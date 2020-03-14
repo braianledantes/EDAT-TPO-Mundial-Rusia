@@ -1,5 +1,6 @@
-package lineales;
+package test;
 
+import lineales.ListaDinamica;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
