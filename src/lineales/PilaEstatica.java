@@ -20,6 +20,11 @@ public class PilaEstatica<T> implements Pila<T> {
     private int tope;
     private Class<T> clase;
 
+    /**
+     * Crea una pila estatica vacia.
+     *
+     * @param clase tipo de dato que almacena
+     */
     public PilaEstatica(Class<T> clase) {
         this.tope = -1;
         pila = (T[]) Array.newInstance(clase, TAM);

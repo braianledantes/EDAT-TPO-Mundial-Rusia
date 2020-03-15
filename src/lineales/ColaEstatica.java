@@ -5,7 +5,8 @@ import java.util.Arrays;
 
 /**
  * Esta cola esta implmentada por un arreglo circular, por lo tanto la cantidad de elementos es limitada por el tamaño del arreglo.
- *  La cola crece y decrece dentro del espacio disponible.
+ * La cola crece y decrece dentro del espacio disponible.
+ *
  * @param <T>
  */
 public class ColaEstatica<T> implements Cola<T> {
@@ -14,6 +15,11 @@ public class ColaEstatica<T> implements Cola<T> {
     private int inicio, fin;
     private Class<T> clase;
 
+    /**
+     * Crea una cola estatica vacia.
+     *
+     * @param clase tipo de dato que almacena
+     */
     public ColaEstatica(Class<T> clase) {
         this.clase = clase;
         cola = (T[]) Array.newInstance(clase, TAM);
@@ -22,7 +28,7 @@ public class ColaEstatica<T> implements Cola<T> {
     }
 
     @Override
-    public boolean poner(T elem) throws EstructuraLlenaException{
+    public boolean poner(T elem) throws EstructuraLlenaException {
         boolean exito = false;
         int finAux = (fin + 1) % TAM;
         if (finAux != inicio) {

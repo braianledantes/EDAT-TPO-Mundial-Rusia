@@ -10,10 +10,35 @@ public class ListaDinamica<T> implements Lista<T> {
     private Nodo<T> cabecera, fin;
     private int longitud;
 
+    /**
+     * Crea una lista dinamica vacia.
+     */
     public ListaDinamica() {
         cabecera = null;
         fin = null;
         longitud = 0;
+    }
+
+    /**
+     * Crea una lista a partir del arreglo enviado por parametro.
+     *
+     * @param arr arreglo de elementos
+     */
+    public ListaDinamica(T[] arr) {
+        this();
+        Nodo<T> nodo;
+
+        if (arr != null) {
+            longitud = arr.length;
+            if (arr.length > 0) {
+                cabecera = nodo = new Nodo<>(arr[0]);
+                for (int i = 1; i < arr.length; i++) {
+                    nodo.setEnlace(new Nodo<>(arr[i]));
+                    nodo = nodo.getEnlace();
+                }
+                fin = nodo;
+            }
+        }
     }
 
     @Override

@@ -9,6 +9,9 @@ package lineales;
 public class PilaDinamica<T> implements Pila<T> {
     private Nodo<T> tope;
 
+    /**
+     * Crea una pil dinamica vacia.
+     */
     public PilaDinamica() {
         this.tope = null;
     }

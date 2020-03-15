@@ -9,6 +9,9 @@ package lineales;
 public class ColaDinamica<T> implements Cola<T> {
     private Nodo<T> inicio, fin;
 
+    /**
+     * Crea una cola dinamica vacia.
+     */
     public ColaDinamica() {
         this.inicio = null;
         this.fin = null;
