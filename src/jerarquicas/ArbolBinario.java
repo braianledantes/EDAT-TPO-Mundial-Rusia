@@ -5,8 +5,6 @@ import lineales.ColaDinamica;
 import lineales.Lista;
 import lineales.ListaDinamica;
 
-import java.util.Objects;
-
 /**
  * Un árbol binariorio es aquel árbol donde cada nodo tiene, como máximo, dos hijos.
  *
@@ -19,7 +17,7 @@ public class ArbolBinario<T> implements Arbol<T> {
     private Nodo<T> raiz;
 
     /**
-     * Crea un arbol binario vacio.
+     * Crea un árbol binario vacio.
      */
     public ArbolBinario() {
         this.raiz = null;
@@ -41,16 +39,19 @@ public class ArbolBinario<T> implements Arbol<T> {
         boolean exito = true;
         Nodo<T> nodoPadre;
 
+        if (posicion != HIJO_IZQUIERDO && posicion != HIJO_DERECHO) {
+            throw new IllegalArgumentException();
+        }
         if (elemNuevo != null) {
             if (raiz == null) {
                 raiz = new Nodo<>(elemNuevo);
             } else {
                 nodoPadre = obtenerNodo(elemPadre, raiz);
                 if (nodoPadre != null) {
-                    if (posicion == HIJO_IZQUIERDO && !nodoPadre.tieneHijoIzq()) {
-                        nodoPadre.setHijoIzq(new Nodo<>(elemNuevo));
-                    } else if (posicion == HIJO_DERECHO && !nodoPadre.tieneHijoDer()) {
-                        nodoPadre.setHijoDer(new Nodo<>(elemNuevo));
+                    if (posicion == HIJO_IZQUIERDO && !nodoPadre.tieneIzq()) {
+                        nodoPadre.setIzq(new Nodo<>(elemNuevo));
+                    } else if (posicion == HIJO_DERECHO && !nodoPadre.tieneDer()) {
+                        nodoPadre.setDer(new Nodo<>(elemNuevo));
                     } else {
                         exito = false;
                     }
@@ -83,10 +84,10 @@ public class ArbolBinario<T> implements Arbol<T> {
             } else {
                 nodoPadre = obtenerNodo(elemPadre, raiz);
                 if (nodoPadre != null) {
-                    if (!nodoPadre.tieneHijoIzq()) {
-                        nodoPadre.setHijoIzq(new Nodo<>(elemNuevo));
-                    } else if (!nodoPadre.tieneHijoDer()) {
-                        nodoPadre.setHijoDer(new Nodo<>(elemNuevo));
+                    if (!nodoPadre.tieneIzq()) {
+                        nodoPadre.setIzq(new Nodo<>(elemNuevo));
+                    } else if (!nodoPadre.tieneDer()) {
+                        nodoPadre.setDer(new Nodo<>(elemNuevo));
                     } else {
                         exito = false;
                     }
@@ -102,13 +103,13 @@ public class ArbolBinario<T> implements Arbol<T> {
     private Nodo<T> obtenerNodo(T elem, Nodo<T> nodo) {
         Nodo<T> result = null;
 
-        if (nodo != null) {
+        if (elem != null && nodo != null) {
             if (nodo.getElem().equals(elem)) {
                 result = nodo;
             } else {
-                result = obtenerNodo(elem, nodo.getHijoIzq());
+                result = obtenerNodo(elem, nodo.getIzq());
                 if (result == null) {
-                    result = obtenerNodo(elem, nodo.getHijoDer());
+                    result = obtenerNodo(elem, nodo.getDer());
                 }
             }
         }
@@ -130,8 +131,8 @@ public class ArbolBinario<T> implements Arbol<T> {
         int result = -1, altIzq, altDer;
 
         if (nodo != null) {
-            altIzq = altura(nodo.getHijoIzq());
-            altDer = altura(nodo.getHijoDer());
+            altIzq = altura(nodo.getIzq());
+            altDer = altura(nodo.getDer());
             result = Math.max(altIzq, altDer) + 1;
         }
 
@@ -150,9 +151,9 @@ public class ArbolBinario<T> implements Arbol<T> {
             if (elemento.equals(nodo.getElem())) {
                 nivel = 0;
             } else {
-                nivel = nivel(elemento, nodo.getHijoIzq());
+                nivel = nivel(elemento, nodo.getIzq());
                 if (nivel == -1) {
-                    nivel = nivel(elemento, nodo.getHijoDer());
+                    nivel = nivel(elemento, nodo.getDer());
                 }
                 if (nivel != -1) {
                     nivel++;
@@ -177,9 +178,9 @@ public class ArbolBinario<T> implements Arbol<T> {
                     result = nodoPadre.getElem();
                 }
             } else {
-                result = padre(elemento, nodoActual.getHijoIzq(), nodoActual);
+                result = padre(elemento, nodoActual.getIzq(), nodoActual);
                 if (result == null) {
-                    result = padre(elemento, nodoActual.getHijoDer(), nodoActual);
+                    result = padre(elemento, nodoActual.getDer(), nodoActual);
                 }
             }
         }
@@ -197,8 +198,8 @@ public class ArbolBinario<T> implements Arbol<T> {
     private void listarPreorden(Lista<T> lista, Nodo<T> nodo) {
         if (nodo != null) {
             lista.insertar(nodo.getElem());
-            listarPreorden(lista, nodo.getHijoIzq());
-            listarPreorden(lista, nodo.getHijoDer());
+            listarPreorden(lista, nodo.getIzq());
+            listarPreorden(lista, nodo.getDer());
         }
     }
 
@@ -211,9 +212,9 @@ public class ArbolBinario<T> implements Arbol<T> {
 
     private void listarInorden(Lista<T> lista, Nodo<T> nodo) {
         if (nodo != null) {
-            listarInorden(lista, nodo.getHijoIzq());
+            listarInorden(lista, nodo.getIzq());
             lista.insertar(nodo.getElem());
-            listarInorden(lista, nodo.getHijoDer());
+            listarInorden(lista, nodo.getDer());
         }
     }
 
@@ -226,8 +227,8 @@ public class ArbolBinario<T> implements Arbol<T> {
 
     private void listarPosorden(Lista<T> lista, Nodo<T> nodo) {
         if (nodo != null) {
-            listarPosorden(lista, nodo.getHijoIzq());
-            listarPosorden(lista, nodo.getHijoDer());
+            listarPosorden(lista, nodo.getIzq());
+            listarPosorden(lista, nodo.getDer());
             lista.insertar(nodo.getElem());
         }
     }
@@ -245,11 +246,11 @@ public class ArbolBinario<T> implements Arbol<T> {
                 nodoActual = cola.obtenerFrente();
                 cola.sacar();
                 lista.insertar(nodoActual.getElem());
-                if (nodoActual.tieneHijoIzq()) {
-                    cola.poner(nodoActual.getHijoIzq());
+                if (nodoActual.tieneIzq()) {
+                    cola.poner(nodoActual.getIzq());
                 }
-                if (nodoActual.tieneHijoDer()) {
-                    cola.poner(nodoActual.getHijoDer());
+                if (nodoActual.tieneDer()) {
+                    cola.poner(nodoActual.getDer());
                 }
             }
         }
@@ -272,8 +273,8 @@ public class ArbolBinario<T> implements Arbol<T> {
             equals = true;
         } else if (nodothis != null && nodoThat != null) {
             if (nodothis.getElem().equals(nodoThat.getElem())) {
-                equals = equals(nodothis.getHijoIzq(), nodoThat.getHijoIzq()) &&
-                        equals(nodothis.getHijoDer(), nodoThat.getHijoDer());
+                equals = equals(nodothis.getIzq(), nodoThat.getIzq()) &&
+                        equals(nodothis.getDer(), nodoThat.getDer());
             }
         }
 
@@ -290,9 +291,7 @@ public class ArbolBinario<T> implements Arbol<T> {
     private Nodo<T> clone(Nodo<T> nodo) {
         Nodo<T> nodoNuevo = null;
         if (nodo != null) {
-            nodoNuevo = new Nodo<>(nodo.getElem());
-            nodoNuevo.setHijoIzq(clone(nodo.getHijoIzq()));
-            nodoNuevo.setHijoDer(clone(nodo.getHijoDer()));
+            nodoNuevo = new Nodo<>(nodo.getElem(), clone(nodo.getIzq()), clone(nodo.getDer()));
         }
         return nodoNuevo;
     }
@@ -308,8 +307,8 @@ public class ArbolBinario<T> implements Arbol<T> {
     private void toString(StringBuilder sb, Nodo<T> nodo) {
         if (nodo != null) {
             sb.append(nodo.getElem()).append(", ");
-            toString(sb, nodo.getHijoIzq());
-            toString(sb, nodo.getHijoDer());
+            toString(sb, nodo.getIzq());
+            toString(sb, nodo.getDer());
         }
     }
 
@@ -320,17 +319,17 @@ public class ArbolBinario<T> implements Arbol<T> {
 
     private static class Nodo<T> {
         private T elem;
-        private Nodo<T> hijoIzq, hijoDer;
+        private Nodo<T> izq, der;
 
-        public Nodo(T elem, Nodo<T> hijoIzq, Nodo<T> hijoDer) {
+        public Nodo(T elem, Nodo<T> izq, Nodo<T> der) {
             this.elem = elem;
-            this.hijoIzq = hijoIzq;
-            this.hijoDer = hijoDer;
+            this.izq = izq;
+            this.der = der;
         }
 
         public Nodo(T elem) {
             this.elem = elem;
-            this.hijoIzq = this.hijoDer = null;
+            this.izq = this.der = null;
         }
 
         public T getElem() {
@@ -341,28 +340,28 @@ public class ArbolBinario<T> implements Arbol<T> {
             this.elem = elem;
         }
 
-        public Nodo<T> getHijoIzq() {
-            return hijoIzq;
+        public Nodo<T> getIzq() {
+            return izq;
         }
 
-        public void setHijoIzq(Nodo<T> hijoIzq) {
-            this.hijoIzq = hijoIzq;
+        public void setIzq(Nodo<T> izq) {
+            this.izq = izq;
         }
 
-        public Nodo<T> getHijoDer() {
-            return hijoDer;
+        public Nodo<T> getDer() {
+            return der;
         }
 
-        public void setHijoDer(Nodo<T> hijoDer) {
-            this.hijoDer = hijoDer;
+        public void setDer(Nodo<T> der) {
+            this.der = der;
         }
 
-        public boolean tieneHijoIzq() {
-            return hijoIzq != null;
+        public boolean tieneIzq() {
+            return izq != null;
         }
 
-        public boolean tieneHijoDer() {
-            return hijoDer != null;
+        public boolean tieneDer() {
+            return der != null;
         }
 
         @Override
