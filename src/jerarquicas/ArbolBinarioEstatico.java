@@ -99,7 +99,6 @@ public class ArbolBinarioEstatico<T> implements Arbol<T> {
         return celda;
     }
 
-    @Override
     public boolean insertar(T elemNuevo, T elemPadre) throws EstructuraLlenaException {
         return false;
     }

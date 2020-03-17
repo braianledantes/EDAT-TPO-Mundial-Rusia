@@ -1,6 +1,8 @@
 package Conjuntistas;
 
-public class ArbolHeapMaximo<T> extends ArbolHeap<T> {
+import lineales.Lista;
+
+public class ArbolHeapMaximo<T extends Comparable<T>> extends ArbolHeap<T> {
 
     public ArbolHeapMaximo(int cant) {
         super(cant);

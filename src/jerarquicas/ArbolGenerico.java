@@ -24,7 +24,16 @@ public class ArbolGenerico<T> implements Arbol<T> {
         this.raiz = null;
     }
 
-    @Override
+    /**
+     * Dado un elemento elemNuevo y un elemento elemPadre, agrega elemNuevo como hijo de la primer aparición
+     * de elemPadre. Para que la operación termine con éxito debe existir un nodo en el árbol con elemento
+     * = elemPadre. No se establece ninguna preferencia respecto a la posición del hijo respecto a sus posibles
+     * hermanos. Esta operación devuelve
+     *
+     * @param elemNuevo elemento a insertar
+     * @param elemPadre elmento padre del nodo
+     * @return verdadero cuando se pudo agregar elemNuevo a la estructura y falso en caso contrario
+     */
     public boolean insertar(T elemNuevo, T elemPadre) {
         boolean exito = true;
         Nodo<T> nodoPadre, nodoHijo;

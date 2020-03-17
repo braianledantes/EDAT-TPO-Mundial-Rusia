@@ -1,6 +1,7 @@
 package test;
 
 import jerarquicas.ArbolBinario;
+import jerarquicas.ArbolBinarioDinamico;
 import lineales.Lista;
 import lineales.ListaDinamica;
 import org.junit.jupiter.api.BeforeEach;
@@ -138,7 +139,7 @@ class ArbolBinarioTest {
     @Test
     void listarPreorden() {
         Lista<String> esperado = new ListaDinamica<>();
-        ArbolBinario<String> abVacio = new ArbolBinario<>();
+        ArbolBinarioDinamico<String> abVacio = new ArbolBinario<>();
         assertEquals(esperado, abVacio.listarPreorden());
 
         esperado = new ListaDinamica<>(new String[]{"A", "B", "D", "H","E","C","F","I","J","G"});
@@ -148,7 +149,7 @@ class ArbolBinarioTest {
     @Test
     void listarInorden() {
         Lista<String> esperado = new ListaDinamica<>();
-        ArbolBinario<String> abVacio = new ArbolBinario<>();
+        ArbolBinarioDinamico<String> abVacio = new ArbolBinario<>();
         assertEquals(esperado, abVacio.listarInorden());
 
         esperado = new ListaDinamica<>(new String[]{"D", "H", "B", "E","A","I","F","J","C","G"});
@@ -158,7 +159,7 @@ class ArbolBinarioTest {
     @Test
     void listarPosorden() {
         Lista<String> esperado = new ListaDinamica<>();
-        ArbolBinario<String> abVacio = new ArbolBinario<>();
+        ArbolBinarioDinamico<String> abVacio = new ArbolBinario<>();
         assertEquals(esperado, abVacio.listarPosorden());
 
         esperado = new ListaDinamica<>(new String[]{"H", "D", "E", "B","I","J","F","G","C","A"});
@@ -168,7 +169,7 @@ class ArbolBinarioTest {
     @Test
     void listarNiveles() {
         Lista<String> esperado = new ListaDinamica<>();
-        ArbolBinario<String> abVacio = new ArbolBinario<>();
+        ArbolBinarioDinamico<String> abVacio = new ArbolBinario<>();
         assertEquals(esperado, abVacio.listarNiveles());
 
         esperado = new ListaDinamica<>(new String[]{"A", "B", "C", "D","E","F","G","H","I","J"});

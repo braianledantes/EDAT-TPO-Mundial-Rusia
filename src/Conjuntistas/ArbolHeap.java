@@ -1,11 +1,14 @@
 package Conjuntistas;
 
-public abstract class ArbolHeap<T> {
-    protected Comparable<T>[] arr;
+import jerarquicas.Arbol;
+import lineales.Lista;
+
+public abstract class ArbolHeap<T extends Comparable<T>> implements Arbol<T> {
+    protected T[] arr;
     protected int ultimo;
 
     public ArbolHeap(int cant) {
-        arr = new Comparable[cant];
+        arr = (T[]) new Comparable[cant];
         ultimo = 0;
     }
 
@@ -15,7 +18,7 @@ public abstract class ArbolHeap<T> {
      * @param elemento elemento a insertar
      * @return devuelve verdadero y falso en caso contrario
      */
-    public boolean insertar(Comparable<T> elemento) {
+    public boolean insertar(T elemento) {
         boolean exito = false;
         this.ultimo++;
         this.arr[this.ultimo] = elemento;
@@ -23,10 +26,8 @@ public abstract class ArbolHeap<T> {
             hacerSubir(this.ultimo);
             exito = true;
         } else { // sino aumenta el tamaño del arreglo y lo llama denuevo
-            Comparable<T> aux[] = new Comparable[this.arr.length + 20];
-            for (int i = 0; i <= this.ultimo; i++) {
-                aux[i] = this.arr[i];
-            }
+            T aux[] = (T[]) new Comparable[this.arr.length + 20];
+            System.arraycopy(this.arr, 0, aux, 0, this.ultimo + 1);
             this.arr = aux;
             exito = insertar(elemento);
         }
@@ -39,7 +40,7 @@ public abstract class ArbolHeap<T> {
         while (posPadre > 0 && funcionHeap(arr[posPadre], arr[posicion])) {
             aux = (T) arr[posicion];
             arr[posicion] = arr[posPadre];
-            arr[posPadre] = (Comparable<T>) aux;
+            arr[posPadre] = aux;
             posicion = posPadre;
             posPadre = posicion / 2;
         }
@@ -116,6 +117,48 @@ public abstract class ArbolHeap<T> {
      */
     public void vaciar() {
         this.ultimo = 0;
+    }
+
+    @Override
+    public int altura() {
+        // TODO
+        throw new UnsupportedOperationException("TODO");
+    }
+
+    @Override
+    public int nivel(T elemento) {
+        // TODO
+        throw new UnsupportedOperationException("TODO");
+    }
+
+    @Override
+    public T padre(T elemento) {
+        // TODO
+        throw new UnsupportedOperationException("TODO");
+    }
+
+    @Override
+    public Lista<T> listarPreorden() {
+        // TODO
+        throw new UnsupportedOperationException("TODO");
+    }
+
+    @Override
+    public Lista<T> listarInorden() {
+        // TODO
+        throw new UnsupportedOperationException("TODO");
+    }
+
+    @Override
+    public Lista<T> listarPosorden() {
+        // TODO
+        throw new UnsupportedOperationException("TODO");
+    }
+
+    @Override
+    public Lista<T> listarNiveles() {
+        // TODO
+        throw new UnsupportedOperationException("TODO");
     }
 
     @Override

@@ -18,12 +18,12 @@ class ArbolHeapMaximoTest {
 
     @BeforeEach
     void beforeEach() {
-
+        arbolHeap.vaciar();
     }
 
     @Test
     void recuperarCima() {
-        System.out.println(arbolHeap);
+        //System.out.println(arbolHeap);
         //assertEquals(16, albolHeap.recuperarCima());
     }
 

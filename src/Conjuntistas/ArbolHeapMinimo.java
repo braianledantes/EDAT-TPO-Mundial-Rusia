@@ -1,6 +1,6 @@
 package Conjuntistas;
 
-public class ArbolHeapMinimo<T> extends ArbolHeap<T> {
+public class ArbolHeapMinimo<T extends Comparable<T>> extends ArbolHeap<T> {
 
     public ArbolHeapMinimo(int cant) {
         super(cant);
