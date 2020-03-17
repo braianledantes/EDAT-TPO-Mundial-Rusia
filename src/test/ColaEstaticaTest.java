@@ -1,6 +1,7 @@
 package test;
 
 import lineales.ColaEstatica;
+import lineales.EstructuraLlenaException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,15 +15,18 @@ public class ColaEstaticaTest {
         esperado = new ColaEstatica<>(Integer.class);
     }
 
-    @Test
+    @Test()
     void poner() {
         boolean poner;
         for (int i = 1; i < ColaEstatica.TAM; i++) {
             poner =  cola.poner(i);
             assertTrue(poner);
         }
-        poner = cola.poner(0);
-        assertFalse(poner);
+
+        EstructuraLlenaException exception = assertThrows(EstructuraLlenaException.class, () ->
+                cola.poner(0));
+        assertEquals("La estructura esta llena", exception.getMessage());
+
         cola.sacar();
         cola.sacar();
         cola.sacar();

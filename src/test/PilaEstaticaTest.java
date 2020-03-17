@@ -1,5 +1,6 @@
 package test;
 
+import lineales.EstructuraLlenaException;
 import lineales.PilaEstatica;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,8 +30,10 @@ class PilaEstaticaTest {
         }
         assertEquals(esperado, pila);
 
-        resultEsperado = pila.apilar(-1);
-        assertFalse(resultEsperado);
+        EstructuraLlenaException exception = assertThrows(EstructuraLlenaException.class, () ->
+                pila.apilar(-1));
+        assertEquals("La estructura esta llena", exception.getMessage());
+
         assertEquals(esperado, pila);
     }
 

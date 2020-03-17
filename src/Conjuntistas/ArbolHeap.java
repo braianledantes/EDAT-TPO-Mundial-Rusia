@@ -1,0 +1,134 @@
+package Conjuntistas;
+
+public abstract class ArbolHeap<T> {
+    protected Comparable<T>[] arr;
+    protected int ultimo;
+
+    public ArbolHeap(int cant) {
+        arr = new Comparable[cant];
+        ultimo = 0;
+    }
+
+    /**
+     * Inserta un elemento en el árbol de manera ordenada.
+     *
+     * @param elemento elemento a insertar
+     * @return devuelve verdadero y falso en caso contrario
+     */
+    public boolean insertar(Comparable<T> elemento) {
+        boolean exito = false;
+        this.ultimo++;
+        this.arr[this.ultimo] = elemento;
+        if (this.ultimo < this.arr.length - 1) { // si hay logar
+            hacerSubir(this.ultimo);
+            exito = true;
+        } else { // sino aumenta el tamaño del arreglo y lo llama denuevo
+            Comparable<T> aux[] = new Comparable[this.arr.length + 20];
+            for (int i = 0; i <= this.ultimo; i++) {
+                aux[i] = this.arr[i];
+            }
+            this.arr = aux;
+            exito = insertar(elemento);
+        }
+        return exito;
+    }
+
+    protected void hacerSubir(int posicion) {
+        int posPadre = posicion / 2;
+        T aux;
+        while (posPadre > 0 && funcionHeap(arr[posPadre], arr[posicion])) {
+            aux = (T) arr[posicion];
+            arr[posicion] = arr[posPadre];
+            arr[posPadre] = (Comparable<T>) aux;
+            posicion = posPadre;
+            posPadre = posicion / 2;
+        }
+    }
+
+    /**
+     * Elimina el elemento de la raíz (o cima del montículo).
+     *
+     * @return verdadero si se eliminó correctamente y falso de lo contrario
+     */
+    public boolean eliminarCima() {
+        boolean exito = false;
+
+        if (this.ultimo != 0) {
+            this.arr[1] = this.arr[ultimo];
+            this.ultimo--;
+            hacerBajar(1);
+            exito = true;
+        }
+
+        return exito;
+    }
+
+    private void hacerBajar(int posicion) {
+        int posHijo;
+        Comparable<T> temp = this.arr[posicion];
+        boolean salir = false;
+        while (!salir) {
+            posHijo = posicion * 2;
+            if (posHijo <= this.ultimo) {
+                // temp tiene hijos (al menos uno)
+                if (posHijo < this.ultimo) {
+                    // hijoMenor tiene hermano derecho
+                    if (funcionHeap(this.arr[posHijo + 1], this.arr[posHijo])) {
+                        posHijo++;
+                    }
+                }
+                if (funcionHeap(this.arr[posHijo], temp)) {
+                    this.arr[posicion] = this.arr[posHijo];
+                    posicion = posHijo;
+                } else {
+                    // el padre es menor que sus hijos
+                    salir = true;
+                }
+            } else {
+                // hijoMenor es hoja
+                salir = true;
+            }
+        }
+    }
+
+    abstract protected boolean funcionHeap(Comparable<T> c1, Comparable<T> c2);
+
+    /**
+     * Devuelve la cima del árbol (o cima del montículo).
+     *
+     * @return la cima del árbol
+     */
+    public T recuperarCima() {
+        return this.ultimo == 0 ? null : (T) this.arr[1];
+    }
+
+    /**
+     * Verifica si el árbol esta vacio.
+     *
+     * @return falso si hay al menos un elemento cargado en la tabla y verdadero en caso contrario
+     */
+    public boolean esVacio() {
+        return this.ultimo == 0;
+    }
+
+    /**
+     * Vacia el contenido del árbol.
+     */
+    public void vaciar() {
+        this.ultimo = 0;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("ArbolHeap{");
+        for (int i = 1; i <= this.ultimo; i++) {
+            if (i != this.ultimo) {
+                sb.append(this.arr[i]).append("; ");
+            } else {
+                sb.append(this.arr[i]);
+            }
+        }
+        sb.append("}");
+        return sb.toString();
+    }
+}
