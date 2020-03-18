@@ -1,10 +1,11 @@
 package test;
 
-import Conjuntistas.ArbolHeap;
-import Conjuntistas.ArbolHeapMaximo;
+import conjuntistas.ArbolHeap;
+import conjuntistas.ArbolHeapMaximo;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArbolHeapMaximoTest {

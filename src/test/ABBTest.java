@@ -1,6 +1,6 @@
 package test;
 
-import Conjuntistas.ABB;
+import conjuntistas.ABB;
 import lineales.Lista;
 import lineales.ListaDinamica;
 import org.junit.jupiter.api.AfterEach;
@@ -79,6 +79,14 @@ class ABBTest {
         assertTrue(abbEsperado.insertar(10));
 
         assertEquals(abbEsperado, abbe);
+    }
+
+    @Test
+    void eliminar0() {
+        abb.vaciar();
+        assertTrue(abb.insertar(45));
+        assertTrue(abb.eliminar(45));
+        assertEquals(abbe, abb);
     }
 
     @Test

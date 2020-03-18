@@ -1,4 +1,4 @@
-package Conjuntistas;
+package conjuntistas;
 
 import jerarquicas.Arbol;
 import lineales.Lista;

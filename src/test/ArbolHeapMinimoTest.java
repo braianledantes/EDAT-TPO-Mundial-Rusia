@@ -1,7 +1,7 @@
 package test;
 
-import Conjuntistas.ArbolHeap;
-import Conjuntistas.ArbolHeapMinimo;
+import conjuntistas.ArbolHeap;
+import conjuntistas.ArbolHeapMinimo;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

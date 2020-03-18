@@ -1,4 +1,4 @@
-package Conjuntistas;
+package conjuntistas;
 
 public class ArbolHeapMinimo<T extends Comparable<T>> extends ArbolHeap<T> {
 

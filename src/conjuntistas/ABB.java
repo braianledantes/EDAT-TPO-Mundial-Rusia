@@ -1,4 +1,4 @@
-package Conjuntistas;
+package conjuntistas;
 
 import jerarquicas.ArbolBinarioDinamico;
 import lineales.Lista;
