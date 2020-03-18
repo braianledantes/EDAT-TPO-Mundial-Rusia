@@ -162,6 +162,18 @@ public abstract class ArbolHeap<T extends Comparable<T>> implements Arbol<T> {
     }
 
     @Override
+    public boolean verificalPatron(Lista<T> lista) {
+        // TODO
+        throw new UnsupportedOperationException("TODO");
+    }
+
+    @Override
+    public Lista<T> frontera() {
+        // TODO
+        throw new UnsupportedOperationException("TODO");
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("ArbolHeap{");
         for (int i = 1; i <= this.ultimo; i++) {

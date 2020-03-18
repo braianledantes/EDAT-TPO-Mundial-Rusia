@@ -45,7 +45,7 @@ public interface Arbol<T> {
     Lista<T> listarPreorden();
 
     /**
-     *  En un recorrido en inorden de un árbol A, primero se visitan los elementos del subárbol
+     * En un recorrido en inorden de un árbol A, primero se visitan los elementos del subárbol
      * izquierdo de la raíz, luego se visita la raíz de A y por último los elementos del subárbol derecho.
      *
      * @return lista con los elementos
@@ -59,6 +59,7 @@ public interface Arbol<T> {
      * @return lista con los elementos
      */
     Lista<T> listarPosorden();
+
     /**
      * En el recorrido por niveles el orden de visita de los nodos es de acuerdo al nivel del
      * mismo, comenzando con los nodos del nivel cero, incrementando el nivel en uno, hasta llegar al nivel máximo
@@ -73,4 +74,22 @@ public interface Arbol<T> {
      * para estructuras lineales dinámicas.
      */
     void vaciar();
+
+    /**
+     * Determina si dicha lista coincide exactamente con al menos un camino del árbol que comience
+     * en la raíz y termine en una hoja.
+     *
+     * @param lista lista del camino
+     * @return si verifica el camino
+     */
+    boolean verificalPatron(Lista<T> lista);
+
+    /**
+     * Devuelve una lista con la frontera del árbol. Se dene frontera de un
+     * árbol, la secuencia formada por los elementos almacenados en las hojas del árbol, tomadas de izquierda
+     * a derecha.
+     *
+     * @return lista con la frontera
+     */
+    Lista<T> frontera();
 }

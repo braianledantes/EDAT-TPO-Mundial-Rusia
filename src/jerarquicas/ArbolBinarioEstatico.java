@@ -100,47 +100,56 @@ public class ArbolBinarioEstatico<T> implements Arbol<T> {
     }
 
     public boolean insertar(T elemNuevo, T elemPadre) throws EstructuraLlenaException {
-        return false;
+        // TODO
+        throw new UnsupportedOperationException("TODO");
     }
 
     @Override
     public boolean esVacio() {
-        return false;
+        // TODO
+        throw new UnsupportedOperationException("TODO");
     }
 
     @Override
     public int altura() {
-        return 0;
+        // TODO
+        throw new UnsupportedOperationException("TODO");
     }
 
     @Override
     public int nivel(T elemento) {
-        return 0;
+        // TODO
+        throw new UnsupportedOperationException("TODO");
     }
 
     @Override
     public T padre(T elemento) {
-        return null;
+        // TODO
+        throw new UnsupportedOperationException("TODO");
     }
 
     @Override
     public Lista<T> listarPreorden() {
-        return null;
+        // TODO
+        throw new UnsupportedOperationException("TODO");
     }
 
     @Override
     public Lista<T> listarInorden() {
-        return null;
+        // TODO
+        throw new UnsupportedOperationException("TODO");
     }
 
     @Override
     public Lista<T> listarPosorden() {
-        return null;
+        // TODO
+        throw new UnsupportedOperationException("TODO");
     }
 
     @Override
     public Lista<T> listarNiveles() {
-        return null;
+        // TODO
+        throw new UnsupportedOperationException("TODO");
     }
 
     @Override
@@ -149,6 +158,18 @@ public class ArbolBinarioEstatico<T> implements Arbol<T> {
             celda.vaciar();
         }
         raiz = -1;
+    }
+
+    @Override
+    public boolean verificalPatron(Lista<T> lista) {
+        // TODO
+        throw new UnsupportedOperationException("TODO");
+    }
+
+    @Override
+    public Lista<T> frontera() {
+        // TODO
+        throw new UnsupportedOperationException("TODO");
     }
 
     private static class Celda<T> {

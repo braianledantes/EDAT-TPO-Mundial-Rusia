@@ -165,6 +165,18 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
     }
 
     @Override
+    public boolean verificalPatron(Lista<T> lista) {
+        // TODO
+        return false;
+    }
+
+    @Override
+    public Lista<T> frontera() {
+        // TODO
+        return null;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
