@@ -11,15 +11,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ABBTest {
-    static ABB<Integer> abb;
+    static ABB<Integer> abb, abbe;
 
     @BeforeAll
     static void start() {
         abb = new ABB<>();
+        abbe = new ABB<>();
     }
 
     @BeforeEach
     void setUp() {
+        abb.vaciar();
         abb.insertar(45);
         abb.insertar(34);
         abb.insertar(13);
@@ -31,7 +33,7 @@ class ABBTest {
 
     @AfterEach
     void tearDown() {
-
+        abbe.vaciar();
     }
 
     @Test
@@ -80,6 +82,79 @@ class ABBTest {
     }
 
     @Test
+    void eliminar1() {
+        assertTrue(abb.eliminar(45));
+
+        assertTrue(abbe.insertar(55));
+        assertTrue(abbe.insertar(34));
+        assertTrue(abbe.insertar(13));
+        assertTrue(abbe.insertar(65));
+        assertTrue(abbe.insertar(73));
+        assertTrue(abbe.insertar(96));
+
+        assertEquals(abbe, abb);
+    }
+
+    @Test
+    void eliminar2() {
+        assertTrue(abb.eliminar(45));
+        assertTrue(abb.eliminar(65));
+
+        assertTrue(abbe.insertar(55));
+        assertTrue(abbe.insertar(34));
+        assertTrue(abbe.insertar(13));
+        assertTrue(abbe.insertar(73));
+        assertTrue(abbe.insertar(96));
+
+        assertEquals(abbe, abb);
+    }
+
+    @Test
+    void eliminar3() {
+        assertTrue(abb.eliminar(73));
+
+        assertTrue(abbe.insertar(45));
+        assertTrue(abbe.insertar(34));
+        assertTrue(abbe.insertar(65));
+        assertTrue(abbe.insertar(13));
+        assertTrue(abbe.insertar(55));
+        //assertTrue(abbe.insertar(73));
+        assertTrue(abbe.insertar(96));
+
+        assertEquals(abbe, abb);
+    }
+
+    @Test
+    void eliminar4() {
+        assertTrue(abb.eliminar(96));
+
+        assertTrue(abbe.insertar(45));
+        assertTrue(abbe.insertar(34));
+        assertTrue(abbe.insertar(65));
+        assertTrue(abbe.insertar(13));
+        assertTrue(abbe.insertar(55));
+        assertTrue(abbe.insertar(73));
+        //assertTrue(abbe.insertar(96));
+
+        assertEquals(abbe, abb);
+    }
+
+    @Test
+    void eliminar5() {
+        assertTrue(abb.eliminar(34));
+
+        assertTrue(abbe.insertar(45));
+       // assertTrue(abbe.insertar(34));
+        assertTrue(abbe.insertar(65));
+        assertTrue(abbe.insertar(13));
+        assertTrue(abbe.insertar(55));
+        assertTrue(abbe.insertar(73));
+        assertTrue(abbe.insertar(96));
+
+        assertEquals(abbe, abb);
+    }
+
+    @Test
     void pertenece() {
         assertTrue(abb.pertenece(45));
         assertTrue(abb.pertenece(34));
@@ -114,6 +189,6 @@ class ABBTest {
         esperado.vaciar();
         assertEquals(esperado, abb.listarRango(35, 44));
         abb.vaciar();
-        assertEquals(esperado, abb.listarRango(1,2));
+        assertEquals(esperado, abb.listarRango(1, 2));
     }
 }
