@@ -200,6 +200,13 @@ class ArbolGenericoTest {
     }
 
     @Test
+    void frontera() {
+        assertEquals(new ListaDinamica<Character>(), new ArbolGenerico<Character>().frontera());
+        Lista<Character> frontera = new ListaDinamica<>(new Character[]{'e', 'j', 'k', 'l', 'c', 'p', 'q', 'h', 'n', 'o'});
+        assertEquals(frontera, arbol.frontera());
+    }
+
+    @Test
     void equalsYClone() {
         ArbolGenerico<Character> arbolVacio2 = arbolVacio.clone();
         assertEquals(arbolVacio, arbolVacio2);

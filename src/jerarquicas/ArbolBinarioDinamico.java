@@ -172,8 +172,18 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
 
     @Override
     public Lista<T> frontera() {
-        // TODO
-        return null;
+        Lista<T> lista = new ListaDinamica<>();
+        frontera(lista, this.raiz);
+        return lista;
+    }
+
+    private void frontera(Lista<T> lista, Nodo<T> nodo) {
+        if (nodo != null) {
+            if (!nodo.tieneIzq() && !nodo.tieneDer())
+                lista.insertar(nodo.getElem());
+            frontera(lista, nodo.getIzq());
+            frontera(lista, nodo.getDer());
+        }
     }
 
     @Override

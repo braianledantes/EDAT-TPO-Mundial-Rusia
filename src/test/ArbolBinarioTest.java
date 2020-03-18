@@ -46,7 +46,7 @@ class ArbolBinarioTest {
     @Test
     void esVacio() {
         assertTrue(arbol.esVacio());
-        arbol.insertar(1,null);
+        arbol.insertar(1, null);
         assertFalse(arbol.esVacio());
         arbol.vaciar();
         assertTrue(arbol.esVacio());
@@ -142,7 +142,7 @@ class ArbolBinarioTest {
         ArbolBinarioDinamico<String> abVacio = new ArbolBinario<>();
         assertEquals(esperado, abVacio.listarPreorden());
 
-        esperado = new ListaDinamica<>(new String[]{"A", "B", "D", "H","E","C","F","I","J","G"});
+        esperado = new ListaDinamica<>(new String[]{"A", "B", "D", "H", "E", "C", "F", "I", "J", "G"});
         assertEquals(esperado, arbolLetras.listarPreorden());
     }
 
@@ -152,7 +152,7 @@ class ArbolBinarioTest {
         ArbolBinarioDinamico<String> abVacio = new ArbolBinario<>();
         assertEquals(esperado, abVacio.listarInorden());
 
-        esperado = new ListaDinamica<>(new String[]{"D", "H", "B", "E","A","I","F","J","C","G"});
+        esperado = new ListaDinamica<>(new String[]{"D", "H", "B", "E", "A", "I", "F", "J", "C", "G"});
         assertEquals(esperado, arbolLetras.listarInorden());
     }
 
@@ -162,7 +162,7 @@ class ArbolBinarioTest {
         ArbolBinarioDinamico<String> abVacio = new ArbolBinario<>();
         assertEquals(esperado, abVacio.listarPosorden());
 
-        esperado = new ListaDinamica<>(new String[]{"H", "D", "E", "B","I","J","F","G","C","A"});
+        esperado = new ListaDinamica<>(new String[]{"H", "D", "E", "B", "I", "J", "F", "G", "C", "A"});
         assertEquals(esperado, arbolLetras.listarPosorden());
     }
 
@@ -172,7 +172,7 @@ class ArbolBinarioTest {
         ArbolBinarioDinamico<String> abVacio = new ArbolBinario<>();
         assertEquals(esperado, abVacio.listarNiveles());
 
-        esperado = new ListaDinamica<>(new String[]{"A", "B", "C", "D","E","F","G","H","I","J"});
+        esperado = new ListaDinamica<>(new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"});
         assertEquals(esperado, arbolLetras.listarNiveles());
     }
 
@@ -205,10 +205,15 @@ class ArbolBinarioTest {
         arbolLetras2.insertar("I", "F");
         arbolLetras2.insertar("J", "F");
         assertEquals(arbolLetras, arbolLetras2);
-      //  assertNotEquals(arbolLetras, arbolLetras2);
+        //  assertNotEquals(arbolLetras, arbolLetras2);
     }
 
     @Test
-    void vaciar() {
+    void frontera() {
+        assertEquals(new ListaDinamica<String>(), new ArbolBinario<String>().frontera());
+        Lista<String> frontera = new ListaDinamica<>(new String[]{"H", "E", "I", "J", "G"});
+        assertEquals(frontera, arbolLetras.frontera());
     }
+
+
 }
