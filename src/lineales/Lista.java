@@ -42,7 +42,7 @@ public interface Lista<T> {
      * Devuelve el elemento de la posición pos. La precondición es que la posición sea válida.
      *
      * @param pos pos del elemento
-     * @return elemento en pos
+     * @return elemento en pos, null si no existe
      */
     T recuperar(int pos);
 
