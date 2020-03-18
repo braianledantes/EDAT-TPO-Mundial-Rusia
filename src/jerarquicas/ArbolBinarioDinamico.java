@@ -197,7 +197,13 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("ArbolBinario{");
+        StringBuilder sb = new StringBuilder("ArbolGenerico{ raiz=");
+        if (raiz != null) {
+            sb.append(raiz.getElem());
+        } else {
+            sb.append("null");
+        }
+        sb.append("\n");
         toString(sb, raiz);
         sb.append("}");
         return sb.toString();
@@ -205,7 +211,17 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
 
     private void toString(StringBuilder sb, Nodo<T> nodo) {
         if (nodo != null) {
-            sb.append(nodo.getElem()).append(", ");
+            sb.append(nodo.getElem()).append(" -> ");
+            if (nodo.tieneIzq())
+                sb.append(nodo.getIzq().getElem()).append("; ");
+            else
+                sb.append("null").append("; ");
+            if (nodo.tieneDer())
+                sb.append(nodo.getDer().getElem());
+            else
+                sb.append("null");
+            sb.append("\n");
+
             toString(sb, nodo.getIzq());
             toString(sb, nodo.getDer());
         }

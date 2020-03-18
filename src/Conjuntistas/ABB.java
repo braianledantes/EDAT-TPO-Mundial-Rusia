@@ -2,6 +2,7 @@ package Conjuntistas;
 
 import jerarquicas.ArbolBinarioDinamico;
 import lineales.Lista;
+import lineales.ListaDinamica;
 
 public class ABB<T extends Comparable<T>> extends ArbolBinarioDinamico<T> implements ArbolBinarioBusqueda<T> {
 
@@ -9,11 +10,12 @@ public class ABB<T extends Comparable<T>> extends ArbolBinarioDinamico<T> implem
     public boolean insertar(T elem) {
         boolean exito = true;
 
-        if (this.raiz == null)
-            this.raiz = new Nodo<>(elem);
-        else
-            exito = insertar(elem, this.raiz);
-
+        if (elem != null) {
+            if (this.raiz == null)
+                this.raiz = new Nodo<>(elem);
+            else
+                exito = insertar(elem, this.raiz);
+        }
         return exito;
     }
 
@@ -24,12 +26,12 @@ public class ABB<T extends Comparable<T>> extends ArbolBinarioDinamico<T> implem
             exito = false;
         } else {
             if (elem.compareTo(nodo.getElem()) < 0) {
-                if (nodo.getIzq() != null)
+                if (nodo.tieneIzq())
                     exito = insertar(elem, nodo.getIzq());
                 else
                     nodo.setIzq(new Nodo<>(elem));
             } else {
-                if (nodo.getDer() != null)
+                if (nodo.tieneDer())
                     exito = insertar(elem, nodo.getDer());
                 else
                     nodo.setDer(new Nodo<>(elem));
@@ -40,12 +42,113 @@ public class ABB<T extends Comparable<T>> extends ArbolBinarioDinamico<T> implem
 
     @Override
     public boolean eliminar(T elem) {
-        return false;
+        boolean exito = false;
+
+        if (elem != null && this.raiz != null)
+            exito = eliminar(elem, this.raiz, null);
+
+        return exito;
+    }
+
+    private boolean eliminar(T elem, Nodo<T> nodo, Nodo<T> nodoPadre) {
+        boolean exito = false;
+
+        if (nodo != null) {
+            if (elem.equals(nodo.getElem())) {
+                if (nodo.tieneIzq() && nodo.tieneDer()) {
+                    eliminarNodoConAmbosHijos(nodo, nodoPadre);
+                } else if (nodo.tieneIzq() || nodo.tieneDer()) {
+                    eliminarNodoConUnHijo(nodo, nodoPadre);
+                } else {
+                    eliminarNodoHoja(nodoPadre);
+                }
+                exito = true;
+            } else {
+                if (elem.compareTo(nodo.getElem()) < 0) {
+                    exito = eliminar(elem, nodo.getIzq(), nodo);
+                } else {
+                    exito = eliminar(elem, nodo.getDer(), nodo);
+                }
+            }
+        }
+
+        return exito;
+    }
+
+    private void eliminarNodoHoja(Nodo<T> nodoPadre) {
+        if (nodoPadre == null) { // si es la raíz
+            this.raiz = null;
+        } else { // si es un nodo interno
+            nodoPadre.setIzq(null);
+            nodoPadre.setDer(null);
+        }
+    }
+
+    private void eliminarNodoConUnHijo(Nodo<T> nodo, Nodo<T> nodoPadre) {
+        Nodo<T> enlace;
+        if (nodo.tieneIzq())
+            enlace = nodo.getIzq();
+        else
+            enlace = nodo.getDer();
+
+        if (nodoPadre == null) { // si es raíz
+            raiz = enlace;
+        } else { // si es un nodo interno
+            if (nodo == nodoPadre.getIzq())
+                nodoPadre.setIzq(enlace);
+            else
+                nodoPadre.setDer(enlace);
+        }
+    }
+
+    private void eliminarNodoConAmbosHijos(Nodo<T> nodo, Nodo<T> nodoPadre) {
+        Nodo<T> nodoCandidatoDer = buscarCandidatoMenor(nodo.getDer(), nodo);
+
+        if (nodoPadre == null) { // si es raíz
+            this.raiz.setElem(nodoCandidatoDer.getElem());
+        } else { // si es un nodo interno
+            nodo.setElem(nodoCandidatoDer.getElem());
+        }
+    }
+
+    private Nodo<T> buscarCandidatoMenor(Nodo<T> nodo, Nodo<T> nodoPadre) {
+        Nodo<T> nodoCandidato;
+
+        if (!nodo.tieneIzq()) {
+            nodoCandidato = nodo;
+            if (nodoCandidato == nodoPadre.getDer()) { // si el candidato es el hijo inmediato al nodo a eliminar
+                nodoPadre.setDer(nodoCandidato.getDer());
+            } else {
+                nodoPadre.setIzq(nodoCandidato.getDer());
+            }
+        } else {
+            nodoCandidato = buscarCandidatoMenor(nodo.getIzq(), nodo);
+        }
+
+        return nodoCandidato;
     }
 
     @Override
     public boolean pertenece(T elem) {
-        return false;
+        return pertenece(elem, this.raiz);
+    }
+
+    private boolean pertenece(T elem, Nodo<T> nodo) {
+        boolean pertenece = false;
+
+        if (elem != null && nodo != null) {
+            if (elem.equals(nodo.getElem())) {
+                pertenece = true;
+            } else {
+                if (elem.compareTo(nodo.getElem()) < 0) {
+                    pertenece = pertenece(elem, nodo.getIzq());
+                } else {
+                    pertenece = pertenece(elem, nodo.getDer());
+                }
+            }
+        }
+
+        return pertenece;
     }
 
     @Override
@@ -55,16 +158,57 @@ public class ABB<T extends Comparable<T>> extends ArbolBinarioDinamico<T> implem
 
     @Override
     public Lista<T> listarRango(T elemMin, T elemMax) {
-        return null;
+        Lista<T> lista = new ListaDinamica<>();
+        if (elemMin != null && elemMax != null)
+            listarRango(lista, elemMin, elemMax, raiz);
+        return lista;
+    }
+
+    private void listarRango(Lista<T> lista, T elemMin, T elemMax, Nodo<T> nodo) {
+        if (nodo != null) {
+            if (elemMin.compareTo(nodo.getElem()) <= 0 && elemMax.compareTo(nodo.getElem()) >= 0) {
+                listarRango(lista, elemMin, elemMax, nodo.getIzq());
+                lista.insertar(nodo.getElem());
+                listarRango(lista, elemMin, elemMax, nodo.getDer());
+            }
+        }
     }
 
     @Override
     public T minimoElemento() {
-        return null;
+        return minimoElemento(this.raiz);
+    }
+
+    private T minimoElemento(Nodo<T> nodo) {
+        T elem = null;
+
+        if (nodo != null) {
+            if (!nodo.tieneIzq()) {
+                elem = nodo.getElem();
+            } else {
+                elem = minimoElemento(nodo.getIzq());
+            }
+        }
+
+        return elem;
     }
 
     @Override
     public T maximoElemento() {
-        return null;
+        return maximoElemento(this.raiz);
+    }
+
+    private T maximoElemento(Nodo<T> nodo) {
+        T elem = null;
+
+        if (nodo != null) {
+            if (!nodo.tieneDer()) {
+                elem = nodo.getElem();
+            } else {
+                elem = minimoElemento(nodo.getDer());
+            }
+        }
+
+        return elem;
     }
 }
