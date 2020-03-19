@@ -302,7 +302,6 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
 
         public void setIzq(Nodo<T> izq) {
             this.izq = izq;
-            //recalcularAltura();
         }
 
         public Nodo<T> getDer() {
@@ -311,7 +310,6 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
 
         public void setDer(Nodo<T> der) {
             this.der = der;
-            // recalcularAltura();
         }
 
         public boolean tieneIzq() {
