@@ -19,7 +19,7 @@ public class ABB<T extends Comparable<T>> extends ArbolBinarioDinamico<T> implem
         return exito;
     }
 
-    private boolean insertar(T elem, Nodo<T> nodo) {
+    protected boolean insertar(T elem, Nodo<T> nodo) {
         boolean exito = true;
 
         if (elem.compareTo(nodo.getElem()) == 0) {
@@ -50,7 +50,7 @@ public class ABB<T extends Comparable<T>> extends ArbolBinarioDinamico<T> implem
         return exito;
     }
 
-    private boolean eliminar(T elem, Nodo<T> nodo, Nodo<T> nodoPadre) {
+    protected boolean eliminar(T elem, Nodo<T> nodo, Nodo<T> nodoPadre) {
         boolean exito = false;
 
         if (nodo != null) {
@@ -60,7 +60,7 @@ public class ABB<T extends Comparable<T>> extends ArbolBinarioDinamico<T> implem
                 } else if (nodo.tieneIzq() || nodo.tieneDer()) {
                     eliminarNodoConUnHijo(nodo, nodoPadre);
                 } else {
-                    eliminarNodoHoja(nodoPadre);
+                    eliminarNodoHoja(nodo, nodoPadre);
                 }
                 exito = true;
             } else {
@@ -75,12 +75,14 @@ public class ABB<T extends Comparable<T>> extends ArbolBinarioDinamico<T> implem
         return exito;
     }
 
-    private void eliminarNodoHoja(Nodo<T> nodoPadre) {
+    private void eliminarNodoHoja(Nodo<T> nodo, Nodo<T> nodoPadre) {
         if (nodoPadre == null) { // si es la raíz
             this.raiz = null;
         } else { // si es un nodo interno
-            nodoPadre.setIzq(null);
-            nodoPadre.setDer(null);
+            if (nodoPadre.getIzq() == nodo)
+                nodoPadre.setIzq(null);
+            else
+                nodoPadre.setDer(null);
         }
     }
 

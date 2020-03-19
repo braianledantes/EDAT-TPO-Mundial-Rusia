@@ -33,7 +33,7 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
         return altura(raiz);
     }
 
-    private int altura(Nodo<T> nodo) {
+    protected int altura(Nodo<T> nodo) {
         int result = -1, altIzq, altDer;
 
         if (nodo != null) {
@@ -189,7 +189,7 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || !(o instanceof ArbolBinarioDinamico)) return false;
         ArbolBinarioDinamico<T> that = (ArbolBinarioDinamico<T>) o;
         return equals(this.raiz, that.raiz);
     }
@@ -219,7 +219,7 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("ArbolGenerico{ raiz=");
+        StringBuilder sb = new StringBuilder(this.getClass().getName() + "{ raiz=");
         if (raiz != null) {
             sb.append(raiz.getElem());
         } else {
@@ -257,11 +257,13 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
     protected static class Nodo<T> {
         private T elem;
         private Nodo<T> izq, der;
+        private int altura;
 
         public Nodo(T elem, Nodo<T> izq, Nodo<T> der) {
             this.elem = elem;
             this.izq = izq;
             this.der = der;
+            this.altura = 0;
         }
 
         public Nodo(T elem) {
@@ -283,6 +285,7 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
 
         public void setIzq(Nodo<T> izq) {
             this.izq = izq;
+            recalcularAltura();
         }
 
         public Nodo<T> getDer() {
@@ -291,6 +294,7 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
 
         public void setDer(Nodo<T> der) {
             this.der = der;
+            recalcularAltura();
         }
 
         public boolean tieneIzq() {
@@ -301,10 +305,28 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
             return der != null;
         }
 
+        public int getAltura() {
+            return altura;
+        }
+
+        private void recalcularAltura() {
+            int altIzq = -1, altDer = -1;
+            if (izq != null) {
+                izq.recalcularAltura();
+                altIzq = izq.altura;
+            }
+            if (der != null) {
+                der.recalcularAltura();
+                altDer = der.altura;
+            }
+            altura = Math.max(altIzq, altDer) + 1;
+        }
+
         @Override
         public String toString() {
             return "Nodo{" +
                     "elem=" + elem +
+                    ", altura=" + altura +
                     '}';
         }
     }
