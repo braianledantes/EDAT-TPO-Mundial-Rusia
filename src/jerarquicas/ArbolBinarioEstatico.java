@@ -161,7 +161,7 @@ public class ArbolBinarioEstatico<T> implements Arbol<T> {
     }
 
     @Override
-    public boolean verificalPatron(Lista<T> lista) {
+    public boolean verificarPatron(Lista<T> lista) {
         // TODO
         throw new UnsupportedOperationException("TODO");
     }

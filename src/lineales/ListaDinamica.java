@@ -219,7 +219,7 @@ public class ListaDinamica<T> implements Lista<T> {
     }
 
     @Override
-    protected ListaDinamica<T> clone() {
+    public ListaDinamica<T> clone() {
         ListaDinamica<T> clon = new ListaDinamica<>();
         Nodo<T> nodoThis = cabecera, nodoClon, enlaceClon;
 

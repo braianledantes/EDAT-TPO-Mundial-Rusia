@@ -82,7 +82,7 @@ public interface Arbol<T> {
      * @param lista lista del camino
      * @return si verifica el camino
      */
-    boolean verificalPatron(Lista<T> lista);
+    boolean verificarPatron(Lista<T> lista);
 
     /**
      * Devuelve una lista con la frontera del árbol. Se dene frontera de un

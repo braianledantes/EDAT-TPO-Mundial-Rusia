@@ -165,9 +165,26 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
     }
 
     @Override
-    public boolean verificalPatron(Lista<T> lista) {
-        // TODO
-        return false;
+    public boolean verificarPatron(Lista<T> lista) {
+        return verificarPatron(lista, this.raiz, 1);
+    }
+
+    private boolean verificarPatron(Lista<T> lista, Nodo<T> nodo, int pos) {
+        boolean verifica = false;
+
+        if (nodo != null && pos <= lista.longitud() && lista.recuperar(pos).equals(nodo.getElem())) {
+            if (!nodo.tieneIzq() && !nodo.tieneIzq() && pos == lista.longitud()) {
+                verifica = true;
+            } else {
+                pos++;
+                verifica = verificarPatron(lista, nodo.getIzq(), pos);
+                if (!verifica) {
+                    verifica = verificarPatron(lista, nodo.getDer(), pos);
+                }
+            }
+        }
+
+        return verifica;
     }
 
     @Override

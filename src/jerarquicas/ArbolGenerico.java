@@ -262,9 +262,25 @@ public class ArbolGenerico<T> implements Arbol<T> {
     }
 
     @Override
-    public boolean verificalPatron(Lista<T> lista) {
-        // TODO
-        return false;
+    public boolean verificarPatron(Lista<T> lista) {
+        return verificarPatron(lista, this.raiz, 1);
+    }
+
+    private boolean verificarPatron(Lista<T> lista, Nodo<T> nodo, int pos) {
+        boolean verifica = false;
+
+        if (nodo != null && pos <= lista.longitud()) {
+            if (lista.recuperar(pos).equals(nodo.getElem())) {
+                if (!nodo.tieneHijoIzq() && pos == lista.longitud())
+                    verifica = true;
+                else
+                    verifica = verificarPatron(lista, nodo.getHijoIzq(), pos + 1);
+            } else {
+                verifica = verificarPatron(lista, nodo.getHerDer(), pos);
+            }
+        }
+
+        return verifica;
     }
 
     @Override
