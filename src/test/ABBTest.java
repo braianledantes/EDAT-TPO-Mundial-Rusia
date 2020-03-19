@@ -46,7 +46,7 @@ class ABBTest {
         assertTrue(abb.insertar(55));
         assertTrue(abb.insertar(73));
         assertTrue(abb.insertar(96));
-        String esperado = "ArbolGenerico{ raiz=45\n" +
+        String esperado = "conjuntistas.ABB{ raiz=45\n" +
                 "45 -> 34; 65\n" +
                 "34 -> 13; null\n" +
                 "13 -> null; null\n" +

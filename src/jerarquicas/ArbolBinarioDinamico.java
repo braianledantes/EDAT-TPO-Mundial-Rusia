@@ -302,7 +302,7 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
 
         public void setIzq(Nodo<T> izq) {
             this.izq = izq;
-            recalcularAltura();
+            //recalcularAltura();
         }
 
         public Nodo<T> getDer() {
@@ -311,7 +311,7 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
 
         public void setDer(Nodo<T> der) {
             this.der = der;
-            recalcularAltura();
+            // recalcularAltura();
         }
 
         public boolean tieneIzq() {
@@ -326,16 +326,12 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
             return altura;
         }
 
-        private void recalcularAltura() {
+        public void recalcularAltura() {
             int altIzq = -1, altDer = -1;
-            if (izq != null) {
-                izq.recalcularAltura();
+            if (izq != null)
                 altIzq = izq.altura;
-            }
-            if (der != null) {
-                der.recalcularAltura();
+            if (der != null)
                 altDer = der.altura;
-            }
             altura = Math.max(altIzq, altDer) + 1;
         }
 

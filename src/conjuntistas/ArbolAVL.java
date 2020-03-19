@@ -5,9 +5,8 @@ public class ArbolAVL<T extends Comparable<T>> extends ABB<T> {
     @Override
     protected boolean insertar(T elem, Nodo<T> nodo) {
         boolean exito = super.insertar(elem, nodo);
-        // TODO
         if (exito) {
-            //nodo.recalcularAltura();
+            nodo.recalcularAltura();
             balancear(nodo);
         }
         return exito;
@@ -17,35 +16,32 @@ public class ArbolAVL<T extends Comparable<T>> extends ABB<T> {
     protected boolean eliminar(T elem, Nodo<T> nodo, Nodo<T> nodoPadre) {
         boolean exito = super.eliminar(elem, nodo, nodoPadre);
         if (exito) {
-            //nodo.recalcularAltura();
+            nodo.recalcularAltura();
             balancear(nodo);
         }
         return exito;
     }
 
     private void balancear(Nodo<T> nodo) {
+        int balance = calcularBalance(nodo);
+        int balanceHijo;
 
-        // TODO esto es temporal, hay que ver si es eficiente ya que el método es recursivo
-//        int altIzq = altura(nodo.getIzq());
-//        int altDer = altura(nodo.getDer());
-        int altIzq = -1, altDer = -1;
-        if (nodo.tieneIzq())
-            altIzq = nodo.getIzq().getAltura();
-        if (nodo.tieneDer())
-            altDer = nodo.getDer().getAltura();
-
-        int balance = altIzq - altDer;
-
-        if (balance == 2 && (altIzq == 0 || altIzq == 1)) {
-            rotarDerecha(nodo);
-        } else if (balance == 2 && altIzq == -1) {
-            rotarIzquierda(nodo.getIzq());
-            rotarDerecha(nodo);
-        } else if (balance == -2 && (altDer == 0 || altDer == 1)) {
-            rotarIzquierda(nodo);
-        } else if (balance == -2 && altIzq == 1) {
-            rotarDerecha(nodo.getDer());
-            rotarIzquierda(nodo);
+        if (balance == -2) {
+            balanceHijo = calcularBalance(nodo.getDer());
+            if (balanceHijo == 0 || balanceHijo == -1)
+                rotarIzquierda(nodo);
+            else if (balanceHijo == 1) {
+                rotarDerecha(nodo.getDer());
+                rotarIzquierda(nodo);
+            }
+        } else if (balance == 2) {
+            balanceHijo = calcularBalance(nodo.getIzq());
+            if (balanceHijo == 0 || balanceHijo == 1)
+                rotarDerecha(nodo);
+            else if (balanceHijo == -1) {
+                rotarIzquierda(nodo.getIzq());
+                rotarDerecha(nodo);
+            }
         }
     }
 
@@ -58,6 +54,14 @@ public class ArbolAVL<T extends Comparable<T>> extends ABB<T> {
         return altIzq - altDer;
     }
 
+    /*
+    private Nodo<T> rotarIzquierda(Nodo<T> r) {
+        Nodo<T> h = r.getDer();
+        Nodo<T> temp = h.getIzq();
+        h.setIzq(r);
+        r.setDer(temp);
+        return  h;
+    }*/
     private void rotarIzquierda(Nodo<T> nodoRaiz) {
         Nodo<T> nodoTemp = nodoRaiz.getDer();
         // intercambio elementos
@@ -73,6 +77,14 @@ public class ArbolAVL<T extends Comparable<T>> extends ABB<T> {
         nodoRaiz.setIzq(nodoTemp);
     }
 
+    /*
+    private Nodo<T> rotarDerecha(Nodo<T> r) {
+        Nodo<T> h = r.getIzq();
+        Nodo<T> temp = h.getDer();
+        h.setDer(r);
+        r.setIzq(temp);
+        return  h;
+    }*/
     private void rotarDerecha(Nodo<T> nodoRaiz) {
         Nodo<T> nodoTemp = nodoRaiz.getIzq();
         // intercambio elementos
@@ -87,20 +99,4 @@ public class ArbolAVL<T extends Comparable<T>> extends ABB<T> {
         // cambio el hijo derecho de la raiz
         nodoRaiz.setDer(nodoTemp);
     }
-
-    /*private Nodo<T> rotarIzquierda(Nodo<T> r) {
-        Nodo<T> h = r.getDer();
-        Nodo<T> temp = h.getIzq();
-        h.setIzq(r);
-        r.setDer(temp);
-        return  h;
-    }
-
-    private Nodo<T> rotarDerecha(Nodo<T> r) {
-        Nodo<T> h = r.getIzq();
-        Nodo<T> temp = h.getDer();
-        h.setDer(r);
-        r.setIzq(temp);
-        return  h;
-    }*/
 }
