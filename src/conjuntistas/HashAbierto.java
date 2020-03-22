@@ -15,12 +15,16 @@ public class HashAbierto<T> implements TablaHash<T> {
 
     @Override
     public boolean insertar(T elem) {
-        int pos = elem.hashCode() % TAM;
-        boolean encontrado = pertenece(elem);
+        boolean encontrado = true;
+        if (elem != null) {
+            int pos = elem.hashCode() % TAM;
+            pos = pos < 0 ? -pos : pos;
+            encontrado = pertenece(elem);
 
-        if (!encontrado) {
-            tabla[pos] = new Nodo<>(elem, tabla[pos]);
-            cant++;
+            if (!encontrado) {
+                tabla[pos] = new Nodo<>(elem, tabla[pos]);
+                cant++;
+            }
         }
         return !encontrado;
     }
@@ -28,39 +32,43 @@ public class HashAbierto<T> implements TablaHash<T> {
     @Override
     public boolean eliminar(T elem) {
         boolean elimino = false;
-        int pos = elem.hashCode() % TAM;
-        Nodo<T> nodoAnt = null, nodo = tabla[pos];
+        if (elem != null) {
+            int pos = elem.hashCode() % TAM;
+            pos = pos < 0 ? -pos : pos;
+            Nodo<T> nodoAnt = null, nodo = tabla[pos];
 
-        while (!elimino && nodo != null) {
-            if (elem.equals(nodo.getElem())) {
-                if (nodoAnt != null) {
-                    nodoAnt.setEnlace(nodo.getEnlace());
+            while (!elimino && nodo != null) {
+                if (elem.equals(nodo.getElem())) {
+                    if (nodoAnt != null) {
+                        nodoAnt.setEnlace(nodo.getEnlace());
+                    } else {
+                        tabla[pos] = nodo.getEnlace();
+                    }
+                    elimino = true;
+                    cant--;
                 } else {
-                    tabla[pos] = nodo.getEnlace();
+                    nodoAnt = nodo;
+                    nodo = nodo.getEnlace();
                 }
-                elimino = true;
-                cant--;
-            } else {
-                nodoAnt = nodo;
-                nodo = nodo.getEnlace();
             }
         }
-
         return elimino;
     }
 
     @Override
     public boolean pertenece(T elem) {
         boolean pertenece = false;
-        int pos = elem.hashCode() % TAM;
-        Nodo<T> nodo = tabla[pos];
+        if (elem != null) {
+            int pos = elem.hashCode() % TAM;
+            pos = pos < 0 ? -pos : pos;
+            Nodo<T> nodo = tabla[pos];
 
-        while (!pertenece && nodo != null) {
-            pertenece = elem.equals(nodo.getElem());
-            nodo = nodo.getEnlace();
+            while (!pertenece && nodo != null) {
+                pertenece = elem.equals(nodo.getElem());
+                nodo = nodo.getEnlace();
+            }
         }
-
-        return false;
+        return pertenece;
     }
 
     @Override
@@ -82,6 +90,22 @@ public class HashAbierto<T> implements TablaHash<T> {
         }
 
         return lista;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("HashAbierto{cant=" + cant);
+        Nodo<T> nodo;
+
+        for (int i = 0; i < TAM; i++) {
+            nodo = tabla[i];
+            while (nodo != null) {
+                sb.append(", ").append(nodo.getElem());
+                nodo = nodo.getEnlace();
+            }
+        }
+
+        return sb.append('}').toString();
     }
 
     private static class Nodo<T> {
