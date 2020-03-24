@@ -8,10 +8,14 @@ import lineales.ListaDinamica;
 public class GrafoDinamico<E> implements Grafo<E> {
     private NodoVert<E> inicio;
 
+    public GrafoDinamico() {
+        this.inicio = null;
+    }
+
     @Override
     public boolean insertarVertice(E elem) {
-        boolean existeVert = !exiteVertice(elem);
-        if (existeVert) inicio = new NodoVert<>(elem, inicio);
+        boolean existeVert = exiteVertice(elem);
+        if (!existeVert) inicio = new NodoVert<>(elem, inicio);
         return !existeVert;
     }
 
@@ -239,7 +243,6 @@ public class GrafoDinamico<E> implements Grafo<E> {
             visitados.insertar(nodo.getElem());
             ady = nodo.getPrimerAdy();
             while (ady != null) {
-                // TODO ver si esta bien
                 if (!visitados.existe(ady.getVertice().getElem())) {
                     cola.poner(ady.getVertice());
                 }
@@ -249,8 +252,31 @@ public class GrafoDinamico<E> implements Grafo<E> {
     }
 
     @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("GrafoDinamico{inicio=");
+        if (inicio != null) sb.append(inicio.getElem());
+        else sb.append("null");
+        sb.append(",\n");
+        NodoVert<E> vertice = inicio;
+        NodoAdy<E> ady;
+
+        while (vertice != null) {
+            sb.append(vertice.getElem()).append(" -> ");
+            ady = vertice.getPrimerAdy();
+            while (ady != null) {
+                sb.append(ady.getVertice().getElem()).append(", ");
+                ady = ady.getSigAdy();
+            }
+            vertice = vertice.getSigVertice();
+            sb.append("\n");
+        }
+
+        return sb.append("}").toString();
+    }
+
+    @Override
     public boolean esVacio() {
-        return inicio != null;
+        return inicio == null;
     }
 
     private static class NodoVert<E> {
@@ -299,6 +325,13 @@ public class GrafoDinamico<E> implements Grafo<E> {
         public boolean tienePrimerAdyacente() {
             return primerAdy != null;
         }
+
+        @Override
+        public String toString() {
+            return "NodoVert{" +
+                    "elem=" + elem +
+                    '}';
+        }
     }
 
     private static class NodoAdy<E> {
@@ -332,6 +365,13 @@ public class GrafoDinamico<E> implements Grafo<E> {
 
         public boolean tieneSigAdyacente() {
             return sigAdy != null;
+        }
+
+        @Override
+        public String toString() {
+            return "NodoAdy{" +
+                    "vertice=" + vertice +
+                    '}';
         }
     }
 }

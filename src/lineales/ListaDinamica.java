@@ -172,7 +172,7 @@ public class ListaDinamica<T> implements Lista<T> {
 
     @Override
     public boolean existe(T elem) {
-        return localizar(elem) < 0;
+        return localizar(elem) != -1;
     }
 
     @Override
