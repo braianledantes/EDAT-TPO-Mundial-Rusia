@@ -56,6 +56,14 @@ public interface Lista<T> {
     int localizar(T elem);
 
     /**
+     * Verifica si el elemento enviado por parámetro existe o no en la lista.
+     *
+     * @param elem elemento a verificar
+     * @return true si existe o false de lo contrario
+     */
+    boolean existe(T elem);
+
+    /**
      * Devuelve verdadero si la lista no tiene elementos y falso en caso contrario.
      *
      * @return verdadero si la lista no tiene elementos y falso en caso contrario.

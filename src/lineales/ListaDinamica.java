@@ -43,17 +43,19 @@ public class ListaDinamica<T> implements Lista<T> {
 
     @Override
     public boolean insertar(T elem) {
+        boolean exito = false;
         Nodo<T> nuevoNodo = new Nodo<>(elem);
-
-        if (cabecera == null) {
-            cabecera = fin = nuevoNodo;
-        } else {
-            fin.setEnlace(nuevoNodo);
-            fin = nuevoNodo;
+        if (elem != null) {
+            if (cabecera == null) {
+                cabecera = fin = nuevoNodo;
+            } else {
+                fin.setEnlace(nuevoNodo);
+                fin = nuevoNodo;
+            }
+            longitud++;
+            exito = true;
         }
-        longitud++;
-
-        return true;
+        return exito;
     }
 
     @Override
@@ -61,7 +63,7 @@ public class ListaDinamica<T> implements Lista<T> {
         boolean exito = false;
         Nodo<T> nuevoNodo, aux;
 
-        if (pos >= 1 && pos <= longitud + 1) {
+        if (elem != null && pos >= 1 && pos <= longitud + 1) {
             if (pos == 1) {
                 if (cabecera == fin) {
                     cabecera = new Nodo<>(elem, cabecera);
@@ -152,7 +154,7 @@ public class ListaDinamica<T> implements Lista<T> {
         int pos = -1, i = 1;
         Nodo<T> aux;
 
-        if (cabecera != null) {
+        if (elem != null && cabecera != null) {
             aux = cabecera;
             while (aux != null) {
                 if (elem == aux.getElem() || elem.equals(aux.getElem())) {
@@ -166,6 +168,11 @@ public class ListaDinamica<T> implements Lista<T> {
         }
 
         return pos;
+    }
+
+    @Override
+    public boolean existe(T elem) {
+        return localizar(elem) < 0;
     }
 
     @Override
