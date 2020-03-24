@@ -1,5 +1,7 @@
 package grafo;
 
+import lineales.Cola;
+import lineales.ColaDinamica;
 import lineales.Lista;
 import lineales.ListaDinamica;
 
@@ -45,9 +47,10 @@ public class GrafoDinamico<E> implements Grafo<E> {
                     if (vert.getElem().equals(elem)) {
                         elimino = true;
                         vertAnt.setSigVertice(vert.getSigVertice());
+                    } else {
+                        vertAnt = vert;
+                        vert = vert.getSigVertice();
                     }
-                    vertAnt = vert;
-                    vert = vert.getSigVertice();
                 }
             }
             if (elimino) eliminarAdyacentes(vert);
@@ -58,7 +61,7 @@ public class GrafoDinamico<E> implements Grafo<E> {
 
     private void eliminarAdyacentes(NodoVert<E> vertAEliminar) {
         NodoVert<E> vertice = inicio;
-        while (vertice != null && vertice.getPrimerAdy() != null) {
+        while (vertice != null) {
             eliminarArco(vertice, vertAEliminar.getElem());
             vertice = vertice.getSigVertice();
         }
@@ -162,7 +165,7 @@ public class GrafoDinamico<E> implements Grafo<E> {
                 visitados.insertar(nodo.getElem());
                 NodoAdy<E> ady = nodo.getPrimerAdy();
                 while (!exito && ady != null) {
-                    if (visitados.existe(ady.getVertice().getElem())) {
+                    if (!visitados.existe(ady.getVertice().getElem())) {
                         exito = existeCamino(ady.getVertice(), destino, visitados);
                     }
                     ady = ady.getSigAdy();
@@ -190,12 +193,11 @@ public class GrafoDinamico<E> implements Grafo<E> {
         Lista<E> visitados = new ListaDinamica<>();
         NodoVert<E> aux = this.inicio;
         while (aux != null) {
-            if (visitados.existe(aux.getElem())) {
+            if (!visitados.existe(aux.getElem())) {
                 listarEnProfundidad(aux, visitados);
             }
             aux = aux.getSigVertice();
         }
-
         return visitados;
     }
 
@@ -204,7 +206,7 @@ public class GrafoDinamico<E> implements Grafo<E> {
             visitados.insertar(nodo.getElem());
             NodoAdy<E> ady = nodo.getPrimerAdy();
             while (ady != null) {
-                if (visitados.existe(ady.getVertice().getElem())) {
+                if (!visitados.existe(ady.getVertice().getElem())) {
                     listarEnProfundidad(ady.getVertice(), visitados);
                 }
                 ady = ady.getSigAdy();
@@ -214,8 +216,36 @@ public class GrafoDinamico<E> implements Grafo<E> {
 
     @Override
     public Lista<E> listarEnAnchura() {
-        // TODO
-        return null;
+        Lista<E> visitados = new ListaDinamica<>();
+        NodoVert<E> nodo = inicio;
+        while (nodo != null) {
+            if (!visitados.existe(nodo.getElem())) {
+                listarEnAnchura(nodo, visitados);
+            }
+            nodo = nodo.getSigVertice();
+        }
+        return visitados;
+    }
+
+    private void listarEnAnchura(NodoVert<E> vertIni, Lista<E> visitados) {
+        Cola<NodoVert<E>> cola = new ColaDinamica<>();
+        NodoVert<E> nodo;
+        NodoAdy<E> ady;
+
+        cola.poner(vertIni);
+        while (!cola.esVacia()) {
+            nodo = cola.obtenerFrente();
+            cola.sacar();
+            visitados.insertar(nodo.getElem());
+            ady = nodo.getPrimerAdy();
+            while (ady != null) {
+                // TODO ver si esta bien
+                if (!visitados.existe(ady.getVertice().getElem())) {
+                    cola.poner(ady.getVertice());
+                }
+                ady = ady.getSigAdy();
+            }
+        }
     }
 
     @Override
