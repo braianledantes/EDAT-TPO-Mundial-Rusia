@@ -207,8 +207,6 @@ public class GrafoDinamico<E> implements Grafo<E> {
                                             int[] distMin) {
         visitados.insertar(vertice.getElem());
         if (vertice.getElem().equals(destino)) {
-            // Como "visitados" va a sufrir modificaciones se decide clonarla, porque si sólo se le asigna va a sufrir
-            // modificaciones, "camino" va a sufrir las mismas modificaciones (referencia).
             camino = visitados.clone();
             distMin[0] = distActual;
         } else {
@@ -220,7 +218,6 @@ public class GrafoDinamico<E> implements Grafo<E> {
                         camino = caminoMasCorto(ady.getVertice(), destino, visitados, distActual, camino, distMin);
                     }
                 }
-                //Se resta porque voy a ir por otro camino,y este no continen al adyacente anterior.
                 distActual -= ady.getEtiqueta();
                 ady = ady.getSigAdy();
             }
@@ -232,8 +229,44 @@ public class GrafoDinamico<E> implements Grafo<E> {
 
     @Override
     public Lista<E> caminoMasLargo(E origen, E destino) {
-        // TODO
-        return null;
+        NodoVert<E> vertOrigen = buscarVertice(origen);
+        NodoVert<E> vertDestino = buscarVertice(destino);
+        ListaDinamica<E> visitados = new ListaDinamica<>();
+        ListaDinamica<E> camino = new ListaDinamica<>();
+        int[] distanciaMaxima = {Integer.MIN_VALUE};
+
+        if (vertOrigen != null & vertDestino != null) {
+            camino = caminoMasLargo(vertOrigen, destino, visitados, 0, camino, distanciaMaxima);
+        }
+        return camino;
+    }
+
+    private ListaDinamica<E> caminoMasLargo(NodoVert<E> vertice,
+                                            E destino,
+                                            ListaDinamica<E> visitados,
+                                            int distActual,
+                                            ListaDinamica<E> camino,
+                                            int[] distMax) {
+        visitados.insertar(vertice.getElem());
+        if (vertice.getElem().equals(destino)) {
+            if (distActual > distMax[0]) {
+                camino = visitados.clone();
+                distMax[0] = distActual;
+            }
+        } else {
+            NodoAdy<E> ady = vertice.getPrimerAdy();
+            while (ady != null) {
+                distActual += ady.getEtiqueta();
+                if (!visitados.existe(ady.getVertice().getElem())) {
+                    camino = caminoMasLargo(ady.getVertice(), destino, visitados, distActual, camino, distMax);
+                }
+                distActual -= ady.getEtiqueta();
+                ady = ady.getSigAdy();
+            }
+        }
+        visitados.eliminar(visitados.longitud());
+
+        return camino;
     }
 
     @Override

@@ -96,7 +96,7 @@ class GrafoDinamicoTest {
         grafo.insertarArco('a', 'c', 1);
         grafo.insertarArco('a', 'f', 1);
         grafo.insertarArco('b', 'd', 1);
-        grafo.insertarArco('b', 'e', 1);
+        grafo.insertarArco('b', 'e', 20);
         grafo.insertarArco('c', 'f', 1);
         grafo.insertarArco('c', 'g', 1);
         grafo.insertarArco('c', 'e', 1);
@@ -111,8 +111,9 @@ class GrafoDinamicoTest {
         grafo.insertarArco('h', 'd', 1);
         System.out.println(grafo);
         System.out.println(grafo.caminoMasCorto('a', 'e'));
-        System.out.println(grafo.caminoMasCorto('h', 'a'));
-        System.out.println(grafo.caminoMasCorto('h', 'b'));
+        System.out.println(grafo.caminoMasLargo('a', 'e'));
+        //System.out.println(grafo.caminoMasCorto('h', 'a'));
+        //  System.out.println(grafo.caminoMasCorto('h', 'b'));
     }
 
     @Test
