@@ -29,6 +29,14 @@ public interface Lista<T> {
     boolean insertar(T elem, int pos);
 
     /**
+     * Elimina el elemento enviado por parámetro de la lista.
+     *
+     * @param elem elemento a eliminar
+     * @return true si pudo eliminar el elemento o false de lo contrario
+     */
+    boolean eliminar(T elem);
+
+    /**
      * Borra el elemento de la posición pos, por lo que la cantidad de elementos de la lista disminuye
      * en uno. Para una eliminación exitosa, la lista no debe estar vacía y la posición recibida debe ser
      * 1 ≤ pos ≤ longitud(lista). Devuelve verdadero si se pudo eliminar correctamente y falso en caso contrario.

@@ -5,10 +5,10 @@ import lineales.ColaDinamica;
 import lineales.Lista;
 import lineales.ListaDinamica;
 
-public class GrafoDinamico<E> implements Grafo<E> {
+public class GrafoEtiquetado<E> implements Grafo<E> {
     private NodoVert<E> inicio;
 
-    public GrafoDinamico() {
+    public GrafoEtiquetado() {
         this.inicio = null;
     }
 
@@ -194,19 +194,19 @@ public class GrafoDinamico<E> implements Grafo<E> {
         int[] distanciaMinima = {Integer.MAX_VALUE}; // Se usa un arreglo para mantener la referencia y poder modificarlo.
 
         if (vertOrigen != null & vertDestino != null) {
-            camino = caminoMasCorto(vertOrigen, destino, visitados, 0, camino, distanciaMinima);
+            camino = caminoMasCorto(vertOrigen, vertDestino, visitados, 0, camino, distanciaMinima);
         }
         return camino;
     }
 
     private ListaDinamica<E> caminoMasCorto(NodoVert<E> vertice,
-                                            E destino,
+                                            NodoVert<E> destino,
                                             ListaDinamica<E> visitados,
                                             int distActual,
                                             ListaDinamica<E> camino,
                                             int[] distMin) {
         visitados.insertar(vertice.getElem());
-        if (vertice.getElem().equals(destino)) {
+        if (vertice == destino) {
             camino = visitados.clone();
             distMin[0] = distActual;
         } else {
@@ -231,40 +231,46 @@ public class GrafoDinamico<E> implements Grafo<E> {
     public Lista<E> caminoMasLargo(E origen, E destino) {
         NodoVert<E> vertOrigen = buscarVertice(origen);
         NodoVert<E> vertDestino = buscarVertice(destino);
-        ListaDinamica<E> visitados = new ListaDinamica<>();
+        ListaDinamica<E> vertVisitados = new ListaDinamica<>();
+        ListaDinamica<NodoAdy<E>> arcosVisitados = new ListaDinamica<>();
         ListaDinamica<E> camino = new ListaDinamica<>();
         int[] distanciaMaxima = {Integer.MIN_VALUE};
 
         if (vertOrigen != null & vertDestino != null) {
-            camino = caminoMasLargo(vertOrigen, destino, visitados, 0, camino, distanciaMaxima);
+            camino = caminoMasLargo(vertOrigen, vertDestino, vertVisitados, arcosVisitados, 0, camino, distanciaMaxima);
         }
         return camino;
     }
 
     private ListaDinamica<E> caminoMasLargo(NodoVert<E> vertice,
-                                            E destino,
-                                            ListaDinamica<E> visitados,
+                                            NodoVert<E> destino,
+                                            ListaDinamica<E> vertVisitados,
+                                            ListaDinamica<NodoAdy<E>> arcosVisitados,
                                             int distActual,
                                             ListaDinamica<E> camino,
                                             int[] distMax) {
-        visitados.insertar(vertice.getElem());
-        if (vertice.getElem().equals(destino)) {
+        // TODO no esta funcionando bien
+        vertVisitados.insertar(vertice.getElem());
+        if (vertice == destino) {
             if (distActual > distMax[0]) {
-                camino = visitados.clone();
+                camino = vertVisitados.clone();
+                System.out.println(camino);
                 distMax[0] = distActual;
             }
         } else {
             NodoAdy<E> ady = vertice.getPrimerAdy();
             while (ady != null) {
                 distActual += ady.getEtiqueta();
-                if (!visitados.existe(ady.getVertice().getElem())) {
-                    camino = caminoMasLargo(ady.getVertice(), destino, visitados, distActual, camino, distMax);
+                if (!arcosVisitados.existe(ady)) {
+                    arcosVisitados.insertar(ady);
+                    camino = caminoMasLargo(ady.getVertice(), destino, vertVisitados, arcosVisitados, distActual, camino, distMax);
+                    arcosVisitados.eliminar(ady);
                 }
                 distActual -= ady.getEtiqueta();
                 ady = ady.getSigAdy();
             }
         }
-        visitados.eliminar(visitados.longitud());
+        vertVisitados.eliminar(vertVisitados.longitud());
 
         return camino;
     }
@@ -330,7 +336,7 @@ public class GrafoDinamico<E> implements Grafo<E> {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("GrafoDinamico{inicio=");
+        StringBuilder sb = new StringBuilder("GrafoEtiquetado{inicio=");
         if (inicio != null) sb.append(inicio.getElem());
         else sb.append("null");
         sb.append(",\n");

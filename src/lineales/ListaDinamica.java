@@ -65,7 +65,7 @@ public class ListaDinamica<T> implements Lista<T> {
 
         if (elem != null && pos >= 1 && pos <= longitud + 1) {
             if (pos == 1) {
-                if (cabecera == fin) {
+                if (cabecera == null) {
                     cabecera = new Nodo<>(elem, cabecera);
                     fin = cabecera;
                 } else {
@@ -86,9 +86,45 @@ public class ListaDinamica<T> implements Lista<T> {
                 // inserto el nuevo nodo en el medio
                 nuevoNodo = new Nodo<>(elem, aux.getEnlace());
                 aux.setEnlace(nuevoNodo);
+                if (aux == fin)
+                    fin = nuevoNodo;
             }
             longitud++;
             exito = true;
+        }
+
+        return exito;
+    }
+
+    @Override
+    public boolean eliminar(T elem) {
+        boolean exito = false;
+        Nodo<T> aux, auxAnt = null;
+
+        if (elem != null && longitud > 0) {
+            aux = cabecera;
+            int i = 1;
+            while (!exito && i < longitud) {
+                if (elem.equals(aux.getElem())) {
+                    exito = true;
+                } else {
+                    auxAnt = aux;
+                    aux = aux.getEnlace();
+                    i++;
+                }
+            }
+            if (exito && auxAnt != null) {
+                if (aux == cabecera && aux == fin) {
+                    cabecera = fin = null;
+                } else if (aux == cabecera) {
+                    cabecera = cabecera.getEnlace();
+                } else if (aux == fin) {
+                    fin = auxAnt;
+                } else {
+                    auxAnt.setEnlace(aux.getEnlace());
+                }
+                longitud--;
+            }
         }
 
         return exito;
@@ -206,7 +242,9 @@ public class ListaDinamica<T> implements Lista<T> {
                 if (this.longitud == that.longitud) {
                     if (thisNodo == null && thatNodo == null) {
                         equals = true;
-                    } else if (thisNodo != null && thatNodo != null) {
+                    } else if (thisNodo != null && thatNodo != null &&
+                            this.fin.getElem().equals(that.fin.getElem()) &&
+                            this.cabecera.getElem().equals(that.cabecera.getElem())) {
                         do {
                             equals = thisNodo.getElem().equals(thatNodo.getElem())
                                     && thisNodo.tieneEnlace() == thatNodo.tieneEnlace();
@@ -230,6 +268,7 @@ public class ListaDinamica<T> implements Lista<T> {
         ListaDinamica<T> clon = new ListaDinamica<>();
         Nodo<T> nodoThis = cabecera, nodoClon, enlaceClon;
 
+        clon.longitud = this.longitud;
         if (nodoThis != null) {
             nodoClon = new Nodo<>(nodoThis.getElem());
             clon.cabecera = nodoClon;

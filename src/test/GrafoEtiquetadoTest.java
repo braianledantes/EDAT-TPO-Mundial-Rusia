@@ -1,16 +1,17 @@
 package test;
 
-import grafo.GrafoDinamico;
+import grafo.GrafoEtiquetado;
+import lineales.Lista;
 import lineales.ListaDinamica;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GrafoDinamicoTest {
+class GrafoEtiquetadoTest {
 
     @Test
     void insertarVertice() {
-        GrafoDinamico<Integer> grafo = new GrafoDinamico<>();
+        GrafoEtiquetado<Integer> grafo = new GrafoEtiquetado<>();
         System.out.println(grafo);
         assertTrue(grafo.esVacio());
 
@@ -56,7 +57,7 @@ class GrafoDinamicoTest {
 
     @Test
     void listarEnProfundidad() {
-        GrafoDinamico<Character> grafo = new GrafoDinamico<>();
+        GrafoEtiquetado<Character> grafo = new GrafoEtiquetado<>();
         assertTrue(grafo.insertarVertice('h'));
         grafo.insertarVertice('g');
         grafo.insertarVertice('f');
@@ -83,7 +84,8 @@ class GrafoDinamicoTest {
 
     @Test
     void caminoMasCorto() {
-        GrafoDinamico<Character> grafo = new GrafoDinamico<>();
+        GrafoEtiquetado<Character> grafo = new GrafoEtiquetado<>();
+        Lista<Character> caminoEsp;
         grafo.insertarVertice('h');
         grafo.insertarVertice('g');
         grafo.insertarVertice('f');
@@ -110,10 +112,20 @@ class GrafoDinamicoTest {
         grafo.insertarArco('h', 'g', 1);
         grafo.insertarArco('h', 'd', 1);
         System.out.println(grafo);
-        System.out.println(grafo.caminoMasCorto('a', 'e'));
-        System.out.println(grafo.caminoMasLargo('a', 'e'));
-        //System.out.println(grafo.caminoMasCorto('h', 'a'));
-        //  System.out.println(grafo.caminoMasCorto('h', 'b'));
+        caminoEsp = new ListaDinamica<>(new Character[]{});
+        assertEquals(caminoEsp, grafo.caminoMasCorto('b', 'a'));
+
+        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'c', 'e'});
+        assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'e'));
+
+        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'b', 'e'});
+        assertEquals(caminoEsp, grafo.caminoMasLargo('a', 'e'));
+
+        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'b'});
+        assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'b'));
+
+        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'f', 'g', 'c', 'e', 'h', 'd', 'e', 'b'});
+        assertEquals(caminoEsp, grafo.caminoMasLargo('a', 'b'));
     }
 
     @Test

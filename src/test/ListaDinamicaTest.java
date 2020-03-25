@@ -29,6 +29,40 @@ class ListaDinamicaTest {
     }
 
     @Test
+    void elimimarElem() {
+        ListaDinamica<Integer> esp = new ListaDinamica<>();
+        assertTrue(lista.insertar(1));
+        assertTrue(lista.eliminar(1));
+        assertEquals(esp, lista);
+
+        lista.vaciar();
+        esp.vaciar();
+        assertTrue(lista.insertar(1));
+        assertTrue(lista.insertar(2));
+        assertTrue(esp.insertar(1));
+        assertTrue(lista.eliminar(2));
+        assertEquals(esp, lista);
+
+        lista.vaciar();
+        esp.vaciar();
+        assertTrue(lista.insertar(1));
+        assertTrue(lista.insertar(2));
+        assertTrue(esp.insertar(2));
+        assertTrue(lista.eliminar(1));
+        assertEquals(esp, lista);
+
+        lista.vaciar();
+        esp.vaciar();
+        assertTrue(lista.insertar(1));
+        assertTrue(lista.insertar(2));
+        assertTrue(lista.insertar(3));
+        assertTrue(esp.insertar(1));
+        assertTrue(esp.insertar(3));
+        assertTrue(lista.eliminar(2));
+        assertEquals(esp, lista);
+    }
+
+    @Test
     void insertar2() {
         assertTrue(lista.insertar(1));
         assertTrue(lista.insertar(2));
