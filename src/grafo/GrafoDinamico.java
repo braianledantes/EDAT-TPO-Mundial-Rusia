@@ -356,7 +356,7 @@ public class GrafoDinamico<E> implements Grafo<E> {
         return inicio == null;
     }
 
-    private static class NodoVert<E> {
+    protected static class NodoVert<E> {
         private E elem;
         private NodoVert<E> sigVertice;
         private NodoAdy<E> primerAdy;
@@ -411,7 +411,7 @@ public class GrafoDinamico<E> implements Grafo<E> {
         }
     }
 
-    private static class NodoAdy<E> {
+    protected static class NodoAdy<E> {
         private NodoVert<E> vertice;
         private NodoAdy<E> sigAdy;
         private int etiqueta;
