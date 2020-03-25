@@ -114,7 +114,7 @@ public class ListaDinamica<T> implements Lista<T> {
                     i++;
                 }
                 aux.setEnlace(aux.getEnlace().getEnlace()); // corto
-                if (aux.getEnlace() == fin) {
+                if (aux.getEnlace() == null) {
                     fin = aux;
                 }
             }
@@ -240,6 +240,8 @@ public class ListaDinamica<T> implements Lista<T> {
                 nodoClon.setEnlace(enlaceClon);
                 nodoClon = enlaceClon;
             }
+
+            clon.fin = nodoClon;
         }
 
         return clon;
@@ -252,6 +254,11 @@ public class ListaDinamica<T> implements Lista<T> {
         sb.append("cabecera=");
         if (cabecera != null)
             sb.append(cabecera.getElem());
+        else
+            sb.append("null");
+        sb.append(", fin=");
+        if (fin != null)
+            sb.append(fin.getElem());
         else
             sb.append("null");
         sb.append(", longitud=").append(longitud);

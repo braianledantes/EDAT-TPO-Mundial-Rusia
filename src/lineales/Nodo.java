@@ -42,4 +42,11 @@ class Nodo<T> {
     public boolean tieneEnlace() {
         return enlace != null;
     }
+
+    @Override
+    public String toString() {
+        return "Nodo{" +
+                "elem=" + elem +
+                '}';
+    }
 }

@@ -31,13 +31,24 @@ public interface Grafo<E> {
 
     /**
      * Dados dos elementos de tipoVertice (origen y destino) se agrega a la estructura el arco que une
-     * ambos vértices.
+     * ambos vértices con la etiqueta igual a 1.
      *
      * @param origen  vertice origen
      * @param destino vertice destino
      * @return si el arco existe y se puede realizar la inserción con éxito devuelve verdadero, en caso contrario devuelve falso
      */
     boolean insertarArco(E origen, E destino);
+
+    /**
+     * Dados dos elementos de tipoVertice (origen y destino) se agrega a la estructura el arco que une
+     * ambos vértices, la una etiqueda que es la distancia entre vertices.
+     *
+     * @param origen   vertice origen
+     * @param destino  vertice destino
+     * @param etiqueta distancia entre origen y destino
+     * @return si el arco existe y se puede realizar la inserción con éxito devuelve verdadero, en caso contrario devuelve falso
+     */
+    boolean insertarArco(E origen, E destino, int etiqueta);
 
     /**
      * Dados dos elementos de tipoVertice (origen y destino) se quita de la estructura el arco que une

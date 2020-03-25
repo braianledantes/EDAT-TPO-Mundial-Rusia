@@ -29,6 +29,32 @@ class ListaDinamicaTest {
     }
 
     @Test
+    void insertar2() {
+        assertTrue(lista.insertar(1));
+        assertTrue(lista.insertar(2));
+        assertTrue(lista.insertar(3));
+        assertTrue(lista.insertar(4));
+        assertTrue(lista.insertar(5));
+        assertEquals(5, lista.longitud());
+        assertTrue(lista.eliminar(5));
+        assertEquals(4, lista.recuperar(4));
+        assertTrue(lista.eliminar(4));
+        assertEquals(3, lista.recuperar(3));
+        assertTrue(lista.eliminar(3));
+        assertEquals(2, lista.recuperar(2));
+        assertTrue(lista.eliminar(2));
+        assertEquals(1, lista.recuperar(1));
+        // assertTrue(lista.eliminar(1));
+        assertEquals(1, lista.longitud());
+        // assertTrue(lista.insertar(1));
+        assertTrue(lista.insertar(2));
+        assertTrue(lista.insertar(3));
+        assertTrue(lista.insertar(4));
+        assertTrue(lista.insertar(5));
+        assertEquals(5, lista.longitud());
+    }
+
+    @Test
     void insertarEnPosicion() {
         ListaDinamica<Integer> esperado = new ListaDinamica<>();
         for (int i = 1; i <= 10; i++) {

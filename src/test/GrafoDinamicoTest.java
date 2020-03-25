@@ -25,16 +25,16 @@ class GrafoDinamicoTest {
         assertTrue(grafo.insertarVertice(6));
         assertTrue(grafo.insertarVertice(7));
         assertTrue(grafo.insertarVertice(8));
-        assertTrue(grafo.insertarArco(1, 2));
-        assertTrue(grafo.insertarArco(2, 5));
-        assertTrue(grafo.insertarArco(1, 3));
-        assertTrue(grafo.insertarArco(3, 4));
-        assertTrue(grafo.insertarArco(4, 6));
-        assertTrue(grafo.insertarArco(6, 7));
-        assertFalse(grafo.insertarArco(6, 7));
-        assertTrue(grafo.insertarArco(5, 7));
-        assertTrue(grafo.insertarArco(7, 8));
-        assertTrue(grafo.insertarArco(3, 8));
+        assertTrue(grafo.insertarArco(1, 2, 1));
+        assertTrue(grafo.insertarArco(2, 5, 1));
+        assertTrue(grafo.insertarArco(1, 3, 1));
+        assertTrue(grafo.insertarArco(3, 4, 1));
+        assertTrue(grafo.insertarArco(4, 6, 1));
+        assertTrue(grafo.insertarArco(6, 7, 1));
+        assertFalse(grafo.insertarArco(6, 7, 1));
+        assertTrue(grafo.insertarArco(5, 7, 1));
+        assertTrue(grafo.insertarArco(7, 8, 1));
+        assertTrue(grafo.insertarArco(3, 8, 1));
         System.out.println(grafo);
         System.out.println(grafo.listarEnProfundidad().toString());
         System.out.println(grafo.listarEnAnchura().toString());
@@ -57,7 +57,7 @@ class GrafoDinamicoTest {
     @Test
     void listarEnProfundidad() {
         GrafoDinamico<Character> grafo = new GrafoDinamico<>();
-        grafo.insertarVertice('h');
+        assertTrue(grafo.insertarVertice('h'));
         grafo.insertarVertice('g');
         grafo.insertarVertice('f');
         grafo.insertarVertice('e');
@@ -82,7 +82,37 @@ class GrafoDinamicoTest {
     }
 
     @Test
-    void listarEnAnchura() {
+    void caminoMasCorto() {
+        GrafoDinamico<Character> grafo = new GrafoDinamico<>();
+        grafo.insertarVertice('h');
+        grafo.insertarVertice('g');
+        grafo.insertarVertice('f');
+        grafo.insertarVertice('e');
+        grafo.insertarVertice('d');
+        grafo.insertarVertice('c');
+        grafo.insertarVertice('b');
+        grafo.insertarVertice('a');
+        grafo.insertarArco('a', 'b', 1);
+        grafo.insertarArco('a', 'c', 1);
+        grafo.insertarArco('a', 'f', 1);
+        grafo.insertarArco('b', 'd', 1);
+        grafo.insertarArco('b', 'e', 1);
+        grafo.insertarArco('c', 'f', 1);
+        grafo.insertarArco('c', 'g', 1);
+        grafo.insertarArco('c', 'e', 1);
+        grafo.insertarArco('d', 'e', 1);
+        grafo.insertarArco('e', 'h', 1);
+        grafo.insertarArco('e', 'd', 1);
+        grafo.insertarArco('e', 'b', 1);
+        grafo.insertarArco('f', 'g', 1);
+        grafo.insertarArco('g', 'c', 1);
+        grafo.insertarArco('g', 'c', 1);
+        grafo.insertarArco('h', 'g', 1);
+        grafo.insertarArco('h', 'd', 1);
+        System.out.println(grafo);
+        System.out.println(grafo.caminoMasCorto('a', 'e'));
+        System.out.println(grafo.caminoMasCorto('h', 'a'));
+        System.out.println(grafo.caminoMasCorto('h', 'b'));
     }
 
     @Test

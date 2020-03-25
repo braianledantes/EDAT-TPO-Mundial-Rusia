@@ -73,13 +73,18 @@ public class GrafoDinamico<E> implements Grafo<E> {
 
     @Override
     public boolean insertarArco(E origen, E destino) {
+        return insertarArco(origen, destino, 1);
+    }
+
+    @Override
+    public boolean insertarArco(E origen, E destino, int etiqueta) {
         boolean inserto = false;
         NodoVert<E> nodoOrigen = buscarVertice(origen);
         NodoVert<E> nodoDestino = buscarVertice(destino);
 
         if (nodoOrigen != null && nodoDestino != null) {
             if (!existeArco(nodoOrigen, nodoDestino)) {
-                nodoOrigen.setPrimerAdy(new NodoAdy<>(nodoDestino, nodoOrigen.getPrimerAdy()));
+                nodoOrigen.setPrimerAdy(new NodoAdy<>(nodoDestino, nodoOrigen.getPrimerAdy(), etiqueta));
                 inserto = true;
             }
         }
@@ -148,26 +153,26 @@ public class GrafoDinamico<E> implements Grafo<E> {
     @Override
     public boolean existeCamino(E origen, E destino) {
         boolean exito = false;
-        NodoVert<E> nodoOrigen = buscarVertice(origen);
-        NodoVert<E> nodoDestino = buscarVertice(destino);
+        NodoVert<E> vertOrigen = buscarVertice(origen);
+        NodoVert<E> vertDestino = buscarVertice(destino);
 
-        if (nodoOrigen != null && nodoDestino != null) {
+        if (vertOrigen != null && vertDestino != null) {
             Lista<E> visitados = new ListaDinamica<>();
-            exito = existeCamino(nodoOrigen, destino, visitados);
+            exito = existeCamino(vertOrigen, vertDestino, visitados);
         }
 
         return exito;
     }
 
-    private boolean existeCamino(NodoVert<E> nodo, E destino, Lista<E> visitados) {
+    private boolean existeCamino(NodoVert<E> vert, NodoVert<E> destino, Lista<E> visitados) {
         boolean exito = false;
 
-        if (nodo != null) {
-            if (nodo.getElem().equals(destino)) {
+        if (vert != null) {
+            if (vert == destino) {
                 exito = true;
             } else {
-                visitados.insertar(nodo.getElem());
-                NodoAdy<E> ady = nodo.getPrimerAdy();
+                visitados.insertar(vert.getElem());
+                NodoAdy<E> ady = vert.getPrimerAdy();
                 while (!exito && ady != null) {
                     if (!visitados.existe(ady.getVertice().getElem())) {
                         exito = existeCamino(ady.getVertice(), destino, visitados);
@@ -182,8 +187,47 @@ public class GrafoDinamico<E> implements Grafo<E> {
 
     @Override
     public Lista<E> caminoMasCorto(E origen, E destino) {
-        // TODO
-        return null;
+        NodoVert<E> vertOrigen = buscarVertice(origen);
+        NodoVert<E> vertDestino = buscarVertice(destino);
+        ListaDinamica<E> visitados = new ListaDinamica<>();
+        ListaDinamica<E> camino = new ListaDinamica<>();
+        int[] distanciaMinima = {Integer.MAX_VALUE}; // Se usa un arreglo para mantener la referencia y poder modificarlo.
+
+        if (vertOrigen != null & vertDestino != null) {
+            camino = caminoMasCorto(vertOrigen, destino, visitados, 0, camino, distanciaMinima);
+        }
+        return camino;
+    }
+
+    private ListaDinamica<E> caminoMasCorto(NodoVert<E> vertice,
+                                            E destino,
+                                            ListaDinamica<E> visitados,
+                                            int distActual,
+                                            ListaDinamica<E> camino,
+                                            int[] distMin) {
+        visitados.insertar(vertice.getElem());
+        if (vertice.getElem().equals(destino)) {
+            // Como "visitados" va a sufrir modificaciones se decide clonarla, porque si sólo se le asigna va a sufrir
+            // modificaciones, "camino" va a sufrir las mismas modificaciones (referencia).
+            camino = visitados.clone();
+            distMin[0] = distActual;
+        } else {
+            NodoAdy<E> ady = vertice.getPrimerAdy();
+            while (ady != null) {
+                distActual += ady.getEtiqueta();
+                if (distActual < distMin[0]) {
+                    if (!visitados.existe(ady.getVertice().getElem())) {
+                        camino = caminoMasCorto(ady.getVertice(), destino, visitados, distActual, camino, distMin);
+                    }
+                }
+                //Se resta porque voy a ir por otro camino,y este no continen al adyacente anterior.
+                distActual -= ady.getEtiqueta();
+                ady = ady.getSigAdy();
+            }
+        }
+        visitados.eliminar(visitados.longitud());
+
+        return camino;
     }
 
     @Override
@@ -221,27 +265,27 @@ public class GrafoDinamico<E> implements Grafo<E> {
     @Override
     public Lista<E> listarEnAnchura() {
         Lista<E> visitados = new ListaDinamica<>();
-        NodoVert<E> nodo = inicio;
-        while (nodo != null) {
-            if (!visitados.existe(nodo.getElem())) {
-                listarEnAnchura(nodo, visitados);
+        NodoVert<E> vert = inicio;
+        while (vert != null) {
+            if (!visitados.existe(vert.getElem())) {
+                listarEnAnchura(vert, visitados);
             }
-            nodo = nodo.getSigVertice();
+            vert = vert.getSigVertice();
         }
         return visitados;
     }
 
     private void listarEnAnchura(NodoVert<E> vertIni, Lista<E> visitados) {
         Cola<NodoVert<E>> cola = new ColaDinamica<>();
-        NodoVert<E> nodo;
+        NodoVert<E> vert;
         NodoAdy<E> ady;
 
         cola.poner(vertIni);
         while (!cola.esVacia()) {
-            nodo = cola.obtenerFrente();
+            vert = cola.obtenerFrente();
             cola.sacar();
-            visitados.insertar(nodo.getElem());
-            ady = nodo.getPrimerAdy();
+            visitados.insertar(vert.getElem());
+            ady = vert.getPrimerAdy();
             while (ady != null) {
                 if (!visitados.existe(ady.getVertice().getElem())) {
                     cola.poner(ady.getVertice());
@@ -264,7 +308,7 @@ public class GrafoDinamico<E> implements Grafo<E> {
             sb.append(vertice.getElem()).append(" -> ");
             ady = vertice.getPrimerAdy();
             while (ady != null) {
-                sb.append(ady.getVertice().getElem()).append(", ");
+                sb.append(ady.getVertice().getElem()).append(" (").append(ady.getEtiqueta()).append("), ");
                 ady = ady.getSigAdy();
             }
             vertice = vertice.getSigVertice();
@@ -337,14 +381,12 @@ public class GrafoDinamico<E> implements Grafo<E> {
     private static class NodoAdy<E> {
         private NodoVert<E> vertice;
         private NodoAdy<E> sigAdy;
+        private int etiqueta;
 
-        public NodoAdy(NodoVert<E> vertice, NodoAdy<E> sigAdy) {
+        public NodoAdy(NodoVert<E> vertice, NodoAdy<E> sigAdy, int etiqueta) {
             this.vertice = vertice;
             this.sigAdy = sigAdy;
-        }
-
-        public NodoAdy(NodoVert<E> vertice) {
-            this(vertice, null);
+            this.etiqueta = etiqueta;
         }
 
         public NodoVert<E> getVertice() {
@@ -367,10 +409,19 @@ public class GrafoDinamico<E> implements Grafo<E> {
             return sigAdy != null;
         }
 
+        public int getEtiqueta() {
+            return etiqueta;
+        }
+
+        public void setEtiqueta(int etiqueta) {
+            this.etiqueta = etiqueta;
+        }
+
         @Override
         public String toString() {
             return "NodoAdy{" +
-                    "vertice=" + vertice +
+                    "vertice=" + vertice.getElem() +
+                    ", etiqueta=" + etiqueta +
                     '}';
         }
     }
