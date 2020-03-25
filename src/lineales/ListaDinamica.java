@@ -66,7 +66,7 @@ public class ListaDinamica<T> implements Lista<T> {
         if (elem != null && pos >= 1 && pos <= longitud + 1) {
             if (pos == 1) {
                 if (cabecera == null) {
-                    cabecera = new Nodo<>(elem, cabecera);
+                    cabecera = new Nodo<>(elem);
                     fin = cabecera;
                 } else {
                     cabecera = new Nodo<>(elem, cabecera);
