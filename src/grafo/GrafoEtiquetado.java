@@ -249,12 +249,10 @@ public class GrafoEtiquetado<E> implements Grafo<E> {
                                             int distActual,
                                             ListaDinamica<E> camino,
                                             int[] distMax) {
-        // TODO no esta funcionando bien
         vertVisitados.insertar(vertice.getElem());
         if (vertice == destino) {
             if (distActual > distMax[0]) {
                 camino = vertVisitados.clone();
-                System.out.println(camino);
                 distMax[0] = distActual;
             }
         } else {
@@ -264,7 +262,7 @@ public class GrafoEtiquetado<E> implements Grafo<E> {
                 if (!arcosVisitados.existe(ady)) {
                     arcosVisitados.insertar(ady);
                     camino = caminoMasLargo(ady.getVertice(), destino, vertVisitados, arcosVisitados, distActual, camino, distMax);
-                    arcosVisitados.eliminar(ady);
+                    arcosVisitados.eliminar(arcosVisitados.longitud());
                 }
                 distActual -= ady.getEtiqueta();
                 ady = ady.getSigAdy();

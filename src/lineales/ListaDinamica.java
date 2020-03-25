@@ -104,7 +104,7 @@ public class ListaDinamica<T> implements Lista<T> {
         if (elem != null && longitud > 0) {
             aux = cabecera;
             int i = 1;
-            while (!exito && i < longitud) {
+            while (!exito && i <= longitud) {
                 if (elem.equals(aux.getElem())) {
                     exito = true;
                 } else {
@@ -113,14 +113,15 @@ public class ListaDinamica<T> implements Lista<T> {
                     i++;
                 }
             }
-            if (exito && auxAnt != null) {
+            if (exito) {
                 if (aux == cabecera && aux == fin) {
                     cabecera = fin = null;
                 } else if (aux == cabecera) {
                     cabecera = cabecera.getEnlace();
                 } else if (aux == fin) {
                     fin = auxAnt;
-                } else {
+                }
+                if (auxAnt != null) {
                     auxAnt.setEnlace(aux.getEnlace());
                 }
                 longitud--;

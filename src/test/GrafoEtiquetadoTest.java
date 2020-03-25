@@ -114,6 +114,7 @@ class GrafoEtiquetadoTest {
         System.out.println(grafo);
         caminoEsp = new ListaDinamica<>(new Character[]{});
         assertEquals(caminoEsp, grafo.caminoMasCorto('b', 'a'));
+        assertEquals(caminoEsp, grafo.caminoMasLargo('b', 'a'));
 
         caminoEsp = new ListaDinamica<>(new Character[]{'a', 'c', 'e'});
         assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'e'));
@@ -124,11 +125,7 @@ class GrafoEtiquetadoTest {
         caminoEsp = new ListaDinamica<>(new Character[]{'a', 'b'});
         assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'b'));
 
-        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'f', 'g', 'c', 'e', 'h', 'd', 'e', 'b'});
+        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'c', 'f', 'g', 'c', 'e', 'h', 'd', 'e', 'b'});
         assertEquals(caminoEsp, grafo.caminoMasLargo('a', 'b'));
-    }
-
-    @Test
-    void esVacio() {
     }
 }
