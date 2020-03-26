@@ -30,13 +30,15 @@ public class ColaEstatica<T> implements Cola<T> {
     @Override
     public boolean poner(T elem) throws EstructuraLlenaException {
         boolean exito = false;
-        int finAux = (fin + 1) % TAM;
-        if (finAux != inicio) {
-            cola[fin] = elem;
-            fin = finAux;
-            exito = true;
-        } else {
-            throw new EstructuraLlenaException();
+        if (elem != null) {
+            int finAux = (fin + 1) % TAM;
+            if (finAux != inicio) {
+                cola[fin] = elem;
+                fin = finAux;
+                exito = true;
+            } else {
+                throw new EstructuraLlenaException();
+            }
         }
         return exito;
     }

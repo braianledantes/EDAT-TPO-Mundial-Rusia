@@ -139,7 +139,7 @@ public class ListaDinamica<T> implements Lista<T> {
         if (pos >= 1 && pos <= longitud) {
             if (pos == 1) {
                 if (cabecera == fin) {
-                    fin = cabecera.getEnlace();
+                    fin = null;
                 }
                 cabecera = cabecera.getEnlace();
             } else {

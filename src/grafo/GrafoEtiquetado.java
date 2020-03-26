@@ -41,7 +41,6 @@ public class GrafoEtiquetado<E> implements Grafo<E> {
 
         if (elem != null && inicio != null) {
             if (inicio.getElem().equals(elem)) {
-                vert = inicio; // para que elimine los adyacentes
                 inicio = inicio.getSigVertice();
                 elimino = true;
             } else {
@@ -57,16 +56,16 @@ public class GrafoEtiquetado<E> implements Grafo<E> {
                     }
                 }
             }
-            if (elimino) eliminarAdyacentes(vert);
+            if (elimino) eliminarAdyacentes(elem);
         }
 
         return elimino;
     }
 
-    private void eliminarAdyacentes(NodoVert<E> vertAEliminar) {
+    private void eliminarAdyacentes(E vertAEliminar) {
         NodoVert<E> vertice = inicio;
         while (vertice != null) {
-            eliminarArco(vertice, vertAEliminar.getElem());
+            eliminarArco(vertice, vertAEliminar);
             vertice = vertice.getSigVertice();
         }
     }

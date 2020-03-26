@@ -16,6 +16,13 @@ class ListaDinamicaTest {
 
     @Test
     void insertar() {
+        Lista<Integer> lesp = new ListaDinamica<>();
+        assertTrue(lista.insertar(1));
+        assertTrue(lista.eliminar(1));
+        assertTrue(lista.estaVacia());
+        assertEquals(lesp, lista);
+        System.out.println(lista);
+
         assertTrue(lista.insertar(1));
         assertTrue(lista.insertar(1));
         assertTrue(lista.insertar(1));

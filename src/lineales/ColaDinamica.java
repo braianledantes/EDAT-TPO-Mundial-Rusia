@@ -20,14 +20,14 @@ public class ColaDinamica<T> implements Cola<T> {
     @Override
     public boolean poner(T elem) {
         Nodo<T> nuevoNodo = new Nodo<>(elem);
-
-        if (inicio == null) {
-            inicio = fin = nuevoNodo;
-        } else {
-            fin.setEnlace(nuevoNodo);
-            fin = nuevoNodo;
+        if (elem != null) {
+            if (inicio == null) {
+                inicio = fin = nuevoNodo;
+            } else {
+                fin.setEnlace(nuevoNodo);
+                fin = nuevoNodo;
+            }
         }
-
         return true;
     }
 

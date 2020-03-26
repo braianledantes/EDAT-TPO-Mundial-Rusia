@@ -20,16 +20,18 @@ public abstract class ArbolHeap<T extends Comparable<T>> implements Arbol<T> {
      */
     public boolean insertar(T elemento) {
         boolean exito = false;
-        this.ultimo++;
-        this.arr[this.ultimo] = elemento;
-        if (this.ultimo < this.arr.length - 1) { // si hay logar
-            hacerSubir(this.ultimo);
-            exito = true;
-        } else { // sino aumenta el tamaño del arreglo y lo llama denuevo
-            T aux[] = (T[]) new Comparable[this.arr.length + 20];
-            System.arraycopy(this.arr, 0, aux, 0, this.ultimo + 1);
-            this.arr = aux;
-            exito = insertar(elemento);
+        if (elemento != null) {
+            this.ultimo++;
+            this.arr[this.ultimo] = elemento;
+            if (this.ultimo < this.arr.length - 1) { // si hay logar
+                hacerSubir(this.ultimo);
+                exito = true;
+            } else { // sino aumenta el tamaño del arreglo y lo llama denuevo
+                T aux[] = (T[]) new Comparable[this.arr.length + 20];
+                System.arraycopy(this.arr, 0, aux, 0, this.ultimo + 1);
+                this.arr = aux;
+                exito = insertar(elemento);
+            }
         }
         return exito;
     }

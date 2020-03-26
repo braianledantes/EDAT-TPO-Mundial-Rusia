@@ -235,25 +235,25 @@ public class ArbolGenerico<T> implements Arbol<T> {
 
     @Override
     public Lista<T> listarNiveles() {
-        Lista<T> lista = new ListaDinamica<>();
-        Cola<Nodo<T>> cola = new ColaDinamica<>();
+        Lista<T> visitados = new ListaDinamica<>();
+        Cola<Nodo<T>> porVisitar = new ColaDinamica<>();
         Nodo<T> nodo;
 
         if (raiz != null) {
-            cola.poner(raiz);
-            while (!cola.esVacia()) {
-                nodo = cola.obtenerFrente();
-                cola.sacar();
-                lista.insertar(nodo.getElem());
+            porVisitar.poner(raiz);
+            while (!porVisitar.esVacia()) {
+                nodo = porVisitar.obtenerFrente();
+                porVisitar.sacar();
+                visitados.insertar(nodo.getElem());
                 nodo = nodo.getHijoIzq();
                 while (nodo != null) {
-                    cola.poner(nodo);
+                    porVisitar.poner(nodo);
                     nodo = nodo.getHerDer();
                 }
             }
         }
 
-        return lista;
+        return visitados;
     }
 
     @Override

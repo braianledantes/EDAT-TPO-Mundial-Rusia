@@ -35,12 +35,14 @@ public class PilaEstatica<T> implements Pila<T> {
     public boolean apilar(T elem) throws EstructuraLlenaException {
         boolean exito = false;
 
-        if (tope < TAM - 1) {
-            tope++;
-            pila[tope] = elem;
-            exito = true;
-        }else{
-            throw new EstructuraLlenaException();
+        if (elem != null) {
+            if (tope < TAM - 1) {
+                tope++;
+                pila[tope] = elem;
+                exito = true;
+            } else {
+                throw new EstructuraLlenaException();
+            }
         }
 
         return exito;

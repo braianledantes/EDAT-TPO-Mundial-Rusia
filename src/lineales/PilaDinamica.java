@@ -18,8 +18,12 @@ public class PilaDinamica<T> implements Pila<T> {
 
     @Override
     public boolean apilar(T elem) {
-        tope = new Nodo<>(elem, tope);
-        return true;
+        boolean exito = false;
+        if (elem != null) {
+            tope = new Nodo<>(elem, tope);
+            exito = true;
+        }
+        return exito;
     }
 
     @Override
