@@ -313,23 +313,35 @@ public class GrafoEtiquetado<E> implements Grafo<E> {
     }
 
     private void listarEnAnchura(NodoVert<E> vertIni, Lista<E> visitados) {
-        Cola<NodoVert<E>> cola = new ColaDinamica<>();
+        Cola<NodoVert<E>> porVisitar = new ColaDinamica<>();
         NodoVert<E> vert;
         NodoAdy<E> ady;
 
-        cola.poner(vertIni);
-        while (!cola.esVacia()) {
-            vert = cola.obtenerFrente();
-            cola.sacar();
+        porVisitar.poner(vertIni);
+        while (!porVisitar.esVacia()) {
+            vert = porVisitar.obtenerFrente();
+            porVisitar.sacar();
             visitados.insertar(vert.getElem());
             ady = vert.getPrimerAdy();
             while (ady != null) {
                 if (!visitados.existe(ady.getVertice().getElem())) {
-                    cola.poner(ady.getVertice());
+                    porVisitar.poner(ady.getVertice());
                 }
                 ady = ady.getSigAdy();
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        // TODO
+        return super.equals(obj);
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        // TODO
+        return super.clone();
     }
 
     @Override

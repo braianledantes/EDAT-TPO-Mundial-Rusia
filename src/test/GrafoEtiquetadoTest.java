@@ -111,7 +111,7 @@ class GrafoEtiquetadoTest {
         grafo.insertarArco('g', 'c', 1);
         grafo.insertarArco('h', 'g', 1);
         grafo.insertarArco('h', 'd', 1);
-        System.out.println(grafo);
+       // System.out.println(grafo);
         caminoEsp = new ListaDinamica<>(new Character[]{});
         assertEquals(caminoEsp, grafo.caminoMasCorto('b', 'a'));
         assertEquals(caminoEsp, grafo.caminoMasLargo('b', 'a'));
