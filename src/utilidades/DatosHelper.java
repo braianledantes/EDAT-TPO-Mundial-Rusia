@@ -6,6 +6,7 @@ import entidades.Partido;
 import entidades.Ronda;
 import estructuras.grafo.GrafoEtiquetado;
 import estructuras.lineales.Lista;
+import estructuras.lineales.ListaDinamica;
 
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -80,7 +81,7 @@ public class DatosHelper {
         if (equipo != null) {
             equipo.setDirectorTecnico(directorTecnico);
             equipo.setPuntos(puntos);
-            equipo.setGolesAFavol(golesAFavor);
+            equipo.setGolesAFavor(golesAFavor);
             equipo.setGolesEnContra(golesEnContra);
             modi = true;
         }
@@ -95,12 +96,31 @@ public class DatosHelper {
         return ciudades.eliminarArco(new Ciudad(origen), new Ciudad(destino));
     }
 
-    public boolean altaDePartido(String equipoA, String equipoB, Ronda ronda, int golesA, int golesB) {
+    public boolean altaDePartido(String equipoA, String equipoB, int ronda, int golesA, int golesB) {
         boolean exito = false;
         Equipo eqA = equipos.get(equipoA);
         Equipo eqB = equipos.get(equipoB);
-        if (eqA != null && eqB != null) {
-            Partido partido = new Partido(eqA, eqB, ronda, golesA, golesB);
+        Ronda ronda1 = null;
+
+        if (eqA != null && eqB != null && ronda >= 0 && ronda <= 4) {
+            switch (ronda) {
+                case 0:
+                    ronda1 = Ronda.GRUPO;
+                    break;
+                case 1:
+                    ronda1 = Ronda.OCTAVOS;
+                    break;
+                case 2:
+                    ronda1 = Ronda.CUARTOS;
+                    break;
+                case 3:
+                    ronda1 = Ronda.SEMIFINAL;
+                    break;
+                case 4:
+                    ronda1 = Ronda.FINAL;
+                    break;
+            }
+            Partido partido = new Partido(eqA, eqB, ronda1, golesA, golesB);
             String key = equipoA + equipoB;
             if (eqB.compareTo(eqA) < 0) {
                 key = equipoB + equipoA;
@@ -116,14 +136,14 @@ public class DatosHelper {
     }
 
     public Lista<Ciudad> obtenerCaminoConMenosCiudades(String ciudadOrigen, String ciudadDestino) {
-        return ciudades.caminoMasCorto(new Ciudad(ciudadOrigen), new Ciudad(ciudadDestino));
+        return ciudades.caminoConMenosVertices(new Ciudad(ciudadOrigen), new Ciudad(ciudadDestino));
     }
 
-    public Lista<Ciudad> obtenerCaminoPosibles(String ciudadOrigen, String ciudadDestino) {
-        return ciudades.caminoMasCorto(new Ciudad(ciudadOrigen), new Ciudad(ciudadDestino));
+    public ListaDinamica<ListaDinamica<Ciudad>> obtenerCaminoPosibles(String ciudadOrigen, String ciudadDestino) {
+        return ciudades.caminosPosibles(new Ciudad(ciudadOrigen), new Ciudad(ciudadDestino));
     }
 
-    public Lista<Ciudad> obtenerCaminoMasCortoEntreCiudad(String ciudadOrigen, String ciudadDestino) {
-        return ciudades.caminoMasCorto(new Ciudad(ciudadOrigen), new Ciudad(ciudadDestino));
+    public Lista<Ciudad> obtenerCaminoMasCortoEntreCiudad(String ciudadOrigen, String ciudadDestino1, String ciudadDestino2) {
+        return ciudades.caminoMasCorto(new Ciudad(ciudadOrigen), new Ciudad(ciudadDestino1), new Ciudad(ciudadDestino2));
     }
 }

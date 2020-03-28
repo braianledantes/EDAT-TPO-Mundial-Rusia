@@ -5,14 +5,14 @@ import estructuras.lineales.ListaDinamica;
 
 public class Equipo implements Comparable<Equipo> {
     private String pais, directorTecnico;
-    private int puntos, golesAFavol, golesEnContra;
+    private int puntos, golesAFavor, golesEnContra;
     private Lista<Equipo> equiposJugados;
 
-    public Equipo(String pais, String directorTecnico, int puntos, int golesAFavol, int golesEnContra) {
+    public Equipo(String pais, String directorTecnico, int puntos, int golesAFavor, int golesEnContra) {
         this.pais = pais;
         this.directorTecnico = directorTecnico;
         this.puntos = puntos;
-        this.golesAFavol = golesAFavol;
+        this.golesAFavor = golesAFavor;
         this.golesEnContra = golesEnContra;
         this.equiposJugados = new ListaDinamica<>();
     }
@@ -47,12 +47,12 @@ public class Equipo implements Comparable<Equipo> {
         this.puntos = puntos;
     }
 
-    public int getGolesAFavol() {
-        return golesAFavol;
+    public int getGolesAFavor() {
+        return golesAFavor;
     }
 
-    public void setGolesAFavol(int golesAFavol) {
-        this.golesAFavol = golesAFavol;
+    public void setGolesAFavor(int golesAFavor) {
+        this.golesAFavor = golesAFavor;
     }
 
     public int getGolesEnContra() {
@@ -64,7 +64,7 @@ public class Equipo implements Comparable<Equipo> {
     }
 
     public int diferenciaGoles() {
-        return golesAFavol - golesEnContra;
+        return golesAFavor - golesEnContra;
     }
 
     public boolean insertarEquipoJugado(Equipo equipo) {
