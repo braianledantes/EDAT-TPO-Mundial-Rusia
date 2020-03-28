@@ -88,6 +88,18 @@ public interface Grafo<E> {
 
     /**
      * Dados dos elementos de tipoVertice (origen y destino), devuelve un camino (lista de vértices) que
+     * indique el camino que pasa por menor distancía que permite llegar del vértice origen al vértice destino.
+     * Si hay más de un camino con igual distancía, devuelve cualquiera de ellos. Si alguno de los
+     * vértices no existe o no hay camino posible entre ellos devuelve la lista vacía.
+     *
+     * @param origen  vertice origen
+     * @param destino vertice destino
+     * @return lista con el camino
+     */
+    Lista<E> caminoMasCorto(E origen, E destino);
+
+    /**
+     * Dados dos elementos de tipoVertice (origen y destino), devuelve un camino (lista de vértices) que
      * indique el camino que pasa por menos vértices que permite llegar del vértice origen al vértice destino.
      * Si hay más de un camino con igual cantidad de vértices, devuelve cualquiera de ellos. Si alguno de los
      * vértices no existe o no hay camino posible entre ellos devuelve la lista vacía.
@@ -96,7 +108,21 @@ public interface Grafo<E> {
      * @param destino vertice destino
      * @return lista con el camino
      */
-    Lista<E> caminoMasCorto(E origen, E destino);
+    Lista<E> caminoConMenosVertices(E origen, E destino);
+
+    /**
+     * Dados dos elementos de tipoVertice (origen y destino), devuelve un camino (lista de vértices) que
+     * indique el camino que pasa por menor distancía que permite llegar del vértice origen al vértice destino,
+     * pasando por uno intermedio.
+     * Si hay más de un camino con igual distancía, devuelve cualquiera de ellos. Si alguno de los
+     * vértices no existe o no hay camino posible entre ellos devuelve la lista vacía.
+     *
+     * @param origen   vertice origen
+     * @param destino1 vertice intermedio
+     * @param destino2 vertice destino final
+     * @return lista con el camino
+     */
+    Lista<E> caminoMasCorto(E origen, E destino1, E destino2);
 
     /**
      * Dados dos elementos de tipoVertice (origen y destino), devuelve un camino (lista de vértices) que
@@ -109,6 +135,18 @@ public interface Grafo<E> {
      * @return lista con el camino
      */
     Lista<E> caminoMasLargo(E origen, E destino);
+
+    /**
+     * Dados dos elementos de tipoVertice (origen y destino), devuelve una lista con los posibles caminos (listas) desde
+     * el vértice origen al vértice destino.
+     * Si hay más de un camino con igual distancía, devuelve cualquiera de ellos. Si alguno de los
+     * vértices no existe o no hay camino posible entre ellos devuelve la lista vacía.
+     *
+     * @param origen  vertice origen
+     * @param destino vertice destino
+     * @return lista con los caminos
+     */
+    Lista<Lista<E>> caminosPosibles(E origen, E destino);
 
     /**
      * Devuelve una lista con los vértices del estructuras.grafo visitados según el recorrido en profundidad explicado

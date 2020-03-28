@@ -131,11 +131,18 @@ class GrafoEtiquetadoTest {
         caminoEsp = new ListaDinamica<>(new Character[]{'a', 'b'});
         assertEquals(caminoEsp, grafo.caminoConMenosVertices('a', 'b'));
 
+        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'c', 'e'});
+        assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'e', 'e'));
+
+        caminoEsp = new ListaDinamica<>(new Character[]{'a'});
+        assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'a', 'a'));
+
         caminoEsp = new ListaDinamica<>(new Character[]{'a', 'c', 'e', 'h', 'd'});
         assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'h', 'd'));
+        assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'h', 'd'));
 
-        ListaDinamica<ListaDinamica<Character>> caminosPosibles = grafo.caminosPosibles('a', 'd');
-        ListaDinamica<ListaDinamica<Character>> caminosEsperados = new ListaDinamica<>();
+        Lista<Lista<Character>> caminosPosibles = grafo.caminosPosibles('a', 'd');
+        Lista<Lista<Character>> caminosEsperados = new ListaDinamica<>();
         caminosEsperados.insertar(new ListaDinamica<>(new Character[]{'a', 'f', 'g', 'c', 'e', 'b', 'd'}));
         caminosEsperados.insertar(new ListaDinamica<>(new Character[]{'a', 'f', 'g', 'c', 'e', 'd'}));
         caminosEsperados.insertar(new ListaDinamica<>(new Character[]{'a', 'f', 'g', 'c', 'e', 'h', 'd'}));

@@ -230,6 +230,7 @@ public class GrafoEtiquetado<E> implements Grafo<E> {
         return camino;
     }
 
+    @Override
     public Lista<E> caminoConMenosVertices(E origen, E destino) {
         NodoVert<E> vertOrigen = buscarVertice(origen);
         NodoVert<E> vertDestino = buscarVertice(destino);
@@ -271,6 +272,7 @@ public class GrafoEtiquetado<E> implements Grafo<E> {
         return camino;
     }
 
+    @Override
     public Lista<E> caminoMasCorto(E origen, E destino1, E destino2) {
         NodoVert<E> vertOrigen = buscarVertice(origen);
         NodoVert<E> vertDestino1 = buscarVertice(destino1);
@@ -281,7 +283,10 @@ public class GrafoEtiquetado<E> implements Grafo<E> {
         boolean[] bandera = {false}; // si paso por el primer destino.
 
         if (vertOrigen != null && vertDestino1 != null && vertDestino2 != null) {
-            camino = caminoMasCorto(vertOrigen, vertDestino1, vertDestino2, visitados, 0, camino, distanciaMinima, bandera);
+            if (destino1 != destino2)
+                camino = caminoMasCorto(vertOrigen, vertDestino1, vertDestino2, visitados, 0, camino, distanciaMinima, bandera);
+            else
+                camino = caminoMasCorto(vertOrigen, vertDestino1, visitados, 0, camino, distanciaMinima);
         }
         return camino;
     }
@@ -369,11 +374,12 @@ public class GrafoEtiquetado<E> implements Grafo<E> {
         return camino;
     }
 
-    public ListaDinamica<ListaDinamica<E>> caminosPosibles(E origen, E destino) {
+    @Override
+    public Lista<Lista<E>> caminosPosibles(E origen, E destino) {
         NodoVert<E> vertOrigen = buscarVertice(origen);
         NodoVert<E> vertDestino = buscarVertice(destino);
         ListaDinamica<E> visitados = new ListaDinamica<>();
-        ListaDinamica<ListaDinamica<E>> caminos = new ListaDinamica<>();
+        Lista<Lista<E>> caminos = new ListaDinamica<>();
 
         if (vertOrigen != null & vertDestino != null) {
             caminosPosibles(vertOrigen, vertDestino, visitados, caminos);
@@ -384,7 +390,7 @@ public class GrafoEtiquetado<E> implements Grafo<E> {
     private void caminosPosibles(NodoVert<E> vertice,
                                  NodoVert<E> destino,
                                  ListaDinamica<E> visitados,
-                                 ListaDinamica<ListaDinamica<E>> caminos) {
+                                 Lista<Lista<E>> caminos) {
         visitados.insertar(vertice.getElem());
         if (vertice == destino) {
             caminos.insertar(visitados.clone());

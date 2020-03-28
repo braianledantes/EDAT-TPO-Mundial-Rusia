@@ -6,7 +6,6 @@ import entidades.Partido;
 import entidades.Ronda;
 import estructuras.grafo.GrafoEtiquetado;
 import estructuras.lineales.Lista;
-import estructuras.lineales.ListaDinamica;
 
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -139,7 +138,7 @@ public class DatosHelper {
         return ciudades.caminoConMenosVertices(new Ciudad(ciudadOrigen), new Ciudad(ciudadDestino));
     }
 
-    public ListaDinamica<ListaDinamica<Ciudad>> obtenerCaminoPosibles(String ciudadOrigen, String ciudadDestino) {
+    public Lista<Lista<Ciudad>> obtenerCaminoPosibles(String ciudadOrigen, String ciudadDestino) {
         return ciudades.caminosPosibles(new Ciudad(ciudadOrigen), new Ciudad(ciudadDestino));
     }
 
