@@ -1,9 +1,8 @@
 package utilidades;
 
 
-
-	import java.io.*;
-	import java.util.*;
+import java.io.IOException;
+import java.util.StringTokenizer;
 
 	/**
 	 Class for simple console input.
