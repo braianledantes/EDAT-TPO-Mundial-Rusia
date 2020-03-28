@@ -111,7 +111,7 @@ class GrafoEtiquetadoTest {
         grafo.insertarArco('g', 'c', 1);
         grafo.insertarArco('h', 'g', 1);
         grafo.insertarArco('h', 'd', 1);
-        // System.out.println(estructuras.grafo);
+        //System.out.println(grafo);
         caminoEsp = new ListaDinamica<>(new Character[]{});
         assertEquals(caminoEsp, grafo.caminoMasCorto('b', 'a'));
         assertEquals(caminoEsp, grafo.caminoMasLargo('b', 'a'));
@@ -127,5 +127,26 @@ class GrafoEtiquetadoTest {
 
         caminoEsp = new ListaDinamica<>(new Character[]{'a', 'c', 'f', 'g', 'c', 'e', 'h', 'd', 'e', 'b'});
         assertEquals(caminoEsp, grafo.caminoMasLargo('a', 'b'));
+
+        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'b'});
+        assertEquals(caminoEsp, grafo.caminoConMenosVertices('a', 'b'));
+
+        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'c', 'e', 'h', 'd'});
+        assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'h', 'd'));
+
+        ListaDinamica<ListaDinamica<Character>> caminosPosibles = grafo.caminosPosibles('a', 'd');
+        ListaDinamica<ListaDinamica<Character>> caminosEsperados = new ListaDinamica<>();
+        caminosEsperados.insertar(new ListaDinamica<>(new Character[]{'a', 'f', 'g', 'c', 'e', 'b', 'd'}));
+        caminosEsperados.insertar(new ListaDinamica<>(new Character[]{'a', 'f', 'g', 'c', 'e', 'd'}));
+        caminosEsperados.insertar(new ListaDinamica<>(new Character[]{'a', 'f', 'g', 'c', 'e', 'h', 'd'}));
+        caminosEsperados.insertar(new ListaDinamica<>(new Character[]{'a', 'c', 'e', 'b', 'd'}));
+        caminosEsperados.insertar(new ListaDinamica<>(new Character[]{'a', 'c', 'e', 'd'}));
+        caminosEsperados.insertar(new ListaDinamica<>(new Character[]{'a', 'c', 'e', 'h', 'd'}));
+        caminosEsperados.insertar(new ListaDinamica<>(new Character[]{'a', 'b', 'e', 'd'}));
+        caminosEsperados.insertar(new ListaDinamica<>(new Character[]{'a', 'b', 'e', 'h', 'd'}));
+        caminosEsperados.insertar(new ListaDinamica<>(new Character[]{'a', 'b', 'd'}));
+        for (int i = 1; i <= 9; i++) {
+            assertEquals(caminosEsperados.recuperar(i), caminosPosibles.recuperar(i));
+        }
     }
 }

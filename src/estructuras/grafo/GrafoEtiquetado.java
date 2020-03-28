@@ -294,27 +294,32 @@ public class GrafoEtiquetado<E> implements Grafo<E> {
                                             ListaDinamica<E> camino,
                                             int[] distMin,
                                             boolean[] bandera) {
-        visitados.insertar(vertice.getElem());
-        if (vertice == destino1) {
-            bandera[0] = true;
-        } else if (bandera[0] && vertice == destino2) {
-            camino = visitados.clone();
-            distMin[0] = distActual;
-        } else {
-            NodoAdy<E> ady = vertice.getPrimerAdy();
-            while (ady != null) {
-                distActual += ady.getEtiqueta();
-                if (distActual < distMin[0]) {
-                    if (!visitados.existe(ady.getVertice().getElem())) {
-                        camino = caminoMasCorto(ady.getVertice(), destino1, destino2, visitados, distActual, camino, distMin, bandera);
+        if (vertice != null) {
+            visitados.insertar(vertice.getElem());
+            if (bandera[0] && vertice == destino2) { // llego al final
+                camino = visitados.clone();
+                distMin[0] = distActual;
+            } else if (vertice == destino1 && vertice.getPrimerAdy() != null) { // llego a la mitad
+                bandera[0] = true;
+                camino = caminoMasCorto(vertice.getPrimerAdy().getVertice(), destino1, destino2, visitados, distActual, camino, distMin, bandera);
+            } else {
+                NodoAdy<E> ady = vertice.getPrimerAdy();
+                while (ady != null) {
+                    distActual += ady.getEtiqueta();
+                    if (distActual < distMin[0]) {
+                        if (!visitados.existe(ady.getVertice().getElem())) {
+                            camino = caminoMasCorto(ady.getVertice(), destino1, destino2, visitados, distActual, camino, distMin, bandera);
+                            if (ady.getVertice() == destino1) {
+                                bandera[0] = false;
+                            }
+                        }
                     }
+                    distActual -= ady.getEtiqueta();
+                    ady = ady.getSigAdy();
                 }
-                distActual -= ady.getEtiqueta();
-                ady = ady.getSigAdy();
             }
+            visitados.eliminar(visitados.longitud());
         }
-        visitados.eliminar(visitados.longitud());
-
         return camino;
     }
 
@@ -369,10 +374,9 @@ public class GrafoEtiquetado<E> implements Grafo<E> {
         NodoVert<E> vertDestino = buscarVertice(destino);
         ListaDinamica<E> visitados = new ListaDinamica<>();
         ListaDinamica<ListaDinamica<E>> caminos = new ListaDinamica<>();
-        int[] distanciaMinima = {Integer.MAX_VALUE}; // Se usa un arreglo para mantener la referencia y poder modificarlo.
 
         if (vertOrigen != null & vertDestino != null) {
-            caminosPosibles(vertOrigen, vertDestino, visitados, 0, caminos, distanciaMinima);
+            caminosPosibles(vertOrigen, vertDestino, visitados, caminos);
         }
         return caminos;
     }
@@ -380,23 +384,16 @@ public class GrafoEtiquetado<E> implements Grafo<E> {
     private void caminosPosibles(NodoVert<E> vertice,
                                  NodoVert<E> destino,
                                  ListaDinamica<E> visitados,
-                                 int distActual,
-                                 ListaDinamica<ListaDinamica<E>> caminos,
-                                 int[] distMin) {
+                                 ListaDinamica<ListaDinamica<E>> caminos) {
         visitados.insertar(vertice.getElem());
         if (vertice == destino) {
             caminos.insertar(visitados.clone());
-            distMin[0] = distActual;
         } else {
             NodoAdy<E> ady = vertice.getPrimerAdy();
             while (ady != null) {
-                distActual += ady.getEtiqueta();
-                if (distActual < distMin[0]) {
-                    if (!visitados.existe(ady.getVertice().getElem())) {
-                        caminosPosibles(ady.getVertice(), destino, visitados, distActual, caminos, distMin);
-                    }
+                if (!visitados.existe(ady.getVertice().getElem())) {
+                    caminosPosibles(ady.getVertice(), destino, visitados, caminos);
                 }
-                distActual -= ady.getEtiqueta();
                 ady = ady.getSigAdy();
             }
         }
