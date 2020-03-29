@@ -6,12 +6,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 public class ColaEstaticaTest {
 
     ColaEstatica<Integer> cola, esperado;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         cola = new ColaEstatica<>(Integer.class);
         esperado = new ColaEstatica<>(Integer.class);
     }
@@ -20,7 +21,7 @@ public class ColaEstaticaTest {
     void poner() {
         boolean poner;
         for (int i = 1; i < ColaEstatica.TAM; i++) {
-            poner =  cola.poner(i);
+            poner = cola.poner(i);
             assertTrue(poner);
         }
 
@@ -48,29 +49,29 @@ public class ColaEstaticaTest {
         }
 
         for (int i = 1; i < ColaEstatica.TAM; i++) {
-            sacar =  cola.sacar();
+            sacar = cola.sacar();
             assertTrue(sacar);
         }
 
-        sacar =  cola.sacar();
+        sacar = cola.sacar();
         assertFalse(sacar);
 
         for (int i = 1; i < ColaEstatica.TAM; i++) {
             cola.poner(i);
         }
 
-        sacar =  cola.sacar();
+        sacar = cola.sacar();
         assertTrue(sacar);
-        sacar =  cola.sacar();
+        sacar = cola.sacar();
         assertTrue(sacar);
-        sacar =  cola.sacar();
+        sacar = cola.sacar();
         assertTrue(sacar);
         cola.poner(1);
         cola.poner(1);
         cola.poner(1);
 
         for (int i = 1; i < 3; i++) {
-            sacar =  cola.sacar();
+            sacar = cola.sacar();
             assertTrue(sacar);
         }
 

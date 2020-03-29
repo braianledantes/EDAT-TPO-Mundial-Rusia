@@ -139,7 +139,7 @@ class PilaDinamicaTest {
         esperado.apilar(1);
         assertEquals(esperado, pila);
         pila.apilar(2);
-        assertNotEquals(esperado,pila);
+        assertNotEquals(esperado, pila);
         esperado.apilar(2);
         assertEquals(esperado, pila);
         pila.desapilar();

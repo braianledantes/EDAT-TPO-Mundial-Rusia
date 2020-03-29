@@ -1,5 +1,6 @@
 package estructuras.lineales;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
@@ -9,7 +10,7 @@ import java.util.Arrays;
  *
  * @param <T>
  */
-public class ColaEstatica<T> implements Cola<T> {
+public class ColaEstatica<T> implements Cola<T>, Serializable {
     public static final int TAM = 8;
     private T[] cola;
     private int inicio, fin;

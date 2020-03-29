@@ -1,12 +1,14 @@
 package estructuras.lineales;
 
+import java.io.Serializable;
+
 /**
  * Esta implementación de cola es dinamica, lo que quiere decir que se pueden almacenar infinitos elementos en ella.
  * Solo se puede acceder al elemento que en frente de la cola.
  *
  * @param <T>
  */
-public class ColaDinamica<T> implements Cola<T> {
+public class ColaDinamica<T> implements Cola<T>, Serializable {
     private Nodo<T> inicio, fin;
 
     /**

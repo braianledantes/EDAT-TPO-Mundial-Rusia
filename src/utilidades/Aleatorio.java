@@ -5,20 +5,22 @@
  */
 
 package utilidades;
+
 /**
- *
  * @author nacho
  */
 public class Aleatorio {
-    public static double doubleAleatorio(int min, int max){
-        return Math.random() * (max-min) + min;
+    public static double doubleAleatorio(int min, int max) {
+        return Math.random() * (max - min) + min;
     }
-    public static int intAleatorio(int min, int max){
+
+    public static int intAleatorio(int min, int max) {
         return (int) doubleAleatorio(min, max);
     }
-    public static char charAleatorio(){
+
+    public static char charAleatorio() {
         char a;
-        if (Math.random() >= 0.5){
+        if (Math.random() >= 0.5) {
             // letras mayúsculas
             a = (char) intAleatorio(97, 123);
         } else {
@@ -27,15 +29,16 @@ public class Aleatorio {
         }
         return a;
     }
-    public static String stringAleatorio(int tam){
+
+    public static String stringAleatorio(int tam) {
         String res = "";
-        for(int i = 0; i < tam; i++){
+        for (int i = 0; i < tam; i++) {
             res = res + charAleatorio();
         }
         return res;
     }
-    
-    public static String nombreAleatorio(){
+
+    public static String nombreAleatorio() {
         // ejemplo para definir un valor aleatorio entre varias posibilidades
         // en este caso nombres
         String arr[] = {"Juan", "Carlos", "Pedro", "Tito", "Cacho"};

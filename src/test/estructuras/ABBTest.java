@@ -152,7 +152,7 @@ class ABBTest {
         assertTrue(abb.eliminar(34));
 
         assertTrue(abbe.insertar(45));
-       // assertTrue(abbe.insertar(34));
+        // assertTrue(abbe.insertar(34));
         assertTrue(abbe.insertar(65));
         assertTrue(abbe.insertar(13));
         assertTrue(abbe.insertar(55));

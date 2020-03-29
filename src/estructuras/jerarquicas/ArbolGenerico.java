@@ -5,12 +5,14 @@ import estructuras.lineales.ColaDinamica;
 import estructuras.lineales.Lista;
 import estructuras.lineales.ListaDinamica;
 
+import java.io.Serializable;
+
 /**
  * Árbol normal, donde cada vértice puede tener varios hijos.
  *
  * @param <T> tipo de dato que almacena el árbol
  */
-public class ArbolGenerico<T> implements Arbol<T> {
+public class ArbolGenerico<T> implements Arbol<T>, Serializable {
 
     /**
      * Vértice raiz del árbol.
@@ -369,7 +371,7 @@ public class ArbolGenerico<T> implements Arbol<T> {
         }
     }
 
-    private static class Nodo<T> {
+    private static class Nodo<T> implements Serializable {
         private T elem;
         private Nodo<T> hijoIzq, herDer;
 

@@ -5,12 +5,14 @@ import estructuras.lineales.ColaDinamica;
 import estructuras.lineales.Lista;
 import estructuras.lineales.ListaDinamica;
 
+import java.io.Serializable;
+
 /**
  * Un árbol binariorio es aquel árbol donde cada nodo tiene, como máximo, dos hijos.
  *
  * @param <T> Tipo de dato que almacena el árbol
  */
-public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
+public abstract class ArbolBinarioDinamico<T> implements Arbol<T>, Serializable {
     public static final int HIJO_IZQUIERDO = 0;
     public static final int HIJO_DERECHO = 1;
 
@@ -271,7 +273,7 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T> {
         raiz = null;
     }
 
-    protected static class Nodo<T> {
+    protected static class Nodo<T> implements Serializable {
         private T elem;
         private Nodo<T> izq, der;
         private int altura;

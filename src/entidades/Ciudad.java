@@ -1,8 +1,9 @@
 package entidades;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Ciudad {
+public class Ciudad implements Serializable {
     private String nombre;
     private double superfice;
     private int cantHabitantes;
@@ -57,5 +58,14 @@ public class Ciudad {
         if (o == null || getClass() != o.getClass()) return false;
         Ciudad ciudad = (Ciudad) o;
         return Objects.equals(nombre, ciudad.nombre);
+    }
+
+    @Override
+    public String toString() {
+        return nombre + "{" +
+                "superfice=" + superfice +
+                ", cantHabitantes=" + cantHabitantes +
+                ", sede=" + sede +
+                '}';
     }
 }

@@ -3,7 +3,9 @@ package estructuras.conjuntistas;
 import estructuras.lineales.Lista;
 import estructuras.lineales.ListaDinamica;
 
-public class HashAbierto<T> implements TablaHash<T> {
+import java.io.Serializable;
+
+public class HashAbierto<T> implements TablaHash<T>, Serializable {
     public static final int TAM = 10000;
     private Nodo<T>[] tabla;
     private int cant;
@@ -108,7 +110,7 @@ public class HashAbierto<T> implements TablaHash<T> {
         return sb.append('}').toString();
     }
 
-    private static class Nodo<T> {
+    private static class Nodo<T> implements Serializable {
         private T elem;
         private Nodo<T> enlace;
 

@@ -6,6 +6,7 @@ package estructuras.lineales;
  * elemento o eliminarlo, y al final para agregar nuevos elementos. El frente de la cola corresponde al elemento que
  * entró primero, es decir el que saldrá en la próxima eliminación. El final de la cola corresponde al elemento que
  * entró en último lugar.
+ *
  * @param <T>
  */
 public interface Cola<T> {
@@ -28,12 +29,14 @@ public interface Cola<T> {
 
     /**
      * Devuelve el elemento que está en el frente. Precondición: la cola no está vacía.
+     *
      * @return el elemento del frente
      */
     T obtenerFrente();
 
     /**
      * Devuelve verdadero si la cola no tiene elementos y falso en caso contrario.
+     *
      * @return Devuelve verdadero si la cola no tiene elementos y falso en caso contrario
      */
     boolean esVacia();

@@ -3,7 +3,9 @@ package estructuras.conjuntistas;
 import estructuras.jerarquicas.Arbol;
 import estructuras.lineales.Lista;
 
-public abstract class ArbolHeap<T extends Comparable<T>> implements Arbol<T> {
+import java.io.Serializable;
+
+public abstract class ArbolHeap<T extends Comparable<T>> implements Arbol<T>, Serializable {
     protected T[] arr;
     protected int ultimo;
 

@@ -2,7 +2,9 @@ package estructuras.conjuntistas;
 
 import estructuras.lineales.Lista;
 
-public class HashCerrado<T> implements TablaHash<T> {
+import java.io.Serializable;
+
+public class HashCerrado<T> implements TablaHash<T>, Serializable {
     public static final int TAM = 10000;
 
     private int reHashing(T elem, int i) {

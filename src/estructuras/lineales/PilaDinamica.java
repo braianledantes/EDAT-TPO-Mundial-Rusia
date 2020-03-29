@@ -1,12 +1,14 @@
 package estructuras.lineales;
 
+import java.io.Serializable;
+
 /**
  * Implementación de una pila dinámica, esta formada por varios nodos enlazados entre sí, con el tope apuntando al
  * primer nodo de la pila. Las inserciones y eliminaciones se harán siempre sobre el tope de la pila.
  *
  * @param <T> tipo de dato de la pila
  */
-public class PilaDinamica<T> implements Pila<T> {
+public class PilaDinamica<T> implements Pila<T>, Serializable {
     private Nodo<T> tope;
 
     /**

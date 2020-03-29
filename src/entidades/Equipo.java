@@ -3,24 +3,42 @@ package entidades;
 import estructuras.lineales.Lista;
 import estructuras.lineales.ListaDinamica;
 
-public class Equipo implements Comparable<Equipo> {
+import java.io.Serializable;
+
+public class Equipo implements Comparable<Equipo>, Serializable {
     private String pais, directorTecnico;
+    private char grupo;
     private int puntos, golesAFavor, golesEnContra;
     private Lista<Equipo> equiposJugados;
+    private Lista<Partido> partidosJugados;
 
-    public Equipo(String pais, String directorTecnico, int puntos, int golesAFavor, int golesEnContra) {
+    public Equipo(String pais, String directorTecnico, char grupo, int puntos, int golesAFavor, int golesEnContra) {
         this.pais = pais;
         this.directorTecnico = directorTecnico;
+        this.grupo = grupo;
         this.puntos = puntos;
         this.golesAFavor = golesAFavor;
         this.golesEnContra = golesEnContra;
         this.equiposJugados = new ListaDinamica<>();
+        this.partidosJugados = new ListaDinamica<>();
     }
 
     public Equipo(String pais, String directorTecnico) {
         this.pais = pais;
         this.directorTecnico = directorTecnico;
         this.equiposJugados = new ListaDinamica<>();
+        this.partidosJugados = new ListaDinamica<>();
+    }
+
+    public Lista<Partido> getPartidosJugados() {
+        return partidosJugados;
+    }
+
+    public boolean agragarPartido(Partido partido) {
+        boolean exito = false;
+        if (partido != null && (this.equals(partido.getEquipoA()) || this.equals(partido.getEquipoB())))
+            exito = partidosJugados.insertar(partido);
+        return exito;
     }
 
     public String getPais() {
@@ -75,8 +93,27 @@ public class Equipo implements Comparable<Equipo> {
         return equiposJugados;
     }
 
+    public char getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(char grupo) {
+        this.grupo = grupo;
+    }
+
     @Override
     public int compareTo(Equipo equipo) {
-        return this.pais.compareTo(equipo.pais);
+        return this.diferenciaGoles() - equipo.diferenciaGoles();
+    }
+
+    @Override
+    public String toString() {
+        return "pais{" +
+                "DT='" + directorTecnico + '\'' +
+                ", grupo=" + grupo +
+                ", puntos=" + puntos +
+                ", golesAFavor=" + golesAFavor +
+                ", golesEnContra=" + golesEnContra +
+                '}';
     }
 }

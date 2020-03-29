@@ -2,7 +2,9 @@ package estructuras.propositoEspecifico;
 
 import estructuras.lineales.Lista;
 
-public class MapeoAUno<D, R> implements Mapeo<D, R> {
+import java.io.Serializable;
+
+public class MapeoAUno<D, R> implements Mapeo<D, R>, Serializable {
 
     @Override
     public boolean asociar(D key, R value) {

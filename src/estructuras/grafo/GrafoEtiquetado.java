@@ -5,7 +5,9 @@ import estructuras.lineales.ColaDinamica;
 import estructuras.lineales.Lista;
 import estructuras.lineales.ListaDinamica;
 
-public class GrafoEtiquetado<E> implements Grafo<E> {
+import java.io.Serializable;
+
+public class GrafoEtiquetado<E> implements Grafo<E>, Serializable {
     private NodoVert<E> inicio;
 
     public GrafoEtiquetado() {
@@ -35,7 +37,11 @@ public class GrafoEtiquetado<E> implements Grafo<E> {
     }
 
     public E obtenerVertice(E elem) {
-        return buscarVertice(elem).getElem();
+        E resp = null;
+        NodoVert<E> vert = buscarVertice(elem);
+        if (vert != null)
+            resp = vert.getElem();
+        return resp;
     }
 
     @Override
@@ -505,7 +511,7 @@ public class GrafoEtiquetado<E> implements Grafo<E> {
         return inicio == null;
     }
 
-    protected static class NodoVert<E> {
+    protected static class NodoVert<E> implements Serializable {
         private E elem;
         private NodoVert<E> sigVertice;
         private NodoAdy<E> primerAdy;
@@ -560,7 +566,7 @@ public class GrafoEtiquetado<E> implements Grafo<E> {
         }
     }
 
-    protected static class NodoAdy<E> {
+    protected static class NodoAdy<E> implements Serializable {
         private NodoVert<E> vertice;
         private NodoAdy<E> sigAdy;
         private int etiqueta;

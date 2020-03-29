@@ -1,6 +1,8 @@
 package entidades;
 
-public class Partido {
+import java.io.Serializable;
+
+public class Partido implements Serializable {
     private Equipo equipoA, equipoB;
     private Ronda ronda;
     private int golesEquipoA, golesEquipoB;
@@ -65,5 +67,14 @@ public class Partido {
 
     public class ValuePartido {
 
+    }
+
+    @Override
+    public String toString() {
+        return "(" + equipoA + "/" + equipoB + "){" +
+                "ronda=" + ronda +
+                ", golesEquipoA=" + golesEquipoA +
+                ", golesEquipoB=" + golesEquipoB +
+                '}';
     }
 }

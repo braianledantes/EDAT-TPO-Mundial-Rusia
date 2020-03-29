@@ -1,12 +1,14 @@
 package estructuras.lineales;
 
+import java.io.Serializable;
+
 /**
  * Esta implementación de lista es dinamica, lo que quiere decir que se pueden almacenar infinitos elementos en ella.
  * Solo hay que tener en cuenta el rendimiento ya que para obener un elemento el tiempo de ejecucion es de O(n).
  *
  * @param <T> tipo de dato que almacena
  */
-public class ListaDinamica<T> implements Lista<T> {
+public class ListaDinamica<T> implements Lista<T>, Serializable {
     private Nodo<T> cabecera, fin;
     private int longitud;
 
@@ -169,18 +171,14 @@ public class ListaDinamica<T> implements Lista<T> {
         Nodo<T> aux;
 
         if (pos >= 1 && pos <= longitud) {
-            if (pos == longitud) {
-                elem = fin.getElem();
-            } else {
-                // me posiciono en el nodo para obtener el elemento
-                int i = 1;
-                aux = cabecera;
-                while (i < pos) {
-                    aux = aux.getEnlace();
-                    i++;
-                }
-                elem = aux.getElem();
+            // me posiciono en el nodo para obtener el elemento
+            int i = 1;
+            aux = cabecera;
+            while (i < pos) {
+                aux = aux.getEnlace();
+                i++;
             }
+            elem = aux.getElem();
         }
 
         return elem;
@@ -310,7 +308,7 @@ public class ListaDinamica<T> implements Lista<T> {
             if (nodo == cabecera)
                 sb.append(nodo.getElem());
             else
-                sb.append("; ").append(nodo.getElem());
+                sb.append(";\n ").append(nodo.getElem());
             nodo = nodo.getEnlace();
         }
 

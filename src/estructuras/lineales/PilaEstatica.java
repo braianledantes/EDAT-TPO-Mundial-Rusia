@@ -1,5 +1,6 @@
 package estructuras.lineales;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
@@ -10,7 +11,7 @@ import java.util.Arrays;
  *
  * @param <T> tipo de dato que almacena la pila
  */
-public class PilaEstatica<T> implements Pila<T> {
+public class PilaEstatica<T> implements Pila<T>, Serializable {
 
     /**
      * Indica el tamaño fijo de la pila.

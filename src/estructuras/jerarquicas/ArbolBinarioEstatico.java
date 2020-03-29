@@ -3,9 +3,10 @@ package estructuras.jerarquicas;
 import estructuras.lineales.EstructuraLlenaException;
 import estructuras.lineales.Lista;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ArbolBinarioEstatico<T> implements Arbol<T> {
+public class ArbolBinarioEstatico<T> implements Arbol<T>, Serializable {
     public static final int HIJO_IZQUIERDO = 0;
     public static final int HIJO_DERECHO = 1;
 

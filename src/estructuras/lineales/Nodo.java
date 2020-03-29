@@ -1,12 +1,15 @@
 package estructuras.lineales;
 
+import java.io.Serializable;
+
 /**
  * Este nodo es una celda en la que se almacenan dos cosas: un dato y un enlace a un nodo del mismo tipo
  * que él. El enlace es como un "hilo" que une un nodo con el siguiente. De esta manera se arma una estructura
  * con nodos enlazados de manera lineal.
+ *
  * @param <T> tipo de dato que almacena el nodo.
  */
-class Nodo<T> {
+class Nodo<T> implements Serializable {
     private T elem;
     private Nodo<T> enlace;
 
