@@ -1,8 +1,6 @@
 # Estructuras de Datos
 
-### Trabajo Práctico Final
-
-### Mundial Rusia 2018
+### Trabajo Práctico Final - Mundial Rusia 2018
 <p>Se desea desarrollar un sistema que brinde información del Mundial de Fútbol 2018 a disputarse en
 Rusia. El principal objetivo del sistema es brindar a los simpatizantes información sobre el evento y
 sugerir caminos para viajar de una sede a otra a ver a su equipo favorito.</p>
@@ -52,7 +50,7 @@ estructura de datos auxiliar que considere apropiada, asegurando la eficiencia)
 utilizadas con su contenido (grafo, AVL y Mapeo) para verificar, en cualquier momento de la
 ejecución del sistema, que se encuentren cargadas correctamente.
 
-###Requisitos importantes:
+### Requisitos importantes:
 + El programa debe permitir la ejecución por separado de cada una de las operaciones
 especificadas.
 + El programa debe ser eficiente: Debe recorrer las estructuras sólo lo necesario y haciendo
@@ -76,7 +74,8 @@ indicado. Ejemplo, la información se puede ingresar de a una por línea indican
 ciudad X”, “Se eliminó el equipo Y”, “Se cargaron los datos del partido eq1-eq2”, etc)
     * Estado del sistema al momento de terminar de ejecutarse (todas las estructuras
 incluyendo la tabla de posiciones)
-###Condiciones y fechas de entrega:
+
+### Condiciones y fechas de entrega:
 - El programa debe realizarse de manera individual y debe presentarse personalmente a
 alguno de los docentes que indicarán si está aprobado. Luego deberá subirlo a la plataforma
 PEDCO para su archivo.
