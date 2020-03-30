@@ -1,6 +1,7 @@
 package estructuras.propositoEspecifico;
 
 import estructuras.lineales.Lista;
+import estructuras.lineales.ListaDinamica;
 
 import java.io.Serializable;
 
@@ -217,32 +218,151 @@ public class TablaBusqueda<C extends Comparable<C>, D> implements Diccionario<C,
 
     @Override
     public boolean existeClave(C clave) {
-        return false;
+        return obtenerNodo(clave, this.raiz) != null;
     }
 
     @Override
     public D obtenerDato(C clave) {
-        return null;
+        return obtenerNodo(clave, this.raiz).getDato();
+    }
+
+    private Nodo<C, D> obtenerNodo(C clave, Nodo<C, D> nodo) {
+        Nodo<C, D> nodo1 = null;
+
+        if (clave != null && nodo != null) {
+            if (clave.equals(nodo.getClave())) {
+                nodo1 = nodo;
+            } else {
+                if (clave.compareTo(nodo.getClave()) < 0) {
+                    nodo1 = obtenerNodo(clave, nodo.getIzq());
+                } else {
+                    nodo1 = obtenerNodo(clave, nodo.getDer());
+                }
+            }
+        }
+
+        return nodo1;
     }
 
     @Override
     public Lista<C> listarClaves() {
-        return null;
+        Lista<C> lista = new ListaDinamica<>();
+        listarClaves(lista, raiz);
+        return lista;
+    }
+
+    private void listarClaves(Lista<C> lista, Nodo<C, D> nodo) {
+        if (nodo != null) {
+            listarClaves(lista, nodo.getIzq());
+            lista.insertar(nodo.getClave());
+            listarClaves(lista, nodo.getDer());
+        }
     }
 
     @Override
     public Lista<D> listarDatos() {
-        return null;
+        Lista<D> lista = new ListaDinamica<>();
+        listarDatos(lista, raiz);
+        return lista;
+    }
+
+    private void listarDatos(Lista<D> lista, Nodo<C, D> nodo) {
+        if (nodo != null) {
+            listarDatos(lista, nodo.getIzq());
+            lista.insertar(nodo.getDato());
+            listarDatos(lista, nodo.getDer());
+        }
+    }
+
+    public Lista<D> listarRango(C claveMin, C claveMax) {
+        Lista<D> lista = new ListaDinamica<>();
+        if (claveMin != null && claveMax != null)
+            listarRango(lista, claveMin, claveMax, raiz);
+        return lista;
+    }
+
+    private void listarRango(Lista<D> lista, C claveMin, C claveMax, Nodo<C, D> nodo) {
+        if (nodo != null) {
+            if (claveMin.compareTo(nodo.getClave()) < 0)
+                listarRango(lista, claveMin, claveMax, nodo.getIzq());
+            if (claveMin.compareTo(nodo.getClave()) <= 0 && claveMax.compareTo(nodo.getClave()) >= 0)
+                lista.insertar(nodo.getDato());
+            if (claveMax.compareTo(nodo.getClave()) > 0)
+                listarRango(lista, claveMin, claveMax, nodo.getDer());
+        }
     }
 
     @Override
     public boolean esVacio() {
-        return false;
+        return this.raiz == null;
     }
 
     @Override
     public void vaciar() {
+        this.raiz = null;
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || !(o instanceof TablaBusqueda)) return false;
+        TablaBusqueda<C, D> that = (TablaBusqueda<C, D>) o;
+        return equals(this.raiz, that.raiz);
+    }
+
+    private boolean equals(Nodo<C, D> nodothis, Nodo<C, D> nodoThat) {
+        boolean equals = false;
+
+        if (nodothis == null && nodoThat == null) {
+            equals = true;
+        } else if (nodothis != null && nodoThat != null) {
+            if (nodothis.getClave().equals(nodoThat.getClave()) && nodothis.getDato().equals(nodoThat.getDato())) {
+                equals = equals(nodothis.getIzq(), nodoThat.getIzq()) &&
+                        equals(nodothis.getDer(), nodoThat.getDer());
+            }
+        }
+
+        return equals;
+    }
+
+    protected Nodo<C, D> clone(Nodo<C, D> nodo) {
+        Nodo<C, D> nodoNuevo = null;
+        if (nodo != null) {
+            nodoNuevo = new Nodo<>(nodo.getClave(), nodo.getDato(), clone(nodo.getIzq()), clone(nodo.getDer()));
+        }
+        return nodoNuevo;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("TablaBusqueda{ raiz=");
+        if (raiz != null) {
+            sb.append(raiz.getClave()).append(" -> ").append(raiz.getDato());
+        } else {
+            sb.append("null");
+        }
+        sb.append("\n");
+        toString(sb, raiz);
+        sb.append("}");
+        return sb.toString();
+    }
+
+    private void toString(StringBuilder sb, Nodo<C, D> nodo) {
+        if (nodo != null) {
+            sb.append(nodo.getClave()).append(" -> ").append(nodo.getDato()).append(" // ");
+            if (nodo.tieneIzq())
+                sb.append(nodo.getIzq().getClave()).append("; ");
+            else
+                sb.append("null").append("; ");
+            if (nodo.tieneDer())
+                sb.append(nodo.getDer().getClave());
+            else
+                sb.append("null");
+            sb.append("\n");
+
+            toString(sb, nodo.getIzq());
+            toString(sb, nodo.getDer());
+        }
     }
 
     private static class Nodo<C, D> implements Serializable {
