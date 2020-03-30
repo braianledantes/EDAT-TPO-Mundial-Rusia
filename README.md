@@ -1,8 +1,8 @@
 # Estructuras de Datos
 
-###Trabajo Práctico Final
+### Trabajo Práctico Final
 
-###Mundial Rusia 2018
+### Mundial Rusia 2018
 <p>Se desea desarrollar un sistema que brinde información del Mundial de Fútbol 2018 a disputarse en
 Rusia. El principal objetivo del sistema es brindar a los simpatizantes información sobre el evento y
 sugerir caminos para viajar de una sede a otra a ver a su equipo favorito.</p>
