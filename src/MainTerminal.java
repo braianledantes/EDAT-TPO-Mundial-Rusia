@@ -2,6 +2,7 @@ import entidades.Ciudad;
 import entidades.Equipo;
 import entidades.Partido;
 import estructuras.lineales.Lista;
+import estructuras.propositoEspecifico.ColaPrioridad;
 import utilidades.ArchivosHelper;
 import utilidades.DatosHelper;
 import utilidades.Log;
@@ -268,7 +269,7 @@ public class MainTerminal {
         int option = 1;
         String sb = "----------------Consultar equipos----------------\n" +
                 "1) Mostrar datos de equipo" + '\n' +
-                "2) Mostrar rango de equipos por puntaje" + '\n' +
+                "2) Mostrar rango de equipos ordenados alfabeticamente" + '\n' +
                 "3) Modificar equipos con diferencia negativa de goles" + '\n' +
                 "-1) Salir" + '\n';
         do {
@@ -322,7 +323,6 @@ public class MainTerminal {
     }
 
     public static void showRangoEquipos() {
-        // TODO showRangoEquipos()
         System.out.println("Ingrese el nombre de un pais:");
         String equipoA = TecladoIn.readLine();
         System.out.println("Ingrese el nombre del otro pais:");
@@ -474,10 +474,14 @@ public class MainTerminal {
     }
 
     public static void showTablaPosiciones() {
-        // TODO
-        // Obtener y mostrar la tabla de posiciones de los equipos de un momento dado, almacenando
-        // los datos de los equipos ordenados de mayor a menor puntaje (puede utilizar alguna
-        // estructura de datos auxiliar que considere apropiada, asegurando la eficiencia)
+        ColaPrioridad<Equipo> equipos = datosHelper.listarEquiposPorPuntaje();
+        StringBuilder sb = new StringBuilder("Puntos -> Equipo\n");
+        while (!equipos.estaVacia()) {
+            Equipo e = equipos.obtenerFrente();
+            equipos.eliminarFrente();
+            sb.append(e.getPuntos()).append(" -> ").append(e.getPais()).append('\n');
+        }
+        System.out.println(sb.toString());
     }
 
     public static void showSystem() {

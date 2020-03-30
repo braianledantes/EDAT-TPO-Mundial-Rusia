@@ -4,12 +4,16 @@ import entidades.Ciudad;
 import entidades.Equipo;
 import entidades.Partido;
 import entidades.Ronda;
+import estructuras.grafo.Arco;
 import estructuras.grafo.GrafoEtiquetado;
 import estructuras.lineales.Lista;
 import estructuras.lineales.ListaDinamica;
+import estructuras.propositoEspecifico.ColaPrioridad;
+import estructuras.propositoEspecifico.ColaPrioridadDinamica;
 import estructuras.propositoEspecifico.TablaBusqueda;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -17,7 +21,7 @@ import java.util.HashMap;
  */
 public class DatosHelper implements Serializable {
     private GrafoEtiquetado<Ciudad> ciudades;
-    // key pais del equipo, TODO diccionario o tabla de Búsqueda implementada con un árbol AVL ordenados alfabeticamente
+    // key pais del equipo
     private TablaBusqueda<String, Equipo> equipos;
     // key nombres de los equipos donde eq1 < eq2
     private HashMap<String, Partido> partidos;
@@ -129,8 +133,6 @@ public class DatosHelper implements Serializable {
     }
 
     public synchronized boolean altaDePartido(String equipoA, String equipoB, String ronda, String golesA, String golesB) throws NumberFormatException {
-        boolean exito = false;
-        Ronda r = Ronda.parseToRonda(ronda);
         int ga = Integer.parseInt(golesA);
         int gb = Integer.parseInt(golesB);
 
@@ -159,7 +161,7 @@ public class DatosHelper implements Serializable {
 
     public synchronized Lista<Equipo> listarEquiposConDifGolNeg() {
         Lista<Equipo> lista = new ListaDinamica<>();
-        Lista<Equipo> todosLosEquipos = equipos.listarDatos();
+        Lista<Equipo> todosLosEquipos = equipos.listarDatosOrdenados();
 
         for (int i = 1; i <= todosLosEquipos.longitud(); i++) {
             Equipo e = todosLosEquipos.recuperar(i);
@@ -179,15 +181,14 @@ public class DatosHelper implements Serializable {
      * los datos de los equipos ordenados de mayor a menor puntaje (puede utilizar alguna
      * estructura de datos auxiliar que considere apropiada, asegurando la eficiencia)
      */
-    public synchronized Lista<Equipo> listarEquiposPorPuntaje() {
-        // pasa del diccionario original a otro diccionario ordenado por puntaje y los lista
-        TablaBusqueda<Integer, Equipo> equiposPuntaje = new TablaBusqueda<>();
-        Lista<Equipo> listaEquipos = equipos.listarDatos();
+    public synchronized ColaPrioridad<Equipo> listarEquiposPorPuntaje() {
+        Lista<Equipo> listaEquipos = equipos.listarDatosOrdenados();
+        ColaPrioridad<Equipo> colaEquiposPuntaje = new ColaPrioridadDinamica<>();
         for (int i = 1; i <= listaEquipos.longitud(); i++) {
             Equipo equipo = listaEquipos.recuperar(i);
-            equiposPuntaje.insertar(equipo.getPuntos(), equipo);
+            colaEquiposPuntaje.insertar(equipo, equipo.getPuntos());
         }
-        return equiposPuntaje.listarDatos();
+        return colaEquiposPuntaje;
     }
 
     public synchronized Lista<Ciudad> obtenerCaminoConMenorDistancia(String ciudadOrigen, String ciudadDestino) {
@@ -206,6 +207,22 @@ public class DatosHelper implements Serializable {
         return ciudades.caminoMasCorto(new Ciudad(ciudadOrigen.toUpperCase()),
                 new Ciudad(ciudadDestino1.toUpperCase()),
                 new Ciudad(ciudadDestino2.toUpperCase()));
+    }
+
+    public synchronized Lista<Ciudad> listarCiudades() {
+        return ciudades.listarEnAnchura();
+    }
+
+    public synchronized Lista<Arco<Ciudad, Integer>> listarRutas() {
+        return ciudades.listarArcos();
+    }
+
+    public synchronized Lista<Equipo> listarEquipos() {
+        return equipos.listarDatosOrdenados();
+    }
+
+    public synchronized Collection<Partido> getPartidos() {
+        return partidos.values();
     }
 
     @Override

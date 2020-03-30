@@ -27,6 +27,15 @@ public class Partido implements Serializable {
         this(equipoA, equipoB, ronda);
         this.golesEquipoA = golesEquipoA;
         this.golesEquipoB = golesEquipoB;
+
+        if (golesEquipoA == golesEquipoB) {
+            equipoA.setPuntos(equipoA.getPuntos() + 1);
+            equipoB.setPuntos(equipoB.getPuntos() + 1);
+        } else if (golesEquipoA > golesEquipoB) {
+            equipoA.setPuntos(equipoA.getPuntos() + 3);
+        } else {
+            equipoB.setPuntos(equipoB.getPuntos() + 3);
+        }
     }
 
     public Equipo getEquipoA() {

@@ -40,7 +40,6 @@ public class Equipo implements Comparable<Equipo>, Serializable {
                 this.golesAFavor += partido.getGolesEquipoB();
                 this.golesEnContra += partido.getGolesEquipoA();
             }
-            this.puntos += (this.golesAFavor - this.golesEnContra) * 10;
             exito = partidosJugados.insertar(partido);
         }
         return exito;

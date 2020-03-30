@@ -260,7 +260,7 @@ public class TablaBusqueda<C extends Comparable<C>, D> implements Diccionario<C,
     }
 
     @Override
-    public Lista<D> listarDatos() {
+    public Lista<D> listarDatosOrdenados() {
         Lista<D> lista = new ListaDinamica<>();
         listarDatos(lista, raiz);
         return lista;

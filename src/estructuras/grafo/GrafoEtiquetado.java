@@ -471,6 +471,22 @@ public class GrafoEtiquetado<E> implements Grafo<E>, Serializable {
         }
     }
 
+    public Lista<Arco<E, Integer>> listarArcos() {
+        Lista<Arco<E, Integer>> arcos = new ListaDinamica<>();
+        NodoVert<E> vert = this.inicio;
+
+        while (vert != null) {
+            NodoAdy<E> ady = vert.getPrimerAdy();
+            while (ady != null) {
+                arcos.insertar(new Arco<>(vert.getElem(), ady.getVertice().getElem(), ady.getEtiqueta()));
+                ady = ady.getSigAdy();
+            }
+            vert = vert.getSigVertice();
+        }
+
+        return arcos;
+    }
+
     @Override
     public boolean equals(Object obj) {
         // TODO

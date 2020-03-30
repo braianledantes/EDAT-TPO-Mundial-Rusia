@@ -1,6 +1,13 @@
 package utilidades;
 
+import entidades.Ciudad;
+import entidades.Equipo;
+import entidades.Partido;
+import estructuras.grafo.Arco;
+import estructuras.lineales.Lista;
+
 import java.io.*;
+import java.util.Collection;
 
 public class ArchivosHelper {
     public static final String FILE_NAME = "datos.edat";
@@ -54,15 +61,49 @@ public class ArchivosHelper {
     }
 
     public synchronized void exportarDatos(DatosHelper datosHelper, String fileName) throws IOException {
-        // TODO
-        FileWriter fileWriter = new FileWriter(fileName, true);
+        FileWriter fileWriter = new FileWriter(fileName);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        String cadena = "E: ARGENTINA; SAMPAOLI; D; 0; 0; 0\n" +
-                "P: ARGENTINA; ISLANDIA; GRUPO; 0; 0\n" +
-                "C: MOSCU; 2511; 12500123; TRUE\n" +
-                "C: TOLYATTI; 314,8; 719514; FALSE\n" +
-                "R: MOSCU; TOLYATTI; 989";
-        bufferedWriter.write(cadena);
+        Lista<Ciudad> ciudades = datosHelper.listarCiudades();
+        Lista<Arco<Ciudad, Integer>> rutas = datosHelper.listarRutas();
+        Lista<Equipo> equipos = datosHelper.listarEquipos();
+        Collection<Partido> partidos = datosHelper.getPartidos();
+
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 1; i <= ciudades.longitud(); i++) {
+            Ciudad c = ciudades.recuperar(i);
+            sb.append("C: ").append(c.getNombre()).append("; ")
+                    .append(c.getSuperfice()).append("; ")
+                    .append(c.getCantHabitantes()).append("; ")
+                    .append(c.isSede()).append('\n');
+        }
+
+        for (int i = 1; i <= equipos.longitud(); i++) {
+            Equipo e = equipos.recuperar(i);
+            sb.append("E: ").append(e.getPais()).append("; ")
+                    .append(e.getDirectorTecnico()).append("; ")
+                    .append(e.getGrupo()).append("; ")
+                    .append(e.getGolesAFavor()).append("; ")
+                    .append(e.getGolesEnContra()).append("; ")
+                    .append(e.getGolesEnContra()).append('\n');
+        }
+
+        for (Partido p : partidos) {
+            sb.append("P: ").append(p.getEquipoA().getPais()).append("; ")
+                    .append(p.getEquipoB().getPais()).append("; ")
+                    .append(p.getRonda()).append("; ")
+                    .append(p.getGolesEquipoA()).append("; ")
+                    .append(p.getGolesEquipoB()).append('\n');
+        }
+
+        for (int i = 1; i <= rutas.longitud(); i++) {
+            Arco<Ciudad, Integer> r = rutas.recuperar(i);
+            sb.append("R: ").append(r.getVerticeA().getNombre()).append("; ")
+                    .append(r.getVerticeB().getNombre()).append("; ")
+                    .append(r.getEtiqueta()).append('\n');
+        }
+
+        bufferedWriter.write(sb.toString());
         bufferedWriter.close();
     }
 

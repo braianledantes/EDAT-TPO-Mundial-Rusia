@@ -54,7 +54,7 @@ public interface Diccionario<K, V> {
      *
      * @return lista con los datos almacenados
      */
-    Lista<V> listarDatos();
+    Lista<V> listarDatosOrdenados();
 
     /**
      * Devuelve falso si hay al menos un elemento cargado en el árbol y verdadero en caso contrario.

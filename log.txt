@@ -1,0 +1,28 @@
+-----------------------------------------------------
+Se inicio el programa el Mon Mar 30 19:17:34 ART 2020
+Se importaron los datos desde /home/chutebnl/Escritorio/datos.txt
+se guardo una instancia del sistema
+se guardo una instancia del sistema
+
+se cerro el programa a Mon Mar 30 19:20:30 ART 2020
+-----------------------------------------------------
+Se inicio el programa el Mon Mar 30 19:20:44 ART 2020
+-----------------------------------------------------
+Se inicio el programa el Mon Mar 30 20:31:46 ART 2020
+Se importaron los datos desde /home/chutebnl/Escritorio/datos.txt
+se guardo una instancia del sistema
+se creo el partido islandia-japon en grupo con 1/1
+-----------------------------------------------------
+Se inicio el programa el Mon Mar 30 20:36:45 ART 2020
+-----------------------------------------------------
+Se inicio el programa el Mon Mar 30 20:39:37 ART 2020
+-----------------------------------------------------
+Se inicio el programa el Mon Mar 30 20:39:55 ART 2020
+se guardo una instancia del sistema
+se creo el partido rusia-japon en octavos con 1/1
+se creo el partido argentina-francia en grupo con 1/2
+se creo el partido rusia-argentina en octavos con 0/2
+se guardo una instancia del sistema
+Se exportaron los datos a /home/chutebnl/Escritorio/datos2.txt
+
+se cerro el programa a Mon Mar 30 20:47:48 ART 2020
