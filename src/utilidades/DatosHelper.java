@@ -41,12 +41,12 @@ public class DatosHelper implements Serializable {
     }
 
     public synchronized boolean altaCiudad(String nombre, double superficie, int cantHabitantes, boolean sede) {
-        Ciudad c = new Ciudad(nombre, superficie, cantHabitantes, sede);
+        Ciudad c = new Ciudad(nombre.toUpperCase(), superficie, cantHabitantes, sede);
         return ciudades.insertarVertice(c);
     }
 
     public synchronized boolean eliminarCiudad(String nombre) {
-        Ciudad c = new Ciudad(nombre);
+        Ciudad c = new Ciudad(nombre.toUpperCase());
         return ciudades.eliminarVertice(c);
     }
 
@@ -56,7 +56,7 @@ public class DatosHelper implements Serializable {
 
     public synchronized boolean modificarCiudad(String nombre, double superficie, int cantHabitantes, boolean sede) {
         boolean modi = false;
-        Ciudad ciudad = getCiudad(nombre);
+        Ciudad ciudad = getCiudad(nombre.toUpperCase());
         if (ciudad != null) {
             ciudad.setSuperfice(superficie);
             ciudad.setCantHabitantes(cantHabitantes);
@@ -67,7 +67,7 @@ public class DatosHelper implements Serializable {
     }
 
     public Ciudad getCiudad(String nombre) {
-        return ciudades.obtenerVertice(new Ciudad(nombre));
+        return ciudades.obtenerVertice(new Ciudad(nombre.toUpperCase()));
     }
 
     public boolean altaEquipo(String pais, String directorTecnico, String grupo) throws NumberFormatException {
@@ -83,8 +83,9 @@ public class DatosHelper implements Serializable {
     }
 
     public synchronized boolean altaEquipo(String pais, String directorTecnico, char grupo, int puntos, int golesAFavor, int golesEnContra) throws NumberFormatException {
-        boolean exito = false;
+        boolean exito;
         if (grupo == 'A' || grupo == 'B' || grupo == 'C' || grupo == 'D' || grupo == 'E' || grupo == 'F' || grupo == 'G' || grupo == 'H') {
+            pais = pais.toUpperCase();
             Equipo equipo = new Equipo(pais, directorTecnico, grupo, puntos, golesAFavor, golesEnContra);
             exito = equipos.insertar(pais, equipo);
         } else {
@@ -94,13 +95,13 @@ public class DatosHelper implements Serializable {
     }
 
     public synchronized boolean bajaEquipo(String pais) {
-        return equipos.eliminar(pais);
+        return equipos.eliminar(pais.toUpperCase());
     }
 
     public synchronized boolean modificarEquipo(String nombre, String directorTecnico, char grupo, int puntos, int golesAFavor, int golesEnContra) throws NumberFormatException {
         boolean modi = false;
         if (grupo == 'A' || grupo == 'B' || grupo == 'C' || grupo == 'D' || grupo == 'E' || grupo == 'F' || grupo == 'G' || grupo == 'H') {
-            Equipo equipo = equipos.obtenerDato(nombre);
+            Equipo equipo = equipos.obtenerDato(nombre.toUpperCase());
             if (equipo != null) {
                 equipo.setDirectorTecnico(directorTecnico);
                 equipo.setGrupo(grupo);
@@ -120,7 +121,7 @@ public class DatosHelper implements Serializable {
     }
 
     public synchronized boolean insertarRuta(String origen, String destino, int distancia) {
-        return ciudades.insertarArco(new Ciudad(origen), new Ciudad(destino), distancia);
+        return ciudades.insertarArco(new Ciudad(origen.toUpperCase()), new Ciudad(destino.toUpperCase()), distancia);
     }
 
     public synchronized boolean eliminarRuta(String origen, String destino) {
@@ -139,8 +140,8 @@ public class DatosHelper implements Serializable {
     public synchronized boolean altaDePartido(String equipoA, String equipoB, String ronda, int golesA, int golesB) throws NumberFormatException {
         boolean exito = false;
         Ronda r = Ronda.parseToRonda(ronda);
-        Equipo eqA = equipos.obtenerDato(equipoA);
-        Equipo eqB = equipos.obtenerDato(equipoB);
+        Equipo eqA = equipos.obtenerDato(equipoA.toUpperCase());
+        Equipo eqB = equipos.obtenerDato(equipoB.toUpperCase());
 
         if (eqA != null && eqB != null) {
             Partido partido = new Partido(eqA, eqB, r, golesA, golesB);
@@ -153,7 +154,7 @@ public class DatosHelper implements Serializable {
     }
 
     public synchronized Equipo obtenerEquipo(String pais) {
-        return equipos.obtenerDato(pais);
+        return equipos.obtenerDato(pais.toUpperCase());
     }
 
     public synchronized Lista<Equipo> listarEquiposConDifGolNeg() {
@@ -169,12 +170,16 @@ public class DatosHelper implements Serializable {
         return lista;
     }
 
+    public synchronized Lista<Equipo> listarEquiposPorRango(String desde, String hasta) {
+        return equipos.listarRango(desde.toUpperCase(), hasta.toUpperCase());
+    }
+
     /*
      * Obtener la tabla de posiciones de los equipos de un momento dado, almacenando
      * los datos de los equipos ordenados de mayor a menor puntaje (puede utilizar alguna
      * estructura de datos auxiliar que considere apropiada, asegurando la eficiencia)
      */
-    public synchronized Lista<Equipo> listarEquipos(String desde, String hasta) {
+    public synchronized Lista<Equipo> listarEquiposPorPuntaje() {
         // pasa del diccionario original a otro diccionario ordenado por puntaje y los lista
         TablaBusqueda<Integer, Equipo> equiposPuntaje = new TablaBusqueda<>();
         Lista<Equipo> listaEquipos = equipos.listarDatos();
@@ -186,19 +191,21 @@ public class DatosHelper implements Serializable {
     }
 
     public synchronized Lista<Ciudad> obtenerCaminoConMenorDistancia(String ciudadOrigen, String ciudadDestino) {
-        return ciudades.caminoMasCorto(new Ciudad(ciudadOrigen), new Ciudad(ciudadDestino));
+        return ciudades.caminoMasCorto(new Ciudad(ciudadOrigen.toUpperCase()), new Ciudad(ciudadDestino.toUpperCase()));
     }
 
     public synchronized Lista<Ciudad> obtenerCaminoConMenosCiudades(String ciudadOrigen, String ciudadDestino) {
-        return ciudades.caminoConMenosVertices(new Ciudad(ciudadOrigen), new Ciudad(ciudadDestino));
+        return ciudades.caminoConMenosVertices(new Ciudad(ciudadOrigen.toUpperCase()), new Ciudad(ciudadDestino.toUpperCase()));
     }
 
     public synchronized Lista<Lista<Ciudad>> obtenerCaminoPosibles(String ciudadOrigen, String ciudadDestino) {
-        return ciudades.caminosPosibles(new Ciudad(ciudadOrigen), new Ciudad(ciudadDestino));
+        return ciudades.caminosPosibles(new Ciudad(ciudadOrigen.toUpperCase()), new Ciudad(ciudadDestino.toUpperCase()));
     }
 
     public synchronized Lista<Ciudad> obtenerCaminoMasCortoEntreCiudad(String ciudadOrigen, String ciudadDestino1, String ciudadDestino2) {
-        return ciudades.caminoMasCorto(new Ciudad(ciudadOrigen), new Ciudad(ciudadDestino1), new Ciudad(ciudadDestino2));
+        return ciudades.caminoMasCorto(new Ciudad(ciudadOrigen.toUpperCase()),
+                new Ciudad(ciudadDestino1.toUpperCase()),
+                new Ciudad(ciudadDestino2.toUpperCase()));
     }
 
     @Override

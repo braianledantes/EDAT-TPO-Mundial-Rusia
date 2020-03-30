@@ -268,7 +268,7 @@ public class MainTerminal {
         int option = 1;
         String sb = "----------------Consultar equipos----------------\n" +
                 "1) Mostrar datos de equipo" + '\n' +
-                "2) Mostrar rango de equipos" + '\n' +
+                "2) Mostrar rango de equipos por puntaje" + '\n' +
                 "3) Modificar equipos con diferencia negativa de goles" + '\n' +
                 "-1) Salir" + '\n';
         do {
@@ -300,7 +300,7 @@ public class MainTerminal {
         String pais = TecladoIn.readLine();
         Equipo equipo = datosHelper.obtenerEquipo(pais);
         if (equipo != null) {
-            StringBuilder sb = new StringBuilder("Equipo: ").append(equipo.getPais());
+            StringBuilder sb = new StringBuilder("Equipo: ").append(equipo.getPais()).append('\n');
             sb.append("puntos: ").append(equipo.getPuntos()).append('\n');
             sb.append("grupo: ").append(equipo.getGrupo()).append('\n');
             sb.append("goles a favor: ").append(equipo.getGolesAFavor()).append('\n');
@@ -309,7 +309,11 @@ public class MainTerminal {
             sb.append("partidos:\n");
             Lista<Partido> partidos = equipo.getPartidosJugados();
             for (int i = 1; i <= partidos.longitud(); i++) {
-                sb.append(partidos.recuperar(i)).append('\n');
+                Partido partido = partidos.recuperar(i);
+                sb.append('-').append(partido.getRonda()).append(' ');
+                sb.append(partido.getEquipoA().getPais()).append('/').append(partido.getEquipoB().getPais()).append(' ');
+                sb.append('(').append(partido.getGolesEquipoA()).append('/').append(partido.getGolesEquipoB()).append(')');
+                sb.append('\n');
             }
             System.out.println(sb.toString());
         } else {
@@ -323,10 +327,30 @@ public class MainTerminal {
         String equipoA = TecladoIn.readLine();
         System.out.println("Ingrese el nombre del otro pais:");
         String equipoB = TecladoIn.readLine();
+
+        if (equipoB.compareTo(equipoA) < 0) { // por si estan alrevez
+            String aux = equipoA;
+            equipoA = equipoB;
+            equipoB = aux;
+        }
+        Lista<Equipo> equipos = datosHelper.listarEquiposPorRango(equipoA, equipoB);
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i <= equipos.longitud(); i++) {
+            Equipo equipo = equipos.recuperar(i);
+            sb.append(equipo).append('\n');
+        }
+        System.out.println(sb.toString());
     }
 
     public static void showEquiposConDifGol() {
-        // TODO showEquiposConDifGol()
+        Lista<Equipo> equipos = datosHelper.listarEquiposConDifGolNeg();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i <= equipos.longitud(); i++) {
+            Equipo equipo = equipos.recuperar(i);
+            sb.append(equipo.getPais()).append(" -> ").append(equipo.diferenciaGoles()).append('\n');
+        }
+        System.out.println(sb.toString());
     }
 
     public static void showConsultarCiudades() {

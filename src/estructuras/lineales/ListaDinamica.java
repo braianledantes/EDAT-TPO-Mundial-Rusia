@@ -306,7 +306,7 @@ public class ListaDinamica<T> implements Lista<T>, Serializable {
 
         while (nodo != null) {
             if (nodo == cabecera)
-                sb.append(nodo.getElem());
+                sb.append('\n').append(nodo.getElem());
             else
                 sb.append(";\n ").append(nodo.getElem());
             nodo = nodo.getEnlace();
