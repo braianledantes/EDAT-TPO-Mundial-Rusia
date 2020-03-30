@@ -190,10 +190,13 @@ class ABBTest {
     @Test
     void listarRango() {
         Lista<Integer> esperado = new ListaDinamica<>(new Integer[]{13, 34, 45, 55, 65, 73, 96});
+        System.out.println(abb);
         assertEquals(esperado, abb.listarRango(13, 96));
         esperado = new ListaDinamica<>(new Integer[]{34, 45, 55, 65, 73});
         assertEquals(esperado, abb.listarRango(34, 73));
         assertEquals(esperado, abb.listarRango(30, 80));
+        esperado = new ListaDinamica<>(new Integer[]{55, 65, 73, 96});
+        assertEquals(esperado, abb.listarRango(55, 96));
         esperado.vaciar();
         assertEquals(esperado, abb.listarRango(35, 44));
         abb.vaciar();

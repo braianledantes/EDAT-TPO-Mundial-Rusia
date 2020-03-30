@@ -1,4 +1,6 @@
 import entidades.Ciudad;
+import entidades.Equipo;
+import entidades.Partido;
 import estructuras.lineales.Lista;
 import utilidades.ArchivosHelper;
 import utilidades.DatosHelper;
@@ -263,7 +265,68 @@ public class MainTerminal {
     }
 
     public static void showConsultarEquipos() {
-        // TODO
+        int option = 1;
+        String sb = "----------------Consultar equipos----------------\n" +
+                "1) Mostrar datos de equipo" + '\n' +
+                "2) Mostrar rango de equipos" + '\n' +
+                "3) Modificar equipos con diferencia negativa de goles" + '\n' +
+                "-1) Salir" + '\n';
+        do {
+            if (option >= 1 && option <= 3)
+                System.out.println(sb);
+            option = TecladoIn.readLineInt();
+            switch (option) {
+                case 1:
+                    showEquipo();
+                    break;
+                case 2:
+                    showRangoEquipos();
+                    break;
+                case 3:
+                    showEquiposConDifGol();
+                    break;
+                case -1:
+                    System.out.println("salio");
+                    break;
+                default:
+                    System.err.println("Opcion invalida");
+                    break;
+            }
+        } while (option != -1);
+    }
+
+    public static void showEquipo() {
+        System.out.println("Ingrese el nombre del pais:");
+        String pais = TecladoIn.readLine();
+        Equipo equipo = datosHelper.obtenerEquipo(pais);
+        if (equipo != null) {
+            StringBuilder sb = new StringBuilder("Equipo: ").append(equipo.getPais());
+            sb.append("puntos: ").append(equipo.getPuntos()).append('\n');
+            sb.append("grupo: ").append(equipo.getGrupo()).append('\n');
+            sb.append("goles a favor: ").append(equipo.getGolesAFavor()).append('\n');
+            sb.append("goles en contra: ").append(equipo.getGolesEnContra()).append('\n');
+            sb.append("diferencia de goles: ").append(equipo.diferenciaGoles()).append('\n');
+            sb.append("partidos:\n");
+            Lista<Partido> partidos = equipo.getPartidosJugados();
+            for (int i = 1; i <= partidos.longitud(); i++) {
+                sb.append(partidos.recuperar(i)).append('\n');
+            }
+            System.out.println(sb.toString());
+        } else {
+            System.err.println("No existe equipo " + pais);
+        }
+    }
+
+    public static void showRangoEquipos() {
+        // TODO showRangoEquipos()
+        System.out.println("Ingrese el nombre de un pais:");
+        String equipoA = TecladoIn.readLine();
+        System.out.println("Ingrese el nombre del otro pais:");
+        String equipoB = TecladoIn.readLine();
+    }
+
+    public static void showEquiposConDifGol() {
+        // TODO showEquiposConDifGol()
     }
 
     public static void showConsultarCiudades() {

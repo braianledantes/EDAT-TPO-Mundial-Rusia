@@ -3,6 +3,7 @@ package entidades;
 import java.io.Serializable;
 
 public class Partido implements Serializable {
+    private String key;
     private Equipo equipoA, equipoB;
     private Ronda ronda;
     private int golesEquipoA, golesEquipoB;
@@ -11,12 +12,19 @@ public class Partido implements Serializable {
         this.equipoA = equipoA;
         this.equipoB = equipoB;
         this.ronda = ronda;
+        this.key = crearKey();
+    }
+
+    private String crearKey() {
+        String clave = equipoA.getPais() + equipoB.getPais();
+        if (equipoB.getPais().compareTo(equipoA.getPais()) < 0) {
+            clave = equipoB.getPais() + equipoA.getPais();
+        }
+        return clave;
     }
 
     public Partido(Equipo equipoA, Equipo equipoB, Ronda ronda, int golesEquipoA, int golesEquipoB) {
-        this.equipoA = equipoA;
-        this.equipoB = equipoB;
-        this.ronda = ronda;
+        this(equipoA, equipoB, ronda);
         this.golesEquipoA = golesEquipoA;
         this.golesEquipoB = golesEquipoB;
     }
@@ -61,17 +69,13 @@ public class Partido implements Serializable {
         this.golesEquipoB = golesEquipoB;
     }
 
-    public class KeyPartido {
-
-    }
-
-    public class ValuePartido {
-
+    public String getKey() {
+        return key;
     }
 
     @Override
     public String toString() {
-        return "(" + equipoA + "/" + equipoB + "){" +
+        return "(" + equipoA.getPais() + "/" + equipoB.getPais() + "){" +
                 "ronda=" + ronda +
                 ", golesEquipoA=" + golesEquipoA +
                 ", golesEquipoB=" + golesEquipoB +

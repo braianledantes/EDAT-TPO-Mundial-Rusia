@@ -4,24 +4,21 @@ import entidades.Ciudad;
 import entidades.Equipo;
 import entidades.Partido;
 import entidades.Ronda;
-import estructuras.conjuntistas.ArbolHeapMaximo;
 import estructuras.grafo.GrafoEtiquetado;
 import estructuras.lineales.Lista;
 import estructuras.lineales.ListaDinamica;
+import estructuras.propositoEspecifico.TablaBusqueda;
 
 import java.io.Serializable;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Iterator;
 
 /**
  * Esta clase funciona como una base de datos que trabaja sobre un archivo con los objetos serializados.
  */
 public class DatosHelper implements Serializable {
     private GrafoEtiquetado<Ciudad> ciudades;
-    // key pais del equipo
-    private Hashtable<String, Equipo> equipos;
+    // key pais del equipo, TODO diccionario o tabla de Búsqueda implementada con un árbol AVL ordenados alfabeticamente
+    private TablaBusqueda<String, Equipo> equipos;
     // key nombres de los equipos donde eq1 < eq2
     private HashMap<String, Partido> partidos;
 
@@ -29,7 +26,7 @@ public class DatosHelper implements Serializable {
 
     private DatosHelper() {
         ciudades = new GrafoEtiquetado<>();
-        equipos = new Hashtable<>();
+        equipos = new TablaBusqueda<>();
         partidos = new HashMap<>();
     }
 
@@ -89,10 +86,7 @@ public class DatosHelper implements Serializable {
         boolean exito = false;
         if (grupo == 'A' || grupo == 'B' || grupo == 'C' || grupo == 'D' || grupo == 'E' || grupo == 'F' || grupo == 'G' || grupo == 'H') {
             Equipo equipo = new Equipo(pais, directorTecnico, grupo, puntos, golesAFavor, golesEnContra);
-            if (equipos.get(pais) == null) {
-                equipos.put(pais, equipo);
-                exito = true;
-            }
+            exito = equipos.insertar(pais, equipo);
         } else {
             throw new NumberFormatException("variable grupo no valida: " + grupo);
         }
@@ -100,13 +94,13 @@ public class DatosHelper implements Serializable {
     }
 
     public synchronized boolean bajaEquipo(String pais) {
-        return equipos.remove(pais) != null;
+        return equipos.eliminar(pais);
     }
 
     public synchronized boolean modificarEquipo(String nombre, String directorTecnico, char grupo, int puntos, int golesAFavor, int golesEnContra) throws NumberFormatException {
         boolean modi = false;
         if (grupo == 'A' || grupo == 'B' || grupo == 'C' || grupo == 'D' || grupo == 'E' || grupo == 'F' || grupo == 'G' || grupo == 'H') {
-            Equipo equipo = equipos.get(nombre);
+            Equipo equipo = equipos.obtenerDato(nombre);
             if (equipo != null) {
                 equipo.setDirectorTecnico(directorTecnico);
                 equipo.setGrupo(grupo);
@@ -145,42 +139,50 @@ public class DatosHelper implements Serializable {
     public synchronized boolean altaDePartido(String equipoA, String equipoB, String ronda, int golesA, int golesB) throws NumberFormatException {
         boolean exito = false;
         Ronda r = Ronda.parseToRonda(ronda);
-        Equipo eqA = equipos.get(equipoA);
-        Equipo eqB = equipos.get(equipoB);
+        Equipo eqA = equipos.obtenerDato(equipoA);
+        Equipo eqB = equipos.obtenerDato(equipoB);
 
         if (eqA != null && eqB != null) {
             Partido partido = new Partido(eqA, eqB, r, golesA, golesB);
-            String key = equipoA + equipoB;
-            if (eqB.compareTo(eqA) < 0) {
-                key = equipoB + equipoA;
+            if (partidos.get(partido.getKey()) == null) { // si no existe lo crea
+                exito = eqA.agragarPartido(partido) && eqB.agragarPartido(partido);
+                partidos.put(partido.getKey(), partido);
             }
-            partidos.put(key, partido);
-            eqA.agragarPartido(partido);
-            eqB.agragarPartido(partido);
-            exito = true;
         }
         return exito;
     }
 
     public synchronized Equipo obtenerEquipo(String pais) {
-        return equipos.get(pais);
+        return equipos.obtenerDato(pais);
     }
 
     public synchronized Lista<Equipo> listarEquiposConDifGolNeg() {
-        Enumeration<Equipo> losEquipos = equipos.elements();
         Lista<Equipo> lista = new ListaDinamica<>();
-        Iterator<Equipo> iterator = losEquipos.asIterator();
-        while (iterator.hasNext()) {
-            Equipo e = iterator.next();
+        Lista<Equipo> todosLosEquipos = equipos.listarDatos();
+
+        for (int i = 1; i <= todosLosEquipos.longitud(); i++) {
+            Equipo e = todosLosEquipos.recuperar(i);
             if (e.diferenciaGoles() < 0)
                 lista.insertar(e);
         }
+
         return lista;
     }
 
+    /*
+     * Obtener la tabla de posiciones de los equipos de un momento dado, almacenando
+     * los datos de los equipos ordenados de mayor a menor puntaje (puede utilizar alguna
+     * estructura de datos auxiliar que considere apropiada, asegurando la eficiencia)
+     */
     public synchronized Lista<Equipo> listarEquipos(String desde, String hasta) {
-        // TODO
-        return null;
+        // pasa del diccionario original a otro diccionario ordenado por puntaje y los lista
+        TablaBusqueda<Integer, Equipo> equiposPuntaje = new TablaBusqueda<>();
+        Lista<Equipo> listaEquipos = equipos.listarDatos();
+        for (int i = 1; i <= listaEquipos.longitud(); i++) {
+            Equipo equipo = listaEquipos.recuperar(i);
+            equiposPuntaje.insertar(equipo.getPuntos(), equipo);
+        }
+        return equiposPuntaje.listarDatos();
     }
 
     public synchronized Lista<Ciudad> obtenerCaminoConMenorDistancia(String ciudadOrigen, String ciudadDestino) {
@@ -199,19 +201,6 @@ public class DatosHelper implements Serializable {
         return ciudades.caminoMasCorto(new Ciudad(ciudadOrigen), new Ciudad(ciudadDestino1), new Ciudad(ciudadDestino2));
     }
 
-    /**
-     * Obtener la tabla de posiciones de los equipos de un momento dado, almacenando
-     * los datos de los equipos ordenados de mayor a menor puntaje (puede utilizar alguna
-     * estructura de datos auxiliar que considere apropiada, asegurando la eficiencia)
-     *
-     * @return
-     */
-    public synchronized Lista<Equipo> obtenerPartidosEnOrden() {
-        // TODO
-        ArbolHeapMaximo<Equipo> partidoArbolAVL = new ArbolHeapMaximo<>(equipos.size());
-        return null;
-    }
-
     @Override
     public synchronized String toString() {
         return "Sistema{" +
@@ -219,5 +208,12 @@ public class DatosHelper implements Serializable {
                 "\nEquipos= " + equipos +
                 "\nPartidos= " + partidos +
                 '}';
+    }
+
+    public void vaciar() {
+        ciudades = new GrafoEtiquetado<>();
+        partidos.clear();
+        ;
+        equipos.vaciar();
     }
 }

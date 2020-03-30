@@ -170,11 +170,12 @@ public class ABB<T extends Comparable<T>> extends ArbolBinarioDinamico<T> implem
 
     private void listarRango(Lista<T> lista, T elemMin, T elemMax, Nodo<T> nodo) {
         if (nodo != null) {
-            if (elemMin.compareTo(nodo.getElem()) <= 0 && elemMax.compareTo(nodo.getElem()) >= 0) {
+            if (elemMin.compareTo(nodo.getElem()) < 0)
                 listarRango(lista, elemMin, elemMax, nodo.getIzq());
+            if (elemMin.compareTo(nodo.getElem()) <= 0 && elemMax.compareTo(nodo.getElem()) >= 0)
                 lista.insertar(nodo.getElem());
+            if (elemMax.compareTo(nodo.getElem()) > 0)
                 listarRango(lista, elemMin, elemMax, nodo.getDer());
-            }
         }
     }
 

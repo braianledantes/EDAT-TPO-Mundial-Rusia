@@ -30,15 +30,24 @@ public class Equipo implements Comparable<Equipo>, Serializable {
         this.partidosJugados = new ListaDinamica<>();
     }
 
-    public Lista<Partido> getPartidosJugados() {
-        return partidosJugados;
-    }
-
     public boolean agragarPartido(Partido partido) {
         boolean exito = false;
-        if (partido != null && (this.equals(partido.getEquipoA()) || this.equals(partido.getEquipoB())))
+        if (partido != null && (this.equals(partido.getEquipoA()) || this.equals(partido.getEquipoB()))) {
+            if (this == partido.getEquipoA()) {
+                this.golesAFavor += partido.getGolesEquipoA();
+                this.golesEnContra += partido.getGolesEquipoB();
+            } else if (this == partido.getEquipoB()) {
+                this.golesAFavor += partido.getGolesEquipoB();
+                this.golesEnContra += partido.getGolesEquipoA();
+            }
+            this.puntos += (this.golesAFavor - this.golesEnContra) * 10;
             exito = partidosJugados.insertar(partido);
+        }
         return exito;
+    }
+
+    public Lista<Partido> getPartidosJugados() {
+        return partidosJugados;
     }
 
     public String getPais() {
@@ -103,12 +112,12 @@ public class Equipo implements Comparable<Equipo>, Serializable {
 
     @Override
     public int compareTo(Equipo equipo) {
-        return this.diferenciaGoles() - equipo.diferenciaGoles();
+        return this.pais.compareTo(equipo.getPais());
     }
 
     @Override
     public String toString() {
-        return "pais{" +
+        return pais + "{" +
                 "DT='" + directorTecnico + '\'' +
                 ", grupo=" + grupo +
                 ", puntos=" + puntos +

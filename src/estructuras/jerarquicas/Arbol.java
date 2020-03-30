@@ -70,8 +70,7 @@ public interface Arbol<T> {
     Lista<T> listarNiveles();
 
     /**
-     * Quita todos los elementos de la estructura. El manejo de memoria es similar al explicado anteriormente
-     * para estructuras estructuras.lineales dinámicas.
+     * Quita todos los elementos de la estructura.
      */
     void vaciar();
 

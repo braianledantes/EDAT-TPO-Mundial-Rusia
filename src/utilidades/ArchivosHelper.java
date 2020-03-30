@@ -17,6 +17,7 @@ public class ArchivosHelper {
     }
 
     public synchronized void importarDatos(DatosHelper datosHelper, String fileName) throws IOException {
+        datosHelper.vaciar();
         FileReader file = new FileReader(fileName);
         BufferedReader bufferedReader = new BufferedReader(file);
         String line;
