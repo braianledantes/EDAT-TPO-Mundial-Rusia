@@ -7,16 +7,18 @@ public class Partido implements Serializable {
     private Equipo equipoA, equipoB;
     private Ronda ronda;
     private int golesEquipoA, golesEquipoB;
+    private Ciudad ciudad;
 
-    public Partido(Equipo equipoA, Equipo equipoB, Ronda ronda) {
+    public Partido(Equipo equipoA, Equipo equipoB, Ronda ronda, Ciudad ciudad) {
         this.equipoA = equipoA;
         this.equipoB = equipoB;
         this.ronda = ronda;
+        this.ciudad = ciudad;
         this.key = crearKey();
     }
 
-    public Partido(Equipo equipoA, Equipo equipoB, Ronda ronda, int golesEquipoA, int golesEquipoB) {
-        this(equipoA, equipoB, ronda);
+    public Partido(Equipo equipoA, Equipo equipoB, Ronda ronda, Ciudad ciudad, int golesEquipoA, int golesEquipoB) {
+        this(equipoA, equipoB, ronda, ciudad);
         this.golesEquipoA = golesEquipoA;
         this.golesEquipoB = golesEquipoB;
 
@@ -82,10 +84,19 @@ public class Partido implements Serializable {
         return key;
     }
 
+    public Ciudad getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(Ciudad ciudad) {
+        this.ciudad = ciudad;
+    }
+
     @Override
     public String toString() {
         return "(" + equipoA.getPais() + "/" + equipoB.getPais() + "){" +
                 "ronda=" + ronda +
+                ", ciudad=" + ciudad.getNombre() +
                 ", golesEquipoA=" + golesEquipoA +
                 ", golesEquipoB=" + golesEquipoB +
                 '}';

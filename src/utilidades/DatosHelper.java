@@ -121,21 +121,22 @@ public class DatosHelper implements Serializable {
         return ciudades.insertarArco(new Ciudad(origen), new Ciudad(destino), distancia);
     }
 
-    public synchronized boolean altaDePartido(String equipoA, String equipoB, String ronda, String golesA, String golesB) throws NumberFormatException {
+    public synchronized boolean altaDePartido(String equipoA, String equipoB, String ronda, String ciudad, String golesA, String golesB) throws NumberFormatException {
         int ga = Integer.parseInt(golesA);
         int gb = Integer.parseInt(golesB);
 
-        return altaDePartido(equipoA, equipoB, ronda, ga, gb);
+        return altaDePartido(equipoA, equipoB, ronda, ciudad, ga, gb);
     }
 
-    public synchronized boolean altaDePartido(String equipoA, String equipoB, String ronda, int golesA, int golesB) throws NumberFormatException {
+    public synchronized boolean altaDePartido(String equipoA, String equipoB, String ronda, String ciudad, int golesA, int golesB) throws NumberFormatException {
         boolean exito = false;
         Ronda r = Ronda.parseToRonda(ronda);
         Equipo eqA = equipos.obtenerDato(equipoA);
         Equipo eqB = equipos.obtenerDato(equipoB);
+        Ciudad c = ciudades.obtenerVertice(new Ciudad(ciudad));
 
-        if (eqA != null && eqB != null) {
-            Partido partido = new Partido(eqA, eqB, r, golesA, golesB);
+        if (eqA != null && eqB != null && c != null) {
+            Partido partido = new Partido(eqA, eqB, r, c, golesA, golesB);
             if (partidos.get(partido.getKey()) == null) { // si no existe lo crea
                 exito = eqA.agragarPartido(partido) && eqB.agragarPartido(partido);
                 partidos.put(partido.getKey(), partido);

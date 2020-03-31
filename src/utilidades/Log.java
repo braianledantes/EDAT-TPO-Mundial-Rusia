@@ -85,9 +85,9 @@ public class Log {
         escribir(log);
     }
 
-    public void altaDePartido(String equipoA, String equipoB, String ronda, String golesA, String golesB) {
+    public void altaDePartido(String equipoA, String equipoB, String ronda, String ciudad, String golesA, String golesB) {
         escribir("se creo el partido " + equipoA + "-" + equipoB +
-                " en " + ronda + " con " + golesA + "/" + golesB);
+                " en " + ciudad + " en la ronda " + ronda + " con " + golesA + "/" + golesB);
     }
 
     public void mostrarEquipo(String equipo) {

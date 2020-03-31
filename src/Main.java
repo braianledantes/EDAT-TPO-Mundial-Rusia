@@ -258,16 +258,18 @@ public class Main {
         String eB = TecladoIn.readLine().toUpperCase();
         System.out.println("Ingrese la ronda (GRUPO, OCTAVOS, CUARTOS, SEMIFINAL, FINAL):");
         String ronda = TecladoIn.readLine().toUpperCase();
+        System.out.println("Ingrese la ciudad del evento:");
+        String ciudad = TecladoIn.readLine().toUpperCase();
         System.out.println("Ingrese los goles del equipo A:");
         int golesA = TecladoIn.readLineInt();
         System.out.println("Ingrese los goles del equipo B:");
         int golesB = TecladoIn.readLineInt();
 
         try {
-            if (datosHelper.altaDePartido(eA, eB, ronda, golesA, golesB))
-                log.altaDePartido(eA, eB, ronda, golesA + "", golesB + "");
+            if (datosHelper.altaDePartido(eA, eB, ronda, ciudad, golesA, golesB))
+                log.altaDePartido(eA, eB, ronda, ciudad, golesA + "", golesB + "");
             else
-                System.err.println("El partido ya existe");
+                System.err.println("El partido ya existe o la ciudad no existe");
         } catch (NumberFormatException e) {
             System.err.println(e.getMessage());
         }
@@ -532,7 +534,7 @@ public class Main {
 
     public static void exportarSistema() {
         try {
-            System.out.println("Indique la direccion absoluta donde se quiere exportar el archivo:");
+            System.out.println("Indique la direccion donde se quiere exportar el archivo:");
             String file = TecladoIn.readLine().toUpperCase();
             archivosHelper.exportarDatos(datosHelper, file);
             log.escribir("Se exportaron los datos a " + file);
@@ -543,7 +545,7 @@ public class Main {
 
     public static void ImportarSistema() {
         try {
-            System.out.println("Indique la direccion absoluta donde se encuentra el archivo a importar");
+            System.out.println("Indique la direccion donde se encuentra el archivo a importar");
             String fileName = TecladoIn.readLine();
             archivosHelper.importarDatos(datosHelper, fileName);
             log.importacionDatos(fileName);

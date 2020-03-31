@@ -44,7 +44,7 @@ public class ArchivosHelper {
                     datosHelper.altaEquipo(datos[0].trim().toUpperCase(), datos[1].trim().toUpperCase(), datos[2].toUpperCase().trim(), datos[3].trim().toUpperCase(), datos[4].trim().toUpperCase(), datos[5].trim().toUpperCase());
                     break;
                 case 'P':
-                    datosHelper.altaDePartido(datos[0].trim().toUpperCase(), datos[1].trim().toUpperCase(), datos[2].trim().toUpperCase(), datos[3].trim().toUpperCase(), datos[4].trim().toUpperCase());
+                    datosHelper.altaDePartido(datos[0].trim().toUpperCase(), datos[1].trim().toUpperCase(), datos[2].trim().toUpperCase(), datos[3].trim().toUpperCase(), datos[4].trim().toUpperCase(), datos[5].trim().toUpperCase());
                     break;
                 case 'C':
                     datosHelper.altaCiudad(datos[0].trim().toUpperCase(), datos[1].trim().toUpperCase(), datos[2].trim().toUpperCase(), datos[3].trim().toUpperCase());
