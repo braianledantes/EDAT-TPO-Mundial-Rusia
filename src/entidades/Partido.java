@@ -15,14 +15,6 @@ public class Partido implements Serializable {
         this.key = crearKey();
     }
 
-    private String crearKey() {
-        String clave = equipoA.getPais() + equipoB.getPais();
-        if (equipoB.getPais().compareTo(equipoA.getPais()) < 0) {
-            clave = equipoB.getPais() + equipoA.getPais();
-        }
-        return clave;
-    }
-
     public Partido(Equipo equipoA, Equipo equipoB, Ronda ronda, int golesEquipoA, int golesEquipoB) {
         this(equipoA, equipoB, ronda);
         this.golesEquipoA = golesEquipoA;
@@ -36,6 +28,14 @@ public class Partido implements Serializable {
         } else {
             equipoB.setPuntos(equipoB.getPuntos() + 3);
         }
+    }
+
+    private String crearKey() {
+        String clave = equipoA.getPais() + equipoB.getPais();
+        if (equipoB.getPais().compareTo(equipoA.getPais()) < 0) {
+            clave = equipoB.getPais() + equipoA.getPais();
+        }
+        return clave;
     }
 
     public Equipo getEquipoA() {

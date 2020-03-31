@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ColaDinamicaTest {
 
-    ColaDinamica<Integer> cola, esperado;
     public static final int TAM = 8;
+    ColaDinamica<Integer> cola, esperado;
 
     @BeforeEach
     void setUp() {

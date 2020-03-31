@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PilaDinamicaTest {
 
-    PilaDinamica<Integer> pila;
     public static final int TAM = 5;
+    PilaDinamica<Integer> pila;
 
     @BeforeEach
     void setUp() {

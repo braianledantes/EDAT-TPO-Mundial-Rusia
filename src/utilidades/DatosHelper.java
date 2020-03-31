@@ -17,16 +17,17 @@ import java.util.Collection;
 import java.util.HashMap;
 
 /**
- * Esta clase funciona como una base de datos que trabaja sobre un archivo con los objetos serializados.
+ * Esta clase funciona como una base de datos.
  */
 public class DatosHelper implements Serializable {
+    // mapa de las ciudades
     private GrafoEtiquetado<Ciudad> ciudades;
     // key pais del equipo
     private TablaBusqueda<String, Equipo> equipos;
     // key nombres de los equipos donde eq1 < eq2
     private HashMap<String, Partido> partidos;
 
-    static DatosHelper instance;
+    private static DatosHelper instance;
 
     private DatosHelper() {
         ciudades = new GrafoEtiquetado<>();
@@ -54,10 +55,6 @@ public class DatosHelper implements Serializable {
         return ciudades.eliminarVertice(c);
     }
 
-    public boolean modificarCiudad(String nombre, String superficie, String cantHabitantes, String sede) throws NumberFormatException {
-        return modificarCiudad(nombre, Integer.parseInt(superficie), Integer.parseInt(cantHabitantes), Boolean.parseBoolean(sede));
-    }
-
     public synchronized boolean modificarCiudad(String nombre, double superficie, int cantHabitantes, boolean sede) {
         boolean modi = false;
         Ciudad ciudad = getCiudad(nombre.toUpperCase());
@@ -72,10 +69,6 @@ public class DatosHelper implements Serializable {
 
     public Ciudad getCiudad(String nombre) {
         return ciudades.obtenerVertice(new Ciudad(nombre.toUpperCase()));
-    }
-
-    public boolean altaEquipo(String pais, String directorTecnico, String grupo) throws NumberFormatException {
-        return altaEquipo(pais, directorTecnico, grupo, "0", "0", "0");
     }
 
     public boolean altaEquipo(String pais, String directorTecnico, char grupo) throws NumberFormatException {
@@ -128,10 +121,6 @@ public class DatosHelper implements Serializable {
         return ciudades.insertarArco(new Ciudad(origen.toUpperCase()), new Ciudad(destino.toUpperCase()), distancia);
     }
 
-    public synchronized boolean eliminarRuta(String origen, String destino) {
-        return ciudades.eliminarArco(new Ciudad(origen), new Ciudad(destino));
-    }
-
     public synchronized boolean altaDePartido(String equipoA, String equipoB, String ronda, String golesA, String golesB) throws NumberFormatException {
         int ga = Integer.parseInt(golesA);
         int gb = Integer.parseInt(golesB);
@@ -176,12 +165,7 @@ public class DatosHelper implements Serializable {
         return equipos.listarRango(desde.toUpperCase(), hasta.toUpperCase());
     }
 
-    /*
-     * Obtener la tabla de posiciones de los equipos de un momento dado, almacenando
-     * los datos de los equipos ordenados de mayor a menor puntaje (puede utilizar alguna
-     * estructura de datos auxiliar que considere apropiada, asegurando la eficiencia)
-     */
-    public synchronized ColaPrioridad<Equipo> listarEquiposPorPuntaje() {
+    public synchronized ColaPrioridad<Equipo> obtenerEquiposPorPuntaje() {
         Lista<Equipo> listaEquipos = equipos.listarDatosOrdenados();
         ColaPrioridad<Equipo> colaEquiposPuntaje = new ColaPrioridadDinamica<>();
         for (int i = 1; i <= listaEquipos.longitud(); i++) {
@@ -192,7 +176,7 @@ public class DatosHelper implements Serializable {
     }
 
     public synchronized String obtenerTablaPosiciones() {
-        ColaPrioridad<Equipo> equipos = listarEquiposPorPuntaje();
+        ColaPrioridad<Equipo> equipos = obtenerEquiposPorPuntaje();
         StringBuilder sb = new StringBuilder("Tabala de posiciones:\n");
         while (!equipos.estaVacia()) {
             Equipo e = equipos.obtenerFrente();
@@ -248,7 +232,6 @@ public class DatosHelper implements Serializable {
     public void vaciar() {
         ciudades = new GrafoEtiquetado<>();
         partidos.clear();
-        ;
         equipos.vaciar();
     }
 }

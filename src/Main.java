@@ -10,7 +10,7 @@ import utilidades.TecladoIn;
 
 import java.io.IOException;
 
-public class MainTerminal {
+public class Main {
     public static DatosHelper datosHelper;
     public static ArchivosHelper archivosHelper;
     public static Log log;
@@ -25,14 +25,14 @@ public class MainTerminal {
             datosHelper = DatosHelper.getInstance();
         }
         log.escribirSistema(datosHelper);
-        showMainMenu();
+        mostrarMenuPrincipal();
         log.escribirSistema(datosHelper);
         log.cierrePrograma();
     }
 
-    public static void showMainMenu() {
+    public static void mostrarMenuPrincipal() {
         int option = 1;
-        String sb = "----------------Main menu----------------\n" +
+        String sb = "----------------Menu Principal----------------\n" +
                 "1) ABM ciudades" + '\n' +
                 "2) ABM equipos" + '\n' +
                 "3) Alta de partidos" + '\n' +
@@ -51,37 +51,37 @@ public class MainTerminal {
             option = TecladoIn.readLineInt();
             switch (option) {
                 case 1:
-                    showABMCiudades();
+                    mostrarMenuABMCiudades();
                     break;
                 case 2:
-                    showABMEquipos();
+                    mostrarMenuABMEquipos();
                     break;
                 case 3:
-                    showAltaPartidos();
+                    mostrarAltaPartidos();
                     break;
                 case 4:
-                    showConsultarEquipos();
+                    mostrarMenuConsultarEquipos();
                     break;
                 case 5:
-                    showConsultarCiudades();
+                    mostrarConsultarCiudades();
                     break;
                 case 6:
-                    showConsultarViajes();
+                    mostrarMenuConsultarViajes();
                     break;
                 case 7:
-                    showTablaPosiciones();
+                    mostrarTablaPosiciones();
                     break;
                 case 8:
-                    showSystem();
+                    mostrarSistema();
                     break;
                 case 9:
-                    saveSystem();
+                    guardarSistema();
                     break;
                 case 10:
-                    exportSystem();
+                    exportarSistema();
                     break;
                 case 11:
-                    importSystem();
+                    ImportarSistema();
                     break;
                 case -1:
                     System.out.println("Chau");
@@ -93,7 +93,7 @@ public class MainTerminal {
         } while (option != -1);
     }
 
-    public static void showABMCiudades() {
+    public static void mostrarMenuABMCiudades() {
         int option = 1;
         String sb = "----------------ABM ciudades----------------\n" +
                 "1) Alta ciudad" + '\n' +
@@ -165,7 +165,7 @@ public class MainTerminal {
             System.err.println("La ciudad " + nombre + " no existe");
     }
 
-    public static void showABMEquipos() {
+    public static void mostrarMenuABMEquipos() {
         int option = 1;
         String sb = "----------------ABM equipos----------------\n" +
                 "1) Alta equipo" + '\n' +
@@ -251,7 +251,7 @@ public class MainTerminal {
         }
     }
 
-    public static void showAltaPartidos() {
+    public static void mostrarAltaPartidos() {
         System.out.println("Ingrese el nombre del equipo A:");
         String eA = TecladoIn.readLine();
         System.out.println("Ingrese el nombre del equipo B:");
@@ -273,7 +273,7 @@ public class MainTerminal {
         }
     }
 
-    public static void showConsultarEquipos() {
+    public static void mostrarMenuConsultarEquipos() {
         int option = 1;
         String sb = "----------------Consultar equipos----------------\n" +
                 "1) Mostrar datos de equipo" + '\n' +
@@ -286,13 +286,13 @@ public class MainTerminal {
             option = TecladoIn.readLineInt();
             switch (option) {
                 case 1:
-                    showEquipo();
+                    mostrarEquipo();
                     break;
                 case 2:
-                    showRangoEquipos();
+                    mostrarRangoEquipos();
                     break;
                 case 3:
-                    showEquiposConDifGol();
+                    mostrarEquiposConDifGol();
                     break;
                 case -1:
                     System.out.println("salio");
@@ -304,7 +304,7 @@ public class MainTerminal {
         } while (option != -1);
     }
 
-    public static void showEquipo() {
+    public static void mostrarEquipo() {
         System.out.println("Ingrese el nombre del pais:");
         String pais = TecladoIn.readLine();
         Equipo equipo = datosHelper.obtenerEquipo(pais);
@@ -330,7 +330,7 @@ public class MainTerminal {
         }
     }
 
-    public static void showRangoEquipos() {
+    public static void mostrarRangoEquipos() {
         System.out.println("Ingrese el nombre de un pais:");
         String equipoA = TecladoIn.readLine();
         System.out.println("Ingrese el nombre del otro pais:");
@@ -351,7 +351,7 @@ public class MainTerminal {
         System.out.println(sb.toString());
     }
 
-    public static void showEquiposConDifGol() {
+    public static void mostrarEquiposConDifGol() {
         Lista<Equipo> equipos = datosHelper.listarEquiposConDifGolNeg();
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= equipos.longitud(); i++) {
@@ -361,7 +361,7 @@ public class MainTerminal {
         System.out.println(sb.toString());
     }
 
-    public static void showConsultarCiudades() {
+    public static void mostrarConsultarCiudades() {
         System.out.println("Ingrese el nombre de la ciudad:");
         String nombre = TecladoIn.readLine();
         Ciudad ciudad = datosHelper.getCiudad(nombre);
@@ -371,7 +371,7 @@ public class MainTerminal {
             System.err.println("No existe " + nombre);
     }
 
-    public static void showConsultarViajes() {
+    public static void mostrarMenuConsultarViajes() {
         int option = 1;
         String sb = "----------------Consultar viajes----------------\n" +
                 "1) Obtener el camino que llegue de A a B de menor distancia en km" + '\n' +
@@ -385,16 +385,16 @@ public class MainTerminal {
             option = TecladoIn.readLineInt();
             switch (option) {
                 case 1:
-                    showCaminoConMenorDistancia();
+                    mostrarCaminoConMenorDistancia();
                     break;
                 case 2:
-                    showCaminoConMenosCiudades();
+                    mostrarCaminoConMenosCiudades();
                     break;
                 case 3:
-                    showCaminoPosibles();
+                    mostrarCaminoPosibles();
                     break;
                 case 4:
-                    showCaminoMasCortoEntreCiudad();
+                    mostrarCaminoMasCortoEntreCiudad();
                     break;
                 case -1:
                     System.out.println("salio");
@@ -406,7 +406,7 @@ public class MainTerminal {
         } while (option != -1);
     }
 
-    public static void showCaminoConMenorDistancia() {
+    public static void mostrarCaminoConMenorDistancia() {
         System.out.println("Ingrese la ciudad de origen:");
         String origen = TecladoIn.readLine();
         System.out.println("Ingrese la ciudad de destino:");
@@ -423,7 +423,7 @@ public class MainTerminal {
         System.out.println(sb.toString());
     }
 
-    public static void showCaminoConMenosCiudades() {
+    public static void mostrarCaminoConMenosCiudades() {
         System.out.println("Ingrese la ciudad de origen:");
         String origen = TecladoIn.readLine();
         System.out.println("Ingrese la ciudad de destino:");
@@ -440,7 +440,7 @@ public class MainTerminal {
         System.out.println(sb.toString());
     }
 
-    public static void showCaminoPosibles() {
+    public static void mostrarCaminoPosibles() {
         System.out.println("Ingrese la ciudad de origen:");
         String origen = TecladoIn.readLine();
         System.out.println("Ingrese la ciudad de destino:");
@@ -462,7 +462,7 @@ public class MainTerminal {
         System.out.println(sb.toString());
     }
 
-    public static void showCaminoMasCortoEntreCiudad() {
+    public static void mostrarCaminoMasCortoEntreCiudad() {
         System.out.println("Ingrese la ciudad de origen:");
         String origen = TecladoIn.readLine();
         System.out.println("Ingrese la ciudad de destino1:");
@@ -481,8 +481,8 @@ public class MainTerminal {
         System.out.println(sb.toString());
     }
 
-    public static void showTablaPosiciones() {
-        ColaPrioridad<Equipo> equipos = datosHelper.listarEquiposPorPuntaje();
+    public static void mostrarTablaPosiciones() {
+        ColaPrioridad<Equipo> equipos = datosHelper.obtenerEquiposPorPuntaje();
         StringBuilder sb = new StringBuilder("Puntos -> Equipo\n");
         while (!equipos.estaVacia()) {
             Equipo e = equipos.obtenerFrente();
@@ -492,12 +492,12 @@ public class MainTerminal {
         System.out.println(sb.toString());
     }
 
-    public static void showSystem() {
+    public static void mostrarSistema() {
         System.out.println(datosHelper);
         log.mostrarEstructuras(datosHelper);
     }
 
-    public static void saveSystem() {
+    public static void guardarSistema() {
         try {
             archivosHelper.guardarDatos(datosHelper);
             log.guardarDatos();
@@ -506,7 +506,7 @@ public class MainTerminal {
         }
     }
 
-    public static void exportSystem() {
+    public static void exportarSistema() {
         try {
             System.out.println("Indique la direccion absoluta donde se quiere exportar el archivo:");
             String file = TecladoIn.readLine();
@@ -517,7 +517,7 @@ public class MainTerminal {
         }
     }
 
-    public static void importSystem() {
+    public static void ImportarSistema() {
         try {
             System.out.println("Indique la direccion absoluta donde se encuentra el archivo a importar");
             String file = TecladoIn.readLine();

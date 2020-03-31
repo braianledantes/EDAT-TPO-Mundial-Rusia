@@ -12,7 +12,7 @@ import java.util.Collection;
 public class ArchivosHelper {
     public static final String FILE_NAME = "datos.edat";
 
-    static ArchivosHelper instance;
+    private static ArchivosHelper instance;
 
     private ArchivosHelper() {
     }
