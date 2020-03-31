@@ -505,7 +505,7 @@ public class Main {
         while (!equipos.estaVacia()) {
             Equipo e = equipos.obtenerFrente();
             equipos.eliminarFrente();
-            sb.append(e.getPuntos()).append(" -> ").append(e.getPais()).append('\n');
+            sb.append('\t').append(e.getPuntos()).append(" -> ").append(e.getPais()).append('\n');
         }
         System.out.println(sb.toString());
         log.mostrarTablaPosiciones();
@@ -540,6 +540,7 @@ public class Main {
         try {
             System.out.println("Indique la direccion absoluta donde se encuentra el archivo a importar");
             String fileName = TecladoIn.readLine();
+            fileName = "/home/chutebnl/Escritorio/datos.txt";
             archivosHelper.importarDatos(datosHelper, fileName);
             log.importacionDatos(fileName);
         } catch (IOException e) {

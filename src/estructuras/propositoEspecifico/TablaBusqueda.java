@@ -95,8 +95,8 @@ public class TablaBusqueda<C extends Comparable<C>, D> implements Diccionario<C,
         // cambio el hijo izquierdo de la raiz
         nodoRaiz.setIzq(nodoTemp);
 
-        nodoRaiz.recalcularAltura();
-        nodoTemp.recalcularAltura();
+        nodoRaiz.setAltura(nodoRaiz.getAltura() - 1);
+        nodoTemp.setAltura(nodoTemp.getAltura() + 1);
     }
 
     private void rotarDerecha(Nodo<C, D> nodoRaiz) {
@@ -116,8 +116,8 @@ public class TablaBusqueda<C extends Comparable<C>, D> implements Diccionario<C,
         // cambio el hijo derecho de la raiz
         nodoRaiz.setDer(nodoTemp);
 
-        nodoRaiz.recalcularAltura();
-        nodoTemp.recalcularAltura();
+        nodoRaiz.setAltura(nodoRaiz.getAltura() - 1);
+        nodoTemp.setAltura(nodoTemp.getAltura() + 1);
     }
 
     @Override
@@ -349,18 +349,21 @@ public class TablaBusqueda<C extends Comparable<C>, D> implements Diccionario<C,
 
     private void toString(StringBuilder sb, Nodo<C, D> nodo) {
         if (nodo != null) {
-            sb.append(nodo.getClave()).append(" -> ").append(nodo.getDato()).append(" // ");
-            if (nodo.tieneIzq())
+            toString(sb, nodo.getIzq());
+
+            sb.append('\t').append(nodo.getClave()).append(" -> ").append(nodo.getDato()).append(" // ");
+            if (nodo.tieneIzq()) {
                 sb.append(nodo.getIzq().getClave()).append("; ");
-            else
+            } else {
                 sb.append("null").append("; ");
-            if (nodo.tieneDer())
+            }
+            if (nodo.tieneDer()) {
                 sb.append(nodo.getDer().getClave());
-            else
+            } else {
                 sb.append("null");
+            }
             sb.append("\n");
 
-            toString(sb, nodo.getIzq());
             toString(sb, nodo.getDer());
         }
     }
@@ -427,6 +430,10 @@ public class TablaBusqueda<C extends Comparable<C>, D> implements Diccionario<C,
 
         public int getAltura() {
             return altura;
+        }
+
+        public void setAltura(int altura) {
+            this.altura = altura;
         }
 
         public void recalcularAltura() {

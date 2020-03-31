@@ -76,8 +76,8 @@ public class ArbolAVL<T extends Comparable<T>> extends ABB<T> {
         // cambio el hijo izquierdo de la raiz
         nodoRaiz.setIzq(nodoTemp);
 
-        nodoRaiz.recalcularAltura();
-        nodoTemp.recalcularAltura();
+        nodoRaiz.setAltura(nodoRaiz.getAltura() - 1);
+        nodoTemp.setAltura(nodoTemp.getAltura() + 1);
     }
 
     /*
@@ -102,7 +102,7 @@ public class ArbolAVL<T extends Comparable<T>> extends ABB<T> {
         // cambio el hijo derecho de la raiz
         nodoRaiz.setDer(nodoTemp);
 
-        nodoRaiz.recalcularAltura();
-        nodoTemp.recalcularAltura();
+        nodoRaiz.setAltura(nodoRaiz.getAltura() - 1);
+        nodoTemp.setAltura(nodoTemp.getAltura() + 1);
     }
 }

@@ -535,7 +535,7 @@ public class GrafoEtiquetado<E> implements Grafo<E>, Serializable {
         NodoAdy<E> ady;
 
         while (vertice != null) {
-            sb.append(vertice.getElem()).append(" -> ");
+            sb.append('\t').append(vertice.getElem()).append(" -> ");
             ady = vertice.getPrimerAdy();
             while (ady != null) {
                 sb.append(ady.getVertice().getElem()).append(" (").append(ady.getEtiqueta()).append("), ");

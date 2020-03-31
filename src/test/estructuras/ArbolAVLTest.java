@@ -11,12 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ArbolAVLTest {
 
     ArbolAVL<Integer> avl = new ArbolAVL<>();
-    ArbolBinario<Integer> arbolEsp = new ArbolBinario<>();
+    ArbolBinario<Integer> esp = new ArbolBinario<>();
 
     @AfterEach
     void afterEach() {
         avl.vaciar();
-        arbolEsp.vaciar();
+        esp.vaciar();
     }
 
     @Test
@@ -24,36 +24,36 @@ class ArbolAVLTest {
         assertTrue(avl.insertar(3));
         assertTrue(avl.insertar(2));
         assertTrue(avl.insertar(1));
-        arbolEsp.insertar(2, null);
-        arbolEsp.insertar(1, 2, ArbolBinario.HIJO_IZQUIERDO);
-        arbolEsp.insertar(3, 2, ArbolBinario.HIJO_DERECHO);
-        assertEquals(arbolEsp, avl);
+        esp.insertar(2, null);
+        esp.insertar(1, 2, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(3, 2, ArbolBinario.HIJO_DERECHO);
+        assertEquals(esp, avl);
 
         //assertTrue(avl.eliminar(3));
         avl.eliminar(3);
-        arbolEsp.vaciar();
-        arbolEsp.insertar(2, null);
-        arbolEsp.insertar(1, 2, ArbolBinario.HIJO_IZQUIERDO);
-        assertEquals(arbolEsp, avl);
+        esp.vaciar();
+        esp.insertar(2, null);
+        esp.insertar(1, 2, ArbolBinario.HIJO_IZQUIERDO);
+        assertEquals(esp, avl);
 
         assertTrue(avl.eliminar(2));
-        arbolEsp.vaciar();
-        arbolEsp.insertar(1, 2, ArbolBinario.HIJO_IZQUIERDO);
-        assertEquals(arbolEsp, avl);
+        esp.vaciar();
+        esp.insertar(1, 2, ArbolBinario.HIJO_IZQUIERDO);
+        assertEquals(esp, avl);
 
         assertTrue(avl.eliminar(1));
-        arbolEsp.vaciar();
-        assertEquals(arbolEsp, avl);
+        esp.vaciar();
+        assertEquals(esp, avl);
     }
 
     @Test
     void RotaciónSimpleIzquierda() {
-        arbolEsp.insertar(15, null);
-        arbolEsp.insertar(8, 15, ArbolBinario.HIJO_IZQUIERDO);
-        arbolEsp.insertar(20, 15, ArbolBinario.HIJO_DERECHO);
-        arbolEsp.insertar(5, 8, ArbolBinario.HIJO_IZQUIERDO);
-        arbolEsp.insertar(13, 8, ArbolBinario.HIJO_DERECHO);
-        arbolEsp.insertar(29, 20, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(15, null);
+        esp.insertar(8, 15, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(20, 15, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(5, 8, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(13, 8, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(29, 20, ArbolBinario.HIJO_DERECHO);
 
         avl.insertar(8);
         avl.insertar(5);
@@ -62,17 +62,17 @@ class ArbolAVLTest {
         avl.insertar(20);
         avl.insertar(29);
 
-        assertEquals(arbolEsp, avl);
+        assertEquals(esp, avl);
     }
 
     @Test
     void RotaciónSimpleDerecha() {
-        arbolEsp.insertar(5, null);
-        arbolEsp.insertar(3, 5, ArbolBinario.HIJO_IZQUIERDO);
-        arbolEsp.insertar(10, 5, ArbolBinario.HIJO_DERECHO);
-        arbolEsp.insertar(4, 3, ArbolBinario.HIJO_DERECHO);
-        arbolEsp.insertar(7, 10, ArbolBinario.HIJO_IZQUIERDO);
-        arbolEsp.insertar(15, 10, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(5, null);
+        esp.insertar(3, 5, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(10, 5, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(4, 3, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(7, 10, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(15, 10, ArbolBinario.HIJO_DERECHO);
 
         avl.insertar(10);
         avl.insertar(5);
@@ -81,17 +81,17 @@ class ArbolAVLTest {
         avl.insertar(7);
         avl.insertar(4);
 
-        assertEquals(arbolEsp, avl);
+        assertEquals(esp, avl);
     }
 
     @Test
     void RotaciónDobleDerechaIzquierda() {
-        arbolEsp.insertar(12, null);
-        arbolEsp.insertar(10, 12, ArbolBinario.HIJO_IZQUIERDO);
-        arbolEsp.insertar(15, 12, ArbolBinario.HIJO_DERECHO);
-        arbolEsp.insertar(5, 10, ArbolBinario.HIJO_IZQUIERDO);
-        arbolEsp.insertar(13, 15, ArbolBinario.HIJO_IZQUIERDO);
-        arbolEsp.insertar(17, 15, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(12, null);
+        esp.insertar(10, 12, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(15, 12, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(5, 10, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(13, 15, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(17, 15, ArbolBinario.HIJO_DERECHO);
 
         avl.insertar(10);
         avl.insertar(5);
@@ -100,17 +100,17 @@ class ArbolAVLTest {
         avl.insertar(17);
         avl.insertar(13);
 
-        assertEquals(arbolEsp, avl);
+        assertEquals(esp, avl);
     }
 
     @Test
     void RotaciónDobleIzquierdaDerecha() {
-        arbolEsp.insertar(8, null);
-        arbolEsp.insertar(5, 8, ArbolBinario.HIJO_IZQUIERDO);
-        arbolEsp.insertar(12, 8, ArbolBinario.HIJO_DERECHO);
-        arbolEsp.insertar(3, 5, ArbolBinario.HIJO_IZQUIERDO);
-        arbolEsp.insertar(10, 12, ArbolBinario.HIJO_IZQUIERDO);
-        arbolEsp.insertar(23, 12, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(8, null);
+        esp.insertar(5, 8, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(12, 8, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(3, 5, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(10, 12, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(23, 12, ArbolBinario.HIJO_DERECHO);
 
         avl.insertar(12);
         avl.insertar(5);
@@ -119,10 +119,35 @@ class ArbolAVLTest {
         avl.insertar(8);
         avl.insertar(10);
 
-        assertEquals(arbolEsp, avl);
+        assertEquals(esp, avl);
     }
 
     @Test
-    void eliminar() {
+    void definitiva() {
+        esp.insertar(5, null);
+        esp.insertar(3, 5, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(8, 5, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(2, 3, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(4, 3, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(1, 2, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(6, 8, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(10, 8, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(7, 6, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(9, 10, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(11, 10, ArbolBinario.HIJO_DERECHO);
+
+        avl.insertar(5);
+        avl.insertar(2);
+        avl.insertar(3);
+        avl.insertar(6);
+        avl.insertar(8);
+        avl.insertar(1);
+        avl.insertar(11);
+        avl.insertar(7);
+        avl.insertar(10);
+        avl.insertar(9);
+        avl.insertar(4);
+
+        assertEquals(esp, avl);
     }
 }

@@ -252,18 +252,21 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T>, Serializable 
 
     private void toString(StringBuilder sb, Nodo<T> nodo) {
         if (nodo != null) {
+            toString(sb, nodo.getIzq());
+
             sb.append(nodo.getElem()).append(" -> ");
-            if (nodo.tieneIzq())
+            if (nodo.tieneIzq()) {
                 sb.append(nodo.getIzq().getElem()).append("; ");
-            else
+            } else {
                 sb.append("null").append("; ");
-            if (nodo.tieneDer())
+            }
+            if (nodo.tieneDer()) {
                 sb.append(nodo.getDer().getElem());
-            else
+            } else {
                 sb.append("null");
+            }
             sb.append("\n");
 
-            toString(sb, nodo.getIzq());
             toString(sb, nodo.getDer());
         }
     }
@@ -324,6 +327,10 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T>, Serializable 
 
         public int getAltura() {
             return altura;
+        }
+
+        public void setAltura(int altura) {
+            this.altura = altura;
         }
 
         public void recalcularAltura() {
