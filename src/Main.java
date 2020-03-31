@@ -545,7 +545,6 @@ public class Main {
         try {
             System.out.println("Indique la direccion absoluta donde se encuentra el archivo a importar");
             String fileName = TecladoIn.readLine();
-            fileName = "/home/chutebnl/Escritorio/datos.txt";
             archivosHelper.importarDatos(datosHelper, fileName);
             log.importacionDatos(fileName);
         } catch (IOException e) {

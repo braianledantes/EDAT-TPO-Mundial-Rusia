@@ -1,6 +1,7 @@
 /*
 /*/
 !/src/
+!/res/
 !.gitignore
 !TPFinal2018.pdf
 !README.md
