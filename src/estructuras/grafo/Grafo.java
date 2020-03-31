@@ -40,6 +40,16 @@ public interface Grafo<E> {
     boolean insertarArco(E origen, E destino);
 
     /**
+     * Dados dos elementos de tipoVertice se agrega a la estructura dos arcos que unen
+     * ambos vértices bidireccionalmente con la etiqueta igual a 1.
+     *
+     * @param vert1 vertice1
+     * @param vert2 vertice2
+     * @return si el arco existe y se puede realizar la inserción con éxito devuelve verdadero, en caso contrario devuelve falso
+     */
+    boolean insertarArcoDoble(E vert1, E vert2);
+
+    /**
      * Dados dos elementos de tipoVertice (origen y destino) se agrega a la estructura el arco que une
      * ambos vértices, la una etiqueda que es la distancia entre vertices.
      *
@@ -49,6 +59,17 @@ public interface Grafo<E> {
      * @return si el arco existe y se puede realizar la inserción con éxito devuelve verdadero, en caso contrario devuelve falso
      */
     boolean insertarArco(E origen, E destino, int etiqueta);
+
+    /**
+     * Dados dos elementos de tipoVertice se agrega a la estructura dos arcos que unen ambos vértices bidireccionalmente,
+     * la una etiqueda que es la distancia entre vertices.
+     *
+     * @param vert1    vertice1
+     * @param vert2    vertice2
+     * @param etiqueta distancia entre origen y destino
+     * @return si el arco existe y se puede realizar la inserción con éxito devuelve verdadero, en caso contrario devuelve falso
+     */
+    boolean insertarArcoDoble(E vert1, E vert2, int etiqueta);
 
     /**
      * Dados dos elementos de tipoVertice (origen y destino) se quita de la estructura el arco que une

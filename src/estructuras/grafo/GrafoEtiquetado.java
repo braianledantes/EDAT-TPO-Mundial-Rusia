@@ -86,6 +86,11 @@ public class GrafoEtiquetado<E> implements Grafo<E>, Serializable {
     }
 
     @Override
+    public boolean insertarArcoDoble(E vert1, E vert2) {
+        return insertarArcoDoble(vert1, vert2, 1);
+    }
+
+    @Override
     public boolean insertarArco(E origen, E destino, int etiqueta) {
         boolean inserto = false;
         NodoVert<E> nodoOrigen = buscarVertice(origen);
@@ -96,6 +101,27 @@ public class GrafoEtiquetado<E> implements Grafo<E>, Serializable {
                 nodoOrigen.setPrimerAdy(new NodoAdy<>(nodoDestino, nodoOrigen.getPrimerAdy(), etiqueta));
                 inserto = true;
             }
+        }
+
+        return inserto;
+    }
+
+    @Override
+    public boolean insertarArcoDoble(E vert1, E vert2, int etiqueta) {
+        boolean inserto = false;
+        NodoVert<E> nodoVert1 = buscarVertice(vert1);
+        NodoVert<E> nodoVert2 = buscarVertice(vert2);
+
+        if (nodoVert1 != null && nodoVert2 != null) {
+            if (!existeArco(nodoVert1, nodoVert2)) {
+                nodoVert1.setPrimerAdy(new NodoAdy<>(nodoVert2, nodoVert1.getPrimerAdy(), etiqueta));
+                inserto = true;
+            }
+            if (!existeArco(nodoVert2, nodoVert1)) {
+                nodoVert2.setPrimerAdy(new NodoAdy<>(nodoVert1, nodoVert2.getPrimerAdy(), etiqueta));
+                inserto = true;
+            }
+
         }
 
         return inserto;

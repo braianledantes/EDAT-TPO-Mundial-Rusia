@@ -1,73 +1,13 @@
 
 - -----------------------------------------------------
-- Se inicio el programa el Tue Mar 31 14:06:05 ART 2020
+- Se inicio el programa el Tue Mar 31 15:11:00 ART 2020
 - Sistema{
-Ciudades= GrafoEtiquetado{inicio=TOLYATTI{superfice=314.8, cantHabitantes=719514, sede=false},
-TOLYATTI{superfice=314.8, cantHabitantes=719514, sede=false} -> 
-KALKUI{superfice=99999.9, cantHabitantes=888, sede=true} -> 
-MOSCU{superfice=2511.0, cantHabitantes=12500123, sede=true} -> TOLYATTI{superfice=314.8, cantHabitantes=719514, sede=false} (989), KALKUI{superfice=99999.9, cantHabitantes=888, sede=true} (500), 
+Ciudades= GrafoEtiquetado{inicio=null,
 }
-Equipos= TablaBusqueda{ raiz=FRANCIA -> FRANCIA{DT='LINGUINI', grupo=D, puntos=0, golesAFavor=1, golesEnContra=2}
-FRANCIA -> FRANCIA{DT='LINGUINI', grupo=D, puntos=0, golesAFavor=1, golesEnContra=2} // ARGENTINA; JAPON
-ARGENTINA -> ARGENTINA{DT='SAMPAOLI', grupo=D, puntos=3, golesAFavor=7, golesEnContra=6} // null; null
-JAPON -> JAPON{DT='LI', grupo=D, puntos=3, golesAFavor=2, golesEnContra=1} // ISLANDIA; RUSIA
-ISLANDIA -> ISLANDIA{DT='NOSE', grupo=D, puntos=3, golesAFavor=11, golesEnContra=11} // null; null
-RUSIA -> RUSIA{DT='ALGUIEN', grupo=D, puntos=0, golesAFavor=3, golesEnContra=4} // null; null
+Equipos= TablaBusqueda{ raiz=null
 }
-Partidos= {FRANCIAJAPON=(FRANCIA/JAPON){ronda=GRUPO, golesEquipoA=1, golesEquipoB=2}, ARGENTINAISLANDIA=(ARGENTINA/ISLANDIA){ronda=GRUPO, golesEquipoA=3, golesEquipoB=2}, ISLANDIARUSIA=(RUSIA/ISLANDIA){ronda=GRUPO, golesEquipoA=1, golesEquipoB=2}}}
+Partidos= {}}
 - Tabala de posiciones:
-0 -> FRANCIA
-0 -> RUSIA
-3 -> ARGENTINA
-3 -> ISLANDIA
-3 -> JAPON
 
 - Se imporaron datos desde /home/chutebnl/Escritorio/datos.txt
 - se guardo una instancia del sistema
-- Se mostro tabla de posiciones de los equipos
-- se guardo una instancia del sistema
-- Se mostro el camino con menor distancia desde SAN PETERSBURGO hasta SARATOV
-- Se mostraron todos los posibles caminos desde SAN PETERSBURGO hasta SARATOV
-- se guardo una instancia del sistema
-- Sistema{
-Ciudades= GrafoEtiquetado{inicio=UFA{superfice=200.0, cantHabitantes=2342, sede=false},
-UFA{superfice=200.0, cantHabitantes=2342, sede=false} -> 
-KRASNODAR{superfice=1257.0, cantHabitantes=98234, sede=true} -> SOCHI{superfice=3508.0, cantHabitantes=411524, sede=true} (11), VOLGOGRADO{superfice=565.0, cantHabitantes=1015586, sede=true} (13), MOSCU{superfice=2511.0, cantHabitantes=12500123, sede=true} (25), 
-PENZA{superfice=425.0, cantHabitantes=23425, sede=false} -> TOLYATTI{superfice=314.8, cantHabitantes=719514, sede=false} (22), SARATOV{superfice=700.0, cantHabitantes=304321, sede=false} (14), MOSCU{superfice=2511.0, cantHabitantes=12500123, sede=true} (15), SARANSK{superfice=383.0, cantHabitantes=314789, sede=true} (20), 
-SARATOV{superfice=700.0, cantHabitantes=304321, sede=false} -> 
-SAN PETERSBURGO{superfice=1439.0, cantHabitantes=5351935, sede=true} -> SARANSK{superfice=383.0, cantHabitantes=314789, sede=true} (14), EKATERIMBURGO{superfice=490.0, cantHabitantes=1455904, sede=true} (50), MOSCU{superfice=2511.0, cantHabitantes=12500123, sede=true} (8), 
-SARANSK{superfice=383.0, cantHabitantes=314789, sede=true} -> TOLYATTI{superfice=314.8, cantHabitantes=719514, sede=false} (18), 
-SOCHI{superfice=3508.0, cantHabitantes=411524, sede=true} -> 
-VOLGOGRADO{superfice=565.0, cantHabitantes=1015586, sede=true} -> SARATOV{superfice=700.0, cantHabitantes=304321, sede=false} (17), UFA{superfice=200.0, cantHabitantes=2342, sede=false} (35), SOCHI{superfice=3508.0, cantHabitantes=411524, sede=true} (15), 
-EKATERIMBURGO{superfice=490.0, cantHabitantes=1455904, sede=true} -> UFA{superfice=200.0, cantHabitantes=2342, sede=false} (50), SOCHI{superfice=3508.0, cantHabitantes=411524, sede=true} (70), 
-TOLYATTI{superfice=314.8, cantHabitantes=719514, sede=false} -> UFA{superfice=200.0, cantHabitantes=2342, sede=false} (9), SARATOV{superfice=700.0, cantHabitantes=304321, sede=false} (10), 
-MOSCU{superfice=2511.0, cantHabitantes=12500123, sede=true} -> 
-}
-Equipos= TablaBusqueda{ raiz=JAPON -> JAPON{DT='PARK', grupo=C, puntos=3, golesAFavor=3, golesEnContra=1}
-JAPON -> JAPON{DT='PARK', grupo=C, puntos=3, golesAFavor=3, golesEnContra=1} // BRASIL; PORTUGAL
-BRASIL -> BRASIL{DT='TITE', grupo=B, puntos=3, golesAFavor=6, golesEnContra=4} // ARGENTINA; INGLATERRA
-ARGENTINA -> ARGENTINA{DT='SAMPAOLI', grupo=A, puntos=10, golesAFavor=12, golesEnContra=8} // ALEMANIA; null
-ALEMANIA -> ALEMANIA{DT='LOW', grupo=C, puntos=4, golesAFavor=11, golesEnContra=10} // null; null
-INGLATERRA -> INGLATERRA{DT='SMITH', grupo=B, puntos=3, golesAFavor=6, golesEnContra=6} // FRANCIA; ITALIA
-FRANCIA -> FRANCIA{DT='SESEGNON', grupo=A, puntos=3, golesAFavor=5, golesEnContra=4} // ESTADOS UNIDOS; null
-ESTADOS UNIDOS -> ESTADOS UNIDOS{DT='MICHAELS', grupo=F, puntos=1, golesAFavor=6, golesEnContra=7} // null; null
-ITALIA -> ITALIA{DT='SARRI', grupo=D, puntos=0, golesAFavor=5, golesEnContra=9} // null; null
-PORTUGAL -> PORTUGAL{DT='FELIPE', grupo=E, puntos=3, golesAFavor=6, golesEnContra=10} // MEXICO; RUSIA
-MEXICO -> MEXICO{DT='MARTINO', grupo=E, puntos=1, golesAFavor=3, golesEnContra=3} // null; null
-RUSIA -> RUSIA{DT='VLAD', grupo=D, puntos=3, golesAFavor=5, golesEnContra=6} // null; null
-}
-Partidos= {ALEMANIAINGLATERRA=(ALEMANIA/INGLATERRA){ronda=GRUPO, golesEquipoA=3, golesEquipoB=4}, ITALIAPORTUGAL=(PORTUGAL/ITALIA){ronda=OCTAVOS, golesEquipoA=4, golesEquipoB=2}, ESTADOS UNIDOSRUSIA=(ESTADOS UNIDOS/RUSIA){ronda=GRUPO, golesEquipoA=3, golesEquipoB=4}, ALEMANIAARGENTINA=(ALEMANIA/ARGENTINA){ronda=GRUPO, golesEquipoA=3, golesEquipoB=3}, ARGENTINAFRANCIA=(ARGENTINA/FRANCIA){ronda=GRUPO, golesEquipoA=4, golesEquipoB=2}, JAPONRUSIA=(RUSIA/JAPON){ronda=FINAL, golesEquipoA=1, golesEquipoB=3}, ALEMANIAITALIA=(ITALIA/ALEMANIA){ronda=GRUPO, golesEquipoA=3, golesEquipoB=5}, FRANCIAPORTUGAL=(FRANCIA/PORTUGAL){ronda=CUARTOS, golesEquipoA=3, golesEquipoB=0}, ARGENTINABRASIL=(BRASIL/ARGENTINA){ronda=GRUPO, golesEquipoA=1, golesEquipoB=2}, BRASILPORTUGAL=(PORTUGAL/BRASIL){ronda=GRUPO, golesEquipoA=2, golesEquipoB=5}, ARGENTINAINGLATERRA=(INGLATERRA/ARGENTINA){ronda=SEMIFINAL, golesEquipoA=2, golesEquipoB=3}, ESTADOS UNIDOSMEXICO=(MEXICO/ESTADOS UNIDOS){ronda=GRUPO, golesEquipoA=3, golesEquipoB=3}}}
-- Tabala de posiciones:
-0 -> ITALIA
-1 -> ESTADOS UNIDOS
-1 -> MEXICO
-3 -> BRASIL
-3 -> FRANCIA
-3 -> INGLATERRA
-3 -> JAPON
-3 -> PORTUGAL
-3 -> RUSIA
-4 -> ALEMANIA
-10 -> ARGENTINA
-
-- se cerro el programa el Tue Mar 31 14:16:13 ART 2020
