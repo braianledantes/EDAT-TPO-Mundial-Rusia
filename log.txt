@@ -1,6 +1,6 @@
 
 - -----------------------------------------------------
-- Se inicio el programa el Tue Mar 31 17:51:28 ART 2020
+- Se inicio el programa el Tue Mar 31 18:31:43 ART 2020
 - Sistema{
 Ciudades= GrafoEtiquetado{inicio=UFA{superfice=200.0, cantHabitantes=2342, sede=false},
 	UFA{superfice=200.0, cantHabitantes=2342, sede=false} -> 
@@ -42,10 +42,19 @@ Partidos= {ITALIAPORTUGAL=(PORTUGAL/ITALIA){ronda=OCTAVOS, golesEquipoA=4, goles
 4 -> ALEMANIA
 10 -> ARGENTINA
 
-- se guardo una instancia del sistema
-- Se imporaron datos desde /home/chutebnl/Escritorio/datos.txt
-- se guardo una instancia del sistema
-- se guardo una instancia del sistema
+- Puntos -> Equipo
+	10 -> ARGENTINA
+	4 -> ALEMANIA
+	3 -> RUSIA
+	3 -> PORTUGAL
+	3 -> JAPON
+	3 -> INGLATERRA
+	3 -> FRANCIA
+	3 -> BRASIL
+	1 -> MEXICO
+	1 -> ESTADOS UNIDOS
+	0 -> ITALIA
+
 - Sistema{
 Ciudades= GrafoEtiquetado{inicio=UFA{superfice=200.0, cantHabitantes=2342, sede=false},
 	UFA{superfice=200.0, cantHabitantes=2342, sede=false} -> 
@@ -87,4 +96,4 @@ Partidos= {ITALIAPORTUGAL=(PORTUGAL/ITALIA){ronda=OCTAVOS, golesEquipoA=4, goles
 4 -> ALEMANIA
 10 -> ARGENTINA
 
-- se cerro el programa el Tue Mar 31 17:56:02 ART 2020
+- se cerro el programa el Tue Mar 31 18:32:09 ART 2020

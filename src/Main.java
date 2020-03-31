@@ -502,13 +502,18 @@ public class Main {
     public static void mostrarTablaPosiciones() {
         ColaPrioridad<Equipo> equipos = datosHelper.obtenerEquiposPorPuntaje();
         StringBuilder sb = new StringBuilder("Puntos -> Equipo\n");
-        while (!equipos.estaVacia()) {
-            Equipo e = equipos.obtenerFrente();
-            equipos.eliminarFrente();
-            sb.append('\t').append(e.getPuntos()).append(" -> ").append(e.getPais()).append('\n');
-        }
+        mostrarTablaPosiciones(equipos, sb);
         System.out.println(sb.toString());
         log.mostrarTablaPosiciones();
+    }
+
+    private static void mostrarTablaPosiciones(ColaPrioridad<Equipo> cola, StringBuilder sb) {
+        if (!cola.estaVacia()) {
+            Equipo e = cola.obtenerFrente();
+            cola.eliminarFrente();
+            mostrarTablaPosiciones(cola, sb);
+            sb.append('\t').append(e.getPuntos()).append(" -> ").append(e.getPais()).append('\n');
+        }
     }
 
     public static void mostrarSistema() {
