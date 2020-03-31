@@ -24,7 +24,9 @@ public class MainTerminal {
         } catch (IOException e) {
             datosHelper = DatosHelper.getInstance();
         }
+        log.escribirSistema(datosHelper);
         showMainMenu();
+        log.escribirSistema(datosHelper);
         log.cierrePrograma();
     }
 
@@ -204,7 +206,9 @@ public class MainTerminal {
 
         try {
             boolean alta = datosHelper.altaEquipo(nombre, dt, grupo);
-            if (!alta)
+            if (alta)
+                log.altaEquipo(nombre, dt, grupo + "");
+            else
                 System.err.println("El equipo " + nombre + " ya existe");
 
         } catch (NumberFormatException e) {
@@ -217,6 +221,8 @@ public class MainTerminal {
         String nombre = TecladoIn.readLine();
         if (!datosHelper.bajaEquipo(nombre))
             System.err.println("El equipo " + nombre + " no existe");
+        else
+            log.bajaEquipo(nombre);
     }
 
     public static void modificarEquipo() {
@@ -237,6 +243,8 @@ public class MainTerminal {
             boolean modifico = datosHelper.modificarEquipo(nombre, dt, grupo, puntaje, golesAFavor, golesEnContra);
             if (!modifico)
                 System.err.println("El equipo " + nombre + " no existe");
+            else
+                log.modificaEquipo(nombre, dt, grupo, puntaje, golesAFavor, golesEnContra);
 
         } catch (NumberFormatException e) {
             System.err.println(e.getMessage());

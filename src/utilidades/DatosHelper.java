@@ -191,6 +191,17 @@ public class DatosHelper implements Serializable {
         return colaEquiposPuntaje;
     }
 
+    public synchronized String obtenerTablaPosiciones() {
+        ColaPrioridad<Equipo> equipos = listarEquiposPorPuntaje();
+        StringBuilder sb = new StringBuilder("Tabala de posiciones:\n");
+        while (!equipos.estaVacia()) {
+            Equipo e = equipos.obtenerFrente();
+            equipos.eliminarFrente();
+            sb.append(e.getPuntos()).append(" -> ").append(e.getPais()).append('\n');
+        }
+        return sb.toString();
+    }
+
     public synchronized Lista<Ciudad> obtenerCaminoConMenorDistancia(String ciudadOrigen, String ciudadDestino) {
         return ciudades.caminoMasCorto(new Ciudad(ciudadOrigen.toUpperCase()), new Ciudad(ciudadDestino.toUpperCase()));
     }

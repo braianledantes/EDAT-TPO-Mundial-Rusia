@@ -2,6 +2,7 @@ package utilidades;
 
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
@@ -22,7 +23,7 @@ public class Log {
     public synchronized void escribir(String log) {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_NAME, true));
-            bufferedWriter.write("\n" + log);
+            bufferedWriter.write("\n- " + log);
             bufferedWriter.close();
             if (mostrarEnConsola)
                 System.out.println(log);
@@ -32,12 +33,14 @@ public class Log {
     }
 
     public void inicioPrograma() {
+        File file = new File(FILE_NAME);
+        file.delete();
         escribir("-----------------------------------------------------\n" +
-                "Se inicio el programa el " + Calendar.getInstance().getTime());
+                "- Se inicio el programa el " + Calendar.getInstance().getTime());
     }
 
     public void cierrePrograma() {
-        escribir("\nse cerro el programa a " + Calendar.getInstance().getTime());
+        escribir("se cerro el programa el " + Calendar.getInstance().getTime());
     }
 
     public void importacionDatos(DatosHelper dh) {
@@ -76,22 +79,19 @@ public class Log {
         escribir(log);
     }
 
-    public void modificaEquipo(String pais, String directorTecnico, String grupo) {
+    public void modificaEquipo(String nombre, String directorTecnico, char grupo, int puntos, int golesAFavor, int golesEnContra) {
         String log = "se modifico el equipo: " +
-                pais + ", directorTecnico: " + directorTecnico + " grupo: " + grupo;
+                nombre + ", directorTecnico: " + directorTecnico + ", grupo: " + grupo + ", puntos: " + puntos + ", golesAFavor: " + golesAFavor + ", golesEnContra: " + golesEnContra;
         escribir(log);
-    }
-
-    public void insertarRuta(String origen, String destino, String distancia) {
-        escribir("se creo la ruta desde " + origen + " hasta " + destino + " en " + distancia + " KM");
-    }
-
-    public void eliminarRuta(String origen, String destino) {
-        escribir("se elimino la ruta desde " + origen + " hasta " + destino);
     }
 
     public void altaDePartido(String equipoA, String equipoB, String ronda, String golesA, String golesB) {
         escribir("se creo el partido " + equipoA + "-" + equipoB +
                 " en " + ronda + " con " + golesA + "/" + golesB);
+    }
+
+    public void escribirSistema(DatosHelper datosHelper) {
+        escribir(datosHelper.toString());
+        escribir(datosHelper.obtenerTablaPosiciones());
     }
 }

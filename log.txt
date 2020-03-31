@@ -1,28 +1,49 @@
------------------------------------------------------
-Se inicio el programa el Mon Mar 30 19:17:34 ART 2020
-Se importaron los datos desde /home/chutebnl/Escritorio/datos.txt
-se guardo una instancia del sistema
-se guardo una instancia del sistema
 
-se cerro el programa a Mon Mar 30 19:20:30 ART 2020
------------------------------------------------------
-Se inicio el programa el Mon Mar 30 19:20:44 ART 2020
------------------------------------------------------
-Se inicio el programa el Mon Mar 30 20:31:46 ART 2020
-Se importaron los datos desde /home/chutebnl/Escritorio/datos.txt
-se guardo una instancia del sistema
-se creo el partido islandia-japon en grupo con 1/1
------------------------------------------------------
-Se inicio el programa el Mon Mar 30 20:36:45 ART 2020
------------------------------------------------------
-Se inicio el programa el Mon Mar 30 20:39:37 ART 2020
------------------------------------------------------
-Se inicio el programa el Mon Mar 30 20:39:55 ART 2020
-se guardo una instancia del sistema
-se creo el partido rusia-japon en octavos con 1/1
-se creo el partido argentina-francia en grupo con 1/2
-se creo el partido rusia-argentina en octavos con 0/2
-se guardo una instancia del sistema
-Se exportaron los datos a /home/chutebnl/Escritorio/datos2.txt
+- -----------------------------------------------------
+- Se inicio el programa el Mon Mar 30 21:30:37 ART 2020
+- Sistema{
+Ciudades= GrafoEtiquetado{inicio=TOLYATTI{superfice=314.8, cantHabitantes=719514, sede=false},
+TOLYATTI{superfice=314.8, cantHabitantes=719514, sede=false} -> 
+KALKUI{superfice=99999.9, cantHabitantes=888, sede=true} -> 
+MOSCU{superfice=2511.0, cantHabitantes=12500123, sede=true} -> TOLYATTI{superfice=314.8, cantHabitantes=719514, sede=false} (989), KALKUI{superfice=99999.9, cantHabitantes=888, sede=true} (500), 
+}
+Equipos= TablaBusqueda{ raiz=JAPON -> JAPON{DT='LI', grupo=D, puntos=0, golesAFavor=0, golesEnContra=0}
+JAPON -> JAPON{DT='LI', grupo=D, puntos=0, golesAFavor=0, golesEnContra=0} // FRANCIA; RUSIA
+FRANCIA -> FRANCIA{DT='LINGUINI', grupo=D, puntos=0, golesAFavor=0, golesEnContra=0} // ARGENTINA; ISLANDIA
+ARGENTINA -> ARGENTINA{DT='SAMPAOLI', grupo=D, puntos=3, golesAFavor=7, golesEnContra=6} // null; null
+ISLANDIA -> ISLANDIA{DT='NOSE', grupo=D, puntos=3, golesAFavor=11, golesEnContra=11} // null; null
+RUSIA -> RUSIA{DT='ALGUIEN', grupo=D, puntos=0, golesAFavor=3, golesEnContra=4} // null; null
+}
+Partidos= {ARGENTINAISLANDIA=(ARGENTINA/ISLANDIA){ronda=GRUPO, golesEquipoA=3, golesEquipoB=2}, ISLANDIARUSIA=(RUSIA/ISLANDIA){ronda=GRUPO, golesEquipoA=1, golesEquipoB=2}}}
+- Tabala de posiciones:
+0 -> FRANCIA
+0 -> JAPON
+0 -> RUSIA
+3 -> ARGENTINA
+3 -> ISLANDIA
 
-se cerro el programa a Mon Mar 30 20:47:48 ART 2020
+- se crea la ciudad: Madrid, superficie: 21233.0 cantHabitantes: 8764567, sede: false
+- se guardo una instancia del sistema
+- Sistema{
+Ciudades= GrafoEtiquetado{inicio=MADRID{superfice=21233.0, cantHabitantes=8764567, sede=false},
+MADRID{superfice=21233.0, cantHabitantes=8764567, sede=false} -> 
+TOLYATTI{superfice=314.8, cantHabitantes=719514, sede=false} -> 
+KALKUI{superfice=99999.9, cantHabitantes=888, sede=true} -> 
+MOSCU{superfice=2511.0, cantHabitantes=12500123, sede=true} -> TOLYATTI{superfice=314.8, cantHabitantes=719514, sede=false} (989), KALKUI{superfice=99999.9, cantHabitantes=888, sede=true} (500), 
+}
+Equipos= TablaBusqueda{ raiz=JAPON -> JAPON{DT='LI', grupo=D, puntos=0, golesAFavor=0, golesEnContra=0}
+JAPON -> JAPON{DT='LI', grupo=D, puntos=0, golesAFavor=0, golesEnContra=0} // FRANCIA; RUSIA
+FRANCIA -> FRANCIA{DT='LINGUINI', grupo=D, puntos=0, golesAFavor=0, golesEnContra=0} // ARGENTINA; ISLANDIA
+ARGENTINA -> ARGENTINA{DT='SAMPAOLI', grupo=D, puntos=3, golesAFavor=7, golesEnContra=6} // null; null
+ISLANDIA -> ISLANDIA{DT='NOSE', grupo=D, puntos=3, golesAFavor=11, golesEnContra=11} // null; null
+RUSIA -> RUSIA{DT='ALGUIEN', grupo=D, puntos=0, golesAFavor=3, golesEnContra=4} // null; null
+}
+Partidos= {ARGENTINAISLANDIA=(ARGENTINA/ISLANDIA){ronda=GRUPO, golesEquipoA=3, golesEquipoB=2}, ISLANDIARUSIA=(RUSIA/ISLANDIA){ronda=GRUPO, golesEquipoA=1, golesEquipoB=2}}}
+- Tabala de posiciones:
+0 -> FRANCIA
+0 -> JAPON
+0 -> RUSIA
+3 -> ARGENTINA
+3 -> ISLANDIA
+
+- se cerro el programa el Mon Mar 30 21:31:25 ART 2020
