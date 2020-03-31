@@ -1,0 +1,52 @@
+E: francia; sesegnon; A; 0; 0; 0
+E: ARGENTINA; SAMPAOLI; A; 0; 0; 0
+E: brasil; tite; B; 0; 0; 0
+E: Inglaterra; smith; b; 0; 0; 0
+E: japon; park; c; 0; 0; 0
+E: alemania; low; c; 0; 0; 0
+E: rusia; vlad; d; 0; 0; 0
+E: italia; sarri; d; 0; 0; 0
+E: portugal; felipe; e; 0; 0; 0
+E: mexico; martino; e; 0; 0; 0
+E: Estados Unidos; michaels; f; 0; 0; 0
+C: MOSCU; 2511; 12500123; TRUE
+C: TOLYATTI; 314.8; 719514; FALSE
+C: Ekaterimburgo; 490; 1455904; true
+C: Volgogrado; 565; 1015586; true
+C: Sochi; 3508; 411524; true
+C: Saransk; 383; 314789; true
+C: San Petersburgo; 1439; 5351935; true
+C: saratov; 700; 304321; false
+C: penza; 425; 23425; false
+C: krasnodar; 1257; 98234; true
+C: ufa; 200; 2342; false
+R: san Petersburgo; moscu; 8
+R: san petersburgo; ekaterimburgo; 50
+R: san petersburgo; saransk; 14
+R: penza; saransk; 20
+R: penza; moscu; 15
+R: penza; saratov; 14
+R: penza; tolyatti; 22
+R: saransk; tolyatti; 18
+R: volgogrado; sochi; 15
+R: volgogrado; ufa; 35
+R: volgogrado; saratov; 17
+R: krasnodar; moscu; 25
+R: krasnodar; volgogrado; 13
+R: krasnodar; sochi; 11
+R: tolyatti; saratov; 10
+R: tolyatti; ufa; 9
+R: ekaterimburgo; sochi; 70
+R: ekaterimburgo; ufa; 50
+P: alemania; argentina; grupo; Volgogrado; 3; 3
+P: ARGENTINA; francia; GRUPO; TOLYATTI; 4; 2
+P: alemania; inglaterra; grupo; Ekaterimburgo; 3; 4
+P: portugal; italia; octavos; san Petersburgo; 4; 2
+P: rusia; japon; final; krasnodar; 1; 3
+P: inglaterra; argentina; semifinal; saransk; 2; 3
+P: italia; alemania; grupo; volgogrado; 3; 5
+P: francia; portugal; cuartos; sochi; 3; 0
+P: brasil; argentina; grupo; saratov; 1; 2
+P: portugal; brasil; grupo; krasnodar; 2; 5
+P: mexico; estados unidos; grupo; sochi; 3; 3
+P: estados unidos; rusia; grupo; moscu; 3; 4
