@@ -38,19 +38,19 @@ public class ArchivosHelper {
     private synchronized void leerDato(DatosHelper datosHelper, String line) throws IOException {
         try {
             char tipo = line.charAt(0);
-            String[] datos = line.substring(3).split("; ");
+            String[] datos = line.substring(3).split(";");
             switch (tipo) {
                 case 'E':
-                    datosHelper.altaEquipo(datos[0].trim(), datos[1].trim(), datos[2].trim(), datos[3].trim(), datos[4].trim(), datos[5].trim());
+                    datosHelper.altaEquipo(datos[0].trim().toUpperCase(), datos[1].trim().toUpperCase(), datos[2].toUpperCase().trim(), datos[3].trim().toUpperCase(), datos[4].trim().toUpperCase(), datos[5].trim().toUpperCase());
                     break;
                 case 'P':
-                    datosHelper.altaDePartido(datos[0], datos[1], datos[2], datos[3], datos[4]);
+                    datosHelper.altaDePartido(datos[0].trim().toUpperCase(), datos[1].trim().toUpperCase(), datos[2].trim().toUpperCase(), datos[3].trim().toUpperCase(), datos[4].trim().toUpperCase());
                     break;
                 case 'C':
-                    datosHelper.altaCiudad(datos[0], datos[1], datos[2], datos[3]);
+                    datosHelper.altaCiudad(datos[0].trim().toUpperCase(), datos[1].trim().toUpperCase(), datos[2].trim().toUpperCase(), datos[3].trim().toUpperCase());
                     break;
                 case 'R':
-                    datosHelper.insertarRuta(datos[0], datos[1], datos[2]);
+                    datosHelper.insertarRuta(datos[0].trim().toUpperCase(), datos[1].trim().toUpperCase(), datos[2].trim().toUpperCase());
                     break;
                 default:
                     throw new IOException("Formato invalido de archivo de importacion:");

@@ -43,8 +43,8 @@ public class Log {
         escribir("se cerro el programa el " + Calendar.getInstance().getTime());
     }
 
-    public void importacionDatos(DatosHelper dh) {
-        escribir("Se imporaron los datos: \n" + dh.toString());
+    public void importacionDatos(String fileName) {
+        escribir("Se imporaron datos desde " + fileName);
     }
 
     public void guardarDatos() {
@@ -88,6 +88,42 @@ public class Log {
     public void altaDePartido(String equipoA, String equipoB, String ronda, String golesA, String golesB) {
         escribir("se creo el partido " + equipoA + "-" + equipoB +
                 " en " + ronda + " con " + golesA + "/" + golesB);
+    }
+
+    public void mostrarEquipo(String equipo) {
+        escribir("Se mostro el equipo " + equipo);
+    }
+
+    public void mostrarEquiposPorRango(String equipoA, String equipoB) {
+        escribir("Se mostro el rango de equipos de " + equipoA + " a " + equipoB);
+    }
+
+    public void mostrarEquiposConDifGol() {
+        escribir("Se mostro los equipos con diferencia de gol negativa");
+    }
+
+    public void mostrarCiudad(String nombre) {
+        escribir("Se mostro la ciudad " + nombre);
+    }
+
+    public void mostrarCaminoConMenorDistancia(String c1, String c2) {
+        escribir("Se mostro el camino con menor distancia desde " + c1 + " hasta " + c2);
+    }
+
+    public void mostrarCaminoConMenosCiudades(String c1, String c2) {
+        escribir("Se mostro el camino con menos ciudades desde " + c1 + " hasta " + c2);
+    }
+
+    public void mostrarCaminoPosibles(String c1, String c2) {
+        escribir("Se mostraron todos los posibles caminos desde " + c1 + " hasta " + c2);
+    }
+
+    public void mostrarCaminoMasCortoEntreCiudad(String c1, String c2, String c3) {
+        escribir("Se mostro el camino con menos ciudades desde " + c1 + " por " + c2 + " hasta " + c3);
+    }
+
+    public void mostrarTablaPosiciones() {
+        escribir("Se mostro tabla de posiciones de los equipos");
     }
 
     public void escribirSistema(DatosHelper datosHelper) {

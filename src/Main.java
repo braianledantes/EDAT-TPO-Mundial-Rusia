@@ -126,7 +126,7 @@ public class Main {
 
     public static void altaCiudad() {
         System.out.println("Ingrese el nombre:");
-        String nombre = TecladoIn.readLine();
+        String nombre = TecladoIn.readLine().toUpperCase();
         System.out.println("Ingrese la superficie en KM^2:");
         double superficie = TecladoIn.readLineDouble();
         System.out.println("Ingrese la cantidad de habitantes:");
@@ -142,7 +142,7 @@ public class Main {
 
     public static void bajaCiudad() {
         System.out.println("Ingrese el nombre:");
-        String nombre = TecladoIn.readLine();
+        String nombre = TecladoIn.readLine().toUpperCase();
         if (datosHelper.eliminarCiudad(nombre))
             log.bajaCiudad(nombre);
         else
@@ -151,7 +151,7 @@ public class Main {
 
     public static void modificarCiudad() {
         System.out.println("Ingrese el nombre:");
-        String nombre = TecladoIn.readLine();
+        String nombre = TecladoIn.readLine().toUpperCase();
         System.out.println("Ingrese la superficie en KM^2:");
         double superficie = TecladoIn.readLineDouble();
         System.out.println("Ingrese la cantidad de habitantes:");
@@ -198,11 +198,11 @@ public class Main {
 
     public static void altaEquipo() {
         System.out.println("Ingrese el nombre del pais:");
-        String nombre = TecladoIn.readLine();
+        String nombre = TecladoIn.readLine().toUpperCase();
         System.out.println("Ingrese el nombre del director tecnico:");
-        String dt = TecladoIn.readLine();
+        String dt = TecladoIn.readLine().toUpperCase();
         System.out.println("Ingrese el grupo (A, B, C, D, E, F, G o H) :");
-        char grupo = TecladoIn.readLineNonwhiteChar();
+        char grupo = Character.toUpperCase(TecladoIn.readLineNonwhiteChar());
 
         try {
             boolean alta = datosHelper.altaEquipo(nombre, dt, grupo);
@@ -218,7 +218,7 @@ public class Main {
 
     public static void bajaEquipo() {
         System.out.println("Ingrese el nombre del pais:");
-        String nombre = TecladoIn.readLine();
+        String nombre = TecladoIn.readLine().toUpperCase();
         if (!datosHelper.bajaEquipo(nombre))
             System.err.println("El equipo " + nombre + " no existe");
         else
@@ -227,11 +227,11 @@ public class Main {
 
     public static void modificarEquipo() {
         System.out.println("Ingrese el nombre del pais:");
-        String nombre = TecladoIn.readLine();
+        String nombre = TecladoIn.readLine().toUpperCase();
         System.out.println("Ingrese el nombre del director tecnico:");
-        String dt = TecladoIn.readLine();
+        String dt = TecladoIn.readLine().toUpperCase();
         System.out.println("Ingrese el grupo (A, B, C, D, E, F, G o H) :");
-        char grupo = TecladoIn.readLineNonwhiteChar();
+        char grupo = Character.toUpperCase(TecladoIn.readLineNonwhiteChar());
         System.out.println("Ingrese el puntaje:");
         int puntaje = TecladoIn.readLineInt();
         System.out.println("Ingrese los goles a favor:");
@@ -253,11 +253,11 @@ public class Main {
 
     public static void mostrarAltaPartidos() {
         System.out.println("Ingrese el nombre del equipo A:");
-        String eA = TecladoIn.readLine();
+        String eA = TecladoIn.readLine().toUpperCase();
         System.out.println("Ingrese el nombre del equipo B:");
-        String eB = TecladoIn.readLine();
+        String eB = TecladoIn.readLine().toUpperCase();
         System.out.println("Ingrese la ronda (GRUPO, OCTAVOS, CUARTOS, SEMIFINAL, FINAL):");
-        String ronda = TecladoIn.readLine();
+        String ronda = TecladoIn.readLine().toUpperCase();
         System.out.println("Ingrese los goles del equipo A:");
         int golesA = TecladoIn.readLineInt();
         System.out.println("Ingrese los goles del equipo B:");
@@ -306,7 +306,7 @@ public class Main {
 
     public static void mostrarEquipo() {
         System.out.println("Ingrese el nombre del pais:");
-        String pais = TecladoIn.readLine();
+        String pais = TecladoIn.readLine().toUpperCase();
         Equipo equipo = datosHelper.obtenerEquipo(pais);
         if (equipo != null) {
             StringBuilder sb = new StringBuilder("Equipo: ").append(equipo.getPais()).append('\n');
@@ -325,6 +325,7 @@ public class Main {
                 sb.append('\n');
             }
             System.out.println(sb.toString());
+            log.mostrarEquipo(pais);
         } else {
             System.err.println("No existe equipo " + pais);
         }
@@ -332,9 +333,9 @@ public class Main {
 
     public static void mostrarRangoEquipos() {
         System.out.println("Ingrese el nombre de un pais:");
-        String equipoA = TecladoIn.readLine();
+        String equipoA = TecladoIn.readLine().toUpperCase();
         System.out.println("Ingrese el nombre del otro pais:");
-        String equipoB = TecladoIn.readLine();
+        String equipoB = TecladoIn.readLine().toUpperCase();
 
         if (equipoB.compareTo(equipoA) < 0) { // por si estan alrevez
             String aux = equipoA;
@@ -349,6 +350,7 @@ public class Main {
             sb.append(equipo).append('\n');
         }
         System.out.println(sb.toString());
+        log.mostrarEquiposPorRango(equipoA, equipoB);
     }
 
     public static void mostrarEquiposConDifGol() {
@@ -359,15 +361,17 @@ public class Main {
             sb.append(equipo.getPais()).append(" -> ").append(equipo.diferenciaGoles()).append('\n');
         }
         System.out.println(sb.toString());
+        log.mostrarEquiposConDifGol();
     }
 
     public static void mostrarConsultarCiudades() {
         System.out.println("Ingrese el nombre de la ciudad:");
-        String nombre = TecladoIn.readLine();
+        String nombre = TecladoIn.readLine().toUpperCase();
         Ciudad ciudad = datosHelper.getCiudad(nombre);
-        if (ciudad != null)
+        if (ciudad != null) {
             System.out.println(ciudad);
-        else
+            log.mostrarCiudad(nombre);
+        } else
             System.err.println("No existe " + nombre);
     }
 
@@ -408,77 +412,91 @@ public class Main {
 
     public static void mostrarCaminoConMenorDistancia() {
         System.out.println("Ingrese la ciudad de origen:");
-        String origen = TecladoIn.readLine();
+        String origen = TecladoIn.readLine().toUpperCase();
         System.out.println("Ingrese la ciudad de destino:");
-        String destino = TecladoIn.readLine();
+        String destino = TecladoIn.readLine().toUpperCase();
 
         Lista<Ciudad> viaje = datosHelper.obtenerCaminoConMenorDistancia(origen, destino);
-        StringBuilder sb = new StringBuilder("Camino: {");
-        for (int i = 1; i <= viaje.longitud(); i++) {
-            sb.append(viaje.recuperar(i).getNombre());
-            if (i < viaje.longitud())
-                sb.append(" -> ");
+        if (!viaje.estaVacia()) {
+            StringBuilder sb = new StringBuilder("Camino: {");
+            for (int i = 1; i <= viaje.longitud(); i++) {
+                sb.append(viaje.recuperar(i).getNombre());
+                if (i < viaje.longitud())
+                    sb.append(" -> ");
+            }
+            sb.append('}');
+            System.out.println(sb.toString());
+            log.mostrarCaminoConMenorDistancia(origen, destino);
         }
-        sb.append('}');
-        System.out.println(sb.toString());
     }
 
     public static void mostrarCaminoConMenosCiudades() {
         System.out.println("Ingrese la ciudad de origen:");
-        String origen = TecladoIn.readLine();
+        String origen = TecladoIn.readLine().toUpperCase();
         System.out.println("Ingrese la ciudad de destino:");
-        String destino = TecladoIn.readLine();
+        String destino = TecladoIn.readLine().toUpperCase();
 
         Lista<Ciudad> viaje = datosHelper.obtenerCaminoConMenosCiudades(origen, destino);
-        StringBuilder sb = new StringBuilder("Camino: {");
-        for (int i = 1; i <= viaje.longitud(); i++) {
-            sb.append(viaje.recuperar(i).getNombre());
-            if (i < viaje.longitud())
-                sb.append(" -> ");
+        if (!viaje.estaVacia()) {
+            StringBuilder sb = new StringBuilder("Camino: {");
+            for (int i = 1; i <= viaje.longitud(); i++) {
+                sb.append(viaje.recuperar(i).getNombre());
+                if (i < viaje.longitud())
+                    sb.append(" -> ");
+            }
+            sb.append('}');
+            System.out.println(sb.toString());
+            log.mostrarCaminoConMenosCiudades(origen, destino);
         }
-        sb.append('}');
-        System.out.println(sb.toString());
     }
 
     public static void mostrarCaminoPosibles() {
         System.out.println("Ingrese la ciudad de origen:");
-        String origen = TecladoIn.readLine();
+        String origen = TecladoIn.readLine().toUpperCase();
         System.out.println("Ingrese la ciudad de destino:");
-        String destino = TecladoIn.readLine();
+        String destino = TecladoIn.readLine().toUpperCase();
 
         Lista<Lista<Ciudad>> viajes = datosHelper.obtenerCaminoPosibles(origen, destino);
-        StringBuilder sb = new StringBuilder();
-        for (int i = 1; i <= viajes.longitud(); i++) {
-            Lista<Ciudad> viaje = viajes.recuperar(i);
-            sb.append("Camino").append(i).append(": {");
-            for (int j = 1; j <= viaje.longitud(); j++) {
-                sb.append(viaje.recuperar(j).getNombre());
-                if (j < viaje.longitud())
-                    sb.append(" -> ");
+        if (!viajes.estaVacia()) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 1; i <= viajes.longitud(); i++) {
+                Lista<Ciudad> viaje = viajes.recuperar(i);
+                sb.append("Camino").append(i).append(": {");
+                for (int j = 1; j <= viaje.longitud(); j++) {
+                    sb.append(viaje.recuperar(j).getNombre());
+                    if (j < viaje.longitud())
+                        sb.append(" -> ");
+                }
+                sb.append('}');
             }
             sb.append('}');
+            System.out.println(sb.toString());
+            log.mostrarCaminoPosibles(origen, destino);
         }
-        sb.append('}');
-        System.out.println(sb.toString());
     }
 
     public static void mostrarCaminoMasCortoEntreCiudad() {
         System.out.println("Ingrese la ciudad de origen:");
-        String origen = TecladoIn.readLine();
+        String origen = TecladoIn.readLine().toUpperCase();
         System.out.println("Ingrese la ciudad de destino1:");
-        String destino1 = TecladoIn.readLine();
+        String destino1 = TecladoIn.readLine().toUpperCase();
         System.out.println("Ingrese la ciudad de destino2:");
-        String destino2 = TecladoIn.readLine();
+        String destino2 = TecladoIn.readLine().toUpperCase();
 
         Lista<Ciudad> viaje = datosHelper.obtenerCaminoMasCortoEntreCiudad(origen, destino1, destino2);
-        StringBuilder sb = new StringBuilder("Camino: {");
-        for (int i = 1; i <= viaje.longitud(); i++) {
-            sb.append(viaje.recuperar(i).getNombre());
-            if (i < viaje.longitud())
-                sb.append(" -> ");
+        if (!viaje.estaVacia()) {
+
+            StringBuilder sb = new StringBuilder("Camino: {");
+            for (int i = 1; i <= viaje.longitud(); i++) {
+                sb.append(viaje.recuperar(i).getNombre());
+                if (i < viaje.longitud()) {
+                    sb.append(" -> ");
+                }
+            }
+            sb.append('}');
+            System.out.println(sb.toString());
+            log.mostrarCaminoMasCortoEntreCiudad(origen, destino1, destino2);
         }
-        sb.append('}');
-        System.out.println(sb.toString());
     }
 
     public static void mostrarTablaPosiciones() {
@@ -490,6 +508,7 @@ public class Main {
             sb.append(e.getPuntos()).append(" -> ").append(e.getPais()).append('\n');
         }
         System.out.println(sb.toString());
+        log.mostrarTablaPosiciones();
     }
 
     public static void mostrarSistema() {
@@ -509,7 +528,7 @@ public class Main {
     public static void exportarSistema() {
         try {
             System.out.println("Indique la direccion absoluta donde se quiere exportar el archivo:");
-            String file = TecladoIn.readLine();
+            String file = TecladoIn.readLine().toUpperCase();
             archivosHelper.exportarDatos(datosHelper, file);
             log.escribir("Se exportaron los datos a " + file);
         } catch (IOException e) {
@@ -520,9 +539,9 @@ public class Main {
     public static void ImportarSistema() {
         try {
             System.out.println("Indique la direccion absoluta donde se encuentra el archivo a importar");
-            String file = TecladoIn.readLine();
-            archivosHelper.importarDatos(datosHelper, file);
-            log.escribir("Se importaron los datos desde " + file);
+            String fileName = TecladoIn.readLine();
+            archivosHelper.importarDatos(datosHelper, fileName);
+            log.importacionDatos(fileName);
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
