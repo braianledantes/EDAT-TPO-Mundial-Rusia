@@ -94,11 +94,6 @@ public class Partido implements Serializable {
 
     @Override
     public String toString() {
-        return "(" + equipoA.getPais() + "/" + equipoB.getPais() + "){" +
-                "ronda=" + ronda +
-                ", ciudad=" + ciudad.getNombre() +
-                ", golesEquipoA=" + golesEquipoA +
-                ", golesEquipoB=" + golesEquipoB +
-                '}';
+        return "{" + ronda + " (" + equipoA.getPais() + " " + golesEquipoA + "-" + golesEquipoA + " " + equipoB.getPais() + "), " + ciudad.getNombre() + "}\n";
     }
 }

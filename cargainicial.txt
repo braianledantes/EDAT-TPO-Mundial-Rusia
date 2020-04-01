@@ -1,14 +1,35 @@
-E: francia; sesegnon; A; 0; 0; 0
-E: ARGENTINA; SAMPAOLI; A; 0; 0; 0
-E: brasil; tite; B; 0; 0; 0
-E: Inglaterra; smith; b; 0; 0; 0
-E: japon; park; c; 0; 0; 0
-E: alemania; low; c; 0; 0; 0
-E: rusia; vlad; d; 0; 0; 0
-E: italia; sarri; d; 0; 0; 0
-E: portugal; felipe; e; 0; 0; 0
-E: mexico; martino; e; 0; 0; 0
-E: Estados Unidos; michaels; f; 0; 0; 0
+E: alemania; low; F; 0; 0; 0
+E: arabia saudita; some guy; A; 0; 0; 0
+E: ARGENTINA; SAMPAOLI; D; 0; 0; 0
+E: AUSTRALIA; ALGUIEN; C; 0; 0; 0
+E: BÉLGICA; BELGA; G; 0; 0; 0
+E: brasil; tite; E; 0; 0; 0
+E: COLOMBIA; CAFÉ; H; 0; 0; 0
+E: COREA DEL SUR; ALGUN ASIATICO; F; 0; 0; 0
+E: COSTA RICA; ALGUIEN; E; 0; 0; 0
+E: CROACIA; ALGUN CROATA; D; 0; 0; 0
+E: DINAMARCA; ALGUIEN; C; 0; 0; 0
+E: egipto; some guy; A; 0; 0; 0
+E: españa; some guy; B; 0; 0; 0
+E: francia; ALGUIEN; C; 0; 0; 0
+E: Inglaterra; smith; G; 0; 0; 0
+E: IRÁN; some guy; B; 0; 0; 0
+E: ISLANDIA; AGUIEN; D; 0; 0; 0
+E: JAPÓN; park; H; 0; 0; 0
+E: MARRUECOS; some guy; B; 0; 0; 0
+E: MÉXICO; martino; F; 0; 0; 0
+E: NIGERIA; AGUIEN; D; 0; 0; 0
+E: PANAMÁ; TESS; G; 0; 0; 0
+E: PERÚ; ALGUIEN; C; 0; 0; 0
+E: POLONIA; ALGUIEN; H; 0; 0; 0
+E: portugal; felipe; B; 0; 0; 0
+E: rusia; vlad; A; 0; 0; 0
+E: SENEGAL; ALGUIEN; H; 0; 0; 0
+E: SERBIA; ALGUIEN; E; 0; 0; 0
+E: SUIZA; ALGUIEN; E; 0; 0; 0
+E: SUECIA; ALGUN TIPO; F; 0; 0; 0
+E: TÚNEZ; BI; G; 0; 0; 0
+E: uruguay; alguien; A; 0; 0; 0
 C: MOSCU; 2511; 12500123; TRUE
 C: TOLYATTI; 314.8; 719514; FALSE
 C: Ekaterimburgo; 490; 1455904; true
@@ -38,15 +59,66 @@ R: tolyatti; saratov; 10
 R: tolyatti; ufa; 9
 R: ekaterimburgo; sochi; 70
 R: ekaterimburgo; ufa; 50
-P: alemania; argentina; grupo; Volgogrado; 3; 3
-P: ARGENTINA; francia; GRUPO; TOLYATTI; 4; 2
-P: alemania; inglaterra; grupo; Ekaterimburgo; 3; 4
-P: portugal; italia; octavos; san Petersburgo; 4; 2
-P: rusia; japon; final; krasnodar; 1; 3
-P: inglaterra; argentina; semifinal; saransk; 2; 3
-P: italia; alemania; grupo; volgogrado; 3; 5
-P: francia; portugal; cuartos; sochi; 3; 0
-P: brasil; argentina; grupo; saratov; 1; 2
-P: portugal; brasil; grupo; krasnodar; 2; 5
-P: mexico; estados unidos; grupo; sochi; 3; 3
-P: estados unidos; rusia; grupo; moscu; 3; 4
+P: rusia; arabia saudita; grupo; MOSCU; 5; 0
+P: egipto; URUGUAY; grupo; Ekaterimburgo; 0; 1
+P: MARRUECOS; IRÁN; grupo; San Petersburgo; 0; 1
+P: PORTUGAL; ESPAÑA; grupo; MOSCU; 3; 3
+P: FRANCIA; AUSTRALIA; grupo; MOSCU; 2; 1
+P: ARGENTINA; ISLANDIA; grupo; MOSCU; 1; 1
+P: PERÚ; DINAMARCA; grupo; MOSCU; 0; 1
+P: CROACIA; NIGERIA; grupo; MOSCU; 2; 0
+P: COSTA RICA; SERBIA; grupo; MOSCU; 0; 1
+P: ALEMANIA; MÉXICO; grupo; MOSCU; 0; 1
+P: BRASIL; SUIZA; grupo; MOSCU; 1; 1
+P: SUECIA; COREA DEL SUR; grupo; MOSCU; 1; 0
+P: BÉLGICA; PANAMÁ; grupo; MOSCU; 3; 0
+P: TÚNEZ; INGLATERRA; grupo; MOSCU; 1; 2
+P: COLOMBIA; JAPÓN; grupo; MOSCU; 1; 2
+P: POLONIA; SENEGAL; grupo; MOSCU; 1; 2
+P: rusia; EGIPTO; grupo; MOSCU; 3; 1
+P: PORTUGAL; MARRUECOS; grupo; MOSCU; 1; 0
+P: URUGUAY; arabia saudita; grupo; MOSCU; 1; 0
+P: IRÁN; ESPAÑA; grupo; MOSCU; 0; 1
+P: DINAMARCA; AUSTRALIA; grupo; MOSCU; 1; 1
+P: FRANCIA; PERÚ; grupo; MOSCU; 1; 0
+P: ARGENTINA; CROACIA; grupo; MOSCU; 0; 3
+P: BRASIL; COSTA RICA; grupo; MOSCU; 2; 0
+P: NIGERIA; ISLANDIA; grupo; MOSCU; 2; 0
+P: SERBIA; SUIZA; grupo; MOSCU; 1; 2
+P: BÉLGICA; TÚNEZ; grupo; MOSCU; 5; 2
+P: COREA DEL SUR; MÉXICO; grupo; MOSCU; 1; 2
+P: ALEMANIA; SUECIA; grupo; MOSCU; 2; 1
+P: INGLATERRA; PANAMÁ; grupo; MOSCU; 6; 1
+P: JAPÓN; SENEGAL; grupo; MOSCU; 2; 2
+P: POLONIA; COLOMBIA; grupo; MOSCU; 0; 3
+P: arabia saudita; EGIPTO; grupo; MOSCU; 2; 1
+P: URUGUAY; rusia; grupo; MOSCU; 3; 0
+P: IRÁN; PORTUGAL; grupo; MOSCU; 1; 1
+P: ESPAÑA; MARRUECOS; grupo; MOSCU; 2; 2
+P: AUSTRALIA; PERÚ; grupo; MOSCU; 0; 2
+P: DINAMARCA; FRANCIA; grupo; MOSCU; 0; 0
+P: NIGERIA; ARGENTINA; grupo; MOSCU; 1; 2
+P: ISLANDIA; CROACIA; grupo; MOSCU; 1; 2
+P: MÉXICO; SUECIA; grupo; MOSCU; 0; 3
+P: COREA DEL SUR; alemania; grupo; MOSCU; 2; 0
+P: SUIZA; COSTA RICA; grupo; MOSCU; 2; 2
+P: SERBIA; brasil; grupo; MOSCU; 0; 2
+P: SENEGAL; COLOMBIA; grupo; MOSCU; 0; 1
+P: JAPÓN; POLONIA; grupo; MOSCU; 0; 1
+P: INGLATERRA; BÉLGICA; grupo; MOSCU; 0; 1
+P: PANAMÁ; TÚNEZ; grupo; MOSCU; 1; 2
+P: ARGENTINA; FRANCIA; OCTAVOS; MOSCU; 4; 3
+P: uruguay; portugal; OCTAVOS; MOSCU; 2; 1
+P: ESPAÑA; rusia; OCTAVOS; MOSCU; 1; 2
+P: CROACIA; DINAMARCA; OCTAVOS; MOSCU; 2; 1
+P: brasil; MÉXICO; OCTAVOS; MOSCU; 2; 0
+P: BÉLGICA; JAPÓN; OCTAVOS; MOSCU; 3; 2
+P: SUECIA; SUIZA; OCTAVOS; MOSCU; 1; 0
+P: COLOMBIA; INGLATERRA; OCTAVOS; MOSCU; 1; 0
+P: uruguay; FRANCIA; CUARTOS; MOSCU; 0; 2
+P: brasil; BÉLGICA; CUARTOS; MOSCU; 1; 2
+P: SUECIA; INGLATERRA; CUARTOS; MOSCU; 0; 2
+P: rusia; CROACIA; CUARTOS; MOSCU; 2; 3
+P: FRANCIA; BÉLGICA; SEMIFINAL; MOSCU; 1; 0
+P: CROACIA; INGLATERRA; SEMIFINAL; MOSCU; 2; 1
+P: FRANCIA; CROACIA; FINAL; MOSCU; 4; 2

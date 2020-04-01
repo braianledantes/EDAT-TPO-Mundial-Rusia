@@ -503,19 +503,21 @@ public class Main {
 
     public static void mostrarTablaPosiciones() {
         ColaPrioridad<Equipo> equipos = datosHelper.obtenerEquiposPorPuntaje();
-        StringBuilder sb = new StringBuilder("Puntos -> Equipo\n");
-        mostrarTablaPosiciones(equipos, sb);
+        StringBuilder sb = new StringBuilder("Posicion | Puntos -> Equipo\n");
+        mostrarTablaPosiciones(equipos, sb, 0);
         System.out.println(sb.toString());
         log.mostrarTablaPosiciones();
     }
 
-    private static void mostrarTablaPosiciones(ColaPrioridad<Equipo> cola, StringBuilder sb) {
+    private static int mostrarTablaPosiciones(ColaPrioridad<Equipo> cola, StringBuilder sb, int pos) {
+        int posicion = pos;
         if (!cola.estaVacia()) {
             Equipo e = cola.obtenerFrente();
             cola.eliminarFrente();
-            mostrarTablaPosiciones(cola, sb);
-            sb.append('\t').append(e.getPuntos()).append(" -> ").append(e.getPais()).append('\n');
+            posicion = mostrarTablaPosiciones(cola, sb, posicion) - 1;
+            sb.append('\t').append(-posicion).append(" | ").append(e.getPuntos()).append(" -> ").append(e.getPais()).append('\n');
         }
+        return posicion;
     }
 
     public static void mostrarSistema() {

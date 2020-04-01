@@ -227,7 +227,7 @@ public class DatosHelper implements Serializable {
                 "\nCiudades= " + ciudades +
                 "\nEquipos= " + equipos +
                 "\nPartidos= " + partidos +
-                '}';
+                "}   " + partidos.size();
     }
 
     public void vaciar() {
