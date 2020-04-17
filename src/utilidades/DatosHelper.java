@@ -21,11 +21,11 @@ import java.util.HashMap;
  */
 public class DatosHelper implements Serializable {
     // mapa de las ciudades
-    private GrafoEtiquetado<Ciudad> ciudades;
+    private final GrafoEtiquetado<Ciudad> ciudades;
     // key pais del equipo
-    private TablaBusqueda<String, Equipo> equipos;
+    private final TablaBusqueda<String, Equipo> equipos;
     // key nombres de los equipos donde eq1 < eq2
-    private HashMap<String, Partido> partidos;
+    private final HashMap<String, Partido> partidos;
 
     private static DatosHelper instance;
 
@@ -82,7 +82,6 @@ public class DatosHelper implements Serializable {
     public synchronized boolean altaEquipo(String pais, String directorTecnico, char grupo, int puntos, int golesAFavor, int golesEnContra) throws NumberFormatException {
         boolean exito;
         if (grupo == 'A' || grupo == 'B' || grupo == 'C' || grupo == 'D' || grupo == 'E' || grupo == 'F' || grupo == 'G' || grupo == 'H') {
-            pais = pais;
             Equipo equipo = new Equipo(pais, directorTecnico, grupo, puntos, golesAFavor, golesEnContra);
             exito = equipos.insertar(pais, equipo);
         } else {
@@ -221,6 +220,12 @@ public class DatosHelper implements Serializable {
         return partidos.values();
     }
 
+    public void vaciar() {
+        ciudades.vaciar();
+        partidos.clear();
+        equipos.vaciar();
+    }
+
     @Override
     public synchronized String toString() {
         return "Sistema{" +
@@ -228,11 +233,5 @@ public class DatosHelper implements Serializable {
                 "\nEquipos= " + equipos +
                 "\nPartidos= " + partidos +
                 "}   " + partidos.size();
-    }
-
-    public void vaciar() {
-        ciudades = new GrafoEtiquetado<>();
-        partidos.clear();
-        equipos.vaciar();
     }
 }

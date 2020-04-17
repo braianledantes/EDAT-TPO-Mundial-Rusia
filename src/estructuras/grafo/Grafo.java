@@ -191,4 +191,9 @@ public interface Grafo<E> {
      * @return devuelve falso si hay al menos un vértice cargado en el estructuras.grafo y verdadero en caso contrario
      */
     boolean esVacio();
+
+    /**
+     * Quita todos los elementos del grafo.
+     */
+    void vaciar();
 }

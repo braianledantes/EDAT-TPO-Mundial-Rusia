@@ -1,6 +1,6 @@
 
 - -----------------------------------------------------
-- Se inicio el programa el Tue Mar 31 21:37:06 ART 2020
+- Se inicio el programa el Sun Apr 05 18:18:01 ART 2020
 - Sistema{
 Ciudades= GrafoEtiquetado{inicio=UFA{superfice=200.0, cantHabitantes=2342, sede=false},
 	UFA{superfice=200.0, cantHabitantes=2342, sede=false} -> 
@@ -21,16 +21,16 @@ Equipos= TablaBusqueda{ raiz=ARABIA SAUDITA -> ARABIA SAUDITA{DT='SOME GUY', gru
 	ARGENTINA -> ARGENTINA{DT='SAMPAOLI', grupo=D, puntos=7, golesAFavor=7, golesEnContra=8} // null; null
 	AUSTRALIA -> AUSTRALIA{DT='ALGUIEN', grupo=C, puntos=1, golesAFavor=2, golesEnContra=5} // ARGENTINA; BÉLGICA
 	BRASIL -> BRASIL{DT='TITE', grupo=E, puntos=10, golesAFavor=8, golesEnContra=3} // null; null
-	BÉLGICA -> BÉLGICA{DT='BELGA', grupo=G, puntos=15, golesAFavor=14, golesEnContra=5} // BRASIL; COREA DEL SUR
+	BÉLGICA -> BÉLGICA{DT='BELGA', grupo=G, puntos=15, golesAFavor=14, golesEnContra=6} // BRASIL; COREA DEL SUR
 	COLOMBIA -> COLOMBIA{DT='CAFÉ', grupo=H, puntos=9, golesAFavor=6, golesEnContra=2} // null; null
 	COREA DEL SUR -> COREA DEL SUR{DT='ALGUN ASIATICO', grupo=F, puntos=3, golesAFavor=3, golesEnContra=3} // COLOMBIA; CROACIA
 	COSTA RICA -> COSTA RICA{DT='ALGUIEN', grupo=E, puntos=1, golesAFavor=2, golesEnContra=5} // null; null
-	CROACIA -> CROACIA{DT='ALGUN CROATA', grupo=D, puntos=15, golesAFavor=12, golesEnContra=4} // COSTA RICA; EGIPTO
+	CROACIA -> CROACIA{DT='ALGUN CROATA', grupo=D, puntos=18, golesAFavor=16, golesEnContra=9} // COSTA RICA; EGIPTO
 	DINAMARCA -> DINAMARCA{DT='ALGUIEN', grupo=C, puntos=5, golesAFavor=3, golesEnContra=3} // null; null
 	EGIPTO -> EGIPTO{DT='SOME GUY', grupo=A, puntos=0, golesAFavor=2, golesEnContra=6} // DINAMARCA; FRANCIA
 	ESPAÑA -> ESPAÑA{DT='SOME GUY', grupo=B, puntos=5, golesAFavor=7, golesEnContra=7} // null; null
-	FRANCIA -> FRANCIA{DT='ALGUIEN', grupo=C, puntos=10, golesAFavor=8, golesEnContra=5} // ESPAÑA; IRÁN
-	INGLATERRA -> INGLATERRA{DT='SMITH', grupo=G, puntos=9, golesAFavor=10, golesEnContra=4} // null; null
+	FRANCIA -> FRANCIA{DT='ALGUIEN', grupo=C, puntos=16, golesAFavor=13, golesEnContra=7} // ESPAÑA; IRÁN
+	INGLATERRA -> INGLATERRA{DT='SMITH', grupo=G, puntos=9, golesAFavor=11, golesEnContra=6} // null; null
 	IRÁN -> IRÁN{DT='SOME GUY', grupo=B, puntos=4, golesAFavor=2, golesEnContra=2} // INGLATERRA; JAPÓN
 	ISLANDIA -> ISLANDIA{DT='AGUIEN', grupo=D, puntos=1, golesAFavor=2, golesEnContra=5} // null; null
 	JAPÓN -> JAPÓN{DT='PARK', grupo=H, puntos=4, golesAFavor=6, golesEnContra=7} // ISLANDIA; MÉXICO
@@ -58,6 +58,7 @@ Partidos= {ARABIA SAUDITAURUGUAY={GRUPO (URUGUAY 1-1 ARABIA SAUDITA), MOSCU}
 , CROACIAISLANDIA={GRUPO (ISLANDIA 1-1 CROACIA), MOSCU}
 , COLOMBIAPOLONIA={GRUPO (POLONIA 0-0 COLOMBIA), MOSCU}
 , COREA DEL SURSUECIA={GRUPO (SUECIA 1-1 COREA DEL SUR), MOSCU}
+, CROACIAFRANCIA={FINAL (FRANCIA 4-4 CROACIA), MOSCU}
 , EGIPTOURUGUAY={GRUPO (EGIPTO 0-0 URUGUAY), EKATERIMBURGO}
 , CROACIANIGERIA={GRUPO (CROACIA 2-2 NIGERIA), MOSCU}
 , COSTA RICASUIZA={GRUPO (SUIZA 2-2 COSTA RICA), MOSCU}
@@ -90,11 +91,13 @@ Partidos= {ARABIA SAUDITAURUGUAY={GRUPO (URUGUAY 1-1 ARABIA SAUDITA), MOSCU}
 , AUSTRALIAPERÚ={GRUPO (AUSTRALIA 0-0 PERÚ), MOSCU}
 , COLOMBIAINGLATERRA={OCTAVOS (COLOMBIA 1-1 INGLATERRA), MOSCU}
 , COLOMBIASENEGAL={GRUPO (SENEGAL 0-0 COLOMBIA), MOSCU}
+, BÉLGICAFRANCIA={SEMIFINAL (FRANCIA 1-1 BÉLGICA), MOSCU}
 , IRÁNMARRUECOS={GRUPO (MARRUECOS 0-0 IRÁN), SAN PETERSBURGO}
 , BRASILSUIZA={GRUPO (BRASIL 1-1 SUIZA), MOSCU}
 , INGLATERRATÚNEZ={GRUPO (TÚNEZ 1-1 INGLATERRA), MOSCU}
 , ARABIA SAUDITARUSIA={GRUPO (RUSIA 5-5 ARABIA SAUDITA), MOSCU}
 , FRANCIAPERÚ={GRUPO (FRANCIA 1-1 PERÚ), MOSCU}
+, CROACIAINGLATERRA={SEMIFINAL (CROACIA 2-2 INGLATERRA), MOSCU}
 , MARRUECOSPORTUGAL={GRUPO (PORTUGAL 1-1 MARRUECOS), MOSCU}
 , EGIPTORUSIA={GRUPO (RUSIA 3-3 EGIPTO), MOSCU}
 , RUSIAURUGUAY={GRUPO (URUGUAY 3-3 RUSIA), MOSCU}
@@ -109,7 +112,7 @@ Partidos= {ARABIA SAUDITAURUGUAY={GRUPO (URUGUAY 1-1 ARABIA SAUDITA), MOSCU}
 , PORTUGALURUGUAY={OCTAVOS (URUGUAY 2-2 PORTUGAL), MOSCU}
 , ALEMANIAMÉXICO={GRUPO (ALEMANIA 0-0 MÉXICO), MOSCU}
 , PANAMÁTÚNEZ={GRUPO (PANAMÁ 1-1 TÚNEZ), MOSCU}
-}}   60
+}}   63
 - Tabala de posiciones:
 0 -> EGIPTO
 0 -> PANAMÁ
@@ -139,10 +142,7 @@ Partidos= {ARABIA SAUDITAURUGUAY={GRUPO (URUGUAY 1-1 ARABIA SAUDITA), MOSCU}
 9 -> RUSIA
 9 -> SUECIA
 10 -> BRASIL
-10 -> FRANCIA
 12 -> URUGUAY
 15 -> BÉLGICA
-15 -> CROACIA
-
-- Se imporaron datos desde cargainicial.txt
-- se guardo una instancia del sistema
+16 -> FRANCIA
+18 -> CROACIA

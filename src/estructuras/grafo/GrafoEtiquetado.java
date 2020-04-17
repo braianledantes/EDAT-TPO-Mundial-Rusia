@@ -553,6 +553,11 @@ public class GrafoEtiquetado<E> implements Grafo<E>, Serializable {
         return inicio == null;
     }
 
+    @Override
+    public void vaciar() {
+        this.inicio = null;
+    }
+
     protected static class NodoVert<E> implements Serializable {
         private E elem;
         private NodoVert<E> sigVertice;
