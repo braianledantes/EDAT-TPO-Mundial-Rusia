@@ -44,16 +44,39 @@ public class ArchivosHelper {
             String[] datos = line.substring(3).split(";");
             switch (tipo) {
                 case 'E':
-                    exito = datosHelper.altaEquipo(datos[0].trim().toUpperCase(), datos[1].trim().toUpperCase(), datos[2].toUpperCase().trim(), datos[3].trim().toUpperCase(), datos[4].trim().toUpperCase(), datos[5].trim().toUpperCase());
+                    exito = datosHelper.altaEquipo(
+                            datos[0].trim().toUpperCase(),
+                            datos[1].trim().toUpperCase(),
+                            datos[2].toUpperCase().trim(),
+                            datos[3].trim().toUpperCase(),
+                            datos[4].trim().toUpperCase(),
+                            datos[5].trim().toUpperCase()
+                    );
                     break;
                 case 'P':
-                    exito = datosHelper.altaDePartido(datos[0].trim().toUpperCase(), datos[1].trim().toUpperCase(), datos[2].trim().toUpperCase(), datos[3].trim().toUpperCase(), datos[4].trim().toUpperCase(), datos[5].trim().toUpperCase());
+                    exito = datosHelper.altaDePartido(
+                            datos[0].trim().toUpperCase(),
+                            datos[1].trim().toUpperCase(),
+                            datos[2].trim().toUpperCase(),
+                            datos[3].trim().toUpperCase(),
+                            datos[4].trim().toUpperCase(),
+                            datos[5].trim().toUpperCase()
+                    );
                     break;
                 case 'C':
-                    exito = datosHelper.altaCiudad(datos[0].trim().toUpperCase(), datos[1].trim().toUpperCase(), datos[2].trim().toUpperCase(), datos[3].trim().toUpperCase());
+                    exito = datosHelper.altaCiudad(
+                            datos[0].trim().toUpperCase(),
+                            datos[1].trim().toUpperCase(),
+                            datos[2].trim().toUpperCase(),
+                            datos[3].trim().toUpperCase()
+                    );
                     break;
                 case 'R':
-                    exito = datosHelper.insertarRuta(datos[0].trim().toUpperCase(), datos[1].trim().toUpperCase(), datos[2].trim().toUpperCase());
+                    exito = datosHelper.insertarRuta(
+                            datos[0].trim().toUpperCase(),
+                            datos[1].trim().toUpperCase(),
+                            datos[2].trim().toUpperCase()
+                    );
                     break;
                 default:
                     throw new IOException("Formato invalido de archivo de importacion:");
@@ -131,5 +154,4 @@ public class ArchivosHelper {
         outputStream.close();
         return datosHelper;
     }
-
 }

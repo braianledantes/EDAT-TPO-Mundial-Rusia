@@ -79,9 +79,13 @@ public class Log {
         escribir(log);
     }
 
-    public void modificaEquipo(String nombre, String directorTecnico, char grupo, int puntos, int golesAFavor, int golesEnContra) {
-        String log = "se modifico el equipo: " +
-                nombre + ", directorTecnico: " + directorTecnico + ", grupo: " + grupo + ", puntos: " + puntos + ", golesAFavor: " + golesAFavor + ", golesEnContra: " + golesEnContra;
+    public void modificaEquipo(String nombre, String directorTecnico,
+                               char grupo, int puntos, int golesAFavor, int golesEnContra) {
+        String log = "se modifico el equipo: " + nombre +
+                ", directorTecnico: " + directorTecnico +
+                ", grupo: " + grupo + ", puntos: " + puntos +
+                ", golesAFavor: " + golesAFavor +
+                ", golesEnContra: " + golesEnContra;
         escribir(log);
     }
 

@@ -41,8 +41,16 @@ public class DatosHelper implements Serializable {
         return instance;
     }
 
-    public boolean altaCiudad(String nombre, String superficie, String cantHabitantes, String sede) throws NumberFormatException {
-        return altaCiudad(nombre, Double.parseDouble(superficie.replace(',', '.')), Integer.parseInt(cantHabitantes), Boolean.parseBoolean(sede));
+    public boolean altaCiudad(String nombre,
+                              String superficie,
+                              String cantHabitantes,
+                              String sede) throws NumberFormatException {
+        return altaCiudad(
+                nombre,
+                Double.parseDouble(superficie.replace(',', '.')),
+                Integer.parseInt(cantHabitantes),
+                Boolean.parseBoolean(sede)
+        );
     }
 
     public synchronized boolean altaCiudad(String nombre, double superficie, int cantHabitantes, boolean sede) {
@@ -75,13 +83,37 @@ public class DatosHelper implements Serializable {
         return altaEquipo(pais, directorTecnico, grupo, 0, 0, 0);
     }
 
-    public boolean altaEquipo(String pais, String directorTecnico, String grupo, String puntos, String golesAFavor, String golesEnContra) throws NumberFormatException {
-        return altaEquipo(pais, directorTecnico, grupo.charAt(0), Integer.parseInt(puntos), Integer.parseInt(golesAFavor), Integer.parseInt(golesEnContra));
+    public boolean altaEquipo(String pais,
+                              String directorTecnico,
+                              String grupo,
+                              String puntos,
+                              String golesAFavor,
+                              String golesEnContra) throws NumberFormatException {
+        return altaEquipo(
+                pais,
+                directorTecnico,
+                grupo.charAt(0),
+                Integer.parseInt(puntos),
+                Integer.parseInt(golesAFavor),
+                Integer.parseInt(golesEnContra)
+        );
     }
 
-    public synchronized boolean altaEquipo(String pais, String directorTecnico, char grupo, int puntos, int golesAFavor, int golesEnContra) throws NumberFormatException {
+    public synchronized boolean altaEquipo(String pais,
+                                           String directorTecnico,
+                                           char grupo,
+                                           int puntos,
+                                           int golesAFavor,
+                                           int golesEnContra) throws NumberFormatException {
         boolean exito;
-        if (grupo == 'A' || grupo == 'B' || grupo == 'C' || grupo == 'D' || grupo == 'E' || grupo == 'F' || grupo == 'G' || grupo == 'H') {
+        if (grupo == 'A' ||
+                grupo == 'B' ||
+                grupo == 'C' ||
+                grupo == 'D' ||
+                grupo == 'E' ||
+                grupo == 'F' ||
+                grupo == 'G' ||
+                grupo == 'H') {
             Equipo equipo = new Equipo(pais, directorTecnico, grupo, puntos, golesAFavor, golesEnContra);
             exito = equipos.insertar(pais, equipo);
         } else {
@@ -94,9 +126,21 @@ public class DatosHelper implements Serializable {
         return equipos.eliminar(pais);
     }
 
-    public synchronized boolean modificarEquipo(String nombre, String directorTecnico, char grupo, int puntos, int golesAFavor, int golesEnContra) throws NumberFormatException {
+    public synchronized boolean modificarEquipo(String nombre,
+                                                String directorTecnico,
+                                                char grupo,
+                                                int puntos,
+                                                int golesAFavor,
+                                                int golesEnContra) throws NumberFormatException {
         boolean modi = false;
-        if (grupo == 'A' || grupo == 'B' || grupo == 'C' || grupo == 'D' || grupo == 'E' || grupo == 'F' || grupo == 'G' || grupo == 'H') {
+        if (grupo == 'A' ||
+                grupo == 'B' ||
+                grupo == 'C' ||
+                grupo == 'D' ||
+                grupo == 'E' ||
+                grupo == 'F' ||
+                grupo == 'G' ||
+                grupo == 'H') {
             Equipo equipo = equipos.obtenerDato(nombre);
             if (equipo != null) {
                 equipo.setDirectorTecnico(directorTecnico);
@@ -120,14 +164,24 @@ public class DatosHelper implements Serializable {
         return ciudades.insertarArco(new Ciudad(origen), new Ciudad(destino), distancia);
     }
 
-    public synchronized boolean altaDePartido(String equipoA, String equipoB, String ronda, String ciudad, String golesA, String golesB) throws NumberFormatException {
+    public synchronized boolean altaDePartido(String equipoA,
+                                              String equipoB,
+                                              String ronda,
+                                              String ciudad,
+                                              String golesA,
+                                              String golesB) throws NumberFormatException {
         int ga = Integer.parseInt(golesA);
         int gb = Integer.parseInt(golesB);
 
         return altaDePartido(equipoA, equipoB, ronda, ciudad, ga, gb);
     }
 
-    public synchronized boolean altaDePartido(String equipoA, String equipoB, String ronda, String ciudad, int golesA, int golesB) throws NumberFormatException {
+    public synchronized boolean altaDePartido(String equipoA,
+                                              String equipoB,
+                                              String ronda,
+                                              String ciudad,
+                                              int golesA,
+                                              int golesB) throws NumberFormatException {
         boolean exito = false;
         Ronda r = Ronda.parseToRonda(ronda);
         Equipo eqA = equipos.obtenerDato(equipoA);
@@ -198,7 +252,9 @@ public class DatosHelper implements Serializable {
         return ciudades.caminosPosibles(new Ciudad(ciudadOrigen), new Ciudad(ciudadDestino));
     }
 
-    public synchronized Lista<Ciudad> obtenerCaminoMasCortoEntreCiudad(String ciudadOrigen, String ciudadDestino1, String ciudadDestino2) {
+    public synchronized Lista<Ciudad> obtenerCaminoMasCortoEntreCiudad(String ciudadOrigen,
+                                                                       String ciudadDestino1,
+                                                                       String ciudadDestino2) {
         return ciudades.caminoMasCorto(new Ciudad(ciudadOrigen),
                 new Ciudad(ciudadDestino1),
                 new Ciudad(ciudadDestino2));
