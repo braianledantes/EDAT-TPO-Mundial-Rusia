@@ -39,7 +39,7 @@ public class ArchivosHelper {
 
     private synchronized void leerDato(DatosHelper datosHelper, String line, int pos) throws IOException {
         try {
-            boolean exito = false;
+            boolean exito;
             char tipo = line.charAt(0);
             String[] datos = line.substring(3).split(";");
             switch (tipo) {

@@ -1,6 +1,6 @@
 
 - -----------------------------------------------------
-- Se inicio el programa el Sun Apr 05 18:18:01 ART 2020
+- Se inicio el programa el Tue Apr 21 18:56:10 ART 2020
 - Sistema{
 Ciudades= GrafoEtiquetado{inicio=UFA{superfice=200.0, cantHabitantes=2342, sede=false},
 	UFA{superfice=200.0, cantHabitantes=2342, sede=false} -> 

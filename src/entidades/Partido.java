@@ -3,7 +3,7 @@ package entidades;
 import java.io.Serializable;
 
 public class Partido implements Serializable {
-    private String key;
+    private final String key;
     private Equipo equipoA, equipoB;
     private Ronda ronda;
     private int golesEquipoA, golesEquipoB;

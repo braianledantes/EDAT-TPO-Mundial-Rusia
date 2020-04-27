@@ -31,17 +31,17 @@ public class Aleatorio {
     }
 
     public static String stringAleatorio(int tam) {
-        String res = "";
+        StringBuilder res = new StringBuilder();
         for (int i = 0; i < tam; i++) {
-            res = res + charAleatorio();
+            res.append(charAleatorio());
         }
-        return res;
+        return res.toString();
     }
 
     public static String nombreAleatorio() {
         // ejemplo para definir un valor aleatorio entre varias posibilidades
         // en este caso nombres
-        String arr[] = {"Juan", "Carlos", "Pedro", "Tito", "Cacho"};
+        String[] arr = {"Juan", "Carlos", "Pedro", "Tito", "Cacho"};
         return arr[intAleatorio(0, arr.length - 1)];
     }
 }

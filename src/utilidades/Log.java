@@ -9,7 +9,7 @@ import java.util.Calendar;
 
 public class Log {
     public static final String FILE_NAME = "log.txt";
-    private boolean mostrarEnConsola;
+    private final boolean mostrarEnConsola;
 
     public Log(boolean mostrarEnConsola) {
         this.mostrarEnConsola = mostrarEnConsola;
