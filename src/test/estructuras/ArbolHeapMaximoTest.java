@@ -1,10 +1,10 @@
 package test.estructuras;
 
-import estructuras.conjuntistas.ArbolHeap;
-import estructuras.conjuntistas.ArbolHeapMaximo;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import structures.conjuntistas.ArbolHeap;
+import structures.conjuntistas.ArbolHeapMaximo;
 
 import static org.junit.jupiter.api.Assertions.*;
 

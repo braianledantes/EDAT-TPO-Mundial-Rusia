@@ -1,7 +1,7 @@
 package test.estructuras;
 
-import estructuras.conjuntistas.HashAbierto;
 import org.junit.jupiter.api.Test;
+import structures.conjuntistas.HashAbierto;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

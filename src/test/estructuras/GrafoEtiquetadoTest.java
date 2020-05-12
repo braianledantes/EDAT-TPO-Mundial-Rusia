@@ -1,9 +1,9 @@
 package test.estructuras;
 
-import estructuras.grafo.GrafoEtiquetado;
-import estructuras.lineales.Lista;
-import estructuras.lineales.ListaDinamica;
 import org.junit.jupiter.api.Test;
+import structures.grafo.GrafoEtiquetado;
+import structures.lineales.Lista;
+import structures.lineales.ListaDinamica;
 
 import static org.junit.jupiter.api.Assertions.*;
 

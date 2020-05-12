@@ -1,10 +1,10 @@
 package test.estructuras;
 
-import estructuras.jerarquicas.ArbolGenerico;
-import estructuras.lineales.Lista;
-import estructuras.lineales.ListaDinamica;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import structures.jerarquicas.ArbolGenerico;
+import structures.lineales.Lista;
+import structures.lineales.ListaDinamica;
 
 import static org.junit.jupiter.api.Assertions.*;
 

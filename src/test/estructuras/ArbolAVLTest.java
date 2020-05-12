@@ -1,9 +1,9 @@
 package test.estructuras;
 
-import estructuras.conjuntistas.ArbolAVL;
-import estructuras.jerarquicas.ArbolBinario;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import structures.conjuntistas.ArbolAVL;
+import structures.jerarquicas.ArbolBinario;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

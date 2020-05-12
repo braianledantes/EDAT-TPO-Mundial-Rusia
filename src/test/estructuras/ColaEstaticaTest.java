@@ -1,9 +1,9 @@
 package test.estructuras;
 
-import estructuras.lineales.ColaEstatica;
-import estructuras.lineales.EstructuraLlenaException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import structures.lineales.ColaEstatica;
+import structures.lineales.EstructuraLlenaException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
