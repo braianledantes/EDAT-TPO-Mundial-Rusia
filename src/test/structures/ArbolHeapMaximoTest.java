@@ -1,4 +1,4 @@
-package test.estructuras;
+package test.structures;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
