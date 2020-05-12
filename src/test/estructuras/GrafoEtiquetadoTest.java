@@ -111,7 +111,7 @@ class GrafoEtiquetadoTest {
         grafo.insertarArco('g', 'c', 1);
         grafo.insertarArco('h', 'g', 1);
         grafo.insertarArco('h', 'd', 1);
-        //System.out.println(grafo);
+        System.out.println(grafo);
         caminoEsp = new ListaDinamica<>(new Character[]{});
         assertEquals(caminoEsp, grafo.caminoMasCorto('b', 'a'));
         assertEquals(caminoEsp, grafo.caminoMasLargo('b', 'a'));
@@ -155,5 +155,35 @@ class GrafoEtiquetadoTest {
         for (int i = 1; i <= 9; i++) {
             assertEquals(caminosEsperados.recuperar(i), caminosPosibles.recuperar(i));
         }
+    }
+
+    @Test
+    void caminoMasCorto2() {
+        GrafoEtiquetado<Character> grafo = new GrafoEtiquetado<>();
+        Lista<Character> caminoEsp;
+        grafo.insertarVertice('i');
+        grafo.insertarVertice('h');
+        grafo.insertarVertice('g');
+        grafo.insertarVertice('f');
+        grafo.insertarVertice('e');
+        grafo.insertarVertice('d');
+        grafo.insertarVertice('c');
+        grafo.insertarVertice('b');
+        grafo.insertarVertice('a');
+        grafo.insertarArco('a', 'b', 3);
+        grafo.insertarArco('a', 'c', 1);
+        grafo.insertarArco('a', 'd', 1);
+        grafo.insertarArco('b', 'e', 2);
+        grafo.insertarArco('c', 'e', 1);
+        grafo.insertarArco('e', 'h', 20);
+        grafo.insertarArco('e', 'f', 40);
+        grafo.insertarArco('e', 'g', 10);
+        grafo.insertarArco('f', 'i', 20);
+        grafo.insertarArco('g', 'h', 20);
+        grafo.insertarArco('i', 'h', 30);
+        System.out.println(grafo);
+
+        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'c', 'e', 'g', 'h'});
+        assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'e', 'h'));
     }
 }

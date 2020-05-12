@@ -150,4 +150,48 @@ class ArbolAVLTest {
 
         assertEquals(esp, avl);
     }
+
+    @Test
+    void paices() {
+        ArbolAVL<String> avl = new ArbolAVL<>();
+        ArbolBinario<String> esp = new ArbolBinario<>();
+
+        String francia = "Francia";
+        String brasil = "Brasil";
+        String japon = "Japon";
+        String argentina = "Argentina";
+        String estados_unidos = "Estados Unidos";
+        String inglaterra = "Inglaterra";
+        String portugal = "Portugal";
+        String alemania = "Alemania";
+        String italia = "Italia";
+        String mexico = "Mexico";
+        String rusia = "Rusia";
+
+        esp.insertar(francia, null);
+        esp.insertar(brasil, francia, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(japon, francia, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(argentina, brasil, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(estados_unidos, brasil, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(inglaterra, japon, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(portugal, japon, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(alemania, argentina, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(italia, inglaterra, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(mexico, portugal, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(rusia, portugal, ArbolBinario.HIJO_DERECHO);
+
+        avl.insertar(francia);
+        avl.insertar(brasil);
+        avl.insertar(japon);
+        avl.insertar(argentina);
+        avl.insertar(estados_unidos);
+        avl.insertar(inglaterra);
+        avl.insertar(portugal);
+        avl.insertar(alemania);
+        avl.insertar(italia);
+        avl.insertar(mexico);
+        avl.insertar(rusia);
+
+        assertEquals(esp, avl);
+    }
 }
