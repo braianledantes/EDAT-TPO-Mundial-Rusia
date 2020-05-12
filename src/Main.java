@@ -1,33 +1,33 @@
-import entidades.Ciudad;
-import entidades.Equipo;
-import entidades.Partido;
-import estructuras.lineales.Lista;
-import estructuras.propositoEspecifico.ColaPrioridad;
-import utilidades.ArchivosHelper;
-import utilidades.DatosHelper;
-import utilidades.Log;
-import utilidades.TecladoIn;
+import models.Ciudad;
+import models.Equipo;
+import models.Partido;
+import structures.lineales.Lista;
+import structures.propositoEspecifico.ColaPrioridad;
+import utilities.DataHelper;
+import utilities.FilesHelper;
+import utilities.Logger;
+import utilities.TecladoIn;
 
 import java.io.IOException;
 
 public class Main {
-    public static DatosHelper datosHelper;
-    public static ArchivosHelper archivosHelper;
-    public static Log log;
+    public static DataHelper dataHelper;
+    public static FilesHelper filesHelper;
+    public static Logger logger;
 
     public static void main(String[] args) {
-        archivosHelper = ArchivosHelper.getInstance();
-        log = new Log(false);
-        log.inicioPrograma();
+        filesHelper = FilesHelper.getInstance();
+        logger = new Logger(false);
+        logger.startProgram();
         try {
-            datosHelper = archivosHelper.obtenerDatos();
+            dataHelper = filesHelper.getData();
         } catch (IOException e) {
-            datosHelper = DatosHelper.getInstance();
+            dataHelper = DataHelper.getInstance();
         }
-        log.escribirSistema(datosHelper);
+        logger.escribirSistema(dataHelper);
         mostrarMenuPrincipal();
-        log.escribirSistema(datosHelper);
-        log.cierrePrograma();
+        logger.escribirSistema(dataHelper);
+        logger.closeProgram();
     }
 
     public static void mostrarMenuPrincipal() {
@@ -134,8 +134,8 @@ public class Main {
         System.out.println("¿Es sede de algun partido? (true/false)");
         boolean sede = TecladoIn.readLineBoolean();
 
-        if (datosHelper.altaCiudad(nombre, superficie, cantHab, sede))
-            log.altaCiudad(nombre, superficie + "", cantHab + "", sede + "");
+        if (dataHelper.altaCiudad(nombre, superficie, cantHab, sede))
+            logger.createCity(nombre, superficie + "", cantHab + "", sede + "");
         else
             System.err.println("La ciudad " + nombre + " ya existe");
     }
@@ -143,8 +143,8 @@ public class Main {
     public static void bajaCiudad() {
         System.out.println("Ingrese el nombre:");
         String nombre = TecladoIn.readLine().toUpperCase();
-        if (datosHelper.eliminarCiudad(nombre))
-            log.bajaCiudad(nombre);
+        if (dataHelper.eliminarCiudad(nombre))
+            logger.deleteCity(nombre);
         else
             System.err.println("La ciudad " + nombre + " no existe");
     }
@@ -159,8 +159,8 @@ public class Main {
         System.out.println("¿Es sede de algun partido? (true/false)");
         boolean sede = TecladoIn.readLineBoolean();
 
-        if (datosHelper.modificarCiudad(nombre, superficie, cantHab, sede))
-            log.modificaCiudad(nombre, superficie + "", cantHab + "", sede + "");
+        if (dataHelper.modificarCiudad(nombre, superficie, cantHab, sede))
+            logger.modifyCity(nombre, superficie + "", cantHab + "", sede + "");
         else
             System.err.println("La ciudad " + nombre + " no existe");
     }
@@ -205,9 +205,9 @@ public class Main {
         char grupo = Character.toUpperCase(TecladoIn.readLineNonwhiteChar());
 
         try {
-            boolean alta = datosHelper.altaEquipo(nombre, dt, grupo);
+            boolean alta = dataHelper.altaEquipo(nombre, dt, grupo);
             if (alta)
-                log.altaEquipo(nombre, dt, grupo + "");
+                logger.createTeam(nombre, dt, grupo + "");
             else
                 System.err.println("El equipo " + nombre + " ya existe");
 
@@ -219,10 +219,10 @@ public class Main {
     public static void bajaEquipo() {
         System.out.println("Ingrese el nombre del pais:");
         String nombre = TecladoIn.readLine().toUpperCase();
-        if (!datosHelper.bajaEquipo(nombre))
+        if (!dataHelper.bajaEquipo(nombre))
             System.err.println("El equipo " + nombre + " no existe");
         else
-            log.bajaEquipo(nombre);
+            logger.daleteTeam(nombre);
     }
 
     public static void modificarEquipo() {
@@ -240,11 +240,11 @@ public class Main {
         int golesEnContra = TecladoIn.readLineInt();
 
         try {
-            boolean modifico = datosHelper.modificarEquipo(nombre, dt, grupo, puntaje, golesAFavor, golesEnContra);
+            boolean modifico = dataHelper.modificarEquipo(nombre, dt, grupo, puntaje, golesAFavor, golesEnContra);
             if (!modifico)
                 System.err.println("El equipo " + nombre + " no existe");
             else
-                log.modificaEquipo(nombre, dt, grupo, puntaje, golesAFavor, golesEnContra);
+                logger.modifyTeam(nombre, dt, grupo, puntaje, golesAFavor, golesEnContra);
 
         } catch (NumberFormatException e) {
             System.err.println(e.getMessage());
@@ -266,8 +266,8 @@ public class Main {
         int golesB = TecladoIn.readLineInt();
 
         try {
-            if (datosHelper.altaDePartido(eA, eB, ronda, ciudad, golesA, golesB))
-                log.altaDePartido(eA, eB, ronda, ciudad, golesA + "", golesB + "");
+            if (dataHelper.altaDePartido(eA, eB, ronda, ciudad, golesA, golesB))
+                logger.altaDePartido(eA, eB, ronda, ciudad, golesA + "", golesB + "");
             else
                 System.err.println("El partido ya existe o la ciudad no existe");
         } catch (NumberFormatException e) {
@@ -309,7 +309,7 @@ public class Main {
     public static void mostrarEquipo() {
         System.out.println("Ingrese el nombre del pais:");
         String pais = TecladoIn.readLine().toUpperCase();
-        Equipo equipo = datosHelper.obtenerEquipo(pais);
+        Equipo equipo = dataHelper.obtenerEquipo(pais);
         if (equipo != null) {
             StringBuilder sb = new StringBuilder("Equipo: ").append(equipo.getPais()).append('\n');
             sb.append("puntos: ").append(equipo.getPuntos()).append('\n');
@@ -327,7 +327,7 @@ public class Main {
                 sb.append('\n');
             }
             System.out.println(sb.toString());
-            log.mostrarEquipo(pais);
+            logger.showTeam(pais);
         } else {
             System.err.println("No existe equipo " + pais);
         }
@@ -339,12 +339,12 @@ public class Main {
         System.out.println("Ingrese el nombre del otro pais:");
         String equipoB = TecladoIn.readLine().toUpperCase();
 
-        if (equipoB.compareTo(equipoA) < 0) { // por si estan alrevez
+        if (equipoB.compareTo(equipoA) < 0) { // por si estan al reves
             String aux = equipoA;
             equipoA = equipoB;
             equipoB = aux;
         }
-        Lista<Equipo> equipos = datosHelper.listarEquiposPorRango(equipoA, equipoB);
+        Lista<Equipo> equipos = dataHelper.listarEquiposPorRango(equipoA, equipoB);
 
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= equipos.longitud(); i++) {
@@ -352,27 +352,27 @@ public class Main {
             sb.append(equipo).append('\n');
         }
         System.out.println(sb.toString());
-        log.mostrarEquiposPorRango(equipoA, equipoB);
+        logger.mostrarEquiposPorRango(equipoA, equipoB);
     }
 
     public static void mostrarEquiposConDifGol() {
-        Lista<Equipo> equipos = datosHelper.listarEquiposConDifGolNeg();
+        Lista<Equipo> equipos = dataHelper.listarEquiposConDifGolNeg();
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= equipos.longitud(); i++) {
             Equipo equipo = equipos.recuperar(i);
             sb.append(equipo.getPais()).append(" -> ").append(equipo.diferenciaGoles()).append('\n');
         }
         System.out.println(sb.toString());
-        log.mostrarEquiposConDifGol();
+        logger.mostrarEquiposConDifGol();
     }
 
     public static void mostrarConsultarCiudades() {
         System.out.println("Ingrese el nombre de la ciudad:");
         String nombre = TecladoIn.readLine().toUpperCase();
-        Ciudad ciudad = datosHelper.getCiudad(nombre);
+        Ciudad ciudad = dataHelper.getCiudad(nombre);
         if (ciudad != null) {
             System.out.println(ciudad);
-            log.mostrarCiudad(nombre);
+            logger.mostrarCiudad(nombre);
         } else
             System.err.println("No existe " + nombre);
     }
@@ -418,7 +418,7 @@ public class Main {
         System.out.println("Ingrese la ciudad de destino:");
         String destino = TecladoIn.readLine().toUpperCase();
 
-        Lista<Ciudad> viaje = datosHelper.obtenerCaminoConMenorDistancia(origen, destino);
+        Lista<Ciudad> viaje = dataHelper.obtenerCaminoConMenorDistancia(origen, destino);
         if (!viaje.estaVacia()) {
             StringBuilder sb = new StringBuilder("Camino: {");
             for (int i = 1; i <= viaje.longitud(); i++) {
@@ -428,7 +428,7 @@ public class Main {
             }
             sb.append('}');
             System.out.println(sb.toString());
-            log.mostrarCaminoConMenorDistancia(origen, destino);
+            logger.mostrarCaminoConMenorDistancia(origen, destino);
         }
     }
 
@@ -438,7 +438,7 @@ public class Main {
         System.out.println("Ingrese la ciudad de destino:");
         String destino = TecladoIn.readLine().toUpperCase();
 
-        Lista<Ciudad> viaje = datosHelper.obtenerCaminoConMenosCiudades(origen, destino);
+        Lista<Ciudad> viaje = dataHelper.obtenerCaminoConMenosCiudades(origen, destino);
         if (!viaje.estaVacia()) {
             StringBuilder sb = new StringBuilder("Camino: {");
             for (int i = 1; i <= viaje.longitud(); i++) {
@@ -448,7 +448,7 @@ public class Main {
             }
             sb.append('}');
             System.out.println(sb.toString());
-            log.mostrarCaminoConMenosCiudades(origen, destino);
+            logger.mostrarCaminoConMenosCiudades(origen, destino);
         }
     }
 
@@ -458,7 +458,7 @@ public class Main {
         System.out.println("Ingrese la ciudad de destino:");
         String destino = TecladoIn.readLine().toUpperCase();
 
-        Lista<Lista<Ciudad>> viajes = datosHelper.obtenerCaminoPosibles(origen, destino);
+        Lista<Lista<Ciudad>> viajes = dataHelper.obtenerCaminoPosibles(origen, destino);
         if (!viajes.estaVacia()) {
             StringBuilder sb = new StringBuilder();
             for (int i = 1; i <= viajes.longitud(); i++) {
@@ -473,7 +473,7 @@ public class Main {
             }
             sb.append('}');
             System.out.println(sb.toString());
-            log.mostrarCaminoPosibles(origen, destino);
+            logger.mostrarCaminoPosibles(origen, destino);
         }
     }
 
@@ -485,7 +485,7 @@ public class Main {
         System.out.println("Ingrese la ciudad de destino2:");
         String destino2 = TecladoIn.readLine().toUpperCase();
 
-        Lista<Ciudad> viaje = datosHelper.obtenerCaminoMasCortoEntreCiudad(origen, destino1, destino2);
+        Lista<Ciudad> viaje = dataHelper.obtenerCaminoMasCortoEntreCiudad(origen, destino1, destino2);
         if (!viaje.estaVacia()) {
 
             StringBuilder sb = new StringBuilder("Camino: {");
@@ -497,16 +497,16 @@ public class Main {
             }
             sb.append('}');
             System.out.println(sb.toString());
-            log.mostrarCaminoMasCortoEntreCiudad(origen, destino1, destino2);
+            logger.mostrarCaminoMasCortoEntreCiudad(origen, destino1, destino2);
         }
     }
 
     public static void mostrarTablaPosiciones() {
-        ColaPrioridad<Equipo> equipos = datosHelper.obtenerEquiposPorPuntaje();
+        ColaPrioridad<Equipo> equipos = dataHelper.obtenerEquiposPorPuntaje();
         StringBuilder sb = new StringBuilder("Posicion | Puntos -> Equipo\n");
         mostrarTablaPosiciones(equipos, sb, 0);
         System.out.println(sb.toString());
-        log.mostrarTablaPosiciones();
+        logger.mostrarTablaPosiciones();
     }
 
     private static int mostrarTablaPosiciones(ColaPrioridad<Equipo> cola, StringBuilder sb, int pos) {
@@ -521,14 +521,14 @@ public class Main {
     }
 
     public static void mostrarSistema() {
-        System.out.println(datosHelper);
-        log.mostrarEstructuras(datosHelper);
+        System.out.println(dataHelper);
+        logger.showStructures(dataHelper);
     }
 
     public static void guardarSistema() {
         try {
-            archivosHelper.guardarDatos(datosHelper);
-            log.guardarDatos();
+            filesHelper.saveData(dataHelper);
+            logger.saveData();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -538,8 +538,8 @@ public class Main {
         try {
             System.out.println("Indique la direccion donde se quiere exportar el archivo:");
             String file = TecladoIn.readLine().toUpperCase();
-            archivosHelper.exportarDatos(datosHelper, file);
-            log.escribir("Se exportaron los datos a " + file);
+            filesHelper.exportData(dataHelper, file);
+            logger.write("Se exportaron los datos a " + file);
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -549,8 +549,8 @@ public class Main {
         try {
             System.out.println("Indique la direccion donde se encuentra el archivo a importar");
             String fileName = TecladoIn.readLine();
-            archivosHelper.importarDatos(datosHelper, fileName);
-            log.importacionDatos(fileName);
+            filesHelper.importData(dataHelper, fileName);
+            logger.importData(fileName);
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

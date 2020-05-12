@@ -1,8 +1,8 @@
 package test.estructuras;
 
-import estructuras.lineales.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import structures.lineales.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
