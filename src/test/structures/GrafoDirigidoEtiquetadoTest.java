@@ -1,17 +1,19 @@
 package test.structures;
 
 import org.junit.jupiter.api.Test;
-import structures.grafo.DigrafoEtiquetado;
+import structures.grafo.GrafoDirigidoEtiquetado;
 import structures.lineales.Lista;
 import structures.lineales.ListaDinamica;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DigrafoEtiquetadoTest {
+class GrafoDirigidoEtiquetadoTest {
+
+    // TODO testear los arcos dobles :)
 
     @Test
     void insertarVertice() {
-        DigrafoEtiquetado<Integer> grafo = new DigrafoEtiquetado<>();
+        GrafoDirigidoEtiquetado<Integer> grafo = new GrafoDirigidoEtiquetado<>();
         System.out.println(grafo);
         assertTrue(grafo.esVacio());
 
@@ -57,7 +59,7 @@ class DigrafoEtiquetadoTest {
 
     @Test
     void listarEnProfundidad() {
-        DigrafoEtiquetado<Character> grafo = new DigrafoEtiquetado<>();
+        GrafoDirigidoEtiquetado<Character> grafo = new GrafoDirigidoEtiquetado<>();
         assertTrue(grafo.insertarVertice('h'));
         grafo.insertarVertice('g');
         grafo.insertarVertice('f');
@@ -84,7 +86,7 @@ class DigrafoEtiquetadoTest {
 
     @Test
     void caminoMasCorto() {
-        DigrafoEtiquetado<Character> grafo = new DigrafoEtiquetado<>();
+        GrafoDirigidoEtiquetado<Character> grafo = new GrafoDirigidoEtiquetado<>();
         Lista<Character> caminoEsp;
         grafo.insertarVertice('h');
         grafo.insertarVertice('g');
@@ -159,7 +161,7 @@ class DigrafoEtiquetadoTest {
 
     @Test
     void caminoMasCorto2() {
-        DigrafoEtiquetado<Character> grafo = new DigrafoEtiquetado<>();
+        GrafoDirigidoEtiquetado<Character> grafo = new GrafoDirigidoEtiquetado<>();
         Lista<Character> caminoEsp;
         grafo.insertarVertice('i');
         grafo.insertarVertice('h');
@@ -175,15 +177,15 @@ class DigrafoEtiquetadoTest {
         grafo.insertarArco('a', 'd', 1);
         grafo.insertarArco('b', 'e', 2);
         grafo.insertarArco('c', 'e', 1);
+        grafo.insertarArco('e', 'g', 10);
         grafo.insertarArco('e', 'h', 20);
         grafo.insertarArco('e', 'f', 40);
-        grafo.insertarArco('e', 'g', 10);
-        grafo.insertarArco('f', 'i', 20);
+        grafo.insertarArco('f', 'i', 100);
         grafo.insertarArco('g', 'h', 20);
         grafo.insertarArco('i', 'h', 30);
         System.out.println(grafo);
 
-        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'c', 'e', 'g', 'h'});
+        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'c', 'e', 'h'});
         assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'e', 'h'));
     }
 }

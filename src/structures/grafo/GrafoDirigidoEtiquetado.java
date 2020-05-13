@@ -7,10 +7,10 @@ import structures.lineales.ListaDinamica;
 
 import java.io.Serializable;
 
-public class DigrafoEtiquetado<E> implements Grafo<E>, Serializable {
+public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
     private NodoVert<E> inicio;
 
-    public DigrafoEtiquetado() {
+    public GrafoDirigidoEtiquetado() {
         this.inicio = null;
     }
 
@@ -36,6 +36,29 @@ public class DigrafoEtiquetado<E> implements Grafo<E>, Serializable {
         return nodoVert;
     }
 
+    /**
+     * Busca el primer vertice que encuentra de ambos parámetros
+     *
+     * @param elem1 elemento a buscar 1
+     * @param elem2 elemento a buscar 2
+     * @return un nodo vertice
+     */
+    private NodoVert<E> buscarPrimerVertice(E elem1, E elem2) {
+        NodoVert<E> nodoVert = inicio;
+        if (elem1 != null && elem2 != null) {
+            while (nodoVert != null && !nodoVert.getElem().equals(elem1) && !nodoVert.getElem().equals(elem2))
+                nodoVert = nodoVert.getSigVertice();
+        }
+        return nodoVert;
+    }
+
+    /**
+     * Busca ambos vertices y los devuelve en un arreglo con las posiciones despectivas de los parametros
+     *
+     * @param elem1 elemento a buscar 1
+     * @param elem2 elemento a buscar 2
+     * @return un arrelo con [verticeElem1, verticeElem2]
+     */
     private NodoVert<E>[] buscarDosVertices(E elem1, E elem2) {
         NodoVert<E>[] vertices = new NodoVert[2];
 
@@ -156,15 +179,21 @@ public class DigrafoEtiquetado<E> implements Grafo<E>, Serializable {
         NodoVert<E> nodoVert2 = vertices[1];
 
         if (nodoVert1 != null && nodoVert2 != null) {
-            if (!existeArco(nodoVert1, nodoVert2)) {
-                nodoVert1.setPrimerAdy(new NodoAdy<>(nodoVert2, nodoVert1.getPrimerAdy(), etiqueta));
-                inserto = true;
+            if (nodoVert1 == nodoVert2) { // por si es un lazo
+                if (!existeArco(nodoVert1, nodoVert2)) {
+                    nodoVert1.setPrimerAdy(new NodoAdy<>(nodoVert2, nodoVert1.getPrimerAdy(), etiqueta));
+                    inserto = true;
+                }
+            } else {
+                if (!existeArco(nodoVert1, nodoVert2)) {
+                    nodoVert1.setPrimerAdy(new NodoAdy<>(nodoVert2, nodoVert1.getPrimerAdy(), etiqueta));
+                    inserto = true;
+                }
+                if (!existeArco(nodoVert2, nodoVert1)) {
+                    nodoVert2.setPrimerAdy(new NodoAdy<>(nodoVert1, nodoVert2.getPrimerAdy(), etiqueta));
+                    inserto = true;
+                }
             }
-            if (!existeArco(nodoVert2, nodoVert1)) {
-                nodoVert2.setPrimerAdy(new NodoAdy<>(nodoVert1, nodoVert2.getPrimerAdy(), etiqueta));
-                inserto = true;
-            }
-
         }
 
         return inserto;
@@ -174,28 +203,58 @@ public class DigrafoEtiquetado<E> implements Grafo<E>, Serializable {
     public boolean eliminarArco(E origen, E destino) {
         boolean elimino = false;
         if (origen != null && destino != null)
-            elimino = eliminarArco(buscarVertice(origen), destino);
+            elimino = eliminarArco(buscarVertice(origen), destino) != null;
         return elimino;
     }
 
-    private boolean eliminarArco(NodoVert<E> vertOrigen, E destino) {
-        boolean elimino = false;
+    /**
+     * Quita el arco de desde el vertice origen al destino y retorna el vertice hacia donde apunta el arco eliminado.
+     *
+     * @param vertOrigen vertice origen del arco
+     * @param destino    elemento destino del arco
+     * @return el vertice hacia donde apunta el arco eliminado
+     */
+    private NodoVert<E> eliminarArco(NodoVert<E> vertOrigen, E destino) {
         NodoAdy<E> ady, adyAnt;
+        NodoVert<E> nodoVertEliminado = null;
 
         if (vertOrigen != null && vertOrigen.getPrimerAdy() != null) {
             if (vertOrigen.getPrimerAdy().getVertice().getElem().equals(destino)) {
+                nodoVertEliminado = vertOrigen.getPrimerAdy().getVertice();
                 vertOrigen.setPrimerAdy(vertOrigen.getPrimerAdy().getSigAdy());
-                elimino = true;
             } else {
                 adyAnt = vertOrigen.getPrimerAdy();
                 ady = vertOrigen.getPrimerAdy().getSigAdy();
-                while (!elimino && ady != null) {
+                while (nodoVertEliminado == null && ady != null) {
                     if (ady.getVertice().getElem().equals(destino)) {
+                        nodoVertEliminado = ady.getVertice();
                         adyAnt.setSigAdy(ady.getSigAdy());
-                        elimino = true;
                     }
                     adyAnt = ady;
                     ady = ady.getSigAdy();
+                }
+            }
+        }
+        return nodoVertEliminado;
+    }
+
+    @Override
+    public boolean eliminarArcoDoble(E vert1, E vert2) {
+        boolean elimino = false;
+        NodoVert<E> vertEliminado;
+        NodoVert<E> nodoVert = buscarPrimerVertice(vert1, vert2);
+        if (vert1 != null && vert2 != null) {
+            if (nodoVert.getElem().equals(vert1)) {
+                vertEliminado = eliminarArco(nodoVert, vert2);
+                if (vertEliminado != null) {
+                    eliminarArco(vertEliminado, vert1);
+                    elimino = true;
+                }
+            } else if (nodoVert.getElem().equals(vert2)) {
+                vertEliminado = eliminarArco(nodoVert, vert1);
+                if (vertEliminado != null) {
+                    eliminarArco(vertEliminado, vert2);
+                    elimino = true;
                 }
             }
         }
@@ -227,6 +286,12 @@ public class DigrafoEtiquetado<E> implements Grafo<E>, Serializable {
         }
 
         return existe;
+    }
+
+    @Override
+    public boolean existeArcoDoble(E vert1, E vert2) {
+        // TODO existeArcoDoble()
+        return false;
     }
 
     @Override
@@ -385,6 +450,7 @@ public class DigrafoEtiquetado<E> implements Grafo<E>, Serializable {
             camino = visitados.clone();
             distMin[0] = distActual;
         } else if (vertice == destino1 && vertice.getPrimerAdy() != null) { // llego a la mitad
+            // TODO verificar por que siempre pasa por el primer vertice de todos cuando llega a destino1
             bandera[0] = true;
             camino = caminoMasCorto(vertice.getPrimerAdy().getVertice(), destino1, destino2, visitados, distActual, camino, distMin, bandera);
         } else {

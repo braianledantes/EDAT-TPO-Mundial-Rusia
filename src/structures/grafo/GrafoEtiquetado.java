@@ -1,4 +1,5 @@
 package structures.grafo;
 
-public class GrafoEtiquetado<E> extends DigrafoEtiquetado<E> {
+public class GrafoEtiquetado<E> extends GrafoDirigidoEtiquetado<E> {
+    // TODO
 }

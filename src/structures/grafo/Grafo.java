@@ -73,13 +73,23 @@ public interface Grafo<E> {
 
     /**
      * Dados dos elementos de tipoVertice (origen y destino) se quita de la estructura el arco que une
-     * ambos vértices.
+     * ambos vértices desde origen a destino.
      *
      * @param origen  vertice origen
      * @param destino vertice destino
      * @return si el arco existe y se puede realizar la eliminación con éxito devuelve verdadero, en caso contrario devuelve falso
      */
     boolean eliminarArco(E origen, E destino);
+
+    /**
+     * Dados dos elementos de tipoVertice (elem1 y elem2) se quita de la estructura el arco que une
+     * ambos vértices desde ambos vertices.
+     *
+     * @param elem1 vertice elem1
+     * @param elem2 vertice elem2
+     * @return si el arco existe y se puede realizar la eliminación con éxito devuelve verdadero, en caso contrario devuelve falso
+     */
+    boolean eliminarArcoDoble(E elem1, E elem2);
 
     /**
      * Verifica si existe el elemento vertice en el estructuras.grafo.
@@ -90,7 +100,7 @@ public interface Grafo<E> {
     boolean exiteVertice(E elem);
 
     /**
-     * Dados dos elementos de tipoVertice (origen y destino), verifca si existe un arco entre ellos.
+     * Dados dos elementos de tipoVertice (origen y destino), verifca si existe un arco desde origen a destino.
      *
      * @param origen  vertice origen
      * @param destino vertice destino
@@ -99,7 +109,16 @@ public interface Grafo<E> {
     boolean existeArco(E origen, E destino);
 
     /**
-     * Dados dos elementos de tipoVertice (origen y destino), verifca si existe un camino entre ellos.
+     * Dados dos elementos de tipoVertice (vert1 y vert2), verifca si existe un arco entre ellos.
+     *
+     * @param vert1 vertice vert1
+     * @param vert2 vertice vert2
+     * @return true si el arco existe y en caso contrario devuelve falso
+     */
+    boolean existeArcoDoble(E vert1, E vert2);
+
+    /**
+     * Dados dos elementos de tipoVertice (origen y destino), verifca si existe un camino desde origen a destino.
      *
      * @param origen  vertice origen
      * @param destino vertice destino
@@ -109,7 +128,7 @@ public interface Grafo<E> {
 
     /**
      * Dados dos elementos de tipoVertice (origen y destino), devuelve un camino (lista de vértices) que
-     * indique el camino que pasa por menor distancía que permite llegar del vértice origen al vértice destino.
+     * indique el camino que pasa por menor distancía que permite llegar desde el vértice origen al vértice destino.
      * Si hay más de un camino con igual distancía, devuelve cualquiera de ellos. Si alguno de los
      * vértices no existe o no hay camino posible entre ellos devuelve la lista vacía.
      *
@@ -121,7 +140,7 @@ public interface Grafo<E> {
 
     /**
      * Dados dos elementos de tipoVertice (origen y destino), devuelve un camino (lista de vértices) que
-     * indique el camino que pasa por menos vértices que permite llegar del vértice origen al vértice destino.
+     * indique el camino que pasa por menos vértices que permite llegar desde el vértice origen al vértice destino.
      * Si hay más de un camino con igual cantidad de vértices, devuelve cualquiera de ellos. Si alguno de los
      * vértices no existe o no hay camino posible entre ellos devuelve la lista vacía.
      *
@@ -133,7 +152,7 @@ public interface Grafo<E> {
 
     /**
      * Dados dos elementos de tipoVertice (origen y destino), devuelve un camino (lista de vértices) que
-     * indique el camino que pasa por menor distancía que permite llegar del vértice origen al vértice destino,
+     * indique el camino que pasa por menor distancía que permite llegar desde el vértice origen al vértice destino,
      * pasando por uno intermedio.
      * Si hay más de un camino con igual distancía, devuelve cualquiera de ellos. Si alguno de los
      * vértices no existe o no hay camino posible entre ellos devuelve la lista vacía.
@@ -147,7 +166,7 @@ public interface Grafo<E> {
 
     /**
      * Dados dos elementos de tipoVertice (origen y destino), devuelve un camino (lista de vértices) que
-     * indique el camino que pasa por más vértices (sin ciclos) que permite llegar del vértice origen al vértice
+     * indique el camino que pasa por más vértices (sin ciclos) que permite llegar desde el vértice origen al vértice
      * destino. Si hay más de un camino con igual cantidad de vértices, devuelve cualquiera de ellos. Si alguno
      * de los vértices no existe o no hay camino posible entre ellos devuelve la lista vacía.
      *
