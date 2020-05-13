@@ -21,7 +21,7 @@ public class ABB<T extends Comparable<T>> extends ArbolBinarioDinamico<T> implem
         return exito;
     }
 
-    protected boolean insertar(T elem, Nodo<T> nodo) {
+    private boolean insertar(T elem, Nodo<T> nodo) {
         boolean exito = true;
 
         if (elem.compareTo(nodo.getElem()) == 0) {

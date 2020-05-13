@@ -1,45 +1,41 @@
-package test.estructuras;
+package test.structures;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import structures.lineales.ColaDinamica;
+import structures.lineales.ColaEstatica;
+import structures.lineales.EstructuraLlenaException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ColaDinamicaTest {
+public class ColaEstaticaTest {
 
-    public static final int TAM = 8;
-    ColaDinamica<Integer> cola, esperado;
+    ColaEstatica<Integer> cola, esperado;
 
     @BeforeEach
     void setUp() {
-        cola = new ColaDinamica<>();
-        esperado = new ColaDinamica<>();
+        cola = new ColaEstatica<>(Integer.class);
+        esperado = new ColaEstatica<>(Integer.class);
     }
 
-    @Test
+    @Test()
     void poner() {
         boolean poner;
-
-        poner = cola.poner(1);
-        assertTrue(poner);
-        assertEquals(1, cola.obtenerFrente());
-
-        cola.sacar();
-
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i < ColaEstatica.TAM; i++) {
             poner = cola.poner(i);
             assertTrue(poner);
         }
-        int valor;
-        for (int i = 1; i <= 10; i++) {
-            valor = cola.obtenerFrente();
-            assertEquals(i, valor);
-            cola.sacar();
-        }
 
-        poner = cola.poner(1);
-        assertTrue(poner);
+        EstructuraLlenaException exception = assertThrows(EstructuraLlenaException.class, () ->
+                cola.poner(0));
+        assertEquals("La estructura esta llena", exception.getMessage());
+
+        cola.sacar();
+        cola.sacar();
+        cola.sacar();
+        for (int i = 0; i < 3; i++) {
+            poner = cola.poner(i);
+            assertTrue(poner);
+        }
     }
 
     @Test
@@ -48,11 +44,11 @@ public class ColaDinamicaTest {
         sacar = cola.sacar();
         assertFalse(sacar);
 
-        for (int i = 1; i < TAM; i++) {
+        for (int i = 1; i < ColaEstatica.TAM; i++) {
             cola.poner(i);
         }
 
-        for (int i = 1; i < TAM; i++) {
+        for (int i = 1; i < ColaEstatica.TAM; i++) {
             sacar = cola.sacar();
             assertTrue(sacar);
         }
@@ -60,7 +56,7 @@ public class ColaDinamicaTest {
         sacar = cola.sacar();
         assertFalse(sacar);
 
-        for (int i = 1; i < TAM; i++) {
+        for (int i = 1; i < ColaEstatica.TAM; i++) {
             cola.poner(i);
         }
 
@@ -92,11 +88,11 @@ public class ColaDinamicaTest {
         assertFalse(cola.esVacia());
         cola.vaciar();
         assertTrue(cola.esVacia());
-        for (int i = 1; i < TAM; i++) {
+        for (int i = 1; i < ColaEstatica.TAM; i++) {
             cola.poner(i);
         }
         assertFalse(cola.esVacia());
-        for (int i = 1; i < TAM; i++) {
+        for (int i = 1; i < ColaEstatica.TAM; i++) {
             cola.sacar();
         }
         assertTrue(cola.esVacia());
@@ -127,7 +123,7 @@ public class ColaDinamicaTest {
         esperado.vaciar();
         assertEquals(cola, esperado);
 
-        for (int i = 1; i < TAM; i++) {
+        for (int i = 1; i < ColaEstatica.TAM; i++) {
             cola.poner(i);
             esperado.poner(i);
         }

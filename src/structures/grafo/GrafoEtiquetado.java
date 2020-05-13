@@ -44,6 +44,7 @@ public class GrafoEtiquetado<E> implements Grafo<E>, Serializable {
         return resp;
     }
 
+    // TODO hacerlo grafo simple, NO PASAR POR TODO EL ARREGLO DE VERTICES
     @Override
     public boolean eliminarVertice(E elem) {
         boolean elimino = false;
@@ -289,13 +290,11 @@ public class GrafoEtiquetado<E> implements Grafo<E>, Serializable {
         } else {
             NodoAdy<E> ady = vertice.getPrimerAdy();
             while (ady != null) {
-                distActual++;
                 if (distActual < distMin[0]) {
                     if (!visitados.existe(ady.getVertice().getElem())) {
-                        camino = caminoConMenosVertices(ady.getVertice(), destino, visitados, distActual, camino, distMin);
+                        camino = caminoConMenosVertices(ady.getVertice(), destino, visitados, distActual + 1, camino, distMin);
                     }
                 }
-                distActual--;
                 ady = ady.getSigAdy();
             }
         }
@@ -304,6 +303,8 @@ public class GrafoEtiquetado<E> implements Grafo<E>, Serializable {
         return camino;
     }
 
+
+    // TODO VER CUANDO LLEGA AL DESTINO1, QUE VISITE TODOS LOS ADYACENTES
     @Override
     public Lista<E> caminoMasCorto(E origen, E destino1, E destino2) {
         NodoVert<E> vertOrigen = buscarVertice(origen);

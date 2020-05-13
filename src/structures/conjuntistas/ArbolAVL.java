@@ -2,12 +2,39 @@ package structures.conjuntistas;
 
 public class ArbolAVL<T extends Comparable<T>> extends ABB<T> {
 
+    // TODO VEVIFICAR TODAS LAS ROTACIONES A NIVEL RAIZ Y NODO INTERNO
     @Override
-    protected boolean insertar(T elem, Nodo<T> nodo) {
-        boolean exito = super.insertar(elem, nodo);
-        if (exito) {
+    public boolean insertar(T elem) {
+        boolean exito = true;
+
+        if (elem != null) {
+            if (this.raiz == null)
+                this.raiz = new Nodo<>(elem);
+            else
+                exito = insertar(elem, this.raiz, null);
+        }
+        return exito;
+    }
+
+    private boolean insertar(T elem, Nodo<T> nodo, Nodo<T> nodoPadre) {
+        boolean exito = true;
+
+        if (elem.compareTo(nodo.getElem()) == 0) {
+            exito = false;
+        } else {
+            if (elem.compareTo(nodo.getElem()) < 0) {
+                if (nodo.tieneIzq())
+                    exito = insertar(elem, nodo.getIzq(), nodo);
+                else
+                    nodo.setIzq(new Nodo<>(elem));
+            } else {
+                if (nodo.tieneDer())
+                    exito = insertar(elem, nodo.getDer(), nodo);
+                else
+                    nodo.setDer(new Nodo<>(elem));
+            }
             nodo.recalcularAltura();
-            balancear(nodo);
+            balancear(nodo, nodoPadre);
         }
         return exito;
     }
@@ -17,30 +44,44 @@ public class ArbolAVL<T extends Comparable<T>> extends ABB<T> {
         boolean exito = super.eliminar(elem, nodo, nodoPadre);
         if (exito) {
             nodo.recalcularAltura();
-            balancear(nodo);
+            balancear(nodo, nodoPadre);
         }
         return exito;
     }
 
-    private void balancear(Nodo<T> nodo) {
+    private void balancear(Nodo<T> nodo, Nodo<T> nodoPadre) {
         int balance = calcularBalance(nodo);
         int balanceHijo;
+        Nodo<T> nodoRaizSubarbol = null;
 
-        if (balance == -2) {
+        if (balance == -2) { // inclinado hacia la derecha
             balanceHijo = calcularBalance(nodo.getDer());
             if (balanceHijo == 0 || balanceHijo == -1)
-                rotarIzquierda(nodo);
+                nodoRaizSubarbol = rotarIzquierda(nodo);
             else if (balanceHijo == 1) {
-                rotarDerecha(nodo.getDer());
-                rotarIzquierda(nodo);
+                nodo.setDer(rotarDerecha(nodo.getDer()));
+                nodoRaizSubarbol = rotarIzquierda(nodo);
             }
-        } else if (balance == 2) {
+        } else if (balance == 2) { // inclinado hacia la izquierda
             balanceHijo = calcularBalance(nodo.getIzq());
             if (balanceHijo == 0 || balanceHijo == 1)
-                rotarDerecha(nodo);
+                nodoRaizSubarbol = rotarDerecha(nodo);
             else if (balanceHijo == -1) {
-                rotarIzquierda(nodo.getIzq());
-                rotarDerecha(nodo);
+                nodo.setIzq(rotarIzquierda(nodo.getIzq()));
+                nodoRaizSubarbol = rotarDerecha(nodo);
+            }
+        }
+
+        // lo "engancho" al nodo padre si hubo una rotacion
+        if (nodoRaizSubarbol != null) {
+            if (nodoPadre == null) {
+                this.raiz = nodoRaizSubarbol;
+            } else {
+                if (nodo == nodoPadre.getDer()) { // si era el hijo derecho
+                    nodoPadre.setDer(nodoRaizSubarbol);
+                } else { // si era el hijo derecho
+                    nodoPadre.setIzq(nodoRaizSubarbol);
+                }
             }
         }
     }
@@ -54,55 +95,23 @@ public class ArbolAVL<T extends Comparable<T>> extends ABB<T> {
         return altIzq - altDer;
     }
 
-    /*
     private Nodo<T> rotarIzquierda(Nodo<T> r) {
         Nodo<T> h = r.getDer();
         Nodo<T> temp = h.getIzq();
         h.setIzq(r);
         r.setDer(temp);
-        return  h;
-    }*/
-    private void rotarIzquierda(Nodo<T> nodoRaiz) {
-        Nodo<T> nodoTemp = nodoRaiz.getDer();
-        // intercambio elementos
-        T elemTemp = nodoRaiz.getElem();
-        nodoRaiz.setElem(nodoTemp.getElem());
-        nodoTemp.setElem(elemTemp);
-        // le asigno a la raiz el hijo derecho del hijo derecho de la raiz
-        nodoRaiz.setDer(nodoRaiz.getDer().getDer());
-        // acomodo los enlaces al nodo temporal
-        nodoTemp.setDer(nodoTemp.getIzq());
-        nodoTemp.setIzq(nodoRaiz.getIzq());
-        // cambio el hijo izquierdo de la raiz
-        nodoRaiz.setIzq(nodoTemp);
 
-        nodoRaiz.setAltura(nodoRaiz.getAltura() - 1);
-        nodoTemp.setAltura(nodoTemp.getAltura() + 1);
+        h.recalcularAltura();
+        return h;
     }
 
-    /*
     private Nodo<T> rotarDerecha(Nodo<T> r) {
         Nodo<T> h = r.getIzq();
         Nodo<T> temp = h.getDer();
         h.setDer(r);
         r.setIzq(temp);
-        return  h;
-    }*/
-    private void rotarDerecha(Nodo<T> nodoRaiz) {
-        Nodo<T> nodoTemp = nodoRaiz.getIzq();
-        // intercambio elementos
-        T elemTemp = nodoRaiz.getElem();
-        nodoRaiz.setElem(nodoTemp.getElem());
-        nodoTemp.setElem(elemTemp);
-        // le asigno a la raiz el hijo izquiedo del hijo izquiedo de la raiz
-        nodoRaiz.setIzq(nodoRaiz.getIzq().getIzq());
-        // acomodo los enlaces al nodo temporal
-        nodoTemp.setIzq(nodoTemp.getDer());
-        nodoTemp.setDer(nodoRaiz.getDer());
-        // cambio el hijo derecho de la raiz
-        nodoRaiz.setDer(nodoTemp);
 
-        nodoRaiz.setAltura(nodoRaiz.getAltura() - 1);
-        nodoTemp.setAltura(nodoTemp.getAltura() + 1);
+        h.recalcularAltura();
+        return h;
     }
 }

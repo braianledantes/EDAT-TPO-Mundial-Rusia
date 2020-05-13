@@ -1,0 +1,11 @@
+E: alemania; low; F; 0; 0; 0
+E: ARGENTINA; SAMPAOLI; D; 0; 0; 0
+E: brasil; tite; E; 0; 0; 0
+E: estados unidos; some guy; A; 0; 0; 0
+E: francia; ALGUIEN; C; 0; 0; 0
+E: Inglaterra; smith; G; 0; 0; 0
+E: italia; some guy; B; 0; 0; 0
+E: JAPÓN; park; H; 0; 0; 0
+E: MÉXICO; martino; F; 0; 0; 0
+E: portugal; felipe; B; 0; 0; 0
+E: rusia; vlad; A; 0; 0; 0
