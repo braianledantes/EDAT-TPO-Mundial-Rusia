@@ -2,11 +2,9 @@ package structures.conjuntistas;
 
 public class ArbolAVL<T extends Comparable<T>> extends ABB<T> {
 
-    // TODO VEVIFICAR TODAS LAS ROTACIONES A NIVEL RAIZ Y NODO INTERNO
     @Override
     public boolean insertar(T elem) {
         boolean exito = true;
-
         if (elem != null) {
             if (this.raiz == null)
                 this.raiz = new Nodo<>(elem);
