@@ -1,17 +1,17 @@
 package test.structures;
 
 import org.junit.jupiter.api.Test;
-import structures.grafo.GrafoEtiquetado;
+import structures.grafo.DigrafoEtiquetado;
 import structures.lineales.Lista;
 import structures.lineales.ListaDinamica;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GrafoEtiquetadoTest {
+class DigrafoEtiquetadoTest {
 
     @Test
     void insertarVertice() {
-        GrafoEtiquetado<Integer> grafo = new GrafoEtiquetado<>();
+        DigrafoEtiquetado<Integer> grafo = new DigrafoEtiquetado<>();
         System.out.println(grafo);
         assertTrue(grafo.esVacio());
 
@@ -57,7 +57,7 @@ class GrafoEtiquetadoTest {
 
     @Test
     void listarEnProfundidad() {
-        GrafoEtiquetado<Character> grafo = new GrafoEtiquetado<>();
+        DigrafoEtiquetado<Character> grafo = new DigrafoEtiquetado<>();
         assertTrue(grafo.insertarVertice('h'));
         grafo.insertarVertice('g');
         grafo.insertarVertice('f');
@@ -84,7 +84,7 @@ class GrafoEtiquetadoTest {
 
     @Test
     void caminoMasCorto() {
-        GrafoEtiquetado<Character> grafo = new GrafoEtiquetado<>();
+        DigrafoEtiquetado<Character> grafo = new DigrafoEtiquetado<>();
         Lista<Character> caminoEsp;
         grafo.insertarVertice('h');
         grafo.insertarVertice('g');
@@ -159,7 +159,7 @@ class GrafoEtiquetadoTest {
 
     @Test
     void caminoMasCorto2() {
-        GrafoEtiquetado<Character> grafo = new GrafoEtiquetado<>();
+        DigrafoEtiquetado<Character> grafo = new DigrafoEtiquetado<>();
         Lista<Character> caminoEsp;
         grafo.insertarVertice('i');
         grafo.insertarVertice('h');
