@@ -72,7 +72,7 @@ public class ArbolAVL<T extends Comparable<T>> extends ABB<T> {
             }
         }
 
-        // lo "engancho" al nodo padre
+        // lo "engancho" al nodo padre si hubo una rotacion
         if (nodoRaizSubarbol != null) {
             if (nodoPadre == null) {
                 this.raiz = nodoRaizSubarbol;

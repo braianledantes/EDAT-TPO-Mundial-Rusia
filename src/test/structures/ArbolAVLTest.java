@@ -124,15 +124,15 @@ class ArbolAVLTest {
 
     @Test
     void definitiva() {
-        esp.insertar(5, null);
-        esp.insertar(3, 5, ArbolBinario.HIJO_IZQUIERDO);
-        esp.insertar(8, 5, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(6, null);
+        esp.insertar(3, 6, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(8, 6, ArbolBinario.HIJO_DERECHO);
         esp.insertar(2, 3, ArbolBinario.HIJO_IZQUIERDO);
-        esp.insertar(4, 3, ArbolBinario.HIJO_DERECHO);
-        esp.insertar(1, 2, ArbolBinario.HIJO_IZQUIERDO);
-        esp.insertar(6, 8, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(5, 3, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(7, 8, ArbolBinario.HIJO_IZQUIERDO);
         esp.insertar(10, 8, ArbolBinario.HIJO_DERECHO);
-        esp.insertar(7, 6, ArbolBinario.HIJO_DERECHO);
+        esp.insertar(1, 2, ArbolBinario.HIJO_IZQUIERDO);
+        esp.insertar(4, 5, ArbolBinario.HIJO_IZQUIERDO);
         esp.insertar(9, 10, ArbolBinario.HIJO_IZQUIERDO);
         esp.insertar(11, 10, ArbolBinario.HIJO_DERECHO);
 

@@ -1,13 +1,32 @@
 
 - -----------------------------------------------------
-- Se inicio el programa el Tue May 12 20:54:16 ART 2020
+- Se inicio el programa el Tue May 12 21:00:11 ART 2020
 - Sistema{
 Ciudades= GrafoEtiquetado{inicio=null,
 }
-Equipos= TablaBusqueda{ raiz=null
+Equipos= TablaBusqueda{ raiz=ESTADOS UNIDOS -> ESTADOS UNIDOS{DT='SOME GUY', grupo=A, puntos=0, golesAFavor=0, golesEnContra=0}
+	ALEMANIA -> ALEMANIA{DT='LOW', grupo=F, puntos=0, golesAFavor=0, golesEnContra=0} // null; null
+	ARGENTINA -> ARGENTINA{DT='SAMPAOLI', grupo=D, puntos=0, golesAFavor=0, golesEnContra=0} // ALEMANIA; BRASIL
+	BRASIL -> BRASIL{DT='TITE', grupo=E, puntos=0, golesAFavor=0, golesEnContra=0} // null; null
+	ESTADOS UNIDOS -> ESTADOS UNIDOS{DT='SOME GUY', grupo=A, puntos=0, golesAFavor=0, golesEnContra=0} // ARGENTINA; JAPÓN
+	FRANCIA -> FRANCIA{DT='ALGUIEN', grupo=C, puntos=0, golesAFavor=0, golesEnContra=0} // null; null
+	INGLATERRA -> INGLATERRA{DT='SMITH', grupo=G, puntos=0, golesAFavor=0, golesEnContra=0} // FRANCIA; ITALIA
+	ITALIA -> ITALIA{DT='SOME GUY', grupo=B, puntos=0, golesAFavor=0, golesEnContra=0} // null; null
+	JAPÓN -> JAPÓN{DT='PARK', grupo=H, puntos=0, golesAFavor=0, golesEnContra=0} // INGLATERRA; PORTUGAL
+	MÉXICO -> MÉXICO{DT='MARTINO', grupo=F, puntos=0, golesAFavor=0, golesEnContra=0} // null; null
+	PORTUGAL -> PORTUGAL{DT='FELIPE', grupo=B, puntos=0, golesAFavor=0, golesEnContra=0} // MÉXICO; RUSIA
+	RUSIA -> RUSIA{DT='VLAD', grupo=A, puntos=0, golesAFavor=0, golesEnContra=0} // null; null
 }
 Partidos= {}}   0
 - Tabala de posiciones:
-
-- Se imporaron datos desde cargainicial2.txt
-- se guardo una instancia del sistema
+0 -> ALEMANIA
+0 -> ARGENTINA
+0 -> BRASIL
+0 -> ESTADOS UNIDOS
+0 -> FRANCIA
+0 -> INGLATERRA
+0 -> ITALIA
+0 -> JAPÓN
+0 -> MÉXICO
+0 -> PORTUGAL
+0 -> RUSIA
