@@ -114,6 +114,7 @@ class GrafoDirigidoEtiquetadoTest {
         grafo.insertarArco('h', 'g', 1);
         grafo.insertarArco('h', 'd', 1);
         System.out.println(grafo);
+
         caminoEsp = new ListaDinamica<>(new Character[]{});
         assertEquals(caminoEsp, grafo.caminoMasCorto('b', 'a'));
         assertEquals(caminoEsp, grafo.caminoMasLargo('b', 'a'));
@@ -135,6 +136,8 @@ class GrafoDirigidoEtiquetadoTest {
 
         caminoEsp = new ListaDinamica<>(new Character[]{'a', 'c', 'e'});
         assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'e', 'e'));
+        assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'a', 'e'));
+        assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'c', 'e'));
 
         caminoEsp = new ListaDinamica<>(new Character[]{'a'});
         assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'a', 'a'));
@@ -172,20 +175,87 @@ class GrafoDirigidoEtiquetadoTest {
         grafo.insertarVertice('c');
         grafo.insertarVertice('b');
         grafo.insertarVertice('a');
-        grafo.insertarArco('a', 'b', 3);
-        grafo.insertarArco('a', 'c', 1);
         grafo.insertarArco('a', 'd', 1);
-        grafo.insertarArco('b', 'e', 2);
-        grafo.insertarArco('c', 'e', 1);
+        grafo.insertarArco('a', 'c', 1);
+        grafo.insertarArco('a', 'b', 1);
+        grafo.insertarArco('b', 'e', 10);
+        grafo.insertarArco('c', 'd', 1);
+        grafo.insertarArco('c', 'e', 10);
+        grafo.insertarArco('d', 'e', 1);
+        grafo.insertarArco('d', 'f', 1);
+        grafo.insertarArco('d', 'i', 1);
+        grafo.insertarArco('e', 'f', 10);
+        grafo.insertarArco('e', 'h', 1);
         grafo.insertarArco('e', 'g', 10);
-        grafo.insertarArco('e', 'h', 20);
-        grafo.insertarArco('e', 'f', 40);
-        grafo.insertarArco('f', 'i', 100);
-        grafo.insertarArco('g', 'h', 20);
-        grafo.insertarArco('i', 'h', 30);
-        System.out.println(grafo);
+        grafo.insertarArco('f', 'i', 10);
+        grafo.insertarArco('g', 'h', 10);
+        grafo.insertarArco('i', 'h', 10);
 
-        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'c', 'e', 'h'});
-        assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'e', 'h'));
+        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'd', 'e', 'h'});
+        assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'e', 'h'), grafo.toString());
+
+        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'b', 'e', 'f', 'i', 'h'});
+        assertEquals(caminoEsp, grafo.caminoMasLargo('a', 'h'), grafo.toString());
+    }
+
+    @Test
+    void test() {
+        GrafoDirigidoEtiquetado<Character> grafo = new GrafoDirigidoEtiquetado<>();
+        Lista<Character> caminoEsp;
+        grafo.insertarVertice('i');
+        grafo.insertarVertice('h');
+        grafo.insertarVertice('g');
+        grafo.insertarVertice('f');
+        grafo.insertarVertice('e');
+        grafo.insertarVertice('d');
+        grafo.insertarVertice('c');
+        grafo.insertarVertice('b');
+        grafo.insertarVertice('a');
+        grafo.insertarArco('a', 'b', 1);
+        grafo.insertarArco('a', 'c', 1);
+        grafo.insertarArco('b', 'e', 1);
+        grafo.insertarArco('b', 'h', 1);
+        grafo.insertarArco('c', 'e', 1);
+        grafo.insertarArco('c', 'd', 1);
+        grafo.insertarArco('d', 'i', 1);
+        grafo.insertarArco('d', 'b', 1);
+        grafo.insertarArco('d', 'g', 1);
+        grafo.insertarArco('e', 'g', 1);
+        grafo.insertarArco('e', 'f', 1);
+        grafo.insertarArco('f', 'h', 1);
+        grafo.insertarArco('f', 'a', 1);
+        grafo.insertarArco('f', 'c', 1);
+        grafo.insertarArco('g', 'd', 1);
+        grafo.insertarArco('g', 'f', 1);
+        grafo.insertarArco('h', 'f', 1);
+
+        caminoEsp = new ListaDinamica<>();
+        assertEquals(caminoEsp, grafo.caminoMasCorto('i', 'a'), grafo.toString());
+
+        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'b', 'h'});
+        assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'h'), grafo.toString());
+
+        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'c', 'd', 'g', 'f', 'c', 'e', 'f', 'a', 'b', 'e', 'g', 'd', 'b', 'h'});
+        assertEquals(caminoEsp, grafo.caminoMasLargo('a', 'h'), grafo.toString());
+
+        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'b', 'h', 'f', 'c', 'd', 'b'});
+        assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'h', 'b'), grafo.toString());
+    }
+
+    @Test
+    void test2() {
+        GrafoDirigidoEtiquetado<Character> grafo = new GrafoDirigidoEtiquetado<>();
+        Lista<Character> caminoEsp;
+        grafo.insertarVertice('d');
+        grafo.insertarVertice('c');
+        grafo.insertarVertice('b');
+        grafo.insertarVertice('a');
+        grafo.insertarArco('a', 'b', 1);
+        grafo.insertarArco('b', 'd', 1);
+        grafo.insertarArco('b', 'c', 1);
+        grafo.insertarArco('c', 'b', 1);
+
+        caminoEsp = new ListaDinamica<>(new Character[]{'a', 'b', 'c', 'b', 'd'});
+        assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'c', 'd'), grafo.toString());
     }
 }

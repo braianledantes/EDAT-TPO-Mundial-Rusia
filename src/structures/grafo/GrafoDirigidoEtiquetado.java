@@ -107,7 +107,6 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
         return resp;
     }
 
-    // TODO hacerlo grafo simple, NO PASAR POR TODO EL ARREGLO DE VERTICES
     @Override
     public boolean eliminarVertice(E elem) {
         boolean elimino = false;
@@ -240,6 +239,7 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
 
     @Override
     public boolean eliminarArcoDoble(E vert1, E vert2) {
+        // TODO rehacer
         boolean elimino = false;
         NodoVert<E> vertEliminado;
         NodoVert<E> nodoVert = buscarPrimerVertice(vert1, vert2);
@@ -291,7 +291,31 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
     @Override
     public boolean existeArcoDoble(E vert1, E vert2) {
         // TODO existeArcoDoble()
-        return false;
+        boolean existe = false;
+        NodoVert<E> vert = buscarPrimerVertice(vert1, vert2);
+        NodoVert<E> otroVert = null;
+        E otroElem = (vert.getElem().equals(vert1)) ? vert2 : vert1;
+
+        if (vert != null) {
+            // busco el vertice adyacente
+            NodoAdy<E> ady = vert.getPrimerAdy();
+            while (otroVert == null && ady != null) {
+                if (ady.getVertice().getElem().equals(otroElem)) {
+                    otroVert = ady.getVertice();
+                }
+                ady = ady.getSigAdy();
+            }
+
+            // y si lo encontro busca el otro arco
+            if (otroVert != null) {
+                while (!existe && ady != null) {
+                    existe = ady.getVertice().getElem().equals(vert.getElem());
+                    ady = ady.getSigAdy();
+                }
+            }
+        }
+
+        return existe;
     }
 
     @Override
@@ -351,25 +375,22 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
                                             int distActual,
                                             ListaDinamica<E> camino,
                                             int[] distMin) {
-        visitados.insertar(vertice.getElem());
-        if (vertice == destino) {
-            camino = visitados.clone();
-            distMin[0] = distActual;
-        } else {
-            NodoAdy<E> ady = vertice.getPrimerAdy();
-            while (ady != null) {
-                distActual += ady.getEtiqueta();
-                if (distActual < distMin[0]) {
+        if (distActual < distMin[0]) {
+            visitados.insertar(vertice.getElem());
+            if (vertice == destino) {
+                camino = visitados.clone();
+                distMin[0] = distActual;
+            } else {
+                NodoAdy<E> ady = vertice.getPrimerAdy();
+                while (ady != null) {
                     if (!visitados.existe(ady.getVertice().getElem())) {
-                        camino = caminoMasCorto(ady.getVertice(), destino, visitados, distActual, camino, distMin);
+                        camino = caminoMasCorto(ady.getVertice(), destino, visitados, distActual + ady.getEtiqueta(), camino, distMin);
                     }
+                    ady = ady.getSigAdy();
                 }
-                distActual -= ady.getEtiqueta();
-                ady = ady.getSigAdy();
             }
+            visitados.eliminar(visitados.longitud());
         }
-        visitados.eliminar(visitados.longitud());
-
         return camino;
     }
 
@@ -394,28 +415,25 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
                                                     int distActual,
                                                     ListaDinamica<E> camino,
                                                     int[] distMin) {
-        visitados.insertar(vertice.getElem());
-        if (vertice == destino) {
-            camino = visitados.clone();
-            distMin[0] = distActual;
-        } else {
-            NodoAdy<E> ady = vertice.getPrimerAdy();
-            while (ady != null) {
-                if (distActual < distMin[0]) {
+        if (distActual < distMin[0]) {
+            visitados.insertar(vertice.getElem());
+            if (vertice == destino) {
+                camino = visitados.clone();
+                distMin[0] = distActual;
+            } else {
+                NodoAdy<E> ady = vertice.getPrimerAdy();
+                while (ady != null) {
                     if (!visitados.existe(ady.getVertice().getElem())) {
                         camino = caminoConMenosVertices(ady.getVertice(), destino, visitados, distActual + 1, camino, distMin);
                     }
+                    ady = ady.getSigAdy();
                 }
-                ady = ady.getSigAdy();
             }
+            visitados.eliminar(visitados.longitud());
         }
-        visitados.eliminar(visitados.longitud());
-
         return camino;
     }
 
-
-    // TODO VER CUANDO LLEGA AL DESTINO1, QUE VISITE TODOS LOS ADYACENTES
     @Override
     public Lista<E> caminoMasCorto(E origen, E destino1, E destino2) {
         NodoVert<E>[] vertices = buscarTresVertices(origen, destino1, destino2);
@@ -423,13 +441,14 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
         NodoVert<E> vertDestino1 = vertices[1];
         NodoVert<E> vertDestino2 = vertices[2];
         ListaDinamica<E> visitados = new ListaDinamica<>();
+        ListaDinamica<NodoAdy<E>> arcosVisitados = new ListaDinamica<>();
         ListaDinamica<E> camino = new ListaDinamica<>();
         int[] distanciaMinima = {Integer.MAX_VALUE}; // Se usa un arreglo para mantener la referencia y poder modificarlo.
         boolean[] bandera = {false}; // si paso por el primer destino.
 
         if (vertOrigen != null && vertDestino1 != null && vertDestino2 != null) {
             if (destino1 != destino2)
-                camino = caminoMasCorto(vertOrigen, vertDestino1, vertDestino2, visitados, 0, camino, distanciaMinima, bandera);
+                camino = caminoMasCorto(vertOrigen, vertDestino1, vertDestino2, visitados, arcosVisitados, 0, camino, distanciaMinima, bandera);
             else
                 camino = caminoMasCorto(vertOrigen, vertDestino1, visitados, 0, camino, distanciaMinima);
         }
@@ -440,37 +459,36 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
                                             NodoVert<E> destino1,
                                             NodoVert<E> destino2,
                                             ListaDinamica<E> visitados,
+                                            ListaDinamica<NodoAdy<E>> arcosVisitados,
                                             int distActual,
                                             ListaDinamica<E> camino,
                                             int[] distMin,
                                             boolean[] bandera) {
+        if (distActual < distMin[0]) {
+            visitados.insertar(vertice.getElem());
 
-        visitados.insertar(vertice.getElem());
-        if (bandera[0] && vertice == destino2) { // llego al final
-            camino = visitados.clone();
-            distMin[0] = distActual;
-        } else if (vertice == destino1 && vertice.getPrimerAdy() != null) { // llego a la mitad
-            // TODO verificar por que siempre pasa por el primer vertice de todos cuando llega a destino1
-            bandera[0] = true;
-            camino = caminoMasCorto(vertice.getPrimerAdy().getVertice(), destino1, destino2, visitados, distActual, camino, distMin, bandera);
-        } else {
-            NodoAdy<E> ady = vertice.getPrimerAdy();
-            while (ady != null) {
-                distActual += ady.getEtiqueta();
-                if (distActual < distMin[0]) {
-                    if (!visitados.existe(ady.getVertice().getElem())) {
-                        camino = caminoMasCorto(ady.getVertice(), destino1, destino2, visitados, distActual, camino, distMin, bandera);
-                        if (ady.getVertice() == destino1) {
-                            bandera[0] = false;
-                        }
-                    }
+            if (bandera[0] && vertice == destino2) { // si llego al final
+                camino = visitados.clone();
+                distMin[0] = distActual;
+            } else {
+                if (!bandera[0] && vertice == destino1) { // si llego a la mitad
+                    bandera[0] = true;
                 }
-                distActual -= ady.getEtiqueta();
-                ady = ady.getSigAdy();
+                NodoAdy<E> ady = vertice.getPrimerAdy();
+                while (ady != null) {
+                    if (!arcosVisitados.existe(ady)) { // mientras no haya pasado por el mismo arco
+                        arcosVisitados.insertar(ady);
+                        camino = caminoMasCorto(ady.getVertice(), destino1, destino2, visitados, arcosVisitados, distActual + ady.getEtiqueta(), camino, distMin, bandera);
+                        if (bandera[0] && ady.getVertice() == destino1) // por si volvio de la mitad, ese camino no sirve
+                            bandera[0] = false;
+                        arcosVisitados.eliminar(arcosVisitados.longitud());
+                    }
+                    ady = ady.getSigAdy();
+                }
             }
-        }
-        visitados.eliminar(visitados.longitud());
 
+            visitados.eliminar(visitados.longitud());
+        }
         return camino;
     }
 
@@ -498,21 +516,19 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
                                             ListaDinamica<E> camino,
                                             int[] distMax) {
         vertVisitados.insertar(vertice.getElem());
-        if (vertice == destino) {
+        if (vertice == destino) { // si llego al destino, los vertices visitados es un posible camino
             if (distActual > distMax[0]) {
                 camino = vertVisitados.clone();
                 distMax[0] = distActual;
             }
-        } else {
+        } else { // mientras sea cualquier vertice menos el destino
             NodoAdy<E> ady = vertice.getPrimerAdy();
             while (ady != null) {
-                distActual += ady.getEtiqueta();
                 if (!arcosVisitados.existe(ady)) {
                     arcosVisitados.insertar(ady);
-                    camino = caminoMasLargo(ady.getVertice(), destino, vertVisitados, arcosVisitados, distActual, camino, distMax);
+                    camino = caminoMasLargo(ady.getVertice(), destino, vertVisitados, arcosVisitados, distActual + ady.getEtiqueta(), camino, distMax);
                     arcosVisitados.eliminar(arcosVisitados.longitud());
                 }
-                distActual -= ady.getEtiqueta();
                 ady = ady.getSigAdy();
             }
         }
