@@ -44,12 +44,14 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
      * @return un nodo vertice
      */
     private NodoVert<E> buscarPrimerVertice(E elem1, E elem2) {
-        NodoVert<E> nodoVert = inicio;
         if (elem1 != null && elem2 != null) {
+            NodoVert<E> nodoVert = inicio;
             while (nodoVert != null && !nodoVert.getElem().equals(elem1) && !nodoVert.getElem().equals(elem2))
                 nodoVert = nodoVert.getSigVertice();
+            return nodoVert;
+
         }
-        return nodoVert;
+        return null;
     }
 
     /**
@@ -239,22 +241,23 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
 
     @Override
     public boolean eliminarArcoDoble(E vert1, E vert2) {
-        // TODO rehacer
         boolean elimino = false;
-        NodoVert<E> vertEliminado;
-        NodoVert<E> nodoVert = buscarPrimerVertice(vert1, vert2);
+        NodoVert<E> vertEliminado, nodoVert;
         if (vert1 != null && vert2 != null) {
-            if (nodoVert.getElem().equals(vert1)) {
-                vertEliminado = eliminarArco(nodoVert, vert2);
-                if (vertEliminado != null) {
-                    eliminarArco(vertEliminado, vert1);
-                    elimino = true;
-                }
-            } else if (nodoVert.getElem().equals(vert2)) {
-                vertEliminado = eliminarArco(nodoVert, vert1);
-                if (vertEliminado != null) {
-                    eliminarArco(vertEliminado, vert2);
-                    elimino = true;
+            nodoVert = buscarPrimerVertice(vert1, vert2);
+            if (nodoVert != null) {
+                if (nodoVert.getElem().equals(vert1)) {
+                    vertEliminado = eliminarArco(nodoVert, vert2);
+                    if (vertEliminado != null) {
+                        eliminarArco(vertEliminado, vert1);
+                        elimino = true;
+                    }
+                } else if (nodoVert.getElem().equals(vert2)) {
+                    vertEliminado = eliminarArco(nodoVert, vert1);
+                    if (vertEliminado != null) {
+                        eliminarArco(vertEliminado, vert2);
+                        elimino = true;
+                    }
                 }
             }
         }
@@ -290,13 +293,12 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
 
     @Override
     public boolean existeArcoDoble(E vert1, E vert2) {
-        // TODO existeArcoDoble()
         boolean existe = false;
         NodoVert<E> vert = buscarPrimerVertice(vert1, vert2);
         NodoVert<E> otroVert = null;
-        E otroElem = (vert.getElem().equals(vert1)) ? vert2 : vert1;
 
         if (vert != null) {
+            E otroElem = (vert.getElem().equals(vert1)) ? vert2 : vert1;
             // busco el vertice adyacente
             NodoAdy<E> ady = vert.getPrimerAdy();
             while (otroVert == null && ady != null) {
@@ -308,6 +310,7 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
 
             // y si lo encontro busca el otro arco
             if (otroVert != null) {
+                ady = otroVert.getPrimerAdy();
                 while (!existe && ady != null) {
                     existe = ady.getVertice().getElem().equals(vert.getElem());
                     ady = ady.getSigAdy();

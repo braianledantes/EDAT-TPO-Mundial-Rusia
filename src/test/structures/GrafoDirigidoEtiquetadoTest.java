@@ -255,7 +255,25 @@ class GrafoDirigidoEtiquetadoTest {
         grafo.insertarArco('b', 'c', 1);
         grafo.insertarArco('c', 'b', 1);
 
+        assertTrue(grafo.existeArcoDoble('b', 'c'));
+        assertFalse(grafo.existeArcoDoble('b', 'd'));
+        assertFalse(grafo.existeArcoDoble('a', 'd'));
+        assertFalse(grafo.existeArcoDoble('a', 'a'));
+        assertFalse(grafo.existeArcoDoble('b', 'e'));
+        assertFalse(grafo.existeArcoDoble('d', 'f'));
+
         caminoEsp = new ListaDinamica<>(new Character[]{'a', 'b', 'c', 'b', 'd'});
         assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'c', 'd'), grafo.toString());
+    }
+
+    @Test
+    void testEqualsNull() {
+        assertFalse(equalsNull());
+    }
+
+    private boolean equalsNull() {
+        Object obj1 = new Object();
+        Object obj2 = null;
+        return obj1.equals(obj2);
     }
 }
