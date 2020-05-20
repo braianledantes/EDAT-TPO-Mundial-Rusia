@@ -106,14 +106,7 @@ public class DataHelper implements Serializable {
                                            int golesAFavor,
                                            int golesEnContra) throws NumberFormatException {
         boolean exito;
-        if (grupo == 'A' ||
-                grupo == 'B' ||
-                grupo == 'C' ||
-                grupo == 'D' ||
-                grupo == 'E' ||
-                grupo == 'F' ||
-                grupo == 'G' ||
-                grupo == 'H') {
+        if (grupo >= 'A' && grupo <= 'H') {
             Equipo equipo = new Equipo(pais, directorTecnico, grupo, puntos, golesAFavor, golesEnContra);
             exito = equipos.insertar(pais, equipo);
         } else {
@@ -133,14 +126,7 @@ public class DataHelper implements Serializable {
                                                 int golesAFavor,
                                                 int golesEnContra) throws NumberFormatException {
         boolean modi = false;
-        if (grupo == 'A' ||
-                grupo == 'B' ||
-                grupo == 'C' ||
-                grupo == 'D' ||
-                grupo == 'E' ||
-                grupo == 'F' ||
-                grupo == 'G' ||
-                grupo == 'H') {
+        if (grupo >= 'A' && grupo <= 'H') {
             Equipo equipo = equipos.obtenerDato(nombre);
             if (equipo != null) {
                 equipo.setDirectorTecnico(directorTecnico);
