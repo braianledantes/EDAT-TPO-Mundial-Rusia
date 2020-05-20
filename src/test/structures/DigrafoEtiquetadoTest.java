@@ -1,19 +1,19 @@
 package test.structures;
 
 import org.junit.jupiter.api.Test;
-import structures.grafo.GrafoDirigidoEtiquetado;
+import structures.grafo.DigrafoEtiquetado;
 import structures.lineales.Lista;
 import structures.lineales.ListaDinamica;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GrafoDirigidoEtiquetadoTest {
+class DigrafoEtiquetadoTest {
 
     // TODO testear los arcos dobles :)
 
     @Test
     void insertarVertice() {
-        GrafoDirigidoEtiquetado<Integer> grafo = new GrafoDirigidoEtiquetado<>();
+        DigrafoEtiquetado<Integer> grafo = new DigrafoEtiquetado<>();
         System.out.println(grafo);
         assertTrue(grafo.esVacio());
 
@@ -59,7 +59,7 @@ class GrafoDirigidoEtiquetadoTest {
 
     @Test
     void listarEnProfundidad() {
-        GrafoDirigidoEtiquetado<Character> grafo = new GrafoDirigidoEtiquetado<>();
+        DigrafoEtiquetado<Character> grafo = new DigrafoEtiquetado<>();
         assertTrue(grafo.insertarVertice('h'));
         grafo.insertarVertice('g');
         grafo.insertarVertice('f');
@@ -86,7 +86,7 @@ class GrafoDirigidoEtiquetadoTest {
 
     @Test
     void caminoMasCorto() {
-        GrafoDirigidoEtiquetado<Character> grafo = new GrafoDirigidoEtiquetado<>();
+        DigrafoEtiquetado<Character> grafo = new DigrafoEtiquetado<>();
         Lista<Character> caminoEsp;
         grafo.insertarVertice('h');
         grafo.insertarVertice('g');
@@ -164,7 +164,7 @@ class GrafoDirigidoEtiquetadoTest {
 
     @Test
     void caminoMasCorto2() {
-        GrafoDirigidoEtiquetado<Character> grafo = new GrafoDirigidoEtiquetado<>();
+        DigrafoEtiquetado<Character> grafo = new DigrafoEtiquetado<>();
         Lista<Character> caminoEsp;
         grafo.insertarVertice('i');
         grafo.insertarVertice('h');
@@ -200,7 +200,7 @@ class GrafoDirigidoEtiquetadoTest {
 
     @Test
     void test() {
-        GrafoDirigidoEtiquetado<Character> grafo = new GrafoDirigidoEtiquetado<>();
+        DigrafoEtiquetado<Character> grafo = new DigrafoEtiquetado<>();
         Lista<Character> caminoEsp;
         grafo.insertarVertice('i');
         grafo.insertarVertice('h');
@@ -244,7 +244,7 @@ class GrafoDirigidoEtiquetadoTest {
 
     @Test
     void test2() {
-        GrafoDirigidoEtiquetado<Character> grafo = new GrafoDirigidoEtiquetado<>();
+        DigrafoEtiquetado<Character> grafo = new DigrafoEtiquetado<>();
         Lista<Character> caminoEsp;
         grafo.insertarVertice('d');
         grafo.insertarVertice('c');
@@ -254,13 +254,6 @@ class GrafoDirigidoEtiquetadoTest {
         grafo.insertarArco('b', 'd', 1);
         grafo.insertarArco('b', 'c', 1);
         grafo.insertarArco('c', 'b', 1);
-
-        assertTrue(grafo.existeArcoDoble('b', 'c'));
-        assertFalse(grafo.existeArcoDoble('b', 'd'));
-        assertFalse(grafo.existeArcoDoble('a', 'd'));
-        assertFalse(grafo.existeArcoDoble('a', 'a'));
-        assertFalse(grafo.existeArcoDoble('b', 'e'));
-        assertFalse(grafo.existeArcoDoble('d', 'f'));
 
         caminoEsp = new ListaDinamica<>(new Character[]{'a', 'b', 'c', 'b', 'd'});
         assertEquals(caminoEsp, grafo.caminoMasCorto('a', 'c', 'd'), grafo.toString());

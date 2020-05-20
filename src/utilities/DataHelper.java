@@ -5,7 +5,7 @@ import models.Equipo;
 import models.Partido;
 import models.Ronda;
 import structures.grafo.Arco;
-import structures.grafo.GrafoDirigidoEtiquetado;
+import structures.grafo.GrafoEtiquetado;
 import structures.lineales.Lista;
 import structures.lineales.ListaDinamica;
 import structures.propositoEspecifico.ColaPrioridad;
@@ -21,7 +21,7 @@ import java.util.HashMap;
  */
 public class DataHelper implements Serializable {
     // mapa de las ciudades
-    private final GrafoDirigidoEtiquetado<Ciudad> ciudades;
+    private final GrafoEtiquetado<Ciudad> ciudades;
     // key pais del equipo
     private final TablaBusqueda<String, Equipo> equipos;
     // key nombres de los equipos donde eq1 < eq2
@@ -30,7 +30,7 @@ public class DataHelper implements Serializable {
     private static DataHelper instance;
 
     private DataHelper() {
-        ciudades = new GrafoDirigidoEtiquetado<>();
+        ciudades = new GrafoEtiquetado<>();
         equipos = new TablaBusqueda<>();
         partidos = new HashMap<>();
     }

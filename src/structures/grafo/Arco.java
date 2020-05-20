@@ -1,5 +1,11 @@
 package structures.grafo;
 
+/**
+ * Clase utilizada por otras clases ajenas a Grafo
+ *
+ * @param <T> Tipo de elemento que guarda el grafo
+ * @param <E> Etiqueta del arco
+ */
 public class Arco<T, E> {
     private T verticeA, verticeB;
     private E etiqueta;
@@ -14,23 +20,11 @@ public class Arco<T, E> {
         return verticeA;
     }
 
-    public void setVerticeA(T verticeA) {
-        this.verticeA = verticeA;
-    }
-
     public T getVerticeB() {
         return verticeB;
     }
 
-    public void setVerticeB(T verticeB) {
-        this.verticeB = verticeB;
-    }
-
     public E getEtiqueta() {
         return etiqueta;
-    }
-
-    public void setEtiqueta(E etiqueta) {
-        this.etiqueta = etiqueta;
     }
 }

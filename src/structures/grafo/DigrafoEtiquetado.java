@@ -7,10 +7,10 @@ import structures.lineales.ListaDinamica;
 
 import java.io.Serializable;
 
-public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
-    private NodoVert<E> inicio;
+public class DigrafoEtiquetado<E> implements Grafo<E>, Serializable {
+    protected NodoVert<E> inicio;
 
-    public GrafoDirigidoEtiquetado() {
+    public DigrafoEtiquetado() {
         this.inicio = null;
     }
 
@@ -27,7 +27,7 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
      * @param elem el elemento a buscar
      * @return el nodo que contiene el elemento
      */
-    private NodoVert<E> buscarVertice(E elem) {
+    protected NodoVert<E> buscarVertice(E elem) {
         NodoVert<E> nodoVert = inicio;
         if (elem != null) {
             while (nodoVert != null && !nodoVert.getElem().equals(elem))
@@ -43,7 +43,7 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
      * @param elem2 elemento a buscar 2
      * @return un nodo vertice
      */
-    private NodoVert<E> buscarPrimerVertice(E elem1, E elem2) {
+    protected NodoVert<E> buscarPrimerVertice(E elem1, E elem2) {
         if (elem1 != null && elem2 != null) {
             NodoVert<E> nodoVert = inicio;
             while (nodoVert != null && !nodoVert.getElem().equals(elem1) && !nodoVert.getElem().equals(elem2))
@@ -61,7 +61,7 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
      * @param elem2 elemento a buscar 2
      * @return un arrelo con [verticeElem1, verticeElem2]
      */
-    private NodoVert<E>[] buscarDosVertices(E elem1, E elem2) {
+    protected NodoVert<E>[] buscarDosVertices(E elem1, E elem2) {
         NodoVert<E>[] vertices = new NodoVert[2];
 
         if (elem1 != null && elem2 != null) {
@@ -80,7 +80,7 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
         return vertices;
     }
 
-    private NodoVert<E>[] buscarTresVertices(E elem1, E elem2, E elem3) {
+    protected NodoVert<E>[] buscarTresVertices(E elem1, E elem2, E elem3) {
         NodoVert<E>[] vertices = new NodoVert[3];
 
         if (elem1 != null && elem2 != null) {
@@ -151,11 +151,6 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
     }
 
     @Override
-    public boolean insertarArcoDoble(E vert1, E vert2) {
-        return insertarArcoDoble(vert1, vert2, 1);
-    }
-
-    @Override
     public boolean insertarArco(E origen, E destino, int etiqueta) {
         boolean inserto = false;
         NodoVert<E>[] vertices = buscarDosVertices(origen, destino);
@@ -166,34 +161,6 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
             if (!existeArco(nodoOrigen, nodoDestino)) {
                 nodoOrigen.setPrimerAdy(new NodoAdy<>(nodoDestino, nodoOrigen.getPrimerAdy(), etiqueta));
                 inserto = true;
-            }
-        }
-
-        return inserto;
-    }
-
-    @Override
-    public boolean insertarArcoDoble(E vert1, E vert2, int etiqueta) {
-        boolean inserto = false;
-        NodoVert<E>[] vertices = buscarDosVertices(vert1, vert2);
-        NodoVert<E> nodoVert1 = vertices[0];
-        NodoVert<E> nodoVert2 = vertices[1];
-
-        if (nodoVert1 != null && nodoVert2 != null) {
-            if (nodoVert1 == nodoVert2) { // por si es un lazo
-                if (!existeArco(nodoVert1, nodoVert2)) {
-                    nodoVert1.setPrimerAdy(new NodoAdy<>(nodoVert2, nodoVert1.getPrimerAdy(), etiqueta));
-                    inserto = true;
-                }
-            } else {
-                if (!existeArco(nodoVert1, nodoVert2)) {
-                    nodoVert1.setPrimerAdy(new NodoAdy<>(nodoVert2, nodoVert1.getPrimerAdy(), etiqueta));
-                    inserto = true;
-                }
-                if (!existeArco(nodoVert2, nodoVert1)) {
-                    nodoVert2.setPrimerAdy(new NodoAdy<>(nodoVert1, nodoVert2.getPrimerAdy(), etiqueta));
-                    inserto = true;
-                }
             }
         }
 
@@ -215,7 +182,7 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
      * @param destino    elemento destino del arco
      * @return el vertice hacia donde apunta el arco eliminado
      */
-    private NodoVert<E> eliminarArco(NodoVert<E> vertOrigen, E destino) {
+    protected NodoVert<E> eliminarArco(NodoVert<E> vertOrigen, E destino) {
         NodoAdy<E> ady, adyAnt;
         NodoVert<E> nodoVertEliminado = null;
 
@@ -224,44 +191,21 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
                 nodoVertEliminado = vertOrigen.getPrimerAdy().getVertice();
                 vertOrigen.setPrimerAdy(vertOrigen.getPrimerAdy().getSigAdy());
             } else {
-                adyAnt = vertOrigen.getPrimerAdy();
+                adyAnt = vertOrigen.getPrimerAdy();  // adyacente anterior a 'ady'
                 ady = vertOrigen.getPrimerAdy().getSigAdy();
+
                 while (nodoVertEliminado == null && ady != null) {
                     if (ady.getVertice().getElem().equals(destino)) {
                         nodoVertEliminado = ady.getVertice();
                         adyAnt.setSigAdy(ady.getSigAdy());
+                    } else {
+                        adyAnt = ady;
+                        ady = ady.getSigAdy();
                     }
-                    adyAnt = ady;
-                    ady = ady.getSigAdy();
                 }
             }
         }
         return nodoVertEliminado;
-    }
-
-    @Override
-    public boolean eliminarArcoDoble(E vert1, E vert2) {
-        boolean elimino = false;
-        NodoVert<E> vertEliminado, nodoVert;
-        if (vert1 != null && vert2 != null) {
-            nodoVert = buscarPrimerVertice(vert1, vert2);
-            if (nodoVert != null) {
-                if (nodoVert.getElem().equals(vert1)) {
-                    vertEliminado = eliminarArco(nodoVert, vert2);
-                    if (vertEliminado != null) {
-                        eliminarArco(vertEliminado, vert1);
-                        elimino = true;
-                    }
-                } else if (nodoVert.getElem().equals(vert2)) {
-                    vertEliminado = eliminarArco(nodoVert, vert1);
-                    if (vertEliminado != null) {
-                        eliminarArco(vertEliminado, vert2);
-                        elimino = true;
-                    }
-                }
-            }
-        }
-        return elimino;
     }
 
     @Override
@@ -277,7 +221,7 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
         return existeArco(nodoOrigen, nodoDestino);
     }
 
-    private boolean existeArco(NodoVert<E> origen, NodoVert<E> destino) {
+    protected boolean existeArco(NodoVert<E> origen, NodoVert<E> destino) {
         boolean existe = false;
 
         if (origen != null && destino != null) {
@@ -285,36 +229,6 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
             while (!existe && ady != null) {
                 existe = ady.getVertice().getElem().equals(destino.getElem());
                 ady = ady.getSigAdy();
-            }
-        }
-
-        return existe;
-    }
-
-    @Override
-    public boolean existeArcoDoble(E vert1, E vert2) {
-        boolean existe = false;
-        NodoVert<E> vert = buscarPrimerVertice(vert1, vert2);
-        NodoVert<E> otroVert = null;
-
-        if (vert != null) {
-            E otroElem = (vert.getElem().equals(vert1)) ? vert2 : vert1;
-            // busco el vertice adyacente
-            NodoAdy<E> ady = vert.getPrimerAdy();
-            while (otroVert == null && ady != null) {
-                if (ady.getVertice().getElem().equals(otroElem)) {
-                    otroVert = ady.getVertice();
-                }
-                ady = ady.getSigAdy();
-            }
-
-            // y si lo encontro busca el otro arco
-            if (otroVert != null) {
-                ady = otroVert.getPrimerAdy();
-                while (!existe && ady != null) {
-                    existe = ady.getVertice().getElem().equals(vert.getElem());
-                    ady = ady.getSigAdy();
-                }
             }
         }
 
@@ -372,12 +286,12 @@ public class GrafoDirigidoEtiquetado<E> implements Grafo<E>, Serializable {
         return camino;
     }
 
-    private ListaDinamica<E> caminoMasCorto(NodoVert<E> vertice,
-                                            NodoVert<E> destino,
-                                            ListaDinamica<E> visitados,
-                                            int distActual,
-                                            ListaDinamica<E> camino,
-                                            int[] distMin) {
+    protected ListaDinamica<E> caminoMasCorto(NodoVert<E> vertice,
+                                              NodoVert<E> destino,
+                                              ListaDinamica<E> visitados,
+                                              int distActual,
+                                              ListaDinamica<E> camino,
+                                              int[] distMin) {
         if (distActual < distMin[0]) {
             visitados.insertar(vertice.getElem());
             if (vertice == destino) {

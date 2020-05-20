@@ -40,16 +40,6 @@ public interface Grafo<E> {
     boolean insertarArco(E origen, E destino);
 
     /**
-     * Dados dos elementos de tipoVertice se agrega a la estructura dos arcos que unen
-     * ambos vértices bidireccionalmente con la etiqueta igual a 1.
-     *
-     * @param vert1 vertice1
-     * @param vert2 vertice2
-     * @return si el arco existe y se puede realizar la inserción con éxito devuelve verdadero, en caso contrario devuelve falso
-     */
-    boolean insertarArcoDoble(E vert1, E vert2);
-
-    /**
      * Dados dos elementos de tipoVertice (origen y destino) se agrega a la estructura el arco que une
      * ambos vértices, la una etiqueda que es la distancia entre vertices.
      *
@@ -61,17 +51,6 @@ public interface Grafo<E> {
     boolean insertarArco(E origen, E destino, int etiqueta);
 
     /**
-     * Dados dos elementos de tipoVertice se agrega a la estructura dos arcos que unen ambos vértices bidireccionalmente,
-     * la una etiqueda que es la distancia entre vertices.
-     *
-     * @param vert1    vertice1
-     * @param vert2    vertice2
-     * @param etiqueta distancia entre origen y destino
-     * @return si el arco existe y se puede realizar la inserción con éxito devuelve verdadero, en caso contrario devuelve falso
-     */
-    boolean insertarArcoDoble(E vert1, E vert2, int etiqueta);
-
-    /**
      * Dados dos elementos de tipoVertice (origen y destino) se quita de la estructura el arco que une
      * ambos vértices desde origen a destino.
      *
@@ -80,16 +59,6 @@ public interface Grafo<E> {
      * @return si el arco existe y se puede realizar la eliminación con éxito devuelve verdadero, en caso contrario devuelve falso
      */
     boolean eliminarArco(E origen, E destino);
-
-    /**
-     * Dados dos elementos de tipoVertice (elem1 y elem2) se quita de la estructura el arco que une
-     * ambos vértices desde ambos vertices.
-     *
-     * @param elem1 vertice elem1
-     * @param elem2 vertice elem2
-     * @return si el arco existe y se puede realizar la eliminación con éxito devuelve verdadero, en caso contrario devuelve falso
-     */
-    boolean eliminarArcoDoble(E elem1, E elem2);
 
     /**
      * Verifica si existe el elemento vertice en el estructuras.grafo.
@@ -107,15 +76,6 @@ public interface Grafo<E> {
      * @return true si el arco existe y en caso contrario devuelve falso
      */
     boolean existeArco(E origen, E destino);
-
-    /**
-     * Dados dos elementos de tipoVertice (vert1 y vert2), verifca si existe un arco entre ellos.
-     *
-     * @param vert1 vertice vert1
-     * @param vert2 vertice vert2
-     * @return true si el arco existe y en caso contrario devuelve falso
-     */
-    boolean existeArcoDoble(E vert1, E vert2);
 
     /**
      * Dados dos elementos de tipoVertice (origen y destino), verifca si existe un camino desde origen a destino.
