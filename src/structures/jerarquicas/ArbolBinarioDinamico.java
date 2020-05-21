@@ -336,11 +336,9 @@ public abstract class ArbolBinarioDinamico<T> implements Arbol<T>, Serializable 
         public void recalcularAltura() {
             int altIzq = -1, altDer = -1;
             if (izq != null) {
-                //izq.recalcularAltura();
                 altIzq = izq.getAltura();
             }
             if (der != null) {
-                //der.recalcularAltura();
                 altDer = der.getAltura();
             }
             altura = Math.max(altIzq, altDer) + 1;

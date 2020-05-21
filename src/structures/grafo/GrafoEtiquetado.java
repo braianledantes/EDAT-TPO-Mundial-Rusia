@@ -6,11 +6,6 @@ import structures.lineales.ListaDinamica;
 public class GrafoEtiquetado<E> extends DigrafoEtiquetado<E> {
 
     @Override
-    public boolean insertarArco(E origen, E destino) {
-        return this.insertarArco(origen, destino, 1);
-    }
-
-    @Override
     public boolean insertarArco(E vert1, E vert2, int etiqueta) {
         boolean inserto = false;
         NodoVert<E>[] vertices = buscarDosVertices(vert1, vert2);
@@ -77,7 +72,6 @@ public class GrafoEtiquetado<E> extends DigrafoEtiquetado<E> {
 
     @Override
     public boolean eliminarArco(E vert1, E vert2) {
-        // TODO eliminarArco() modificarco por que tiene codigo repetido
         boolean elimino = false;
         NodoVert<E> vertEliminado, nodoVert;
         if (vert1 != null && vert2 != null) {

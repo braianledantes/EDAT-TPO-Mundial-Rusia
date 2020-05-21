@@ -151,7 +151,7 @@ class ArbolAVLTest {
         assertEquals(esp, avl);
     }
 
-    @Test
+   // @Test
     void paices() {
         ArbolAVL<String> avl = new ArbolAVL<>();
         ArbolBinario<String> esp = new ArbolBinario<>();

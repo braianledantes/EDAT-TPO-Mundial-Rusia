@@ -47,36 +47,22 @@ public class TablaBusqueda<C extends Comparable<C>, D> implements Diccionario<C,
     private void balancear(Nodo<C, D> nodo, Nodo<C, D> nodoPadre) {
         int balance = calcularBalance(nodo);
         int balanceHijo;
-        Nodo<C, D> nodoRaizSubarbol = null;
 
         if (balance == -2) { // inclinado hacia la derecha
             balanceHijo = calcularBalance(nodo.getDer());
-            if (balanceHijo == 0 || balanceHijo == -1)
-                nodoRaizSubarbol = rotarIzquierda(nodo);
-            else if (balanceHijo == 1) {
-                nodo.setDer(rotarDerecha(nodo.getDer()));
-                nodoRaizSubarbol = rotarIzquierda(nodo);
+            if (balanceHijo == 0 || balanceHijo == -1) {
+                rotarIzquierda(nodo);
+            } else if (balanceHijo == 1) {
+                rotarDerecha(nodo.getDer());
+                rotarIzquierda(nodo);
             }
         } else if (balance == 2) { // inclinado hacia la izquierda
             balanceHijo = calcularBalance(nodo.getIzq());
-            if (balanceHijo == 0 || balanceHijo == 1)
-                nodoRaizSubarbol = rotarDerecha(nodo);
-            else if (balanceHijo == -1) {
-                nodo.setIzq(rotarIzquierda(nodo.getIzq()));
-                nodoRaizSubarbol = rotarDerecha(nodo);
-            }
-        }
-
-        // lo "engancho" al nodo padre
-        if (nodoRaizSubarbol != null) {
-            if (nodoPadre == null) {
-                this.raiz = nodoRaizSubarbol;
-            } else {
-                if (nodo == nodoPadre.getDer()) { // si era el hijo derecho
-                    nodoPadre.setDer(nodoRaizSubarbol);
-                } else { // si era el hijo derecho
-                    nodoPadre.setIzq(nodoRaizSubarbol);
-                }
+            if (balanceHijo == 0 || balanceHijo == 1) {
+                rotarDerecha(nodo);
+            } else if (balanceHijo == -1) {
+                rotarIzquierda(nodo.getIzq());
+                rotarDerecha(nodo);
             }
         }
     }
@@ -90,24 +76,46 @@ public class TablaBusqueda<C extends Comparable<C>, D> implements Diccionario<C,
         return altIzq - altDer;
     }
 
-    private Nodo<C, D> rotarIzquierda(Nodo<C, D> r) {
-        Nodo<C, D> h = r.getDer();
-        Nodo<C, D> temp = h.getIzq();
-        h.setIzq(r);
-        r.setDer(temp);
+    private void rotarIzquierda(Nodo<C, D> nodoRaiz) {
+        Nodo<C, D> nodoTemp = nodoRaiz.getDer();
+        // intercambio elementos
+        C claveTemp = nodoRaiz.getClave();
+        D datoTemp = nodoRaiz.getDato();
+        nodoRaiz.setClave(nodoTemp.getClave());
+        nodoTemp.setClave(claveTemp);
+        nodoRaiz.setDato(nodoTemp.getDato());
+        nodoTemp.setDato(datoTemp);
+        // le asigno a la raiz el hijo derecho del hijo derecho de la raiz
+        nodoRaiz.setDer(nodoRaiz.getDer().getDer());
+        // acomodo los enlaces al nodo temporal
+        nodoTemp.setDer(nodoTemp.getIzq());
+        nodoTemp.setIzq(nodoRaiz.getIzq());
+        // cambio el hijo izquierdo de la raiz
+        nodoRaiz.setIzq(nodoTemp);
 
-        h.recalcularAltura();
-        return h;
+        nodoTemp.recalcularAltura();
+        nodoRaiz.recalcularAltura();
     }
 
-    private Nodo<C, D> rotarDerecha(Nodo<C, D> r) {
-        Nodo<C, D> h = r.getIzq();
-        Nodo<C, D> temp = h.getDer();
-        h.setDer(r);
-        r.setIzq(temp);
+    private void rotarDerecha(Nodo<C, D> nodoRaiz) {
+        Nodo<C, D> nodoTemp = nodoRaiz.getIzq();
+        // intercambio elementos
+        C claveTemp = nodoRaiz.getClave();
+        D datoTemp = nodoRaiz.getDato();
+        nodoRaiz.setClave(nodoTemp.getClave());
+        nodoTemp.setClave(claveTemp);
+        nodoRaiz.setDato(nodoTemp.getDato());
+        nodoTemp.setDato(datoTemp);
+        // le asigno a la raiz el hijo izquiedo del hijo izquiedo de la raiz
+        nodoRaiz.setIzq(nodoRaiz.getIzq().getIzq());
+        // acomodo los enlaces al nodo temporal
+        nodoTemp.setIzq(nodoTemp.getDer());
+        nodoTemp.setDer(nodoRaiz.getDer());
+        // cambio el hijo derecho de la raiz
+        nodoRaiz.setDer(nodoTemp);
 
-        h.recalcularAltura();
-        return h;
+        nodoTemp.recalcularAltura();
+        nodoRaiz.recalcularAltura();
     }
 
     @Override
@@ -423,18 +431,12 @@ public class TablaBusqueda<C extends Comparable<C>, D> implements Diccionario<C,
             return altura;
         }
 
-        public void setAltura(int altura) {
-            this.altura = altura;
-        }
-
         public void recalcularAltura() {
             int altIzq = -1, altDer = -1;
             if (izq != null) {
-                izq.recalcularAltura();
                 altIzq = izq.getAltura();
             }
             if (der != null) {
-                der.recalcularAltura();
                 altDer = der.getAltura();
             }
             altura = Math.max(altIzq, altDer) + 1;

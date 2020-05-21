@@ -3,8 +3,8 @@ package structures.conjuntistas;
 public class ArbolAVL<T extends Comparable<T>> extends ABB<T> {
 
     protected boolean insertar(T elem, Nodo<T> nodo) {
-
         boolean exito = super.insertar(elem, nodo);
+
         if (exito) {
             nodo.recalcularAltura();
             balancear(nodo);
