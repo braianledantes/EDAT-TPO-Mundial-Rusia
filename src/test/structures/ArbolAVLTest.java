@@ -168,29 +168,33 @@ class ArbolAVLTest {
         String mexico = "Mexico";
         String rusia = "Rusia";
 
-        esp.insertar(francia, null);
-        esp.insertar(brasil, francia, ArbolBinario.HIJO_IZQUIERDO);
-        esp.insertar(japon, francia, ArbolBinario.HIJO_DERECHO);
-        esp.insertar(argentina, brasil, ArbolBinario.HIJO_IZQUIERDO);
-        esp.insertar(estados_unidos, brasil, ArbolBinario.HIJO_DERECHO);
-        esp.insertar(inglaterra, japon, ArbolBinario.HIJO_IZQUIERDO);
-        esp.insertar(portugal, japon, ArbolBinario.HIJO_DERECHO);
-        esp.insertar(alemania, argentina, ArbolBinario.HIJO_IZQUIERDO);
-        esp.insertar(italia, inglaterra, ArbolBinario.HIJO_DERECHO);
-        esp.insertar(mexico, portugal, ArbolBinario.HIJO_IZQUIERDO);
-        esp.insertar(rusia, portugal, ArbolBinario.HIJO_DERECHO);
+//        esp.insertar(francia, null);
+//        esp.insertar(brasil, francia, ArbolBinario.HIJO_IZQUIERDO);
+//        esp.insertar(japon, francia, ArbolBinario.HIJO_DERECHO);
+//        esp.insertar(argentina, brasil, ArbolBinario.HIJO_IZQUIERDO);
+//        esp.insertar(estados_unidos, brasil, ArbolBinario.HIJO_DERECHO);
+//        esp.insertar(inglaterra, japon, ArbolBinario.HIJO_IZQUIERDO);
+//        esp.insertar(portugal, japon, ArbolBinario.HIJO_DERECHO);
+//        esp.insertar(alemania, argentina, ArbolBinario.HIJO_IZQUIERDO);
+//        esp.insertar(italia, inglaterra, ArbolBinario.HIJO_DERECHO);
+//        esp.insertar(mexico, portugal, ArbolBinario.HIJO_IZQUIERDO);
+//        esp.insertar(rusia, portugal, ArbolBinario.HIJO_DERECHO);
 
-        avl.insertar(francia);
+        avl.insertar(rusia);
         avl.insertar(brasil);
-        avl.insertar(japon);
-        avl.insertar(argentina);
-        avl.insertar(estados_unidos);
-        avl.insertar(inglaterra);
-        avl.insertar(portugal);
-        avl.insertar(alemania);
         avl.insertar(italia);
         avl.insertar(mexico);
-        avl.insertar(rusia);
+        avl.insertar(argentina);
+        avl.insertar(portugal);
+        avl.insertar(francia);
+        avl.insertar(estados_unidos);
+        avl.insertar(inglaterra);
+        avl.insertar(japon);
+        avl.insertar(alemania);
+
+        avl.eliminar(rusia);
+        avl.eliminar(italia);
+        avl.eliminar(portugal);
 
         assertEquals(esp, avl);
     }

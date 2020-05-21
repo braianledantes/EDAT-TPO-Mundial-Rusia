@@ -3,11 +3,13 @@ package structures.conjuntistas;
 public class ArbolAVL<T extends Comparable<T>> extends ABB<T> {
 
     protected boolean insertar(T elem, Nodo<T> nodo) {
+
         boolean exito = super.insertar(elem, nodo);
         if (exito) {
             nodo.recalcularAltura();
             balancear(nodo);
         }
+
         return exito;
     }
 
@@ -67,6 +69,7 @@ public class ArbolAVL<T extends Comparable<T>> extends ABB<T> {
         // cambio el hijo izquierdo de la raiz
         nodoRaiz.setIzq(nodoTemp);
 
+        nodoTemp.recalcularAltura();
         nodoRaiz.recalcularAltura();
     }
 
@@ -84,6 +87,7 @@ public class ArbolAVL<T extends Comparable<T>> extends ABB<T> {
         // cambio el hijo derecho de la raiz
         nodoRaiz.setDer(nodoTemp);
 
+        nodoTemp.recalcularAltura();
         nodoRaiz.recalcularAltura();
     }
 }
