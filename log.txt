@@ -1,150 +1,20 @@
 
 - -----------------------------------------------------
-- Se inicio el programa el Thu May 21 12:38:13 ART 2020
+- Se inicio el programa el Sun Jul 19 16:48:58 ART 2020
 - Sistema{
-Ciudades= GrafoEtiquetado{inicio=UFA{superfice=200.0, cantHabitantes=2342, sede=false},
-	UFA{superfice=200.0, cantHabitantes=2342, sede=false} -> EKATERIMBURGO{superfice=490.0, cantHabitantes=1455904, sede=true} (50), TOLYATTI{superfice=314.8, cantHabitantes=719514, sede=false} (9), VOLGOGRADO{superfice=565.0, cantHabitantes=1015586, sede=true} (35), 
-	KRASNODAR{superfice=1257.0, cantHabitantes=98234, sede=true} -> SOCHI{superfice=3508.0, cantHabitantes=411524, sede=true} (11), VOLGOGRADO{superfice=565.0, cantHabitantes=1015586, sede=true} (13), MOSCU{superfice=2511.0, cantHabitantes=12500123, sede=true} (25), 
-	PENZA{superfice=425.0, cantHabitantes=23425, sede=false} -> TOLYATTI{superfice=314.8, cantHabitantes=719514, sede=false} (22), SARATOV{superfice=700.0, cantHabitantes=304321, sede=false} (14), MOSCU{superfice=2511.0, cantHabitantes=12500123, sede=true} (15), SARANSK{superfice=383.0, cantHabitantes=314789, sede=true} (20), 
-	SARATOV{superfice=700.0, cantHabitantes=304321, sede=false} -> TOLYATTI{superfice=314.8, cantHabitantes=719514, sede=false} (10), VOLGOGRADO{superfice=565.0, cantHabitantes=1015586, sede=true} (17), PENZA{superfice=425.0, cantHabitantes=23425, sede=false} (14), 
-	SAN PETERSBURGO{superfice=1439.0, cantHabitantes=5351935, sede=true} -> SARANSK{superfice=383.0, cantHabitantes=314789, sede=true} (14), EKATERIMBURGO{superfice=490.0, cantHabitantes=1455904, sede=true} (50), MOSCU{superfice=2511.0, cantHabitantes=12500123, sede=true} (8), 
-	SARANSK{superfice=383.0, cantHabitantes=314789, sede=true} -> TOLYATTI{superfice=314.8, cantHabitantes=719514, sede=false} (18), PENZA{superfice=425.0, cantHabitantes=23425, sede=false} (20), SAN PETERSBURGO{superfice=1439.0, cantHabitantes=5351935, sede=true} (14), 
-	SOCHI{superfice=3508.0, cantHabitantes=411524, sede=true} -> EKATERIMBURGO{superfice=490.0, cantHabitantes=1455904, sede=true} (70), KRASNODAR{superfice=1257.0, cantHabitantes=98234, sede=true} (11), VOLGOGRADO{superfice=565.0, cantHabitantes=1015586, sede=true} (15), 
-	VOLGOGRADO{superfice=565.0, cantHabitantes=1015586, sede=true} -> KRASNODAR{superfice=1257.0, cantHabitantes=98234, sede=true} (13), SARATOV{superfice=700.0, cantHabitantes=304321, sede=false} (17), UFA{superfice=200.0, cantHabitantes=2342, sede=false} (35), SOCHI{superfice=3508.0, cantHabitantes=411524, sede=true} (15), 
-	EKATERIMBURGO{superfice=490.0, cantHabitantes=1455904, sede=true} -> UFA{superfice=200.0, cantHabitantes=2342, sede=false} (50), SOCHI{superfice=3508.0, cantHabitantes=411524, sede=true} (70), SAN PETERSBURGO{superfice=1439.0, cantHabitantes=5351935, sede=true} (50), 
-	TOLYATTI{superfice=314.8, cantHabitantes=719514, sede=false} -> UFA{superfice=200.0, cantHabitantes=2342, sede=false} (9), SARATOV{superfice=700.0, cantHabitantes=304321, sede=false} (10), SARANSK{superfice=383.0, cantHabitantes=314789, sede=true} (18), PENZA{superfice=425.0, cantHabitantes=23425, sede=false} (22), 
-	MOSCU{superfice=2511.0, cantHabitantes=12500123, sede=true} -> KRASNODAR{superfice=1257.0, cantHabitantes=98234, sede=true} (25), PENZA{superfice=425.0, cantHabitantes=23425, sede=false} (15), SAN PETERSBURGO{superfice=1439.0, cantHabitantes=5351935, sede=true} (8), 
+Ciudades= GrafoEtiquetado{inicio=null,
 }
-Equipos= TablaBusqueda{ raiz=IRÁN -> IRÁN{DT='SOME GUY', grupo=B, puntos=4, golesAFavor=2, golesEnContra=2}
-	ALEMANIA -> ALEMANIA{DT='LOW', grupo=F, puntos=3, golesAFavor=2, golesEnContra=4} // null; null
-	ARABIA SAUDITA -> ARABIA SAUDITA{DT='SOME GUY', grupo=A, puntos=3, golesAFavor=2, golesEnContra=7} // ALEMANIA; ARGENTINA
-	ARGENTINA -> ARGENTINA{DT='SAMPAOLI', grupo=D, puntos=7, golesAFavor=7, golesEnContra=8} // null; null
-	AUSTRALIA -> AUSTRALIA{DT='ALGUIEN', grupo=C, puntos=1, golesAFavor=2, golesEnContra=5} // ARABIA SAUDITA; BÉLGICA
-	BRASIL -> BRASIL{DT='TITE', grupo=E, puntos=10, golesAFavor=8, golesEnContra=3} // null; null
-	BÉLGICA -> BÉLGICA{DT='BELGA', grupo=G, puntos=15, golesAFavor=14, golesEnContra=6} // BRASIL; COLOMBIA
-	COLOMBIA -> COLOMBIA{DT='CAFÉ', grupo=H, puntos=9, golesAFavor=6, golesEnContra=2} // null; null
-	COREA DEL SUR -> COREA DEL SUR{DT='ALGUN ASIATICO', grupo=F, puntos=3, golesAFavor=3, golesEnContra=3} // AUSTRALIA; EGIPTO
-	COSTA RICA -> COSTA RICA{DT='ALGUIEN', grupo=E, puntos=1, golesAFavor=2, golesEnContra=5} // null; null
-	CROACIA -> CROACIA{DT='ALGUN CROATA', grupo=D, puntos=18, golesAFavor=16, golesEnContra=9} // COSTA RICA; DINAMARCA
-	DINAMARCA -> DINAMARCA{DT='ALGUIEN', grupo=C, puntos=5, golesAFavor=3, golesEnContra=3} // null; null
-	EGIPTO -> EGIPTO{DT='SOME GUY', grupo=A, puntos=0, golesAFavor=2, golesEnContra=6} // CROACIA; FRANCIA
-	ESPAÑA -> ESPAÑA{DT='SOME GUY', grupo=B, puntos=5, golesAFavor=7, golesEnContra=7} // null; null
-	FRANCIA -> FRANCIA{DT='ALGUIEN', grupo=C, puntos=16, golesAFavor=13, golesEnContra=7} // ESPAÑA; INGLATERRA
-	INGLATERRA -> INGLATERRA{DT='SMITH', grupo=G, puntos=9, golesAFavor=11, golesEnContra=6} // null; null
-	IRÁN -> IRÁN{DT='SOME GUY', grupo=B, puntos=4, golesAFavor=2, golesEnContra=2} // COREA DEL SUR; POLONIA
-	ISLANDIA -> ISLANDIA{DT='AGUIEN', grupo=D, puntos=1, golesAFavor=2, golesEnContra=5} // null; null
-	JAPÓN -> JAPÓN{DT='PARK', grupo=H, puntos=4, golesAFavor=6, golesEnContra=7} // ISLANDIA; MARRUECOS
-	MARRUECOS -> MARRUECOS{DT='SOME GUY', grupo=B, puntos=1, golesAFavor=2, golesEnContra=4} // null; null
-	MÉXICO -> MÉXICO{DT='MARTINO', grupo=F, puntos=6, golesAFavor=3, golesEnContra=6} // JAPÓN; PANAMÁ
-	NIGERIA -> NIGERIA{DT='AGUIEN', grupo=D, puntos=3, golesAFavor=3, golesEnContra=4} // null; null
-	PANAMÁ -> PANAMÁ{DT='TESS', grupo=G, puntos=0, golesAFavor=2, golesEnContra=11} // NIGERIA; PERÚ
-	PERÚ -> PERÚ{DT='ALGUIEN', grupo=C, puntos=3, golesAFavor=2, golesEnContra=2} // null; null
-	POLONIA -> POLONIA{DT='ALGUIEN', grupo=H, puntos=3, golesAFavor=2, golesEnContra=5} // MÉXICO; SERBIA
-	PORTUGAL -> PORTUGAL{DT='FELIPE', grupo=B, puntos=5, golesAFavor=6, golesEnContra=6} // null; null
-	RUSIA -> RUSIA{DT='VLAD', grupo=A, puntos=9, golesAFavor=12, golesEnContra=8} // PORTUGAL; SENEGAL
-	SENEGAL -> SENEGAL{DT='ALGUIEN', grupo=H, puntos=4, golesAFavor=4, golesEnContra=4} // null; null
-	SERBIA -> SERBIA{DT='ALGUIEN', grupo=E, puntos=3, golesAFavor=2, golesEnContra=4} // RUSIA; SUIZA
-	SUECIA -> SUECIA{DT='ALGUN TIPO', grupo=F, puntos=9, golesAFavor=6, golesEnContra=4} // null; null
-	SUIZA -> SUIZA{DT='ALGUIEN', grupo=E, puntos=5, golesAFavor=5, golesEnContra=5} // SUECIA; TÚNEZ
-	TÚNEZ -> TÚNEZ{DT='BI', grupo=G, puntos=3, golesAFavor=5, golesEnContra=8} // null; URUGUAY
-	URUGUAY -> URUGUAY{DT='ALGUIEN', grupo=A, puntos=12, golesAFavor=7, golesEnContra=3} // null; null
+Equipos= TablaBusqueda{ raiz=null
 }
-Partidos= {ARABIA SAUDITAURUGUAY={GRUPO (URUGUAY 1-1 ARABIA SAUDITA), MOSCU}
-, DINAMARCAFRANCIA={GRUPO (DINAMARCA 0-0 FRANCIA), MOSCU}
-, SERBIASUIZA={GRUPO (SERBIA 1-1 SUIZA), MOSCU}
-, COREA DEL SURMÉXICO={GRUPO (COREA DEL SUR 1-1 MÉXICO), MOSCU}
-, BRASILMÉXICO={OCTAVOS (BRASIL 2-2 MÉXICO), MOSCU}
-, IRÁNPORTUGAL={GRUPO (IRÁN 1-1 PORTUGAL), MOSCU}
-, CROACIAISLANDIA={GRUPO (ISLANDIA 1-1 CROACIA), MOSCU}
-, COLOMBIAPOLONIA={GRUPO (POLONIA 0-0 COLOMBIA), MOSCU}
-, COREA DEL SURSUECIA={GRUPO (SUECIA 1-1 COREA DEL SUR), MOSCU}
-, CROACIAFRANCIA={FINAL (FRANCIA 4-4 CROACIA), MOSCU}
-, EGIPTOURUGUAY={GRUPO (EGIPTO 0-0 URUGUAY), EKATERIMBURGO}
-, CROACIANIGERIA={GRUPO (CROACIA 2-2 NIGERIA), MOSCU}
-, COSTA RICASUIZA={GRUPO (SUIZA 2-2 COSTA RICA), MOSCU}
-, JAPÓNPOLONIA={GRUPO (JAPÓN 0-0 POLONIA), MOSCU}
-, COLOMBIAJAPÓN={GRUPO (COLOMBIA 1-1 JAPÓN), MOSCU}
-, ESPAÑAIRÁN={GRUPO (IRÁN 0-0 ESPAÑA), MOSCU}
-, AUSTRALIADINAMARCA={GRUPO (DINAMARCA 1-1 AUSTRALIA), MOSCU}
-, ALEMANIACOREA DEL SUR={GRUPO (COREA DEL SUR 2-2 ALEMANIA), MOSCU}
-, BÉLGICATÚNEZ={GRUPO (BÉLGICA 5-5 TÚNEZ), MOSCU}
-, BRASILCOSTA RICA={GRUPO (BRASIL 2-2 COSTA RICA), MOSCU}
-, BÉLGICAJAPÓN={OCTAVOS (BÉLGICA 3-3 JAPÓN), MOSCU}
-, ARGENTINAFRANCIA={OCTAVOS (ARGENTINA 4-4 FRANCIA), MOSCU}
-, CROACIARUSIA={CUARTOS (RUSIA 2-2 CROACIA), MOSCU}
-, MÉXICOSUECIA={GRUPO (MÉXICO 0-0 SUECIA), MOSCU}
-, CROACIADINAMARCA={OCTAVOS (CROACIA 2-2 DINAMARCA), MOSCU}
-, ARGENTINACROACIA={GRUPO (ARGENTINA 0-0 CROACIA), MOSCU}
-, FRANCIAURUGUAY={CUARTOS (URUGUAY 0-0 FRANCIA), MOSCU}
-, ARGENTINANIGERIA={GRUPO (NIGERIA 1-1 ARGENTINA), MOSCU}
-, SUECIASUIZA={OCTAVOS (SUECIA 1-1 SUIZA), MOSCU}
-, JAPÓNSENEGAL={GRUPO (JAPÓN 2-2 SENEGAL), MOSCU}
-, ESPAÑAMARRUECOS={GRUPO (ESPAÑA 2-2 MARRUECOS), MOSCU}
-, COSTA RICASERBIA={GRUPO (COSTA RICA 0-0 SERBIA), MOSCU}
-, POLONIASENEGAL={GRUPO (POLONIA 1-1 SENEGAL), MOSCU}
-, ALEMANIASUECIA={GRUPO (ALEMANIA 2-2 SUECIA), MOSCU}
-, INGLATERRASUECIA={CUARTOS (SUECIA 0-0 INGLATERRA), MOSCU}
-, BÉLGICAINGLATERRA={GRUPO (INGLATERRA 0-0 BÉLGICA), MOSCU}
-, INGLATERRAPANAMÁ={GRUPO (INGLATERRA 6-6 PANAMÁ), MOSCU}
-, ARGENTINAISLANDIA={GRUPO (ARGENTINA 1-1 ISLANDIA), MOSCU}
-, ESPAÑAPORTUGAL={GRUPO (PORTUGAL 3-3 ESPAÑA), MOSCU}
-, AUSTRALIAPERÚ={GRUPO (AUSTRALIA 0-0 PERÚ), MOSCU}
-, COLOMBIAINGLATERRA={OCTAVOS (COLOMBIA 1-1 INGLATERRA), MOSCU}
-, COLOMBIASENEGAL={GRUPO (SENEGAL 0-0 COLOMBIA), MOSCU}
-, BÉLGICAFRANCIA={SEMIFINAL (FRANCIA 1-1 BÉLGICA), MOSCU}
-, IRÁNMARRUECOS={GRUPO (MARRUECOS 0-0 IRÁN), SAN PETERSBURGO}
-, BRASILSUIZA={GRUPO (BRASIL 1-1 SUIZA), MOSCU}
-, INGLATERRATÚNEZ={GRUPO (TÚNEZ 1-1 INGLATERRA), MOSCU}
-, ARABIA SAUDITARUSIA={GRUPO (RUSIA 5-5 ARABIA SAUDITA), MOSCU}
-, FRANCIAPERÚ={GRUPO (FRANCIA 1-1 PERÚ), MOSCU}
-, CROACIAINGLATERRA={SEMIFINAL (CROACIA 2-2 INGLATERRA), MOSCU}
-, MARRUECOSPORTUGAL={GRUPO (PORTUGAL 1-1 MARRUECOS), MOSCU}
-, EGIPTORUSIA={GRUPO (RUSIA 3-3 EGIPTO), MOSCU}
-, RUSIAURUGUAY={GRUPO (URUGUAY 3-3 RUSIA), MOSCU}
-, ARABIA SAUDITAEGIPTO={GRUPO (ARABIA SAUDITA 2-2 EGIPTO), MOSCU}
-, BÉLGICAPANAMÁ={GRUPO (BÉLGICA 3-3 PANAMÁ), MOSCU}
-, ESPAÑARUSIA={OCTAVOS (ESPAÑA 1-1 RUSIA), MOSCU}
-, BRASILBÉLGICA={CUARTOS (BRASIL 1-1 BÉLGICA), MOSCU}
-, AUSTRALIAFRANCIA={GRUPO (FRANCIA 2-2 AUSTRALIA), MOSCU}
-, ISLANDIANIGERIA={GRUPO (NIGERIA 2-2 ISLANDIA), MOSCU}
-, BRASILSERBIA={GRUPO (SERBIA 0-0 BRASIL), MOSCU}
-, DINAMARCAPERÚ={GRUPO (PERÚ 0-0 DINAMARCA), MOSCU}
-, PORTUGALURUGUAY={OCTAVOS (URUGUAY 2-2 PORTUGAL), MOSCU}
-, ALEMANIAMÉXICO={GRUPO (ALEMANIA 0-0 MÉXICO), MOSCU}
-, PANAMÁTÚNEZ={GRUPO (PANAMÁ 1-1 TÚNEZ), MOSCU}
-}}   63
+Partidos= {}}   0
 - Tabala de posiciones:
-0 -> EGIPTO
-0 -> PANAMÁ
-1 -> AUSTRALIA
-1 -> COSTA RICA
-1 -> ISLANDIA
-1 -> MARRUECOS
-3 -> ALEMANIA
-3 -> ARABIA SAUDITA
-3 -> COREA DEL SUR
-3 -> NIGERIA
-3 -> PERÚ
-3 -> POLONIA
-3 -> SERBIA
-3 -> TÚNEZ
-4 -> IRÁN
-4 -> JAPÓN
-4 -> SENEGAL
-5 -> DINAMARCA
-5 -> ESPAÑA
-5 -> PORTUGAL
-5 -> SUIZA
-6 -> MÉXICO
-7 -> ARGENTINA
-9 -> COLOMBIA
-9 -> INGLATERRA
-9 -> RUSIA
-9 -> SUECIA
-10 -> BRASIL
-12 -> URUGUAY
-15 -> BÉLGICA
-16 -> FRANCIA
-18 -> CROACIA
 
-- Se imporaron datos desde cargainicial2.txt
+- Sistema{
+Ciudades= GrafoEtiquetado{inicio=null,
+}
+Equipos= TablaBusqueda{ raiz=null
+}
+Partidos= {}}   0
+- Tabala de posiciones:
+
+- se cerro el programa el Sun Jul 19 16:49:20 ART 2020

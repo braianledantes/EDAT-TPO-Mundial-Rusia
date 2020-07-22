@@ -137,10 +137,19 @@ public class GrafoEtiquetado<E> extends DigrafoEtiquetado<E> {
         boolean[] bandera = {false}; // si paso por el primer destino.
 
         if (vertOrigen != null && vertDestino1 != null && vertDestino2 != null) {
-            if (destino1 != destino2)
-                camino = caminoMasCorto(vertOrigen, vertDestino1, vertDestino2, visitados, 0, camino, distanciaMinima, bandera);
-            else
+            if (destino1 != destino2) {
+                camino = caminoMasCorto(
+                        vertOrigen,
+                        vertDestino1,
+                        vertDestino2,
+                        visitados,
+                        0,
+                        camino,
+                        distanciaMinima,
+                        bandera);
+            } else {
                 camino = caminoMasCorto(vertOrigen, vertDestino1, visitados, 0, camino, distanciaMinima);
+            }
         }
         return camino;
     }
@@ -166,7 +175,17 @@ public class GrafoEtiquetado<E> extends DigrafoEtiquetado<E> {
                 NodoAdy<E> ady = vertice.getPrimerAdy();
                 while (ady != null) {
                     if (!visitados.existe(ady.getVertice().getElem())) { // mientras no haya pasado por el mismo vertice
-                        camino = caminoMasCorto(ady.getVertice(), destino1, destino2, visitados, distActual + ady.getEtiqueta(), camino, distMin, bandera);
+
+                        camino = caminoMasCorto(
+                                ady.getVertice(),
+                                destino1,
+                                destino2,
+                                visitados,
+                                distActual + ady.getEtiqueta(),
+                                camino,
+                                distMin,
+                                bandera);
+
                         if (bandera[0] && ady.getVertice() == destino1) // por si volvio de la mitad, ese camino no sirve
                             bandera[0] = false;
                     }
@@ -210,7 +229,13 @@ public class GrafoEtiquetado<E> extends DigrafoEtiquetado<E> {
             NodoAdy<E> ady = vertice.getPrimerAdy();
             while (ady != null) {
                 if (!vertVisitados.existe(ady.getVertice().getElem())) {
-                    camino = caminoMasLargo(ady.getVertice(), destino, vertVisitados, distActual + ady.getEtiqueta(), camino, distMax);
+                    camino = caminoMasLargo(
+                            ady.getVertice(),
+                            destino,
+                            vertVisitados,
+                            distActual + ady.getEtiqueta(),
+                            camino,
+                            distMax);
                 }
                 ady = ady.getSigAdy();
             }

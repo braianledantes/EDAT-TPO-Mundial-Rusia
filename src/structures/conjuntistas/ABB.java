@@ -6,7 +6,8 @@ import structures.lineales.ListaDinamica;
 
 import java.io.Serializable;
 
-public class ABB<T extends Comparable<T>> extends ArbolBinarioDinamico<T> implements ArbolBinarioBusqueda<T>, Serializable {
+public class ABB<T extends Comparable<T>> extends ArbolBinarioDinamico<T>
+        implements ArbolBinarioBusqueda<T>, Serializable {
 
     @Override
     public boolean insertar(T elem) {

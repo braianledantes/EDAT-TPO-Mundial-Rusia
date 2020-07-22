@@ -17,7 +17,7 @@ public class ColaPrioridadDinamica<E> implements ColaPrioridad<E>, Serializable 
         if (prioridad >= 0)
             return insertar(elemento, prioridad, null, inicio);
         else
-            throw new IllegalArgumentException("prioridad debe se positivo: " + prioridad);
+            throw new IllegalArgumentException("prioridad debe ser un numero positivo: " + prioridad);
     }
 
     private boolean insertar(E elemento, int prioridad, Nodo<E> nodoAnt, Nodo<E> nodo) {
