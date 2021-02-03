@@ -46,16 +46,16 @@ rango [min, max]. Los valores de min y max pueden no estar en el árbol.
 7. Obtener y mostrar la tabla de posiciones de los equipos de un momento dado, almacenando
 los datos de los equipos ordenados de mayor a menor puntaje (puede utilizar alguna
 estructura de datos auxiliar que considere apropiada, asegurando la eficiencia)
-8. Mostrar sistema: es una operación de dubugging que permite ver todas las structures
+8. Mostrar sistema: es una operación de dubugging que permite ver todas las estructuras
 utilizadas con su contenido (grafo, AVL y Mapeo) para verificar, en cualquier momento de la
 ejecución del sistema, que se encuentren cargadas correctamente.
 
 ### Requisitos importantes:
 + El programa debe permitir la ejecución por separado de cada una de las operaciones
 especificadas.
-+ El programa debe ser eficiente: Debe recorrer las structures sólo lo necesario y haciendo
++ El programa debe ser eficiente: Debe recorrer las estructuras sólo lo necesario y haciendo
 buen uso de la memoria.
-+ Las structures deben estar implementadas de forma genérica para elementos de tipo Object
++ Las estructuras deben estar implementadas de forma genérica para elementos de tipo Object
 o Comparable de Java, según el propósito de la estructura.
 + La **carga inicial** del sistema debe hacerse a partir de un archivo de texto con el formato
 indicado. Ejemplo, la información se puede ingresar de a una por línea indicando el tipo
@@ -69,10 +69,10 @@ indicado. Ejemplo, la información se puede ingresar de a una por línea indican
 		R: MOSCU; TOLYATTI; 989
 		
 + Guardar **un archivo de LOG** (archivo de texto) para guardar la siguiente información:
- Estado del sistema al momento de terminar la carga inicial (todas las structures)
+ Estado del sistema al momento de terminar la carga inicial (todas las estructuras)
     * Listado de operaciones de ABM que se realizan a lo largo de la ejecución (Ej: “Se crea la
 ciudad X”, “Se eliminó el equipo Y”, “Se cargaron los datos del partido eq1-eq2”, etc)
-    * Estado del sistema al momento de terminar de ejecutarse (todas las structures
+    * Estado del sistema al momento de terminar de ejecutarse (todas las estructuras
 incluyendo la tabla de posiciones)
 
 ### Condiciones y fechas de entrega:

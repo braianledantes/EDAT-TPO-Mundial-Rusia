@@ -1,6 +1,6 @@
-import utilities.DataHelper;
-import utilities.FilesHelper;
-import utilities.Logger;
+import utilidades.DataHelper;
+import utilidades.FilesHelper;
+import utilidades.Logger;
 
 import java.io.IOException;
 
@@ -20,6 +20,7 @@ public class Main {
             dataHelper = DataHelper.getInstance();
         }
         vistaTerminal = new VistaTerminal(dataHelper, filesHelper, logger);
+
         logger.escribirSistema(dataHelper);
         vistaTerminal.iniciar();
         logger.escribirSistema(dataHelper);

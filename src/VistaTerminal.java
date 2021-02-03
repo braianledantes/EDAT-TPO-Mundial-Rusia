@@ -1,12 +1,12 @@
-import models.Ciudad;
-import models.Equipo;
-import models.Partido;
-import structures.lineales.Lista;
-import structures.propositoEspecifico.ColaPrioridad;
-import utilities.DataHelper;
-import utilities.FilesHelper;
-import utilities.Logger;
-import utilities.TecladoIn;
+import modelos.Ciudad;
+import modelos.Equipo;
+import modelos.Partido;
+import estructuras.lineales.Lista;
+import estructuras.propositoEspecifico.ColaPrioridad;
+import utilidades.DataHelper;
+import utilidades.FilesHelper;
+import utilidades.Logger;
+import utilidades.TecladoIn;
 
 import java.io.IOException;
 
