@@ -195,7 +195,23 @@ public class ArbolAVL<E extends Comparable<E>> implements AAVL<E> {
 
     @Override
     public Lista<E> lisarRango(E elementoMinimo, E elementoMaximo) {
-        return null;
+        Lista<E> listaRango = new ListaDinamica<>();
+        listarRangoAux(elementoMinimo, elementoMaximo, this.raiz, listaRango);
+        return listaRango;
+    }
+
+    private void listarRangoAux(E elementoMinimo, E elementoMaximo, NodoAVL<E> nodo, Lista<E> listaRango) {
+        if (nodo != null) {
+            if (nodo.getElemento().compareTo(elementoMinimo) > 0) {
+                listarRangoAux(elementoMinimo, elementoMaximo, nodo.getIzquierdo(), listaRango);
+            }
+            if (nodo.getElemento().compareTo(elementoMinimo) >= 0 && nodo.getElemento().compareTo(elementoMaximo) <= 0) {
+                listaRango.insertar(nodo.getElemento(), listaRango.longitud() + 1);
+            }
+            if (nodo.getElemento().compareTo(elementoMaximo) < 0) {
+                listarRangoAux(elementoMinimo, elementoMaximo, nodo.getDerecho(), listaRango);
+            }
+        }
     }
 
     @Override
