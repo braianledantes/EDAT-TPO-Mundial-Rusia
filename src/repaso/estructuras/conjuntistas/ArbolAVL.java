@@ -58,18 +58,14 @@ public class ArbolAVL<E extends Comparable<E>> implements AAVL<E> {
             int balanceHijo = nodo.getIzquierdo().calcularBalance();
             if (balanceHijo == -1) {
                 nodo.setIzquierdo(rotarIzquierda(nodo.getIzquierdo()));
-                subRaiz = rotarDerecha(nodo);
-            } else {
-                subRaiz = rotarDerecha(nodo);
             }
+            subRaiz = rotarDerecha(nodo);
         } else if (balance == -2) {
             int balanceHijo = nodo.getDerecho().calcularBalance();
             if (balanceHijo == 1) {
                 nodo.setDerecho(rotarDerecha(nodo.getDerecho()));
-                subRaiz = rotarIzquierda(nodo);
-            } else {
-                subRaiz = rotarIzquierda(nodo);
             }
+            subRaiz = rotarIzquierda(nodo);
         }
         return subRaiz;
     }
