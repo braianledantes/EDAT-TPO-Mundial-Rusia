@@ -1,4 +1,4 @@
-package repaso.estructuras;
+package repaso.estructuras.utliles;
 
 import java.util.Objects;
 

@@ -1,6 +1,6 @@
 package repaso.estructuras.conjuntistas;
 
-import repaso.estructuras.Resultado;
+import repaso.estructuras.utliles.Resultado;
 import repaso.estructuras.jerarquicas.NodoArbolBin;
 import repaso.estructuras.lineales.Lista;
 import repaso.estructuras.lineales.ListaDinamica;
