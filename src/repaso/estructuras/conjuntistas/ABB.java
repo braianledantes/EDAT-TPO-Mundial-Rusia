@@ -13,39 +13,24 @@ public class ABB<E extends Comparable<E>> implements ArbolBinarioBusqueda<E> {
     }
 
     @Override
-    public boolean insertar(E elemento) {
-        boolean exito = false;
-        if (elemento != null) {
-            if (this.raiz == null) {
-                this.raiz = new NodoArbolBin<>(elemento);
-                exito = true;
-            } else {
-                exito = insertarAux(elemento, this.raiz);
-            }
+    public boolean insertar(E elem) {
+        Resultado<Boolean> exito = new Resultado<>(false);
+        if (elem != null) {
+            this.raiz = insertartAux(elem, this.raiz, exito);
         }
-        return exito;
+        return exito.getValor();
     }
 
-    private boolean insertarAux(E elemento, NodoArbolBin<E> nodo) {
-        boolean exito = false;
-        if (!nodo.getElemento().equals(elemento)) {
-            if (elemento.compareTo(nodo.getElemento()) < 0) {
-                if (nodo.getIzquierdo() == null) {
-                    nodo.setIzquierdo(new NodoArbolBin<>(elemento));
-                    exito = true;
-                } else {
-                    exito = insertarAux(elemento, nodo.getIzquierdo());
-                }
-            } else {
-                if (nodo.getDerecho() == null) {
-                    nodo.setDerecho(new NodoArbolBin<>(elemento));
-                    exito = true;
-                } else {
-                    exito = insertarAux(elemento, nodo.getDerecho());
-                }
-            }
+    private NodoArbolBin<E> insertartAux(E elem, NodoArbolBin<E> nodo, Resultado<Boolean> exito) {
+        if (nodo == null) {
+            nodo = new NodoArbolBin<>(elem);
+            exito.setValor(true);
+        } else if (elem.compareTo(nodo.getElemento()) < 0) {
+            nodo.setIzquierdo(insertartAux(elem, nodo.getIzquierdo(), exito));
+        } else if (elem.compareTo(nodo.getElemento()) > 0) {
+            nodo.setDerecho(insertartAux(elem, nodo.getDerecho(), exito));
         }
-        return exito;
+        return nodo;
     }
 
     @Override
@@ -60,16 +45,16 @@ public class ABB<E extends Comparable<E>> implements ArbolBinarioBusqueda<E> {
     private NodoArbolBin<E> eliminarAux(NodoArbolBin<E> nodo, E elemento, Resultado<Boolean> exito) {
         NodoArbolBin<E> salida = nodo;
 
-        if (nodo != null)  {
+        if (nodo != null) {
             if (elemento.compareTo(nodo.getElemento()) == 0) {
                 exito.setValor(true);
                 // el nodo es el elemento buscado
                 if (nodo.getIzquierdo() == null && nodo.getDerecho() == null) {
                     // caso 1: el nodo es una hoja
                     salida = null;
-                } else if (nodo.getIzquierdo() != null && nodo.getDerecho() != null){
+                } else if (nodo.getIzquierdo() != null && nodo.getDerecho() != null) {
                     // caso 2: el nodo tiene ambos hijos
-                    NodoArbolBin<E> nodoCandidato = buscarCandidatoMenor(nodo.getDerecho());
+                    NodoArbolBin<E> nodoCandidato = buscarCandidatoMenor(nodo);
                     if (nodoCandidato == nodo.getDerecho()) {
                         nodoCandidato.setIzquierdo(nodo.getIzquierdo());
                     } else {
@@ -93,9 +78,13 @@ public class ABB<E extends Comparable<E>> implements ArbolBinarioBusqueda<E> {
     }
 
     private NodoArbolBin<E> buscarCandidatoMenor(NodoArbolBin<E> nodo) {
+        return buscarMenor(nodo.getDerecho());
+    }
+
+    private NodoArbolBin<E> buscarMenor(NodoArbolBin<E> nodo) {
         NodoArbolBin<E> nodoCandidato = nodo;
         if (nodo.getIzquierdo() != null) {
-            nodoCandidato = buscarCandidatoMenor(nodo.getIzquierdo());
+            nodoCandidato = buscarMenor(nodo.getIzquierdo());
         }
         return nodoCandidato;
     }

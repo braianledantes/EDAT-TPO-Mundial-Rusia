@@ -1,5 +1,6 @@
 package repaso.estructuras.conjuntistas;
 
+import repaso.estructuras.jerarquicas.NodoArbolBin;
 import repaso.estructuras.utliles.Resultado;
 import repaso.estructuras.lineales.Lista;
 import repaso.estructuras.lineales.ListaDinamica;
@@ -15,39 +16,27 @@ public class ArbolAVL<E extends Comparable<E>> implements AAVL<E> {
     public boolean insertar(E elemento) {
         Resultado<Boolean> exito = new Resultado<>(false);
         if (elemento != null) {
-            if (this.raiz == null) {
-                this.raiz = new NodoAVL<>(elemento);
-                exito.setValor(true);
-            } else {
-                this.raiz = insertarAux(elemento, this.raiz, exito);
-            }
+            this.raiz = insertarAux(elemento, this.raiz, exito);
         }
         return exito.getValor();
     }
 
     private NodoAVL<E> insertarAux(E elemento, NodoAVL<E> nodo, Resultado<Boolean> exito) {
         NodoAVL<E> salida = nodo;
-        if (!nodo.getElemento().equals(elemento)) {
-            if (elemento.compareTo(nodo.getElemento()) < 0) {
-                if (nodo.getIzquierdo() == null) {
-                    nodo.setIzquierdo(new NodoAVL<>(elemento));
-                    exito.setValor(true);
-                } else {
-                    insertarAux(elemento, nodo.getIzquierdo(), exito);
-                }
-            } else {
-                if (nodo.getDerecho() == null) {
-                    nodo.setDerecho(new NodoAVL<>(elemento));
-                    exito.setValor(true);
-                } else {
-                    insertarAux(elemento, nodo.getDerecho(), exito);
-                }
-            }
+
+        if (nodo == null) {
+            salida = new NodoAVL<>(elemento);
+            exito.setValor(true);
+        } else if (elemento.compareTo(nodo.getElemento()) < 0) {
+            nodo.setIzquierdo(insertarAux(elemento, nodo.getIzquierdo(), exito));
+        } else if (elemento.compareTo(nodo.getElemento()) > 0) {
+            nodo.setDerecho(insertarAux(elemento, nodo.getDerecho(), exito));
         }
         if (exito.getValor()) {
-            nodo.recalcularAltura();
-            salida = balancear(nodo);
+            salida.recalcularAltura();
+            salida = balancear(salida);
         }
+
         return salida;
     }
 
@@ -113,7 +102,7 @@ public class ArbolAVL<E extends Comparable<E>> implements AAVL<E> {
                     salida = null;
                 } else if (nodo.getIzquierdo() != null && nodo.getDerecho() != null) {
                     // caso 2: el nodo tiene ambos hijos
-                    NodoAVL<E> nodoCandidato = buscarCandidatoMenor(nodo.getDerecho());
+                    NodoAVL<E> nodoCandidato = buscarCandidatoMenor(nodo);
                     if (nodoCandidato == nodo.getDerecho()) {
                         nodoCandidato.setIzquierdo(nodo.getIzquierdo());
                     } else {
@@ -141,9 +130,13 @@ public class ArbolAVL<E extends Comparable<E>> implements AAVL<E> {
     }
 
     private NodoAVL<E> buscarCandidatoMenor(NodoAVL<E> nodo) {
+        return buscarMenor(nodo.getDerecho());
+    }
+
+    private NodoAVL<E> buscarMenor(NodoAVL<E> nodo) {
         NodoAVL<E> nodoCandidato = nodo;
         if (nodo.getIzquierdo() != null) {
-            nodoCandidato = buscarCandidatoMenor(nodo.getIzquierdo());
+            nodoCandidato = buscarMenor(nodo.getIzquierdo());
         }
         return nodoCandidato;
     }

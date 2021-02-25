@@ -57,6 +57,7 @@ public class ArbolHeapMinimo<E extends Comparable<E>> implements ArbolHeap<E> {
         int posCandidato = (posicion * 2) + 1;
         if (posCandidato <= this.ultimo) {
 
+            // si el hijo tiene hermano derecho
             if (posCandidato < this.ultimo) {
                 if (this.arr[posCandidato].compareTo(this.arr[posCandidato + 1]) > 0) {
                     posCandidato++;
