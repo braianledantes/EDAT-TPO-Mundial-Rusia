@@ -1,6 +1,6 @@
 
 - -----------------------------------------------------
-- Se inicio el programa el Sun Jul 19 16:48:58 ART 2020
+- Se inicio el programa el Tue Feb 23 15:26:06 ART 2021
 - Sistema{
 Ciudades= GrafoEtiquetado{inicio=null,
 }
@@ -17,4 +17,4 @@ Equipos= TablaBusqueda{ raiz=null
 Partidos= {}}   0
 - Tabala de posiciones:
 
-- se cerro el programa el Sun Jul 19 16:49:20 ART 2020
+- se cerro el programa el Tue Feb 23 15:26:14 ART 2021

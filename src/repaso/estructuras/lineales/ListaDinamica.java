@@ -1,5 +1,7 @@
 package repaso.estructuras.lineales;
 
+import repaso.estructuras.grafos.NodoVert;
+
 public class ListaDinamica<E> implements Lista<E> {
     private NodoLineal<E> cabecera = null;
 
@@ -123,4 +125,32 @@ public class ListaDinamica<E> implements Lista<E> {
         return iguales;
     }
 
+    @Override
+    public ListaDinamica<E> clone() {
+        ListaDinamica<E> clon = new ListaDinamica<>();
+
+        if (this.cabecera != null) {
+            clon.cabecera = new NodoLineal<>(this.cabecera.getElemento());
+            NodoLineal<E> nodoThis = this.cabecera.getEnlace();
+            NodoLineal<E> nodoClon = clon.cabecera;
+            while (nodoThis != null) {
+                nodoClon.setEnlace(new NodoLineal<>(nodoThis.getElemento()));
+                nodoClon = nodoClon.getEnlace();
+                nodoThis = nodoThis.getEnlace();
+            }
+        }
+        return clon;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("ListaDinamica{ ");
+        NodoLineal<E> nodo = this.cabecera;
+        while (nodo != null) {
+            sb.append(nodo.getElemento()).append(" ");
+            nodo = nodo.getEnlace();
+        }
+        sb.append('}');
+        return sb.toString();
+    }
 }
