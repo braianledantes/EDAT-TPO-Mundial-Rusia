@@ -22,13 +22,16 @@ public class ABB<E extends Comparable<E>> implements ArbolBinarioBusqueda<E> {
     }
 
     private NodoArbolBin<E> insertartAux(E elem, NodoArbolBin<E> nodo, Resultado<Boolean> exito) {
+        NodoArbolBin<E> nodoAux;
         if (nodo == null) {
             nodo = new NodoArbolBin<>(elem);
             exito.setValor(true);
         } else if (elem.compareTo(nodo.getElemento()) < 0) {
-            nodo.setIzquierdo(insertartAux(elem, nodo.getIzquierdo(), exito));
+            nodoAux = insertartAux(elem, nodo.getIzquierdo(), exito);
+            nodo.setIzquierdo(nodoAux);
         } else if (elem.compareTo(nodo.getElemento()) > 0) {
-            nodo.setDerecho(insertartAux(elem, nodo.getDerecho(), exito));
+            nodoAux = insertartAux(elem, nodo.getDerecho(), exito);
+            nodo.setDerecho(nodoAux);
         }
         return nodo;
     }
@@ -54,15 +57,9 @@ public class ABB<E extends Comparable<E>> implements ArbolBinarioBusqueda<E> {
                     salida = null;
                 } else if (nodo.getIzquierdo() != null && nodo.getDerecho() != null) {
                     // caso 2: el nodo tiene ambos hijos
-                    NodoArbolBin<E> nodoCandidato = buscarCandidatoMenor(nodo);
-                    if (nodoCandidato == nodo.getDerecho()) {
-                        nodoCandidato.setIzquierdo(nodo.getIzquierdo());
-                    } else {
-                        nodo.getDerecho().setIzquierdo(nodoCandidato.getDerecho());
-                        nodoCandidato.setIzquierdo(nodo.getIzquierdo());
-                        nodoCandidato.setDerecho(nodo.getDerecho());
-                    }
-                    salida = nodoCandidato;
+                    salida = buscarCandidatoMenor(nodo);
+                    salida.setIzquierdo(nodo.getIzquierdo());
+                    salida.setDerecho(nodo.getDerecho());
                 } else {
                     // caso 3: el nodo tiene un solo hijo
                     salida = (nodo.getIzquierdo() != null) ? nodo.getIzquierdo() : nodo.getDerecho();
@@ -78,15 +75,20 @@ public class ABB<E extends Comparable<E>> implements ArbolBinarioBusqueda<E> {
     }
 
     private NodoArbolBin<E> buscarCandidatoMenor(NodoArbolBin<E> nodo) {
-        return buscarMenor(nodo.getDerecho());
+        // precondicion: el nodo tiene ambos hijos
+        Resultado<NodoArbolBin<E>> nodoCandidato = new Resultado<>(null);
+        nodo.setDerecho(obtenerCandidatoMenor(nodo.getDerecho(), nodoCandidato));
+        return nodoCandidato.getValor();
     }
 
-    private NodoArbolBin<E> buscarMenor(NodoArbolBin<E> nodo) {
-        NodoArbolBin<E> nodoCandidato = nodo;
-        if (nodo.getIzquierdo() != null) {
-            nodoCandidato = buscarMenor(nodo.getIzquierdo());
+    private NodoArbolBin<E> obtenerCandidatoMenor(NodoArbolBin<E> nodo, Resultado<NodoArbolBin<E>> nodoCandidato) {
+        if (nodo.getIzquierdo() == null) {
+            nodoCandidato.setValor(nodo);
+            nodo = nodo.getDerecho(); // elimina el nodo candidato
+        } else {
+            nodo.setIzquierdo(obtenerCandidatoMenor(nodo.getIzquierdo(), nodoCandidato));
         }
-        return nodoCandidato;
+        return nodo;
     }
 
     @Override

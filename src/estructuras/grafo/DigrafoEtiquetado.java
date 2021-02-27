@@ -578,6 +578,7 @@ public class DigrafoEtiquetado<E> implements Grafo<E>, Serializable {
     }
 
     private void listarEnAnchura(NodoVert<E> vertIni, Lista<E> visitados) {
+        // TODO Mal, y si el vertice adyacente ya esta en la cola???? lo vuelve a agregar, ojo!!!
         Cola<NodoVert<E>> porVisitar = new ColaDinamica<>();
         NodoVert<E> vert;
         NodoAdy<E> ady;
@@ -589,6 +590,7 @@ public class DigrafoEtiquetado<E> implements Grafo<E>, Serializable {
             visitados.insertar(vert.getElem());
             ady = vert.getPrimerAdy();
             while (ady != null) {
+                // y si el vertice ya esta en la cola????
                 if (!visitados.existe(ady.getVertice().getElem())) {
                     porVisitar.poner(ady.getVertice());
                 }

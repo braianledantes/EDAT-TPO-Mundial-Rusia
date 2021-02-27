@@ -262,7 +262,7 @@ public class GrafoSimple<E> implements Grafo<E> {
             } else {
                 NodoAdy<E> ady = nodoActual.getPrimerAdy();
                 while (ady != null) {
-                    if (visitados.localizar(ady.getVertice().getElem()) == -1){
+                    if (visitados.localizar(ady.getVertice().getElem()) == -1) {
 
                         camino = caminoMasCortoAux(
                                 camino,
@@ -306,7 +306,7 @@ public class GrafoSimple<E> implements Grafo<E> {
         } else {
             NodoAdy<E> ady = nodoVert.getPrimerAdy();
             while (ady != null) {
-                if (visitados.localizar(ady.getVertice().getElem()) == -1){
+                if (visitados.localizar(ady.getVertice().getElem()) == -1) {
                     camino = caminoMasLargoAux(
                             camino,
                             visitados,
@@ -336,15 +336,16 @@ public class GrafoSimple<E> implements Grafo<E> {
         return listaVisitados;
     }
 
-    private void listarAnchuraAux(Lista<E> listaVisitados, NodoVert<E> verticeInicial) {
+    private void listarAnchuraAux(Lista<E> listaVisitados, NodoVert<E> vertice) {
         Cola<NodoVert<E>> cola = new ColaDinamica<>();
-        listaVisitados.insertar(verticeInicial.getElem(), listaVisitados.longitud() + 1);
-        cola.poner(verticeInicial);
+        listaVisitados.insertar(vertice.getElem(), listaVisitados.longitud() + 1);
+        cola.poner(vertice);
         while (!cola.esVacia()) {
-            NodoVert<E> vertice = cola.obtenerFrente();
+            vertice = cola.obtenerFrente();
             cola.sacar();
             NodoAdy<E> ady = vertice.getPrimerAdy();
             while (ady != null) {
+                vertice = ady.getVertice();
                 if (listaVisitados.localizar(vertice.getElem()) == -1) {
                     listaVisitados.insertar(vertice.getElem(), listaVisitados.longitud() + 1);
                     cola.poner(ady.getVertice());

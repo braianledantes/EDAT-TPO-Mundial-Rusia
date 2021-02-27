@@ -37,4 +37,10 @@ public class NodoArbolBin<E> {
     public void setDerecho(NodoArbolBin<E> derecho) {
         this.derecho = derecho;
     }
+
+    @Override
+    public String toString() {
+        return "NodoArbolBin{" +
+                "elemento=" + elemento + '}';
+    }
 }

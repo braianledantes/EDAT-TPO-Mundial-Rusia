@@ -165,6 +165,85 @@ class ABBTest {
     }
 
     @Test
+    void eliminar6() {
+        abb.vaciar();
+        abbe.vaciar();
+
+        abb.insertar(45);
+        abb.insertar(34);
+        abb.insertar(13);
+        abb.insertar(65);
+        abb.insertar(55);
+        abb.insertar(47);
+        abb.insertar(48);
+        abb.insertar(57);
+        abb.insertar(73);
+        abb.insertar(96);
+
+        abbe.insertar(47);
+        abbe.insertar(34);
+        abbe.insertar(13);
+        abbe.insertar(65);
+        abbe.insertar(55);
+        abbe.insertar(48);
+        abbe.insertar(57);
+        abbe.insertar(73);
+        abbe.insertar(96);
+
+        abb.eliminar(45);
+
+        assertEquals(abbe, abb);
+    }
+
+    @Test
+    void eliminar7() {
+        abb.vaciar();
+        abbe.vaciar();
+
+        abb.insertar(45);
+        abb.insertar(34);
+        abb.insertar(13);
+        abb.insertar(65);
+        abb.insertar(55);
+        abb.insertar(73);
+        abb.insertar(96);
+
+        abbe.insertar(55);
+        abbe.insertar(34);
+        abbe.insertar(13);
+        abbe.insertar(65);
+        abbe.insertar(73);
+        abbe.insertar(96);
+
+        abb.eliminar(45);
+
+        assertEquals(abbe, abb);
+    }
+
+    @Test
+    void eliminar8() {
+        abb.vaciar();
+        abbe.vaciar();
+
+        abb.insertar(45);
+        abb.insertar(34);
+        abb.insertar(13);
+        abb.insertar(65);
+        abb.insertar(73);
+        abb.insertar(96);
+
+        abbe.insertar(65);
+        abbe.insertar(34);
+        abbe.insertar(13);
+        abbe.insertar(73);
+        abbe.insertar(96);
+
+        abb.eliminar(45);
+
+        assertEquals(abbe, abb);
+    }
+
+    @Test
     void pertenece() {
         assertTrue(abb.pertenece(45));
         assertTrue(abb.pertenece(34));

@@ -102,15 +102,9 @@ public class ArbolAVL<E extends Comparable<E>> implements AAVL<E> {
                     salida = null;
                 } else if (nodo.getIzquierdo() != null && nodo.getDerecho() != null) {
                     // caso 2: el nodo tiene ambos hijos
-                    NodoAVL<E> nodoCandidato = buscarCandidatoMenor(nodo);
-                    if (nodoCandidato == nodo.getDerecho()) {
-                        nodoCandidato.setIzquierdo(nodo.getIzquierdo());
-                    } else {
-                        nodo.getDerecho().setIzquierdo(nodoCandidato.getDerecho());
-                        nodoCandidato.setIzquierdo(nodo.getIzquierdo());
-                        nodoCandidato.setDerecho(nodo.getDerecho());
-                    }
-                    salida = nodoCandidato;
+                    salida = buscarCandidatoMenor(nodo);
+                    salida.setIzquierdo(nodo.getIzquierdo());
+                    salida.setDerecho(nodo.getDerecho());
                 } else {
                     // caso 3: el nodo tiene un solo hijo
                     salida = (nodo.getIzquierdo() != null) ? nodo.getIzquierdo() : nodo.getDerecho();
@@ -130,15 +124,20 @@ public class ArbolAVL<E extends Comparable<E>> implements AAVL<E> {
     }
 
     private NodoAVL<E> buscarCandidatoMenor(NodoAVL<E> nodo) {
-        return buscarMenor(nodo.getDerecho());
+        // precondicion: el nodo tiene ambos hijos
+        Resultado<NodoAVL<E>> nodoCandidato = new Resultado<>(null);
+        nodo.setDerecho(obtenerCandidatoMenor(nodo.getDerecho(), nodoCandidato));
+        return nodoCandidato.getValor();
     }
 
-    private NodoAVL<E> buscarMenor(NodoAVL<E> nodo) {
-        NodoAVL<E> nodoCandidato = nodo;
-        if (nodo.getIzquierdo() != null) {
-            nodoCandidato = buscarMenor(nodo.getIzquierdo());
+    private NodoAVL<E> obtenerCandidatoMenor(NodoAVL<E> nodo, Resultado<NodoAVL<E>> nodoCandidato) {
+        if (nodo.getIzquierdo() == null) {
+            nodoCandidato.setValor(nodo);
+            nodo = nodo.getDerecho(); // elimina el nodo candidato
+        } else {
+            nodo.setIzquierdo(obtenerCandidatoMenor(nodo.getIzquierdo(), nodoCandidato));
         }
-        return nodoCandidato;
+        return nodo;
     }
 
     @Override

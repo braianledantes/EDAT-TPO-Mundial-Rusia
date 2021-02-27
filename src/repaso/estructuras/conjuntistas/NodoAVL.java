@@ -31,10 +31,10 @@ public class NodoAVL<E> {
     public void recalcularAltura() {
         int altIzq = -1, altDer = -1;
         if (izquierdo != null) {
-            altIzq = izquierdo.getAltura();
+            altIzq = izquierdo.altura;
         }
         if (derecho != null) {
-            altDer = derecho.getAltura();
+            altDer = derecho.altura;
         }
         altura = Math.max(altIzq, altDer) + 1;
     }
@@ -42,10 +42,10 @@ public class NodoAVL<E> {
     public int calcularBalance() {
         int altIzq = -1, altDer = -1;
         if (izquierdo != null) {
-            altIzq = izquierdo.getAltura();
+            altIzq = izquierdo.altura;
         }
         if (derecho != null) {
-            altDer = derecho.getAltura();
+            altDer = derecho.altura;
         }
         return altIzq - altDer;
     }

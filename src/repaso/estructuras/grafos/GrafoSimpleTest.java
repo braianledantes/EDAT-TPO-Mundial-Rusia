@@ -64,6 +64,7 @@ class GrafoSimpleTest {
 
         System.out.println(grafo);
         System.out.println(grafo.caminoMasLargo('A', 'I'));
+        System.out.println(grafo.listarAnchura());
     }
 
 }
