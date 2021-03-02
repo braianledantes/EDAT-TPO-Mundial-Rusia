@@ -14,6 +14,11 @@ public class TablaHashAbierto<E> implements TablaHash<E> {
         this.cant = 0;
     }
 
+    public TablaHashAbierto(int cant) {
+        this.hash = new NodoLineal[cant];
+        this.cant = 0;
+    }
+
     private int hash(E elemento) {
         int hash = -1;
         if (elemento != null) {
@@ -22,7 +27,7 @@ public class TablaHashAbierto<E> implements TablaHash<E> {
                 hash = -hash;
             }
         }
-        return hash % tam;
+        return hash % this.hash.length;
     }
 
     @Override
