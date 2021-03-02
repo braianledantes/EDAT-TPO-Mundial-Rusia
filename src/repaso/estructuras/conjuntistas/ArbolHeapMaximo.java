@@ -1,7 +1,5 @@
 package repaso.estructuras.conjuntistas;
 
-import java.util.Arrays;
-
 public class ArbolHeapMaximo<E extends Comparable<E>> implements ArbolHeap<E> {
     private final E[] arr;
     private int ultimo;

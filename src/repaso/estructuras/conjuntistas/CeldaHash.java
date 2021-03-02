@@ -1,7 +1,5 @@
 package repaso.estructuras.conjuntistas;
 
-import estructuras.conjuntistas.HashCerrado;
-
 public class CeldaHash<E> {
     private E elem;
     private int estado;

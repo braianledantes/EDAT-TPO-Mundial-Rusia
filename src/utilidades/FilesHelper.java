@@ -1,10 +1,10 @@
 package utilidades;
 
+import estructuras.grafo.Arco;
+import estructuras.lineales.Lista;
 import modelos.Ciudad;
 import modelos.Equipo;
 import modelos.Partido;
-import estructuras.grafo.Arco;
-import estructuras.lineales.Lista;
 
 import java.io.*;
 import java.util.Collection;

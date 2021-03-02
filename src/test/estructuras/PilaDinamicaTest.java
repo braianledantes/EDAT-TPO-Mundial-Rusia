@@ -1,8 +1,8 @@
 package test.estructuras;
 
+import estructuras.lineales.PilaDinamica;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import estructuras.lineales.PilaDinamica;
 
 import static org.junit.jupiter.api.Assertions.*;
 

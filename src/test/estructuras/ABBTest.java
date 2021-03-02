@@ -1,12 +1,12 @@
 package test.estructuras;
 
+import estructuras.conjuntistas.ABB;
+import estructuras.lineales.Lista;
+import estructuras.lineales.ListaDinamica;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import estructuras.conjuntistas.ABB;
-import estructuras.lineales.Lista;
-import estructuras.lineales.ListaDinamica;
 
 import static org.junit.jupiter.api.Assertions.*;
 

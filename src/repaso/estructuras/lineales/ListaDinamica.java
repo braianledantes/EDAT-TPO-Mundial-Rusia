@@ -1,7 +1,5 @@
 package repaso.estructuras.lineales;
 
-import repaso.estructuras.grafos.NodoVert;
-
 public class ListaDinamica<E> implements Lista<E> {
     private NodoLineal<E> cabecera = null;
 

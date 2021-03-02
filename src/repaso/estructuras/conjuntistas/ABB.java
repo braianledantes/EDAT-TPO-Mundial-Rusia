@@ -1,9 +1,9 @@
 package repaso.estructuras.conjuntistas;
 
-import repaso.estructuras.utliles.Resultado;
 import repaso.estructuras.jerarquicas.NodoArbolBin;
 import repaso.estructuras.lineales.Lista;
 import repaso.estructuras.lineales.ListaDinamica;
+import repaso.estructuras.utliles.Resultado;
 
 public class ABB<E extends Comparable<E>> implements ArbolBinarioBusqueda<E> {
     protected NodoArbolBin<E> raiz;

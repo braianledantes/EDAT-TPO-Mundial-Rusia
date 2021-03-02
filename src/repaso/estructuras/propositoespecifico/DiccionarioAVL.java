@@ -1,6 +1,5 @@
 package repaso.estructuras.propositoespecifico;
 
-import repaso.estructuras.conjuntistas.NodoAVL;
 import repaso.estructuras.lineales.Lista;
 import repaso.estructuras.lineales.ListaDinamica;
 import repaso.estructuras.utliles.Resultado;

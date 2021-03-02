@@ -1,9 +1,5 @@
 package utilidades;
 
-import modelos.Ciudad;
-import modelos.Equipo;
-import modelos.Partido;
-import modelos.Ronda;
 import estructuras.grafo.Arco;
 import estructuras.grafo.GrafoEtiquetado;
 import estructuras.lineales.Lista;
@@ -11,6 +7,10 @@ import estructuras.lineales.ListaDinamica;
 import estructuras.propositoEspecifico.ColaPrioridad;
 import estructuras.propositoEspecifico.ColaPrioridadDinamica;
 import estructuras.propositoEspecifico.TablaBusqueda;
+import modelos.Ciudad;
+import modelos.Equipo;
+import modelos.Partido;
+import modelos.Ronda;
 
 import java.io.Serializable;
 import java.util.Collection;

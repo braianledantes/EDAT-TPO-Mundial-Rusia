@@ -1,9 +1,8 @@
 package repaso.estructuras.conjuntistas;
 
-import repaso.estructuras.jerarquicas.NodoArbolBin;
-import repaso.estructuras.utliles.Resultado;
 import repaso.estructuras.lineales.Lista;
 import repaso.estructuras.lineales.ListaDinamica;
+import repaso.estructuras.utliles.Resultado;
 
 public class ArbolAVL<E extends Comparable<E>> implements AAVL<E> {
     protected NodoAVL<E> raiz;
