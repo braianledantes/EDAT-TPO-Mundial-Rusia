@@ -244,6 +244,31 @@ class ABBTest {
     }
 
     @Test
+    void caminoHojaMasCercana() {
+        abb.vaciar();
+        System.out.println(abb.caminoHojaMasCercana());
+
+        abb.insertar(45);
+        abb.insertar(34);
+        abb.insertar(13);
+        abb.insertar(65);
+        abb.insertar(73);
+        abb.insertar(96);
+
+        abb.insertar(36);
+        abb.insertar(10);
+        abb.insertar(11);
+        abb.insertar(8);
+        abb.insertar(9);
+        abb.insertar(66);
+        abb.insertar(68);
+        abb.insertar(50);
+
+        // System.out.println(abb);
+        System.out.println(abb.caminoHojaMasCercana());
+    }
+
+    @Test
     void pertenece() {
         assertTrue(abb.pertenece(45));
         assertTrue(abb.pertenece(34));

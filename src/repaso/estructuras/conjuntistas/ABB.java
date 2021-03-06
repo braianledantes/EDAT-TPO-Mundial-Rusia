@@ -260,4 +260,30 @@ public class ABB<E extends Comparable<E>> implements ArbolBinarioBusqueda<E> {
             toString(sb, nodo.getDerecho());
         }
     }
+
+    public Lista<E> caminoHojaMasCercana() {
+        ListaDinamica<E> visitados = new ListaDinamica<>();
+        Lista<E> camino = null;
+        if (this.raiz != null)
+            camino = caminoHojaMasCercana(this.raiz, visitados, camino);
+        else
+            camino = visitados;
+        return camino;
+    }
+
+    private Lista<E> caminoHojaMasCercana(NodoArbolBin<E> nodo, ListaDinamica<E> visitados, Lista<E> camino) {
+        if (nodo != null) {
+            visitados.insertar(nodo.getElemento(), visitados.longitud() + 1);
+            if (camino == null || visitados.longitud() < camino.longitud()) {
+                if ((nodo.getIzquierdo() == null && nodo.getDerecho() == null)) {
+                    camino = visitados.clone();
+                } else {
+                    camino = caminoHojaMasCercana(nodo.getIzquierdo(), visitados, camino);
+                    camino = caminoHojaMasCercana(nodo.getDerecho(), visitados, camino);
+                }
+            }
+            visitados.eliminar(visitados.longitud());
+        }
+        return camino;
+    }
 }
