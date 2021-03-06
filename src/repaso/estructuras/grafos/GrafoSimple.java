@@ -1,5 +1,7 @@
 package repaso.estructuras.grafos;
 
+import repaso.estructuras.conjuntistas.TablaHash;
+import repaso.estructuras.conjuntistas.TablaHashAbierto;
 import repaso.estructuras.lineales.Cola;
 import repaso.estructuras.lineales.ColaDinamica;
 import repaso.estructuras.lineales.Lista;
@@ -75,6 +77,7 @@ public class GrafoSimple<E> implements Grafo<E> {
                 } else {
                     nodoVertAnt.setSigVertice(nodoVert.getSigVertice());
                 }
+                exito = true;
             }
         }
 
@@ -383,6 +386,62 @@ public class GrafoSimple<E> implements Grafo<E> {
     @Override
     public void vaciar() {
         this.inicio = null;
+    }
+
+    public int cantCaminosMenNoPasanPor(E origen, E destino, E intermedio, int longMax) {
+        int cantCaminos = 0;
+
+        if (longMax > 0) {
+            NodoVert<E>[] vertices = ubicarVertices(origen, destino, intermedio);
+            NodoVert<E> vOrigen = vertices[0];
+            NodoVert<E> vDestino = vertices[1];
+            NodoVert<E> vIntermedio = vertices[2];
+
+            if (vOrigen != null && vDestino != null && vIntermedio!= null) {
+                TablaHash<E> visitados = new TablaHashAbierto<>(100);
+                cantCaminos = cantCaminosMenNoPasanPor(vOrigen, vDestino, vIntermedio, longMax, visitados, 0,0);
+            }
+        }
+
+        return cantCaminos;
+    }
+
+    private int cantCaminosMenNoPasanPor(NodoVert<E> nodo, NodoVert<E> destino, NodoVert<E> intermedio, int longMax, TablaHash<E> visitados, int longAct, int cantCaminos) {
+        if (longAct <= longMax) {
+            if (nodo == destino) {
+                cantCaminos++;
+            } else {
+                visitados.insertar(nodo.getElem());
+                NodoAdy<E> ady = nodo.getPrimerAdy();
+                while (ady != null) {
+                    if (ady.getVertice() != intermedio && !visitados.pertenece(ady.getVertice().getElem())) {
+                        cantCaminos = cantCaminosMenNoPasanPor(ady.getVertice(),
+                                destino, intermedio, longMax, visitados, longAct + 1, cantCaminos);
+                    }
+                    ady = ady.getSigAdyacente();
+                }
+                visitados.eliminar(nodo.getElem());
+            }
+        }
+        return cantCaminos;
+    }
+
+    private NodoVert<E>[] ubicarVertices(E vertice1, E vertice2, E vertice3) {
+        NodoVert<E>[] vertices = new NodoVert[3];
+        if (vertice1 != null && vertice2 != null) {
+            NodoVert<E> nodoVert = inicio;
+            while (nodoVert != null && (vertices[0] == null || vertices[1] == null || vertices[2] == null)) {
+                if (nodoVert.getElem().equals(vertice1))
+                    vertices[0] = nodoVert;
+                if (nodoVert.getElem().equals(vertice2))
+                    vertices[1] = nodoVert;
+                if (nodoVert.getElem().equals(vertice3))
+                    vertices[2] = nodoVert;
+
+                nodoVert = nodoVert.getSigVertice();
+            }
+        }
+        return vertices;
     }
 
     @Override

@@ -63,9 +63,11 @@ class GrafoSimpleTest {
         valor = grafo.insertarArco('A', 'B');
         assertFalse(valor);
 
-        System.out.println(grafo);
-        System.out.println(grafo.caminoMasLargo('A', 'I'));
-        System.out.println(grafo.listarAnchura());
+        //System.out.println(grafo);
+        //System.out.println(grafo.caminoMasLargo('A', 'I'));
+        //System.out.println(grafo.listarAnchura());
+
+        System.out.println(grafo.cantCaminosMenNoPasanPor('A', 'D', 'H', 2));
     }
 
 }
